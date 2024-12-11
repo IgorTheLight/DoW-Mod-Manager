@@ -748,7 +748,7 @@ namespace DoW_Mod_Manager
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.ForeColor = System.Drawing.Color.Red;
+            this.label15.ForeColor = System.Drawing.Color.Orange;
             this.label15.Location = new System.Drawing.Point(494, 245);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(146, 52);

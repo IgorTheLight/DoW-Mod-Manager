@@ -16,45 +16,53 @@ namespace DoW_Mod_Manager
 {
     public static class FogRemover
     {
-        private static readonly byte[] getZero           = new byte[6] { 217, 238,  15,  31,  64,   0 };
-        private static readonly byte[] setNothing        = new byte[6] { 221, 216,  15,  31,  64,   0 };
-        private static readonly byte[] float512          = new byte[4] {   0,   0,   0,  68 };
-        private static readonly byte[] float96           = new byte[4] {   0,   0, 192,  66 };
-        private static readonly byte[] getFog            = new byte[6] { 217, 129,  96,  12,   0,   0 };
-        private static readonly byte[] setMapSkyDistance = new byte[6] { 217, 155, 112,  12,   0,   0 };
+        // GOG - 0x1059580
+        static readonly byte[] getFog            = new byte[6] { 0xD9, 0x81, 0x60, 0x0C, 0x00, 0x00 };
+        static readonly byte[] getZero           = new byte[6] { 0xD9, 0xEE, 0x0F, 0x1F, 0x40, 0x00 };
 
-        private const int PAGE_EXECUTE_READWRITE = 0x40;
+        static readonly byte[] float96           = new byte[4] { 0x00, 0x00, 0xC0, 0x42 };
+        static readonly byte[] float512          = new byte[4] { 0x00, 0x00, 0x00, 0x44 };
 
-        private const int fogAddress12               = 0x745570;
-        private const int float512Address12          = 0x863B18;
-        private const int mapSkyDistanceAddress12    = 0x7470CA;
+        static readonly byte[] setMapSkyDistance = new byte[6] { 0xD9, 0x9B, 0x70, 0x0C, 0x00, 0x00 };
+        static readonly byte[] setNothing        = new byte[6] { 0xDD, 0xD8, 0x0F, 0x1F, 0x40, 0x00 };
 
-        private const int fogAddressSteam            = 0x8282F0;
-        private const int float512AddressSteam       = 0xAF54C8;
-        private const int mapSkyDistanceAddressSteam = 0x82A33A;
+        const int PAGE_EXECUTE_READWRITE = 0x40;
+
+        const int fogAddress12               = 0x745570;
+        const int float512Address12          = 0x863B18;
+        const int mapSkyDistanceAddress12    = 0x7470CA;
+
+        const int fogAddressSteam            = 0x8282F0;
+        const int float512AddressSteam       = 0xAF54C8;
+        const int mapSkyDistanceAddressSteam = 0x82A33A;
+
+        const int fogAddressGOG              = 0x0;         //TODO: Coudn't find this address!
+        const int float512AddressGOG         = 0xDA76ED;
+        const int mapSkyDistanceAddressGOG   = 0x0;         //TODO: Coudn't find this address!
 
         [DllImport("kernel32.dll")]
-        private static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+        static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
         [DllImport("kernel32.dll")]
-        private static extern bool ReadProcessMemory(IntPtr hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesRead);
+        static extern bool ReadProcessMemory(IntPtr hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesRead);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        private static extern bool WriteProcessMemory(IntPtr hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesWritten);
+        static extern bool WriteProcessMemory(IntPtr hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesWritten);
 
         [DllImport("kernel32.dll")]
-        public static extern bool CloseHandle(IntPtr handle);
+        static extern bool CloseHandle(IntPtr handle);
 
         [DllImport("kernel32.dll")]
-        private static extern bool VirtualProtectEx(IntPtr hProcess, int lpAddress, int dwSize, int flNewProtect, out int lpflOldProtect);
+        static extern bool VirtualProtectEx(IntPtr hProcess, int lpAddress, int dwSize, int flNewProtect, out int lpflOldProtect);
 
         public static void DisableFog(Process process)
         {
             ActuallyDisableFog(process, fogAddress12, float512Address12, mapSkyDistanceAddress12);
             ActuallyDisableFog(process, fogAddressSteam, float512AddressSteam, mapSkyDistanceAddressSteam);
+            //ActuallyDisableFog(process, fogAddressGOG, float512AddressGOG, mapSkyDistanceAddressGOG);     // Uncomment this when all addresses would be found!
         }
 
-        private static void ActuallyDisableFog(Process process, int fogAddress, int float512Address, int mapSkyDistanceAddress)
+        static void ActuallyDisableFog(Process process, int fogAddress, int float512Address, int mapSkyDistanceAddress)
         {
             IntPtr pHandle = OpenProcess(56, false, process.Id);
             try
@@ -69,7 +77,7 @@ namespace DoW_Mod_Manager
             }
         }
 
-        private static bool CheckToggleMemory(int addr, byte[] checkVal, byte[] setVal, IntPtr pHandle)
+        static bool CheckToggleMemory(int addr, byte[] checkVal, byte[] setVal, IntPtr pHandle)
         {
             byte[] lpBuffer = new byte[checkVal.Length];
 

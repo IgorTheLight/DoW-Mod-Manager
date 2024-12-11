@@ -7,7 +7,7 @@ namespace DoW_Mod_Manager
 {
     public partial class AboutForm : Form
     {
-        private readonly ModManagerForm modManager;
+        readonly ModManagerForm modManager;
 
         public AboutForm(ModManagerForm form)
         {
@@ -36,17 +36,17 @@ namespace DoW_Mod_Manager
             AOTCompilationRadioButton.CheckedChanged += new EventHandler(AOTCompilationRadioButton_CheckedChanged);
         }
 
-        private void HomePageButton_Click(object sender, EventArgs e)
+        void HomePageButton_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/Fragjacker/DoW-Mod-Manager");
         }
 
-        private void OKButton_Click(object sender, EventArgs e)
+        void OKButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void UpdateButton_Click(object sender, EventArgs e)
+        void UpdateButton_Click(object sender, EventArgs e)
         {
             DialogResult result = DownloadHelper.CheckForUpdates(silently: false);
 
@@ -54,22 +54,22 @@ namespace DoW_Mod_Manager
                 modManager.ChangeSetting(ModManagerForm.ACTION_STATE, (int)ModManagerForm.Action.CreateNativeImage);
         }
 
-        private void SpecialThanks1LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        void SpecialThanks1LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://stackoverflow.com");
         }
 
-        private void SpecialThanks2LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        void SpecialThanks2LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/tebjan/TimerTool");
         }
 
-        private void SpecialThanks3LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        void SpecialThanks3LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/zayenCh/DownloadFile");
         }
 
-        private void AutoupdateCheckBox_CheckedChanged(object sender, EventArgs e)
+        void AutoupdateCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (autoupdateCheckBox.Checked)
                 modManager.ChangeSetting(ModManagerForm.AUTOUPDATE, 1);
@@ -77,7 +77,7 @@ namespace DoW_Mod_Manager
                 modManager.ChangeSetting(ModManagerForm.AUTOUPDATE, 0);
         }
 
-        private void SinglethreadedJITCompilationRadioButton_CheckedChanged(object sender, EventArgs e)
+        void SinglethreadedJITCompilationRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (singlethreadedJITCompilationRadioButton.Checked)
             {
@@ -88,7 +88,7 @@ namespace DoW_Mod_Manager
             }
         }
 
-        private void MultithreadedJITCompilationRadioButton_CheckedChanged(object sender, EventArgs e)
+        void MultithreadedJITCompilationRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (multithreadedJITCompilationRadioButton.Checked)
             {
@@ -99,7 +99,7 @@ namespace DoW_Mod_Manager
             }
         }
 
-        private void AOTCompilationRadioButton_CheckedChanged(object sender, EventArgs e)
+        void AOTCompilationRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (AOTCompilationRadioButton.Checked)
             {

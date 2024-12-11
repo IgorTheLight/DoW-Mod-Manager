@@ -874,7 +874,7 @@
             // hdTexWarningLabel
             // 
             this.hdTexWarningLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.hdTexWarningLabel.ForeColor = System.Drawing.Color.Red;
+            this.hdTexWarningLabel.ForeColor = System.Drawing.Color.Orange;
             this.hdTexWarningLabel.Location = new System.Drawing.Point(132, 7);
             this.hdTexWarningLabel.Name = "hdTexWarningLabel";
             this.hdTexWarningLabel.Size = new System.Drawing.Size(150, 40);

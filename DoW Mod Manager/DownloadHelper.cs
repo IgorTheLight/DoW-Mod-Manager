@@ -13,17 +13,17 @@ namespace DoW_Mod_Manager
 {
     static class DownloadHelper
     {
-        private const string EXE_VERSION_TEXT_URL = "https://raw.githubusercontent.com/Fragjacker/DoW-Mod-Manager/master/DoW%20Mod%20Manager/LatestStable/version";
-        private const string EXECUTABLE_URL = "https://github.com/Fragjacker/DoW-Mod-Manager/raw/master/DoW%20Mod%20Manager/LatestStable/DoW%20Mod%20Manager.exe";
+        const string EXE_VERSION_TEXT_URL = "https://raw.githubusercontent.com/Fragjacker/DoW-Mod-Manager/master/DoW%20Mod%20Manager/LatestStable/version";
+        const string EXECUTABLE_URL = "https://github.com/Fragjacker/DoW-Mod-Manager/raw/master/DoW%20Mod%20Manager/LatestStable/DoW%20Mod%20Manager.exe";
 
-        private const string MODLIST_VERSION_TEXT_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/ModList/version";
-        private const string MODLIST_URL = "https://github.com/IgorTheLight/DoW-Mod-Manager/raw/master/DoW%20Mod%20Manager/ModList/DoW%20Mod%20Manager%20Download%20Mods.list";
+        const string MODLIST_VERSION_TEXT_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/ModList/version";
+        const string MODLIST_URL = "https://github.com/IgorTheLight/DoW-Mod-Manager/raw/master/DoW%20Mod%20Manager/ModList/DoW%20Mod%20Manager%20Download%20Mods.list";
 
-        private static readonly string currentDir = Directory.GetCurrentDirectory();
-        private static string latestStringVersion = "";
-        private static readonly Version currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+        static readonly string currentDir = Directory.GetCurrentDirectory();
+        static string latestStringVersion = "";
+        static readonly Version currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
-        private static bool closeAndDelete;
+        static bool closeAndDelete;
 
         public static DialogResult CheckForUpdates(bool silently)
         {
@@ -185,7 +185,7 @@ namespace DoW_Mod_Manager
 
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static string DownloadString(string address)
+        static string DownloadString(string address)
         {
             string str = "";
 
@@ -205,7 +205,7 @@ namespace DoW_Mod_Manager
 
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void DownloadFile(string address, string downloadPath, bool closeAndDeleteApplication)
+        static void DownloadFile(string address, string downloadPath, bool closeAndDeleteApplication)
         {
             // Start a new thread for the download part only.
             new Thread(() =>
@@ -231,12 +231,12 @@ namespace DoW_Mod_Manager
             }).Start();
         }
 
-        //private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        //void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         //{
         //    ThemedMessageBox.Show(e.ProgressPercentage + "%");
         //}
 
-        private static void Completed(object sender, AsyncCompletedEventArgs e)
+        static void Completed(object sender, AsyncCompletedEventArgs e)
         {
             if (closeAndDelete)
             {
@@ -252,11 +252,11 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void CleanupAndStartApp()
+        static void CleanupAndStartApp()
         {
-            string oldExecutablePath = currentDir + "\\" + AppDomain.CurrentDomain.FriendlyName;
+            
+            string oldExecutablePath = Path.Combine(currentDir, AppDomain.CurrentDomain.FriendlyName);
             string newExecutablePath = currentDir + $"\\DoW Mod Manager v{latestStringVersion}.exe";
-
             // Start new downloaded exectuable
             Process.Start(newExecutablePath);
             // Delete the old executable after 3 seconds have passed using cmd!
@@ -276,7 +276,6 @@ namespace DoW_Mod_Manager
             string shortcutLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), shortcutName + ".lnk");
             WshShell shell = new WshShell();
             IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
-
             shortcut.Description = $"The latest DoW Mod Manager v{latestStringVersion}";
             shortcut.TargetPath = targetPath;
             shortcut.WorkingDirectory = currentDir;

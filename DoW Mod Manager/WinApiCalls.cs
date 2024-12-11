@@ -39,10 +39,10 @@ namespace DoW_Mod_Manager
     public static class WinApiCalls
     {
         [DllImport("ntdll.dll", SetLastError = true)]
-        private static extern NtStatus NtQueryTimerResolution(out uint MinimumResolution, out uint MaximumResolution, out uint ActualResolution);
+        static extern NtStatus NtQueryTimerResolution(out uint MinimumResolution, out uint MaximumResolution, out uint ActualResolution);
 
         [DllImport("ntdll.dll", SetLastError = true)]
-        private static extern NtStatus NtSetTimerResolution(uint DesiredResolution, bool SetResolution, ref uint CurrentResolution);
+        static extern NtStatus NtSetTimerResolution(uint DesiredResolution, bool SetResolution, ref uint CurrentResolution);
 
         public static TimerCaps QueryTimerResolution()
         {
@@ -79,8 +79,8 @@ namespace DoW_Mod_Manager
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         static extern bool ShellExecuteEx(ref SHELLEXECUTEINFO lpExecInfo);
 
-        private const int SW_SHOW = 5;
-        private const uint SEE_MASK_INVOKEIDLIST = 12;
+        const int SW_SHOW = 5;
+        const uint SEE_MASK_INVOKEIDLIST = 12;
         public static bool ShowFileProperties(string Filename)
         {
             SHELLEXECUTEINFO info = new SHELLEXECUTEINFO();

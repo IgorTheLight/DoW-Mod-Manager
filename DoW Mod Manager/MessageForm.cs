@@ -12,7 +12,7 @@ namespace DoW_Mod_Manager
             Text = title;
         }
 
-        private void OKButton_Click(object sender, System.EventArgs e)
+        void OKButton_Click(object sender, System.EventArgs e)
         {
             Close();
         }

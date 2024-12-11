@@ -30,12 +30,12 @@ namespace DoW_Mod_Manager
         }
 
         public const string MODLIST_FILE = "DoW Mod Manager Download Mods.list";
-        private const string SEARCH_TEXT = "Search...";
-        private readonly List<Mod> modlist;
+        const string SEARCH_TEXT = "Search...";
+        readonly List<Mod> modlist;
 
-        private bool findByModuleName = true;
+        bool findByModuleName = true;
 
-        private readonly ModManagerForm modManager;
+        readonly ModManagerForm modManager;
 
         /// <summary>
         /// Creates the Form of the Mod Downloader Window
@@ -55,39 +55,24 @@ namespace DoW_Mod_Manager
             // DO NOT extract this as a method - it will be x2 times slower! Even with "AggressiveInlining"
             modlist = new List<Mod>();
 
-            if (modManager.CurrentGameEXE == ModManagerForm.GameExecutable.SOULSTORM)
+            switch (modManager.CurrentGameEXE)
             {
-                popularModsLabel.Text += "Soulstorm:";
-
-                ReadModsFromFile("[SS]");
-            }
-            else if (modManager.CurrentGameEXE == ModManagerForm.GameExecutable.DARK_CRUSADE)
-            {
-                popularModsLabel.Text += "Dark Crusade:";
-
-                ReadModsFromFile("[DC]");
-            }
-            else if (modManager.CurrentGameEXE == ModManagerForm.GameExecutable.WINTER_ASSAULT)
-            {
-                popularModsLabel.Text += "Winter Assault:";
-
-                ReadModsFromFile("[WA]");
-            }
-            else if (modManager.CurrentGameEXE == ModManagerForm.GameExecutable.ORIGINAL)
-            {
-                popularModsLabel.Text += "Original:";
-
-                modlist = new List<Mod>()
-                {
-                    new Mod("First I have to find a few mods for Original :-)",
-                            "",
-                            "",
-                            "",
-                            "")
-                };
-
-                openModPageButton.Enabled = false;
-                downloadModDefaultButton.Enabled = false;
+                case ModManagerForm.GameExecutable.SOULSTORM:
+                    popularModsLabel.Text += "Soulstorm:";
+                    ReadModsFromFile("[SS]");
+                    break;
+                case ModManagerForm.GameExecutable.DARK_CRUSADE:
+                    popularModsLabel.Text += "Dark Crusade:";
+                    ReadModsFromFile("[DC]");
+                    break;
+                case ModManagerForm.GameExecutable.WINTER_ASSAULT:
+                    popularModsLabel.Text += "Winter Assault:";
+                    ReadModsFromFile("[WA]");
+                    break;
+                case ModManagerForm.GameExecutable.ORIGINAL:
+                    popularModsLabel.Text += "Original:";
+                    ReadModsFromFile("[OR]");
+                    break;
             }
 
             // If we want to search by the *.module file name - we don't have to populate modListBox.Items
@@ -104,11 +89,6 @@ namespace DoW_Mod_Manager
 
             findByModuleName = false;
             modListBox.Select();
-
-            // AddRange(new Mod()) 3.5 ms
-            // Add(new Mod())      2.87 ms
-            // { new Mod() }       2.7 ms
-            // AddRange() is the slowest? NANI? BAKANA! :-)
         }
 
         /// <summary>
@@ -124,7 +104,7 @@ namespace DoW_Mod_Manager
             else
                 DownloadHelper.DownloadModlist();
 
-            // Wait 2 seconds for Modlist to download
+            // Wait 2 seconds (10 times by 200ms) for Modlist to download
             int counter = 0;
             while (!IsFileReady(MODLIST_FILE) && counter < 200)
             {
@@ -179,7 +159,7 @@ namespace DoW_Mod_Manager
         /// This method reads mods from a modlist file
         /// </summary>
         /// <param name="filename"></param>
-        private static bool IsFileReady(string filename)
+        static bool IsFileReady(string filename)
         {
             // If the file can be opened for exclusive access it means that the file
             // is no longer locked by another process.
@@ -199,7 +179,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method opens the ModDB.com web page
         /// </summary>
-        private void OpenModDBButton_Click(object sender, EventArgs e)
+        void OpenModDBButton_Click(object sender, EventArgs e)
         {
             Process.Start("https://www.moddb.com/games/dawn-of-war/mods?sort=rating-desc");
         }
@@ -207,7 +187,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method opens selected mod web page
         /// </summary>
-        private void OpenModPageButton_Click(object sender, EventArgs e)
+        void OpenModPageButton_Click(object sender, EventArgs e)
         {
             if (modListBox.SelectedItem == null)
                 return;
@@ -227,22 +207,25 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method downloads selected mod using Internet Explorer's 11 engine
         /// </summary>
-        private void DownloadModIEButton_Click(object sender, EventArgs e)
+        void DownloadModIEButton_Click(object sender, EventArgs e)
         {
-            DownloadMod(false);
+            DownloadMod(isExternalBrowser: false);
         }
 
         /// <summary>
         /// This method downloads selected mod using external browser
         /// </summary>
-        private void DownloadModDefaultButton_Click(object sender, EventArgs e)
+        void DownloadModDefaultButton_Click(object sender, EventArgs e)
         {
-            DownloadMod(true);
+            DownloadMod(isExternalBrowser: true);
         }
 
+        /// <summary>
+        /// This method downloads selected mod using IE or external browser
+        /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void DownloadMod(bool isExternalBrowser)
+        void DownloadMod(bool isExternalBrowser)
         {
             if (modListBox.SelectedItem == null)
                 return;
@@ -267,7 +250,7 @@ namespace DoW_Mod_Manager
 
             if (patchAddress.Length > 0)
             {
-                Thread.Sleep(250);                                               // Some small delay before trying to download second file
+                Thread.Sleep(250);                      // Some small delay before trying to download a second file
 
                 if (isExternalBrowser)
                     Process.Start(patchAddress);
@@ -279,7 +262,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in searchTextBox.Text
         /// </summary>
-        private void SearchTextBox_TextChanged(object sender, EventArgs e)
+        void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
             modListBox.Items.Clear();
 
@@ -319,7 +302,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in searchTextBox.Focused
         /// </summary>
-        private void SearchTextBox_Enter(object sender, EventArgs e)
+        void SearchTextBox_Enter(object sender, EventArgs e)
         {
             if (searchTextBox.Text == SEARCH_TEXT)
             {
@@ -331,7 +314,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in searchTextBox.Focused
         /// </summary>
-        private void SearchTextBox_Leave(object sender, EventArgs e)
+        void SearchTextBox_Leave(object sender, EventArgs e)
         {
             if (searchTextBox.Text == "")
             {

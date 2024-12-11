@@ -59,6 +59,8 @@ namespace DoW_Mod_Manager
             this.noFogCheckbox = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.GOGRadioButton = new System.Windows.Forms.RadioButton();
+            this.SteamRadioButton = new System.Windows.Forms.RadioButton();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -474,6 +476,8 @@ namespace DoW_Mod_Manager
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.AutoSize = true;
+            this.panel2.Controls.Add(this.GOGRadioButton);
+            this.panel2.Controls.Add(this.SteamRadioButton);
             this.panel2.Controls.Add(this.toggleLAAButton);
             this.panel2.Controls.Add(this.checkForErrorsButton);
             this.panel2.Controls.Add(this.gameLAAStatusLabel);
@@ -483,6 +487,34 @@ namespace DoW_Mod_Manager
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(245, 110);
             this.panel2.TabIndex = 29;
+            // 
+            // GOGRadioButton
+            // 
+            this.GOGRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.GOGRadioButton.AutoSize = true;
+            this.GOGRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.GOGRadioButton.Location = new System.Drawing.Point(131, 57);
+            this.GOGRadioButton.Name = "GOGRadioButton";
+            this.GOGRadioButton.Size = new System.Drawing.Size(86, 17);
+            this.GOGRadioButton.TabIndex = 27;
+            this.GOGRadioButton.Text = "GOG version";
+            this.GOGRadioButton.UseVisualStyleBackColor = true;
+            this.GOGRadioButton.CheckedChanged += new System.EventHandler(this.GOGRadioButton_CheckedChanged);
+            // 
+            // SteamRadioButton
+            // 
+            this.SteamRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.SteamRadioButton.AutoSize = true;
+            this.SteamRadioButton.Checked = true;
+            this.SteamRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.SteamRadioButton.Location = new System.Drawing.Point(131, 38);
+            this.SteamRadioButton.Name = "SteamRadioButton";
+            this.SteamRadioButton.Size = new System.Drawing.Size(92, 17);
+            this.SteamRadioButton.TabIndex = 26;
+            this.SteamRadioButton.TabStop = true;
+            this.SteamRadioButton.Text = "Steam version";
+            this.SteamRadioButton.UseVisualStyleBackColor = true;
+            this.SteamRadioButton.CheckedChanged += new System.EventHandler(this.SteamRadioButton_CheckedChanged);
             // 
             // flowLayoutPanel2
             // 
@@ -545,6 +577,7 @@ namespace DoW_Mod_Manager
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -588,5 +621,7 @@ namespace DoW_Mod_Manager
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button open_folder_button;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.RadioButton GOGRadioButton;
+        private System.Windows.Forms.RadioButton SteamRadioButton;
     }
 }

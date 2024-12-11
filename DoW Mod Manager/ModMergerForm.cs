@@ -42,19 +42,19 @@ namespace DoW_Mod_Manager
             }
         }
 
-        private readonly ModManagerForm modManager;
-        private object lastItem = null;
-        private int lastDropDownItemIndex = -1;
-        private int lastUsedModIndex = -1;
-        private int lastAvailableModIndex = -1;
-        private string mergePostfix = "_MERGED";
+        readonly ModManagerForm modManager;
+        object lastItem = null;
+        int lastDropDownItemIndex = -1;
+        int lastUsedModIndex = -1;
+        int lastAvailableModIndex = -1;
+        string mergePostfix = "_MERGED";
 
-        private readonly List<Mod> modlist = new List<Mod>();
-        private List<Module> moduleList = new List<Module>();
-        private bool hasNoActiveMods = false;
-        private bool hasNoInactiveMods = false;
-        private bool usesW40kmodule = false;
-        private bool usesDXP2module = false;
+        readonly List<Mod> modlist = new List<Mod>();
+        List<Module> moduleList = new List<Module>();
+        bool hasNoActiveMods = false;
+        bool hasNoInactiveMods = false;
+        bool usesW40kmodule = false;
+        bool usesDXP2module = false;
         public List<string> AlllegitModules;
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void GetLoadableMods()
+        void GetLoadableMods()
         {
             loadedModBox.Items.Clear();
             moduleList.Clear();
@@ -133,7 +133,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void GetAvailableMods()
+        void GetAvailableMods()
         {
             AvailableModsList.Items.Clear();
 
@@ -145,7 +145,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void HideOrReinsertLastSelectedMod()
+        void HideOrReinsertLastSelectedMod()
         {
             // Stores the last selected item in order to reinsert it once the selection changes again.
             //lastAvailableModIndex = AvailableModsList.Items.IndexOf(lastItem);
@@ -162,7 +162,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method draws all required mods from a list
         /// </summary>
-        private void DrawAllRequiredModsFromList()
+        void DrawAllRequiredModsFromList()
         {
             UsedModsList.Items.Clear();
 
@@ -180,7 +180,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void SortInactiveModsToBottom()
+        void SortInactiveModsToBottom()
         {
             List<Mod> inactiveModsList = new List<Mod>();
 
@@ -203,7 +203,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void HideUnavailableMods()
+        void HideUnavailableMods()
         {
             // Get a Fresh new List everytime
             GetAvailableMods();
@@ -222,7 +222,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void GetActiveModsFromFile()
+        void GetActiveModsFromFile()
         {
             int index = loadedModBox.SelectedIndex;
             string currentModuleFilePath;
@@ -266,7 +266,7 @@ namespace DoW_Mod_Manager
         /// <param name="rmRegex"></param>
         /// <param name="line"></param>
         /// <returns></returns>
-        private bool isValidActiveMod(Regex rmRegex, string line)
+        bool isValidActiveMod(Regex rmRegex, string line)
         {
             string lowerCase = line.ToLower();
             bool isW40kMod = lowerCase.Contains("w40k");
@@ -281,7 +281,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UsedModsList_DrawItem(object sender, DrawItemEventArgs e)
+        void UsedModsList_DrawItem(object sender, DrawItemEventArgs e)
         {
             // Draw the background of the ListBox control for each item.
             e.DrawBackground();
@@ -322,7 +322,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void EnablePlusButton()
+        void EnablePlusButton()
         {
             buttonAdd.Enabled = true;
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_Mod_Manager.Resources.plus.png");
@@ -334,7 +334,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void DisablePlusButton()
+        void DisablePlusButton()
         {
             buttonAdd.Enabled = false;
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_Mod_Manager.Resources.plus_disabled.png");
@@ -346,7 +346,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void EnableMinusButton()
+        void EnableMinusButton()
         {
             buttonRemove.Enabled = true;
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_Mod_Manager.Resources.minus.png");
@@ -358,7 +358,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void DisableMinusButton()
+        void DisableMinusButton()
         {
             buttonRemove.Enabled = false;
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_Mod_Manager.Resources.minus_disabled.png");
@@ -370,7 +370,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void EnableCheckmarkButton()
+        void EnableCheckmarkButton()
         {
             buttonActivate.Enabled = true;
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_Mod_Manager.Resources.checkmark.png");
@@ -382,7 +382,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void DisableCheckmarkButton()
+        void DisableCheckmarkButton()
         {
             buttonActivate.Enabled = false;
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_Mod_Manager.Resources.checkmark_disabled.png");
@@ -394,7 +394,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void EnableCrossButton()
+        void EnableCrossButton()
         {
             buttonDeactivate.Enabled = true;
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_Mod_Manager.Resources.cross.png");
@@ -406,7 +406,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void DisableCrossButton()
+        void DisableCrossButton()
         {
             buttonDeactivate.Enabled = false;
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_Mod_Manager.Resources.cross_disabled.png");
@@ -418,7 +418,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void EnableArrowUpButton()
+        void EnableArrowUpButton()
         {
             buttonArrowUp.Enabled = true;
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_Mod_Manager.Resources.arrow_up.png");
@@ -430,7 +430,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void DisableArrowUpButton()
+        void DisableArrowUpButton()
         {
             buttonArrowUp.Enabled = false;
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_Mod_Manager.Resources.arrow_up_disabled.png");
@@ -442,7 +442,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void EnableArrowDownButton()
+        void EnableArrowDownButton()
         {
             buttonArrowDown.Enabled = true;
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_Mod_Manager.Resources.arrow_down.png");
@@ -454,7 +454,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void DisableArrowDownButton()
+        void DisableArrowDownButton()
         {
             buttonArrowDown.Enabled = false;
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_Mod_Manager.Resources.arrow_down_disabled.png");
@@ -464,7 +464,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method swaps top and bottom mods up
         /// </summary>
-        private void ButtonArrowUp_Click(object sender, EventArgs e)
+        void ButtonArrowUp_Click(object sender, EventArgs e)
         {
             Mod topItem, bottomItem;
             int topPos, bottomPos;
@@ -493,7 +493,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method swaps top and bottom mods down
         /// </summary>
-        private void ButtonArrowDown_Click(object sender, EventArgs e)
+        void ButtonArrowDown_Click(object sender, EventArgs e)
         {
             Mod topItem, bottomItem;
             int topPos, bottomPos;
@@ -525,7 +525,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method saves changes to the *.module file
         /// </summary>
-        private void ButtonSaveFile_Click(object sender, EventArgs e)
+        void ButtonSaveFile_Click(object sender, EventArgs e)
         {
             string filePath = modManager.ModuleFilePaths[loadedModBox.SelectedIndex];
             List<string> listOfMods = new List<string>();
@@ -589,7 +589,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonDelete_Click(object sender, EventArgs e)
+        void ButtonDelete_Click(object sender, EventArgs e)
         {
             int selIndex = loadedModBox.SelectedIndex;
             string filePath = moduleList[selIndex].Parent.FilePath;
@@ -623,7 +623,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method activates mod
         /// </summary>
-        private void ButtonActivate_Click(object sender, EventArgs e)
+        void ButtonActivate_Click(object sender, EventArgs e)
         {
             int lastSelectedIndex;
 
@@ -669,7 +669,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method deactivates mod
         /// </summary>
-        private void ButtonDeactivate_Click(object sender, EventArgs e)
+        void ButtonDeactivate_Click(object sender, EventArgs e)
         {
             int lastSelectedIndex;
 
@@ -720,7 +720,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method adds a mod
         /// </summary>
-        private void ButtonAdd_Click(object sender, EventArgs e)
+        void ButtonAdd_Click(object sender, EventArgs e)
         {
             int lastSelectedIndex = 0;
 
@@ -757,7 +757,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method removes a mod
         /// </summary>
-        private void ButtonRemove_Click(object sender, EventArgs e)
+        void ButtonRemove_Click(object sender, EventArgs e)
         {
             int lastSelectedIndex = 0;
 
@@ -794,7 +794,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="source"></param>
         /// <param name="e"></param>
-        private void FileSystemWatcherOnChanged(object source, FileSystemEventArgs e)
+        void FileSystemWatcherOnChanged(object source, FileSystemEventArgs e)
         {
             refreshAllModEntries();
         }
@@ -803,7 +803,7 @@ namespace DoW_Mod_Manager
         /// This method checks if modList contains Inactive mods or not
         /// </summary>
         /// <returns>bool</returns>
-        private bool DoesModlistContainsNoInactiveMods()
+        bool DoesModlistContainsNoInactiveMods()
         {
             hasNoInactiveMods = true;
 
@@ -823,7 +823,7 @@ namespace DoW_Mod_Manager
         /// This method checks if modList contains Active mods or not
         /// </summary>
         /// <returns>bool</returns>
-        private bool DoesModlistContainsNoActiveMods()
+        bool DoesModlistContainsNoActiveMods()
         {
             hasNoActiveMods = true;
 
@@ -844,7 +844,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="index"></param>
         /// <param name="state"></param>
-        private void SetModState(int index, ModState state)
+        void SetModState(int index, ModState state)
         {
             // Use this if Mod is a class
             modlist[index].State = state;
@@ -858,7 +858,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// Deletes an Item from the available Mods List as soon as you select it in the Dropdown List.
         /// </summary>
-        private void LoadedModBox_SelectedIndexChanged(object sender, EventArgs e)
+        void LoadedModBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             lastItem = loadedModBox.SelectedItem;
             GetActiveModsFromFile();
@@ -894,7 +894,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// Changes selected used mod
         /// </summary>
-        private void UsedModsList_SelectedIndexChanged(object sender, EventArgs e)
+        void UsedModsList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (UsedModsList.SelectedItem != null)
             {
@@ -947,7 +947,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// Changes selected availabe mod
         /// </summary>
-        private void AvailableModsList_SelectedIndexChanged(object sender, EventArgs e)
+        void AvailableModsList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (AvailableModsList.SelectedItem != null)
             {
@@ -967,7 +967,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reselects the last selected available mod, used mod and loaded mod.
         /// </summary>
-        private void ReselectLastItems()
+        void ReselectLastItems()
         {
             // Safety checks for the mods list since they can change in size during runtime
             int numAvailableMods = AvailableModsList.Items.Count;
@@ -999,7 +999,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// Assigns a proper value to the last item selected in the loaded mod dropdownlist.
         /// </summary>
-        private void GetLoastDropDownItem()
+        void GetLoastDropDownItem()
         {
             if (lastDropDownItemIndex > (loadedModBox.Items.Count - 1))
             {

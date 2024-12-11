@@ -15,11 +15,10 @@ namespace DoW_Mod_Manager
     /// <summary>
     /// This struct contains the module name and mod folder path for easy access.
     /// </summary>
-    // TODO: Try to make this struct readonly
-    public struct ModuleEntry
+    public readonly struct ModuleEntry
     {
-        private readonly string ModuleName;
-        private readonly string ModuleFolder;
+        readonly string ModuleName;
+        readonly string ModuleFolder;
 
         public ModuleEntry(string moduleName, string moduleFolder)
         {
@@ -42,17 +41,15 @@ namespace DoW_Mod_Manager
             public const string SOULSTORM = "Soulstorm.exe";
         }
 
-        private const int IMAGE_FILE_LARGE_ADDRESS_AWARE = 0x20;
+        const string CONFIG_FILE_NAME = "DoW Mod Manager.ini";
+        const string JIT_PROFILE_FILE_NAME = "DoW Mod Manager.JITProfile";
+        const string WARNINGS_LOG = "warnings.log";
 
-        private const string CONFIG_FILE_NAME = "DoW Mod Manager.ini";
-        private const string JIT_PROFILE_FILE_NAME = "DoW Mod Manager.JITProfile";
-        private const string WARNINGS_LOG = "warnings.log";
-
-        // This is a State Machine which determens what action must be performed
+        // This is a State Machine which determines what action must be performed
         public enum Action { None, CreateNativeImage, CreateNativeImageAndDeleteJITProfile, DeleteJITProfile, DeleteNativeImage, DeleteJITProfileAndNativeImage }
 
         public const string ACTION_STATE = "ActionState";
-        private const string CHOICE_INDEX = "ChoiceIndex";
+        public const string CHOICE_INDEX = "ChoiceIndex";
         public const string DEV = "Dev";
         public const string NO_MOVIES = "NoMovies";
         public const string FORCE_HIGH_POLY = "ForceHighPoly";
@@ -61,18 +58,19 @@ namespace DoW_Mod_Manager
         public const string AUTOUPDATE = "Autoupdate";
         public const string MULTITHREADED_JIT = "MultithreadedJIT";
         public const string AOT_COMPILATION = "AOTCompilation";
+        public const string IS_GOG_VERSION = "IsGOGVersion";
 
         // A boolean array that maps Index-wise to the filepaths indices. Index 0 checks if required mod at index 0 in the FilePaths is installed or not.
-        private bool[] _isInstalled;
-        private bool _isGameEXELAAPatched = false;
-        private bool _isGraphicsConfigLAAPatched = false;
-        private bool _isMessageBoxOnScreen = false;
-        private bool _isOldGame;
-        private bool _IsNoFogTooltipShown = false;
-        private string _dowProcessName = "";
-        private readonly ToolTip _disabledNoFogTooltip = new ToolTip();
-        private Control _currentToolTipControl;
-        private ModMergerForm modMerger = null;
+        bool[] _isInstalled;
+        bool _isGameEXELAAPatched = false;
+        bool _isGraphicsConfigLAAPatched = false;
+        bool _isMessageBoxOnScreen = false;
+        bool _isOldGame;
+        bool _IsNoFogTooltipShown = false;
+        string _dowProcessName = "";
+        readonly ToolTip _disabledNoFogTooltip = new ToolTip();
+        Control _currentToolTipControl;
+        ModMergerForm modMerger = null;
 
         public readonly string CurrentDir = Directory.GetCurrentDirectory();
         public readonly string CurrentGameEXE = "";
@@ -82,11 +80,11 @@ namespace DoW_Mod_Manager
         public List<string> AllFoundModules;                                        // Contains the list of all available Mods that will be used by the Mod Merger
         public List<ModuleEntry> AllValidModules;                                   // Contains the list of all playable Mods that will be used by the Mod Merger
         public bool IsTimerResolutionLowered = false;
-        string currentModuleFilePath = "";                                          // Contains the name of the current selected Mod.
+        string currentModuleFilePath = "";                                  // Contains the name of the current selected Mod.
 
         // Don't make Settings readonly or it couldn't be changed from outside the class!
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "<Pending>")]
-        private Dictionary<string, int> settings = new Dictionary<string, int>
+        Dictionary<string, int> settings = new Dictionary<string, int>
         {
             [ACTION_STATE] = (int)Action.CreateNativeImage,
             [CHOICE_INDEX] = 0,
@@ -97,7 +95,8 @@ namespace DoW_Mod_Manager
             [DOW_OPTIMIZATIONS] = 0,
             [AUTOUPDATE] = 1,
             [MULTITHREADED_JIT] = 0,
-            [AOT_COMPILATION] = 1
+            [AOT_COMPILATION] = 1,
+            [IS_GOG_VERSION] = 0
         };
 
         /// <summary>
@@ -112,7 +111,7 @@ namespace DoW_Mod_Manager
             if (settings[MULTITHREADED_JIT] == 1)
             {
                 // Enable Multithreaded JIT compilation. It's not a smart idea to use it with AOT compilation
-                // So: Singethreaded JIT compilation < Multithreaded JIT compilation < AOT compilation < Native code (we don't have this option)
+                // So: Singethreaded JIT compilation < Multithreaded JIT compilation < AOT compilation < Native code (this is available in .NET 7+)
                 // Defines where to store JIT profiles
                 ProfileOptimization.SetProfileRoot(CurrentDir);
                 // Enables Multicore JIT with the specified profile
@@ -166,9 +165,9 @@ namespace DoW_Mod_Manager
             currentDirTextBox.Text = CurrentDir;
             SetUpAllNecessaryMods();
 
-            _isGameEXELAAPatched = IsLargeAware(Directory.GetFiles(CurrentDir, CurrentGameEXE)[0]);
+            _isGameEXELAAPatched = IsLargeAddressAware(Directory.GetFiles(CurrentDir, CurrentGameEXE)[0]);
             SetGameLAALabelText();
-            _isGraphicsConfigLAAPatched = IsLargeAware(Directory.GetFiles(CurrentDir, GraphicsConfigEXE)[0]);
+            _isGraphicsConfigLAAPatched = IsLargeAddressAware(Directory.GetFiles(CurrentDir, GraphicsConfigEXE)[0]);
             SetGraphicsConfigLAALabelText();
 
             // Watch for any changes in game directory
@@ -187,7 +186,7 @@ namespace DoW_Mod_Manager
             optimizationsCheckBox.CheckedChanged += new EventHandler(OptimizationsCheckBox_CheckedChanged);
             noFogCheckbox.CheckedChanged += new EventHandler(NoFogCheckboxCheckedChanged);
 
-            // Disable no Fog checkbox if it's not Soulstorm because it only works on Soulstorm at all.
+            // Disable no Fog checkbox if it's not Soulstorm because it only works on Soulstorm.
             if (CurrentGameEXE != GameExecutable.SOULSTORM)
             {
                 noFogCheckbox.Enabled = false;
@@ -217,8 +216,10 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NoFogCheckbox_hover(object sender, MouseEventArgs e)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0019:Use pattern matching", Justification = "<Pending>")]
+        void NoFogCheckbox_hover(object sender, MouseEventArgs e)
         {
+            // It could be refactored with Pattern Matching but it looks less clean in my opinion
             Control parent = sender as Control;
             if (parent == null)
                 return;
@@ -246,7 +247,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method creates Native Image using ngen tool
         /// </summary>
-        private static void CreateNativeImage()
+        static void CreateNativeImage()
         {
             // To enable AOT compilation we have to register DoW Mod Manager for NativeImage generation using ngen.exe
             string ModManagerName = AppDomain.CurrentDomain.FriendlyName;
@@ -259,7 +260,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method deletes Native Image using ngen tool
         /// </summary>
-        private static void DeleteNativeImage()
+        static void DeleteNativeImage()
         {
             // To disable AOT compilation we have to unregister DoW Mod Manager for NativeImage generation using ngen.exe
             string ModManagerName = AppDomain.CurrentDomain.FriendlyName;
@@ -272,7 +273,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method deletes JIT profile cache file
         /// </summary>
-        private void DeleteJITProfile()
+        void DeleteJITProfile()
         {
             string JITProfilePath = CurrentDir + "\\" + JIT_PROFILE_FILE_NAME;
 
@@ -285,7 +286,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void ReadSettingsFromDoWModManagerINI()
+        void ReadSettingsFromDoWModManagerINI()
         {
             if (File.Exists(CONFIG_FILE_NAME))
             {
@@ -319,15 +320,10 @@ namespace DoW_Mod_Manager
                             {
                                 case ACTION_STATE:
                                     if (value < 6)
-                                        // if value <= 3 (we have only 3 states) - do the same as in CHOICE_INDEX case
+                                        // if value < 6 (we have only 6 states) - do the same as in CHOICE_INDEX case
                                         goto case CHOICE_INDEX;
                                     break;
                                 case CHOICE_INDEX:
-                                    if (value >= 0)
-                                        settings[setting] = value;
-                                    else
-                                        settings[setting] = 0;
-                                    break;
                                 case DEV:
                                 case NO_MOVIES:
                                 case FORCE_HIGH_POLY:
@@ -336,15 +332,11 @@ namespace DoW_Mod_Manager
                                 case MULTITHREADED_JIT:
                                 case AOT_COMPILATION:
                                 case NO_FOG:
-                                    if (value == 0 || value == 1)
+                                case IS_GOG_VERSION:
+                                    if (value > 0)
                                         settings[setting] = value;
                                     else
-                                    {
-                                        if (value > 1)
-                                            settings[setting] = 1;
-                                        else
-                                            settings[setting] = 0;
-                                    }
+                                        settings[setting] = 0;
                                     break;
                             }
                         }
@@ -358,7 +350,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void ReselectSavedMod()
+        void ReselectSavedMod()
         {
             int index = GetSelectedModIndex();
 
@@ -374,23 +366,24 @@ namespace DoW_Mod_Manager
         /// <returns>string</returns>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private string GetCurrentGameEXE()
+        string GetCurrentGameEXE()
         {
-            if (File.Exists(CurrentDir + "\\" + GameExecutable.SOULSTORM))
+            
+            if (File.Exists(Path.Combine(CurrentDir, GameExecutable.SOULSTORM)))
             {
                 currentDirectoryLabel.Text = "Your current Soulstorm directory:";
                 _isOldGame = false;
                 return GameExecutable.SOULSTORM;
             }
 
-            if (File.Exists(CurrentDir + "\\" + GameExecutable.DARK_CRUSADE))
+            if (File.Exists(Path.Combine(CurrentDir, GameExecutable.DARK_CRUSADE)))
             {
                 currentDirectoryLabel.Text = "Your current Dark Crusade directory:";
                 _isOldGame = false;
                 return GameExecutable.DARK_CRUSADE;
             }
 
-            if (File.Exists(CurrentDir + "\\" + GameExecutable.WINTER_ASSAULT))
+            if (File.Exists(Path.Combine(CurrentDir, GameExecutable.WINTER_ASSAULT)))
             {
                 currentDirectoryLabel.Text = "Your current Winter Assault directory:";
                 _isOldGame = true;
@@ -398,7 +391,7 @@ namespace DoW_Mod_Manager
             }
 
             // That part of the code will never be reached if you have Original + WA
-            if (File.Exists(CurrentDir + "\\" + GameExecutable.ORIGINAL))
+            if (File.Exists(Path.Combine(CurrentDir, GameExecutable.ORIGINAL)))
             {
                 currentDirectoryLabel.Text = "   Your current Dawn of War directory";
                 _isOldGame = true;
@@ -420,9 +413,9 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void CheckForGraphicsConfigEXE()
+        void CheckForGraphicsConfigEXE()
         {
-            if (!File.Exists(CurrentDir + "\\" + GraphicsConfigEXE))
+            if (!File.Exists(Path.Combine(CurrentDir, GraphicsConfigEXE)))
             {
                 if (!_isMessageBoxOnScreen)
                 {
@@ -443,39 +436,186 @@ namespace DoW_Mod_Manager
             ReselectSavedMod();
         }
 
-        /// <summary>
-        /// This method instigates the test if a given EXE is LAA patched or not.
-        /// </summary>
-        /// <param name="file"></param>
-        /// <returns>bool</returns>
-        static bool IsLargeAware(string file)
+        const short LAA_FLAG = 0x20;
+
+        static bool IsLargeAddressAware(string file)
         {
-            using (FileStream fs = File.OpenRead(file))
+            try
             {
+                using (FileStream fs = File.OpenRead(file))
                 using (BinaryReader br = new BinaryReader(fs))
                 {
-                    if (br.ReadInt16() != 0x5A4D)       // No MZ Header
-                        return false;
+                    if (!IsValidExecutable(br)) return false;
 
-                    br.BaseStream.Position = 0x3C;
-                    int peloc = br.ReadInt32();         // Get the PE header location.
+                    long peHeaderPos = GetPEHeaderPosition(br);
+                    if (peHeaderPos == -1) return false;
 
-                    br.BaseStream.Position = peloc;
-                    if (br.ReadInt32() != 0x4550)       // No PE header
-                        return false;
+                    long laaFlagPos = GetLAAFlagPosition(br, peHeaderPos);
+                    if (laaFlagPos == -1) return false;
 
-                    br.BaseStream.Position += 0x12;     // LAA flag position
-                    short LAAFlag = br.ReadInt16();
+                    short laaFlag = br.ReadInt16();
 
-                    return (LAAFlag & IMAGE_FILE_LARGE_ADDRESS_AWARE) == IMAGE_FILE_LARGE_ADDRESS_AWARE;
+                    // Check if the LAA flag is set
+                    return (laaFlag & LAA_FLAG) == LAA_FLAG;
                 }
             }
+            catch (Exception ex)
+            {
+                ThemedMessageBox.Show(ex.Message, "ERROR:");
+                return false;
+            }
         }
+
+
+        static bool ToggleLAA(string file)
+        {
+            try
+            {
+                using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+                using (BinaryReader br = new BinaryReader(fs))
+                using (BinaryWriter bw = new BinaryWriter(fs))
+                {
+                    if (!IsValidExecutable(br)) return false;
+
+                    long peHeaderPos = GetPEHeaderPosition(br);
+                    if (peHeaderPos == -1) return false;
+
+                    long laaFlagPos = GetLAAFlagPosition(br, peHeaderPos);
+                    if (laaFlagPos == -1) return false;
+
+                    short laaFlag = br.ReadInt16();
+
+                    long checksumPos = GetChecksumPosition(br, peHeaderPos);
+                    if (checksumPos == -1) return false;
+
+                    short originalChecksum = br.ReadInt16();
+
+                    bool isLAASet = (laaFlag & LAA_FLAG) == LAA_FLAG;
+                    laaFlag = ToggleFlag(laaFlag, LAA_FLAG);
+
+                    // Write updated LAA flag
+                    bw.Seek((int)laaFlagPos, SeekOrigin.Begin);
+                    bw.Write(laaFlag);
+
+                    // Calculate and write new checksum
+                    uint newChecksum = CalculatePEChecksum(fs, checksumPos);
+                    bw.Seek((int)checksumPos, SeekOrigin.Begin);
+                    bw.Write((short)newChecksum); // Writing lower 16 bits (checksum field is 16 bits)
+
+                    return !isLAASet;
+                }
+            }
+            catch (Exception ex)
+            {
+                ThemedMessageBox.Show(ex.Message, "ERROR:");
+                return false;
+            }
+        }
+
+        static long GetPEHeaderPosition(BinaryReader br)
+        {
+            br.BaseStream.Seek(0x3C, SeekOrigin.Begin);
+            int peHeaderOffset = br.ReadInt32(); // Location of PE header (at 0x3C in MZ header)
+
+            br.BaseStream.Seek(peHeaderOffset, SeekOrigin.Begin);
+            if (br.ReadInt32() == 0x4550)  // PE signature (0x4550 = "PE\0\0")
+                return peHeaderOffset;
+
+            return -1;  // PE header not found
+        }
+
+        static long GetLAAFlagPosition(BinaryReader br, long peHeaderPos)
+        {
+            br.BaseStream.Seek(peHeaderPos + 0x4, SeekOrigin.Begin);  // Skip to COFF header
+            short machineType = br.ReadInt16(); // Machine type (not used here)
+            short numberOfSections = br.ReadInt16(); // Number of sections (not used here)
+
+            // The Characteristics field (where the LAA flag is located) is at offset 0x16 from the PE header.
+            br.BaseStream.Seek(peHeaderPos + 0x16, SeekOrigin.Begin);
+            return br.BaseStream.Position;
+        }
+
+        static long GetChecksumPosition(BinaryReader br, long peHeaderPos)
+        {
+            br.BaseStream.Seek(peHeaderPos + 0x14, SeekOrigin.Begin);  // Skip to Optional Header start
+            short optionalHeaderSize = br.ReadInt16();  // Size of Optional Header
+
+            // The checksum field is at offset 0x40 from the beginning of the Optional Header.
+            long checksumPos = peHeaderPos + 0x18 + 0x40;
+            if (checksumPos < br.BaseStream.Length)
+            {
+                br.BaseStream.Seek(checksumPos, SeekOrigin.Begin);
+                return checksumPos;
+            }
+
+            return -1;  // Checksum position not found
+        }
+
+        static uint CalculatePEChecksum(FileStream fs, long checksumPos)
+        {
+            uint checksum = 0;
+            long fileSize = fs.Length;
+
+            // Save the current position to restore later
+            long originalPos = fs.Position;
+
+            fs.Seek(0, SeekOrigin.Begin);  // Start from the beginning of the file
+
+            using (BinaryReader br = new BinaryReader(fs, System.Text.Encoding.Default, leaveOpen: true))
+            {
+                for (long i = 0; i < fileSize; i += 4)
+                {
+                    if (i == checksumPos)
+                    {
+                        br.BaseStream.Seek(4, SeekOrigin.Current); // Skip the checksum field itself (4 bytes)
+                        continue;
+                    }
+
+                    // Add 32-bit words to checksum
+                    if (i + 4 <= fileSize)
+                        checksum += br.ReadUInt32();
+                    else
+                        checksum += br.ReadUInt16(); // Handle remaining bytes
+                }
+            }
+
+            // Add file length to the checksum
+            checksum += (uint)fileSize;
+
+            // Fold the checksum into 16 bits
+            checksum = (checksum & 0xFFFF) + (checksum >> 16);
+            checksum += (checksum >> 16);
+
+            // Restore the original file position
+            fs.Seek(originalPos, SeekOrigin.Begin);
+
+            return checksum & 0xFFFF; // Return a 16-bit checksum
+        }
+
+        static bool IsValidExecutable(BinaryReader br)
+        {
+            const short MZ_HEADER = 0x5A4D;
+            const int PE_HEADER_SIGNATURE = 0x4550;
+
+            if (br.ReadInt16() != MZ_HEADER) return false;
+
+            br.BaseStream.Position = 0x3C;
+            int peHeaderLoc = br.ReadInt32();
+
+            br.BaseStream.Position = peHeaderLoc;
+            return br.ReadInt32() == PE_HEADER_SIGNATURE;
+        }
+
+        static short ToggleFlag(short value, short flag)
+        {
+            return (short)(value ^ flag);
+        }
+
 
         /// <summary>
         /// This method draws the LAA text for the game label depending on whether the flag is true (Green) or false (Red).
         /// </summary>
-        private void SetGameLAALabelText()
+        void SetGameLAALabelText()
         {
             if (_isGameEXELAAPatched)
             {
@@ -492,7 +632,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method draws the LAA text for the GraphicsConfig label depending on whether the flag is true (Green) or false (Red).
         /// </summary>
-        private void SetGraphicsConfigLAALabelText()
+        void SetGraphicsConfigLAALabelText()
         {
             if (_isGraphicsConfigLAAPatched)
             {
@@ -511,7 +651,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void AddFileSystemWatcher()
+        void AddFileSystemWatcher()
         {
             fileSystemWatcher1.Path = CurrentDir;
 
@@ -534,7 +674,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void GetMods()
+        void GetMods()
         {
             // Make a new list for the new Pathitems
             List<string> newfilePathsList = new List<string>();
@@ -573,7 +713,7 @@ namespace DoW_Mod_Manager
                         // Filter the unplayable mods and populate the List only with playable mods
                         while ((line = file.ReadLine()) != null)
                         {
-                            // Winter Assault of Original doesn't have a "Playable" state
+                            // Winter Assault or Original doesn't have a "Playable" state
                             if (line.Contains("Playable = 1") || _isOldGame)
                                 isPlayable = true;
 
@@ -582,8 +722,9 @@ namespace DoW_Mod_Manager
                             {
                                 int indexOfEqualSigh = line.IndexOf('=');
                                 modFolderName = line.Substring(indexOfEqualSigh + 1, line.Length - indexOfEqualSigh - 1);
-                                modFolderName = modFolderName.Replace(" ", ""); //Remove whitespaces
+                                modFolderName = modFolderName.Replace(" ", "");     // Remove whitespaces
                             }
+
                             // Add information about a version of a mod
                             if (line.Contains("ModVersion"))
                             {
@@ -627,7 +768,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="source"></param>
         /// <param name="e"></param>
-        private void ModManagerForm_Closing(object sender, EventArgs e)
+        void ModManagerForm_Closing(object sender, EventArgs e)
         {
             using (StreamWriter sw = File.CreateText(CONFIG_FILE_NAME))
             {
@@ -640,7 +781,8 @@ namespace DoW_Mod_Manager
                 sw.WriteLine($"{AUTOUPDATE}={settings[AUTOUPDATE]}");
                 sw.WriteLine($"{MULTITHREADED_JIT}={settings[MULTITHREADED_JIT]}");
                 sw.WriteLine($"{AOT_COMPILATION}={settings[AOT_COMPILATION]}");
-                sw.Write($"{NO_FOG}={settings[NO_FOG]}");
+                sw.WriteLine($"{NO_FOG}={settings[NO_FOG]}");
+                sw.Write($"{IS_GOG_VERSION}={settings[IS_GOG_VERSION]}");
             }
 
             // If Timer Resolution was lowered we have to keep DoW Mod Manager alive or Timer Resolution will be reset
@@ -692,7 +834,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="source"></param>
         /// <param name="e"></param>
-        private void FileSystemWatcherOnChanged(object source, FileSystemEventArgs e)
+        void FileSystemWatcherOnChanged(object source, FileSystemEventArgs e)
         {
             SetUpAllNecessaryMods();
 
@@ -708,7 +850,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void InstalledModsList_SelectedIndexChanged(object sender, EventArgs e)
+        void InstalledModsList_SelectedIndexChanged(object sender, EventArgs e)
         {
             startModButton.Enabled = true;
 
@@ -757,7 +899,7 @@ namespace DoW_Mod_Manager
         /// <returns></returns>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private int GetSelectedModIndex()
+        int GetSelectedModIndex()
         {
             return settings[CHOICE_INDEX];
         }
@@ -768,7 +910,7 @@ namespace DoW_Mod_Manager
         /// <param name="index"></param>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void SetSelectedModIndex(int index)
+        void SetSelectedModIndex(int index)
         {
             settings[CHOICE_INDEX] = index;
         }
@@ -778,7 +920,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void LoadModFoldersFromFile()
+        void LoadModFoldersFromFile()
         {
             int requiredModsCount = requiredModsList.Items.Count;
             ModFolderPaths = new string[requiredModsCount];
@@ -786,7 +928,7 @@ namespace DoW_Mod_Manager
             // Read the file line by line and check for "ModFolder" attribute
             for (int i = 0; i < requiredModsCount; i++)
             {
-                string moduleFilePath = CurrentDir + "\\" + requiredModsList.Items[i].ToString() + ".module";
+                string moduleFilePath = Path.Combine(CurrentDir, requiredModsList.Items[i].ToString()) + ".module";
 
                 if (File.Exists(moduleFilePath))
                 {
@@ -824,7 +966,7 @@ namespace DoW_Mod_Manager
 
             for (int i = 0; i < itemsCount; i++)
             {
-                folderPath = CurrentDir + "\\" + ModFolderPaths[i];
+                folderPath = Path.Combine(CurrentDir, ModFolderPaths[i]);
 
                 if (Directory.Exists(folderPath))
                 {
@@ -852,7 +994,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RequiredModsList_SelectedIndexChanged(object sender, EventArgs e)
+        void RequiredModsList_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = requiredModsList.SelectedIndex;
 
@@ -877,7 +1019,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void StartVanillaGameButton_Click(object sender, EventArgs e)
+        void StartVanillaGameButton_Click(object sender, EventArgs e)
         {
             StartGameWithOptions("W40k");
         }
@@ -887,7 +1029,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void StartButton_Click(object sender, EventArgs e)
+        void StartButton_Click(object sender, EventArgs e)
         {
             StartGameWithOptions(installedModsListBox.SelectedItem.ToString());
         }
@@ -896,7 +1038,7 @@ namespace DoW_Mod_Manager
         /// This method handles starting an instance of CurrentGameEXE with arguments
         /// </summary>
         /// <param name="modName"></param>
-        private void StartGameWithOptions(string modName)
+        void StartGameWithOptions(string modName)
         {
             string arguments = "-modname " + modName;
 
@@ -932,7 +1074,7 @@ namespace DoW_Mod_Manager
                         {
                             Process[] dow = Process.GetProcessesByName(procName);
                             dow[0].PriorityClass = ProcessPriorityClass.High;
-                            dow[0].ProcessorAffinity = (IntPtr)0x0006;          // Affinity 6 means using only CPU threads 2 and 3 (6 = 0110)
+                            dow[0].ProcessorAffinity = (IntPtr)0x0006;          // Affinity 6 means using only CPU threads 2 and 3 (6 = 0b0110)
                             break;                                              // We've done what we intended to do
                         }
                         catch (Exception)
@@ -978,7 +1120,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DevCheckBox_CheckedChanged(object sender, EventArgs e)
+        void DevCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (devCheckBox.Checked)
                 settings[DEV] = 1;
@@ -992,7 +1134,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NomoviesCheckBox_CheckedChanged(object sender, EventArgs e)
+        void NomoviesCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (nomoviesCheckBox.Checked)
                 settings[NO_MOVIES] = 1;
@@ -1006,7 +1148,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void HighpolyCheckBox_CheckedChanged(object sender, EventArgs e)
+        void HighpolyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (highpolyCheckBox.Checked)
                 settings[FORCE_HIGH_POLY] = 1;
@@ -1022,7 +1164,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OptimizationsCheckBox_CheckedChanged(object sender, EventArgs e)
+        void OptimizationsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (optimizationsCheckBox.Checked)
                 settings[DOW_OPTIMIZATIONS] = 1;
@@ -1035,7 +1177,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NoFogCheckboxCheckedChanged(object sender, EventArgs e)
+        void NoFogCheckboxCheckedChanged(object sender, EventArgs e)
         {
             if (noFogCheckbox.Checked)
                 settings[NO_FOG] = 1;
@@ -1048,7 +1190,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RequiredModsList_DrawItem(object sender, DrawItemEventArgs e)
+        void RequiredModsList_DrawItem(object sender, DrawItemEventArgs e)
         {
             // No need to draw anything if there are no required mods
             if (requiredModsList.Items.Count == 0)
@@ -1064,15 +1206,13 @@ namespace DoW_Mod_Manager
             else
                 myBrush = Brushes.Red;
 
-            // Draw the current item text based on the current 
-            // Font and the custom brush settings.
+            // Draw the current item text based on the current font and the custom brush settings.
             e.Graphics.DrawString(((ListBox)sender).Items[e.Index].ToString(),
                                   e.Font,
                                   myBrush,
                                   e.Bounds);
 
-            // If the ListBox has focus, draw a focus rectangle 
-            // around the selected item.
+            // If the ListBox has focus, draw a focus rectangle around the selected item.
             e.DrawFocusRectangle();
         }
 
@@ -1081,7 +1221,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DownloadButton_Click(object sender, EventArgs e)
+        void DownloadButton_Click(object sender, EventArgs e)
         {
             new ModDownloaderForm(this).Show();
         }
@@ -1091,7 +1231,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FixMissingModButton_Click(object sender, EventArgs e)
+        void FixMissingModButton_Click(object sender, EventArgs e)
         {
             if (requiredModsList.SelectedItem == null)
                 return;
@@ -1115,8 +1255,9 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ModMergeButton_Click(object sender, EventArgs e)
+        void ModMergeButton_Click(object sender, EventArgs e)
         {
+            //TODO: ModMerger is causing problems for the noobs - we should do something! xD
             modMerger = new ModMergerForm(this);
             modMerger.Show();
         }
@@ -1126,7 +1267,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SettingsButton_Click(object sender, EventArgs e)
+        void SettingsButton_Click(object sender, EventArgs e)
         {
             new SettingsManagerForm(this).Show();
         }
@@ -1136,7 +1277,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckForErrorsButton_Click(object sender, EventArgs e)
+        void CheckForErrorsButton_Click(object sender, EventArgs e)
         {
             if (File.Exists(WARNINGS_LOG))
             {
@@ -1149,7 +1290,7 @@ namespace DoW_Mod_Manager
                     while ((line = logFile.ReadLine()) != null)
                     {
                         if (line.Contains("Fatal Data Error"))
-                            errors += line + "\n";
+                            errors += line + Environment.NewLine;
                     }
                 }
 
@@ -1159,67 +1300,7 @@ namespace DoW_Mod_Manager
                     ThemedMessageBox.Show($"No errors were found in {WARNINGS_LOG}!", "Errors:");
             }
             else
-                ThemedMessageBox.Show($"There is no {WARNINGS_LOG} file\nThat means that there is no errors!", "Errors:");
-        }
-
-        /// <summary>
-        /// This method performs the necessary data operations in order to toggle the LAA for a given EXE file back and forth.
-        /// </summary>
-        /// <param name="file"></param>
-        /// <returns>bool</returns>
-        static bool ToggleLAA(string file)
-        {
-            bool result = false;
-
-            using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
-            {
-                BinaryReader br = new BinaryReader(fs);
-
-                if (br.ReadInt16() != 0x5A4D)       // No MZ Header
-                    return false;
-
-                br.BaseStream.Position = 0x3C;
-                int peloc = br.ReadInt32();         // Get the PE header location.
-
-                br.BaseStream.Position = peloc;
-                if (br.ReadInt32() != 0x4550)       // No PE header
-                    return false;
-
-                br.BaseStream.Position += 0x12;     // LAA flag position
-                long nFilePos = (int)br.BaseStream.Position;
-                short LAAFlag = br.ReadInt16();
-
-                br.BaseStream.Position += 0x40;     // Checksum position
-                long nSumPos = (int)br.BaseStream.Position;
-                short ChckSum = br.ReadInt16();
-
-                BinaryWriter bw = new BinaryWriter(fs);
-                if ((LAAFlag & IMAGE_FILE_LARGE_ADDRESS_AWARE) != IMAGE_FILE_LARGE_ADDRESS_AWARE)
-                {
-                    LAAFlag += IMAGE_FILE_LARGE_ADDRESS_AWARE;
-                    ChckSum += IMAGE_FILE_LARGE_ADDRESS_AWARE;
-                    bw.Seek((int)nFilePos, SeekOrigin.Begin);
-                    bw.Write(LAAFlag);
-                    bw.Seek((int)nSumPos, SeekOrigin.Begin);
-                    bw.Write(ChckSum);
-                    bw.Flush();
-                    result = true;
-                }
-                else if ((LAAFlag & IMAGE_FILE_LARGE_ADDRESS_AWARE) == IMAGE_FILE_LARGE_ADDRESS_AWARE)
-                {
-                    LAAFlag -= IMAGE_FILE_LARGE_ADDRESS_AWARE;
-                    ChckSum -= IMAGE_FILE_LARGE_ADDRESS_AWARE;
-                    bw.Seek((int)nFilePos, SeekOrigin.Begin);
-                    bw.Write(LAAFlag);
-                    bw.Seek((int)nSumPos, SeekOrigin.Begin);
-                    bw.Write(ChckSum);
-                    bw.Flush();
-                    result = false;
-                }
-                bw.Close();
-                br.Close();
-            }
-            return result;
+                ThemedMessageBox.Show($"There is no {WARNINGS_LOG} file{Environment.NewLine}That means that there is no errors!", "Errors:");
         }
 
         /// <summary>
@@ -1228,7 +1309,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="file"></param>
         /// <returns>bool</returns>
-        private bool IsFileNotLocked(string file)
+        bool IsFileLocked(string file)
         {
             FileStream fs = null;
             try
@@ -1241,17 +1322,18 @@ namespace DoW_Mod_Manager
                 // still being written to
                 // or being processed by another thread
                 // or does not exist (has already been processed)
-                return false;
+                return true;
             }
             finally
             {
                 fs?.Close();
+
                 // Or using the old way of checking that
                 //if (fs != null) fs.Close();
             }
 
             // File is not locked
-            return true;
+            return false;
         }
 
         /// <summary>
@@ -1260,13 +1342,13 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonToggleLAA_Click(object sender, EventArgs e)
+        void ButtonToggleLAA_Click(object sender, EventArgs e)
         {
             // Check if the Game is LAA Patched and fill in the Label properly
             string currentGamePath = CurrentDir + "\\" + CurrentGameEXE;
             string currentGraphucsConfigPath = CurrentDir + "\\" + GraphicsConfigEXE;
 
-            if (IsFileNotLocked(currentGamePath) && IsFileNotLocked(currentGraphucsConfigPath))
+            if (!IsFileLocked(currentGamePath) && !IsFileLocked(currentGraphucsConfigPath))
             {
                 if ((_isGameEXELAAPatched && _isGraphicsConfigLAAPatched) || (!_isGameEXELAAPatched && !_isGraphicsConfigLAAPatched))
                 {
@@ -1341,13 +1423,20 @@ namespace DoW_Mod_Manager
                 case AOT_COMPILATION:
                     settings[AOT_COMPILATION] = newValue;
                     break;
+                case IS_GOG_VERSION:
+                    settings[IS_GOG_VERSION] = newValue;
+                    if (newValue == 1)
+                        GOGRadioButton.Checked = Convert.ToBoolean(newValue);
+                    else
+                        SteamRadioButton.Checked = Convert.ToBoolean(newValue);
+                    break;
             }
         }
 
         /// <summary>
         /// This method opens an AboutForm
         /// </summary>
-        private void HomePageLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        void HomePageLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             new AboutForm(this).Show();
         }
@@ -1357,7 +1446,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ModManagerForm_MouseMove(object sender, MouseEventArgs e)
+        void ModManagerForm_MouseMove(object sender, MouseEventArgs e)
         {
             Control control = GetChildAtPoint(e.Location);
             if (control != null)
@@ -1382,7 +1471,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OpenFolderButton_Click(object sender, EventArgs e)
+        void OpenFolderButton_Click(object sender, EventArgs e)
         {
             // Maybe there are no mods
             if (AllValidModules.Count == 0)
@@ -1403,6 +1492,18 @@ namespace DoW_Mod_Manager
             {
                 ThemedMessageBox.Show($"Permission to access the folder: \"{pathToMod}\" denied! \nMake sure you have the necessary access rights!");
             }
+        }
+
+        void SteamRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SteamRadioButton.Checked)
+                settings[IS_GOG_VERSION] = 0;
+        }
+
+        void GOGRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (GOGRadioButton.Checked)
+                settings[IS_GOG_VERSION] = 1;
         }
     }
 }

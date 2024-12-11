@@ -2,8 +2,14 @@
 
 Who did what:
 Fragjacker (Original author) - up to 1.5.2,  then 1.6.1,  2.0.3,  2.0.5,  2.1.2,  2.1.4,  2.1.5,  2.1.7,  2.1.9,,  2.2.2,  2.3.1.0
-IgorTheLight - 1.5.3 to 1.6,  1.7 to 2.0.3,  2.0.4,  2.1.0,  2.1.1,  2.1.3,  2.1.6,  2.1.8,  2.2.0,  2.2.1,  2.3.0.0, 2.3.2.0
+IgorTheLight - 1.5.3 to 1.6,  1.7 to 2.0.3,  2.0.4,  2.1.0,  2.1.1,  2.1.3,  2.1.6,  2.1.8,  2.2.0,  2.2.1,  2.3.0.0, 2.3.2.0, 2.4.0.0
 BlueAmulet - 2.1.7
+
+## Version 2.4.0.0
+
+- PE header and checksum calculations are more advanced now. That adds support for GOG version of the game. Now users could toggle LAA flags or any version of the game! (potentionally - on ANY Windows executable!)
+- Added mod support for Original game (mostly for "A larger fonts")
+- Some code refactorings
 
 ## Version 2.3.2.0
 

@@ -24,76 +24,76 @@ namespace DoW_Mod_Manager
             }
         }
 
-        private const string CANCEL_LABEL = "CANCEL";
-        private const string CLOSE_LABEL = "CLOSE";
+        const string CANCEL_LABEL = "CANCEL";
+        const string CLOSE_LABEL = "CLOSE";
 
-        private const string SETTINGS_FILE = "Local.ini";
-        private readonly string DRIVER_SETTINGS_FILE = Path.Combine(Directory.GetCurrentDirectory(), "Drivers", "spdx9_config.txt");
+        const string SETTINGS_FILE = "Local.ini";
+        readonly string DRIVER_SETTINGS_FILE = Path.Combine(Directory.GetCurrentDirectory(), "Drivers", "spdx9_config.txt");
 
         // Here is the allohwcursor setting from the driver file
-        private const string ALLOWHWCURSOR = "allowhwcursor";
+        const string ALLOWHWCURSOR = "allowhwcursor";
 
         // Here are all settings from Local.ini in correct order
-        private const string CAMERA_DETAIL = "cameradetail";
-        private const string CURRENT_MOD = "currentmoddc";
-        private const string DYNAMIC_LIGHTS = "dynamiclights";
-        private const string EVENT_DETAIL_LEVEL = "event_detail_level";
-        private const string FORCE_WATCH_MOVIES = "force_watch_movies";
-        private const string FULLRES_TEAMCOLOUR = "fullres_teamcolour";
-        private const string FX_DETAIL_LEVEL = "fx_detail_level";
-        private const string MODEL_DETAIL = "modeldetail";
-        private const string PARENTAL_CONTROL = "parentalcontrol";
-        private const string PERSISTENT_BODIES = "persistent_bodies";
-        private const string PERSISTENT_DECALS = "persistent_decals";
-        private const string PLAYER_PROFILE = "playerprofile";
-        private const string RL_SSO_NUM_TIMES_SHOWN = "rl_sso_num_times_shown";
-        private const string SCREEN_ADAPTER = "screenadapter";
-        private const string SCREEN_ANIALIAS = "screenantialias";
-        private const string SCREEN_DEPTH = "screendepth";
-        private const string SCREEN_DEVICE = "screendevice";
-        private const string SCREEN_GAMMA = "screengamma";
-        private const string SCREEN_HEIGHT = "screenheight";
-        private const string SCREEN_NO_VSYNC = "screennovsync";
-        private const string SCREEN_REFRESH = "screenrefresh";
-        private const string SCREEN_WIDTH = "screenwidth";
-        private const string SCREEN_WINDOWED = "screenwindowed";
-        private const string SHADOW_BLOB = "shadowblob";
-        private const string SHADOW_MAP = "shadowmap";
-        private const string SHADOW_VOLUME = "shadowvolume";
-        private const string SOUND_ENABLED = "sound_enabled";
-        private const string SOUND_LIMIT_SAMPLES = "sound_limitsamples";
-        private const string SOUND_NR_CHANNELS = "sound_nrchannels";
-        private const string SOUND_QUALITY = "sound_quality";
-        private const string TERRAIN_ENABLE_FOW_BLUR = "terrainenablefowblur";
-        private const string TEXTURE_DETAIL = "texturedetail";
-        private const string TOTAL_MATCHES = "total_matches";
-        private const string UNIT_OCCLUSION = "unit_occlusion";
+        const string CAMERA_DETAIL = "cameradetail";
+        const string CURRENT_MOD = "currentmoddc";
+        const string DYNAMIC_LIGHTS = "dynamiclights";
+        const string EVENT_DETAIL_LEVEL = "event_detail_level";
+        const string FORCE_WATCH_MOVIES = "force_watch_movies";
+        const string FULLRES_TEAMCOLOUR = "fullres_teamcolour";
+        const string FX_DETAIL_LEVEL = "fx_detail_level";
+        const string MODEL_DETAIL = "modeldetail";
+        const string PARENTAL_CONTROL = "parentalcontrol";
+        const string PERSISTENT_BODIES = "persistent_bodies";
+        const string PERSISTENT_DECALS = "persistent_decals";
+        const string PLAYER_PROFILE = "playerprofile";
+        const string RL_SSO_NUM_TIMES_SHOWN = "rl_sso_num_times_shown";
+        const string SCREEN_ADAPTER = "screenadapter";
+        const string SCREEN_ANIALIAS = "screenantialias";
+        const string SCREEN_DEPTH = "screendepth";
+        const string SCREEN_DEVICE = "screendevice";
+        const string SCREEN_GAMMA = "screengamma";
+        const string SCREEN_HEIGHT = "screenheight";
+        const string SCREEN_NO_VSYNC = "screennovsync";
+        const string SCREEN_REFRESH = "screenrefresh";
+        const string SCREEN_WIDTH = "screenwidth";
+        const string SCREEN_WINDOWED = "screenwindowed";
+        const string SHADOW_BLOB = "shadowblob";
+        const string SHADOW_MAP = "shadowmap";
+        const string SHADOW_VOLUME = "shadowvolume";
+        const string SOUND_ENABLED = "sound_enabled";
+        const string SOUND_LIMIT_SAMPLES = "sound_limitsamples";
+        const string SOUND_NR_CHANNELS = "sound_nrchannels";
+        const string SOUND_QUALITY = "sound_quality";
+        const string TERRAIN_ENABLE_FOW_BLUR = "terrainenablefowblur";
+        const string TEXTURE_DETAIL = "texturedetail";
+        const string TOTAL_MATCHES = "total_matches";
+        const string UNIT_OCCLUSION = "unit_occlusion";
 
-        private readonly string PROFILES_PATH;
-        private const string NAME_DAT = "name.dat";
-        private const string PLAYERCONFIG = "playercfg.lua";
-        private const string PROFILE = "Profile";
+        readonly string PROFILES_PATH;
+        const string NAME_DAT = "name.dat";
+        const string PLAYERCONFIG = "playercfg.lua";
+        const string PROFILE = "Profile";
 
         // Here are some usefull settings from playercfg.lua in correct order
-        private const string INVERT_DECLINATION = "invertDeclination";
-        private const string INVERT_PAN = "invertPan";
-        private const string SCROLL_RATE = "scrollRate";
+        const string INVERT_DECLINATION = "invertDeclination";
+        const string INVERT_PAN = "invertPan";
+        const string SCROLL_RATE = "scrollRate";
 
-        private const string SOUND_VOLUME_AMBIENT = "VolumeAmbient";
-        private const string SOUND_VOLUME_MUSIC = "VolumeMusic";
-        private const string SOUND_VOLUME_SFX = "VolumeSfx";
-        private const string SOUND_VOLUME_VOICE = "VolumeVoice";
+        const string SOUND_VOLUME_AMBIENT = "VolumeAmbient";
+        const string SOUND_VOLUME_MUSIC = "VolumeMusic";
+        const string SOUND_VOLUME_SFX = "VolumeSfx";
+        const string SOUND_VOLUME_VOICE = "VolumeVoice";
 
-        private readonly ModManagerForm modManager;
+        readonly ModManagerForm modManager;
 
         // Those two settings could indicate that we need to modify DoW start options
-        private bool enableHighPoly = false;
-        private bool disableHighPoly = false;
+        bool enableHighPoly = false;
+        bool disableHighPoly = false;
 
         // Not the same settings as in ModManagerForm!
-        private Dictionary<string, string> settings;
+        Dictionary<string, string> settings;
 
-        private List<Profile> profiles;
+        List<Profile> profiles;
 
         /// <summary>
         /// Creates the Form of the Settings Manager Window
@@ -187,7 +187,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void InitializeSettingsWithDefaults()
+        void InitializeSettingsWithDefaults()
         {
             settings = new Dictionary<string, string>
             {
@@ -249,7 +249,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void ReadSettingsFromLocalINI()
+        void ReadSettingsFromLocalINI()
         {
             if (File.Exists(DRIVER_SETTINGS_FILE))
             {
@@ -453,7 +453,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void FindAllProfilesInDirectory(bool clearProfiles)
+        void FindAllProfilesInDirectory(bool clearProfiles)
         {
             if (clearProfiles)
                 profiles.Clear();
@@ -502,7 +502,7 @@ namespace DoW_Mod_Manager
         // TODO: Investigate why this method is called twice after SettingManagerForm is launched
         // Request the inlining of this method
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void ReadSettingsFromPlayercfgLUA()
+        void ReadSettingsFromPlayercfgLUA()
         {
             string profileName = settings[PLAYER_PROFILE];
             int index = currentPlayerComboBox.SelectedIndex;
@@ -560,7 +560,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="localINI"></param>
         /// <param name="playercfgLUA"></param>
-        private void InitializeGUIWithSettings(bool localINI, bool playercfgLUA)
+        void InitializeGUIWithSettings(bool localINI, bool playercfgLUA)
         {
             if (localINI)
             {
@@ -691,7 +691,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <returns>List<string></returns>
         // TODO: this method may benefit from an optimization pass!
-        private List<string> GetAllVideocards()
+        List<string> GetAllVideocards()
         {
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
             List<string> videocards = new List<string>();
@@ -714,7 +714,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts on SaveButton press
         /// </summary>
-        private void SaveButton_Click(object sender, EventArgs e)
+        void SaveButton_Click(object sender, EventArgs e)
         {
             WriteSettings(localINI: true, playercgfLUA: true);
 
@@ -727,7 +727,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="localINI"></param>
         /// <param name="playercgfLUA"></param>
-        private void WriteSettings(bool localINI, bool playercgfLUA)
+        void WriteSettings(bool localINI, bool playercgfLUA)
         {
             // There is no Profile selected
             if (currentPlayerComboBox.Text.Length == 0)
@@ -916,7 +916,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method restores all settings to their default values
         /// </summary>
-        private void DefaultsButton_Click(object sender, EventArgs e)
+        void DefaultsButton_Click(object sender, EventArgs e)
         {
             InitializeSettingsWithDefaults();
             InitializeGUIWithSettings(localINI: true, playercfgLUA: true);
@@ -929,7 +929,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method closes the SettingManagerForm
         /// </summary>
-        private void CloseButton_Click(object sender, EventArgs e)
+        void CloseButton_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -937,7 +937,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in currentPlayerComboBox.SelectedIndex
         /// </summary>
-        private void CurrentPlayerComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void CurrentPlayerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ReadSettingsFromPlayercfgLUA();
             InitializeGUIWithSettings(localINI: false, playercfgLUA: true);
@@ -952,7 +952,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in parentalControlCheckBox.Checked
         /// </summary>
-        private void ParentalControlCheckBox_CheckedChanged(object sender, EventArgs e)
+        void ParentalControlCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (parentalControlCheckBox.Checked)
                 settings[PARENTAL_CONTROL] = "1";
@@ -967,7 +967,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in inversePanCheckBox.Checked
         /// </summary>
-        private void InversePanCheckBox_CheckedChanged(object sender, EventArgs e)
+        void InversePanCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (inversePanCheckBox.Checked)
                 settings[INVERT_PAN] = "1";
@@ -982,7 +982,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in inverseDeclinationCheckBox.Checked
         /// </summary>
-        private void InverseDeclinationCheckBox_CheckedChanged(object sender, EventArgs e)
+        void InverseDeclinationCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (inverseDeclinationCheckBox.Checked)
                 settings[INVERT_DECLINATION] = "1";
@@ -997,7 +997,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in scrollRateTrackBar.Value
         /// </summary>
-        private void ScrollRateTrackBar_Scroll(object sender, EventArgs e)
+        void ScrollRateTrackBar_Scroll(object sender, EventArgs e)
         {
             double doubleValue = Convert.ToDouble(scrollRateTrackBar.Value);
             double settingValue = doubleValue / 100d;
@@ -1012,7 +1012,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in loginAttemptsComboBox.SelectedItem
         /// </summary>
-        private void LoginAttemptsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void LoginAttemptsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings[RL_SSO_NUM_TIMES_SHOWN] = loginAttemptsComboBox.SelectedItem.ToString();
 
@@ -1024,7 +1024,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in activeVideocardComboBox.SelectedItem
         /// </summary>
-        private void ActiveVideocardComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void ActiveVideocardComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings[SCREEN_ADAPTER] = activeVideocardComboBox.SelectedIndex.ToString();
 
@@ -1036,7 +1036,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in rendererComboBox.SelectedItem
         /// </summary>
-        private void RendererComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void RendererComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings[SCREEN_DEVICE] = rendererComboBox.SelectedItem.ToString();
 
@@ -1048,7 +1048,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in screenResolutionComboBox.SelectedItem
         /// </summary>
-        private void ScreenResolutionComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void ScreenResolutionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string str = screenResolutionComboBox.SelectedItem.ToString();
             int x = str.IndexOf('×');
@@ -1064,7 +1064,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in refreshRateComboBox.SelectedItem
         /// </summary>
-        private void RefreshRateComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void RefreshRateComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string str = refreshRateComboBox.SelectedItem.ToString();
             int indexOfSpace = str.IndexOf(" ");
@@ -1082,7 +1082,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in colorDepthComboBox.SelectedIndex
         /// </summary>
-        private void ColorDepthComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void ColorDepthComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (colorDepthComboBox.SelectedIndex)
             {
@@ -1105,7 +1105,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in gammaTrackBar.Value
         /// </summary>
-        private void GammaTrackBar_Scroll(object sender, EventArgs e)
+        void GammaTrackBar_Scroll(object sender, EventArgs e)
         {
             double doubleValue = Convert.ToDouble(gammaTrackBar.Value);
             double settingValue = doubleValue / 100d;
@@ -1120,7 +1120,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in vSyncCheckBox.Checked
         /// </summary>
-        private void VSyncCheckBox_CheckedChanged(object sender, EventArgs e)
+        void VSyncCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (vSyncCheckBox.Checked)      // We have to invert this for convienience
                 settings[SCREEN_NO_VSYNC] = "0";
@@ -1135,7 +1135,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in windowedCheckBox.Checked
         /// </summary>
-        private void WindowedCheckBox_CheckedChanged(object sender, EventArgs e)
+        void WindowedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (windowedCheckBox.Checked)
                 settings[SCREEN_WINDOWED] = "1";
@@ -1150,7 +1150,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in antialiasingCheckBox.Checked
         /// </summary>
-        private void AntialiasingCheckBox_CheckedChanged(object sender, EventArgs e)
+        void AntialiasingCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (antialiasingCheckBox.Checked)
                 settings[SCREEN_ANIALIAS] = "1";
@@ -1165,7 +1165,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in textureDetailComboBox.SelectedIndex
         /// </summary>
-        private void TextureDetailComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void TextureDetailComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings[TEXTURE_DETAIL] = textureDetailComboBox.SelectedIndex.ToString();
 
@@ -1177,7 +1177,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in modelDetailComboBox.SelectedIndex
         /// </summary>
-        private void ModelDetailComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void ModelDetailComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings[MODEL_DETAIL] = modelDetailComboBox.SelectedIndex.ToString();
 
@@ -1189,7 +1189,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in terrainDetailComboBox.SelectedIndex
         /// </summary>
-        private void TerrainDetailComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void TerrainDetailComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings[TERRAIN_ENABLE_FOW_BLUR] = terrainDetailComboBox.SelectedIndex.ToString();
 
@@ -1201,7 +1201,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in betterTeamcoloredTexturexCheckBox.Checked
         /// </summary>
-        private void BetterTeamcoloredTexturexCheckBox_CheckedChanged(object sender, EventArgs e)
+        void BetterTeamcoloredTexturexCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (betterTeamcoloredTexturexCheckBox.Checked)
                 settings[FULLRES_TEAMCOLOUR] = "1";
@@ -1216,7 +1216,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in shadowsDetailComboBox.SelectedIndex
         /// </summary>
-        private void ShadowsDetailComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void ShadowsDetailComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Using goto we could fall through even if case is not empty!
             switch (shadowsDetailComboBox.SelectedIndex)
@@ -1245,7 +1245,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in worldEventsComboBox.SelectedIndex
         /// </summary>
-        private void WorldEventsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void WorldEventsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings[EVENT_DETAIL_LEVEL] = worldEventsComboBox.SelectedIndex.ToString();
 
@@ -1257,7 +1257,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in effectsDetailComboBox.SelectedIndex
         /// </summary>
-        private void EffectsDetailComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void EffectsDetailComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings[FX_DETAIL_LEVEL] = effectsDetailComboBox.SelectedIndex.ToString();
 
@@ -1269,7 +1269,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in persistentBodiesComboBox.SelectedIndex
         /// </summary>
-        private void PersistentBodiesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void PersistentBodiesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings[PERSISTENT_BODIES] = persistentBodiesComboBox.SelectedIndex.ToString();
 
@@ -1281,7 +1281,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in persistentScarringComboBox.SelectedIndex
         /// </summary>
-        private void PersistentScarringComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void PersistentScarringComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings[PERSISTENT_DECALS] = persistentScarringComboBox.SelectedIndex.ToString();
 
@@ -1293,7 +1293,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in dynamicLightsComboBox.SelectedIndex
         /// </summary>
-        private void DynamicLightsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void DynamicLightsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings[DYNAMIC_LIGHTS] = dynamicLightsComboBox.SelectedIndex.ToString();
 
@@ -1305,7 +1305,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in full3DCameraCheckBox.Checked
         /// </summary>
-        private void Full3DCameraCheckBox_CheckedChanged(object sender, EventArgs e)
+        void Full3DCameraCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (full3DCameraCheckBox.Checked)
                 settings[CAMERA_DETAIL] = "1";
@@ -1320,7 +1320,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in unitsOcclusionCheckBox.Checked
         /// </summary>
-        private void UnitsOcclusionCheckBox_CheckedChanged(object sender, EventArgs e)
+        void UnitsOcclusionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (unitsOcclusionCheckBox.Checked)
                 settings[UNIT_OCCLUSION] = "1";
@@ -1335,7 +1335,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in soundEnabledCheckBox.Checked
         /// </summary>
-        private void SoundEnabledCheckBox_CheckedChanged(object sender, EventArgs e)
+        void SoundEnabledCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (soundEnabledCheckBox.Checked)
                 settings[SOUND_ENABLED] = "1";
@@ -1350,7 +1350,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in randomizedSoundsCheckBox.Checked
         /// </summary>
-        private void RandomizedSoundsCheckBox_CheckedChanged(object sender, EventArgs e)
+        void RandomizedSoundsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (randomizedSoundsCheckBox.Checked)       // We have to invert it for covienience
                 settings[SOUND_LIMIT_SAMPLES] = "0";
@@ -1366,7 +1366,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void hw_cursor_checkbox_CheckedChanged(object sender, EventArgs e)
+        void hw_cursor_checkbox_CheckedChanged(object sender, EventArgs e)
         {
             if (hwCursorCheckBox.Checked)
                 settings[ALLOWHWCURSOR] = "1";
@@ -1381,7 +1381,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in soundQualityComboBox.SelectedIndex
         /// </summary>
-        private void SoundQualityComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void SoundQualityComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings[SOUND_QUALITY] = soundQualityComboBox.SelectedIndex.ToString();
 
@@ -1393,7 +1393,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in soundChannelsComboBox.SelectedIndex
         /// </summary>
-        private void SoundChannelsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void SoundChannelsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (soundChannelsComboBox.SelectedIndex)
             {
@@ -1416,7 +1416,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in ambientVolumeTrackBar.Value
         /// </summary>
-        private void AmbientVolumeTarckBar_Scroll(object sender, EventArgs e)
+        void AmbientVolumeTarckBar_Scroll(object sender, EventArgs e)
         {
             double doubleValue = Convert.ToDouble(ambientVolumeTrackBar.Value);
             double settingValue = doubleValue / 100d;
@@ -1431,7 +1431,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in effectsVolumeTrackBar.Value
         /// </summary>
-        private void EffectsVolumeTrackBar_Scroll(object sender, EventArgs e)
+        void EffectsVolumeTrackBar_Scroll(object sender, EventArgs e)
         {
             double doubleValue = Convert.ToDouble(effectsVolumeTrackBar.Value);
             double settingValue = doubleValue / 100d;
@@ -1446,7 +1446,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in voiceVolumeTrackBar.Value
         /// </summary>
-        private void VoiceVolumeTrackBar_Scroll(object sender, EventArgs e)
+        void VoiceVolumeTrackBar_Scroll(object sender, EventArgs e)
         {
             double doubleValue = Convert.ToDouble(voiceVolumeTrackBar.Value);
             double settingValue = doubleValue / 100d;
@@ -1461,7 +1461,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to changes in musicVolumeTrackBar.Value
         /// </summary>
-        private void MusicVolumeTrackBar_Scroll(object sender, EventArgs e)
+        void MusicVolumeTrackBar_Scroll(object sender, EventArgs e)
         {
             double doubleValue = Convert.ToDouble(musicVolumeTrackBar.Value);
             double settingValue = doubleValue / 100d;
@@ -1476,7 +1476,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method sets the graphics to "Low" preset
         /// </summary>
-        private void LowGraphicsButton_Click(object sender, EventArgs e)
+        void LowGraphicsButton_Click(object sender, EventArgs e)
         {
             settings[CAMERA_DETAIL] = "0";
             settings[DYNAMIC_LIGHTS] = "0";
@@ -1507,7 +1507,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method sets the graphics to "Medium" preset
         /// </summary>
-        private void MediumGraphicsButton_Click(object sender, EventArgs e)
+        void MediumGraphicsButton_Click(object sender, EventArgs e)
         {
             settings[CAMERA_DETAIL] = "1";
             settings[DYNAMIC_LIGHTS] = "1";
@@ -1536,7 +1536,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method sets the graphics to "High" preset
         /// </summary>
-        private void HighGraphicsButton_Click(object sender, EventArgs e)
+        void HighGraphicsButton_Click(object sender, EventArgs e)
         {
             settings[CAMERA_DETAIL] = "1";
             settings[DYNAMIC_LIGHTS] = "2";
@@ -1565,7 +1565,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method sets the graphics to "Ultra" preset
         /// </summary>
-        private void UltraGraphicsButton_Click(object sender, EventArgs e)
+        void UltraGraphicsButton_Click(object sender, EventArgs e)
         {
             settings[CAMERA_DETAIL] = "1";
             settings[DYNAMIC_LIGHTS] = "3";
@@ -1596,7 +1596,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method sets the sound quality to "Low" preset
         /// </summary>
-        private void LowAudioButton_Click(object sender, EventArgs e)
+        void LowAudioButton_Click(object sender, EventArgs e)
         {
             settings[SOUND_ENABLED] = "1";
             settings[SOUND_LIMIT_SAMPLES] = "1";
@@ -1614,7 +1614,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method sets the sound quality to "Medium" preset
         /// </summary>
-        private void MediumAudioButton_Click(object sender, EventArgs e)
+        void MediumAudioButton_Click(object sender, EventArgs e)
         {
             settings[SOUND_ENABLED] = "1";
             settings[SOUND_LIMIT_SAMPLES] = "0";
@@ -1632,7 +1632,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method sets the sound quality to "High" preset
         /// </summary>
-        private void HighAudioButton_Click(object sender, EventArgs e)
+        void HighAudioButton_Click(object sender, EventArgs e)
         {
             settings[SOUND_ENABLED] = "1";
             settings[SOUND_LIMIT_SAMPLES] = "0";
@@ -1650,7 +1650,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method starts the FontsManagerForm
         /// </summary>
-        private void FontsManagerButton_Click(object sender, EventArgs e)
+        void FontsManagerButton_Click(object sender, EventArgs e)
         {
             new FontsManagerForm(settings[SCREEN_WIDTH]).Show();
         }
@@ -1658,7 +1658,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method starts the SystemPerformanceManagerForm
         /// </summary>
-        private void SystemPerformanceManagerButton_Click(object sender, EventArgs e)
+        void SystemPerformanceManagerButton_Click(object sender, EventArgs e)
         {
             new SystemPerformanceManagerForm(modManager).Show();
         }
@@ -1666,7 +1666,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method deletes the current selected Player Profile
         /// </summary>
-        private void DeleteProfileButton_Click(object sender, EventArgs e)
+        void DeleteProfileButton_Click(object sender, EventArgs e)
         {
             string playerNameToDelete = currentPlayerComboBox.SelectedItem.ToString();
 
@@ -1694,7 +1694,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method creates a new Player Profile
         /// </summary>
-        private void CreateProfileButton_Click(object sender, EventArgs e)
+        void CreateProfileButton_Click(object sender, EventArgs e)
         {
             int indexOfNewProfile = 1;
 
@@ -1740,7 +1740,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method renames the current selected Player Profile
         /// </summary>
-        private void RenameProfileButton_Click(object sender, EventArgs e)
+        void RenameProfileButton_Click(object sender, EventArgs e)
         {
             string currentPLayerName = currentPlayerComboBox.SelectedItem.ToString();
 
@@ -1775,7 +1775,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method reacts to chanes in newPlayerTextBox.Text
         /// </summary>
-        private void NewPlayerTextBox_TextChanged(object sender, EventArgs e)
+        void NewPlayerTextBox_TextChanged(object sender, EventArgs e)
         {
             if (newPlayerTextBox.TextLength > 0)
             {

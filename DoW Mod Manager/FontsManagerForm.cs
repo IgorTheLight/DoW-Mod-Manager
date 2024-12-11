@@ -9,41 +9,41 @@ namespace DoW_Mod_Manager
 {
     public partial class FontsManagerForm : Form
     {
-        private const string ALBERTUS_EXTRA_BOLD_12     = "albertus extra bold12.fnt";
-        private const string ALBERTUS_EXTRA_BOLD_14     = "albertus extra bold14.fnt";
-        private const string ALBERTUS_EXTRA_BOLD_16     = "albertus extra bold16.fnt";
-        private const string ENGRAVERS_OLD_ENGLISH_MT30 = "engravers old english mt30.fnt";
-        private const string GILLSANS_11                = "gillsans_11.fnt";
-        private const string GILLSANS_11B               = "gillsans_11b.fnt";
-        private const string GILLSANS_16                = "gillsans_16.fnt";
-        private const string GILLSANS_BOLD_16           = "gillsans_bold_16.fnt";
-        private const string QUORUM_MEDIUM_BOLD_13      = "quorum medium bold13.fnt";
-        private const string QUORUM_MEDIUM_BOLD_16      = "quorum medium bold16.fnt";
+        const string ALBERTUS_EXTRA_BOLD_12     = "albertus extra bold12.fnt";
+        const string ALBERTUS_EXTRA_BOLD_14     = "albertus extra bold14.fnt";
+        const string ALBERTUS_EXTRA_BOLD_16     = "albertus extra bold16.fnt";
+        const string ENGRAVERS_OLD_ENGLISH_MT30 = "engravers old english mt30.fnt";
+        const string GILLSANS_11                = "gillsans_11.fnt";
+        const string GILLSANS_11B               = "gillsans_11b.fnt";
+        const string GILLSANS_16                = "gillsans_16.fnt";
+        const string GILLSANS_BOLD_16           = "gillsans_bold_16.fnt";
+        const string QUORUM_MEDIUM_BOLD_13      = "quorum medium bold13.fnt";
+        const string QUORUM_MEDIUM_BOLD_16      = "quorum medium bold16.fnt";
 
-        private const string BACKUP_FILE_NAME = "defaults.zip";
+        const string BACKUP_FILE_NAME = "defaults.zip";
 
-        private const string SIZE_DEFAULT = "sizeDefault";
-        private const string SIZE_640     = "size640";
-        private const string SIZE_800     = "size800";
-        private const string SIZE_1024    = "size1024";
-        private const string SIZE_1280    = "size1280";
-        private const string SIZE_1366    = "size1366";
-        private const string SIZE_1600    = "size1600";
-        private const string SIZE_1920    = "size1920";
-        private const string SIZE_2560    = "size2560";
-        private const string SIZE_4096    = "size4096";
+        const string SIZE_DEFAULT = "sizeDefault";
+        const string SIZE_640     = "size640";
+        const string SIZE_800     = "size800";
+        const string SIZE_1024    = "size1024";
+        const string SIZE_1280    = "size1280";
+        const string SIZE_1366    = "size1366";
+        const string SIZE_1600    = "size1600";
+        const string SIZE_1920    = "size1920";
+        const string SIZE_2560    = "size2560";
+        const string SIZE_4096    = "size4096";
 
-        private readonly string FONTS_DIRECTORY = Path.Combine(Directory.GetCurrentDirectory(), "Engine", "Locale", "English", "data", "font");
+        readonly string FONTS_DIRECTORY = Path.Combine(Directory.GetCurrentDirectory(), "Engine", "Locale", "English", "data", "font");
 
-        private readonly Color labelForeColor;
-        private readonly Color textBoxForeColor;
-        private readonly Color textBoxBackColor;
+        readonly Color labelForeColor;
+        readonly Color textBoxForeColor;
+        readonly Color textBoxBackColor;
 
-        private readonly string backupFileNameWithPath;
+        readonly string backupFileNameWithPath;
 
-        private readonly Dictionary<string, string> screenSizesUI;
+        readonly Dictionary<string, string> screenSizesUI;
 
-        private string selectedScreenSize;
+        string selectedScreenSize;
 
         /// <summary>
         /// Creates the Form of the Font Manager Window
@@ -97,7 +97,7 @@ namespace DoW_Mod_Manager
 
             selectedScreenSize = screenSizesUI[screenWidthsUIComboBox.SelectedItem.ToString()];
 
-            backupFileNameWithPath = FONTS_DIRECTORY + "\\" + BACKUP_FILE_NAME;
+            backupFileNameWithPath = Path.Combine(FONTS_DIRECTORY, BACKUP_FILE_NAME);
 
             InitializeGUIWithFonts();
 
@@ -132,7 +132,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method will be called right after Constructor
         /// </summary>
-        private void FontsManagerForm_Load(object sender, EventArgs e)
+        void FontsManagerForm_Load(object sender, EventArgs e)
         {
             if (Directory.Exists(FONTS_DIRECTORY))
             {
@@ -159,7 +159,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method initializes GUI with font names and their sizes
         /// </summary>
-        private void InitializeGUIWithFonts()
+        void InitializeGUIWithFonts()
         {
             ReadFntToUI(FONTS_DIRECTORY + "\\" + ALBERTUS_EXTRA_BOLD_12,     selectedScreenSize,  label1,  textBox1,  button1,  numericUpDown1);
             ReadFntToUI(FONTS_DIRECTORY + "\\" + ALBERTUS_EXTRA_BOLD_14,     selectedScreenSize,  label2,  textBox2,  button2,  numericUpDown2);
@@ -176,7 +176,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method initialises one "line": TextBox + Button + NumericUpDown for a particular font
         /// </summary>
-        private void ReadFntToUI(string fileNameWithPath, string searchFor, Label label, TextBox textBox, Button button, NumericUpDown numericUpDown)
+        void ReadFntToUI(string fileNameWithPath, string searchFor, Label label, TextBox textBox, Button button, NumericUpDown numericUpDown)
         {
             if (File.Exists(fileNameWithPath))
             {
@@ -238,7 +238,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method will be called when user changes screen resolution ComboBox
         /// </summary>
-        private void ScreenWidthsUIComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void ScreenWidthsUIComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedScreenSize = screenSizesUI[screenWidthsUIComboBox.SelectedItem.ToString()];
 
@@ -248,7 +248,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method will be called when one of the TextBoxes has been changed
         /// </summary>
-        private void SomeFieldChanged(object sender, EventArgs e)
+        void SomeFieldChanged(object sender, EventArgs e)
         {
             saveButton.Enabled = true;
         }
@@ -256,7 +256,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method saves all the font config files
         /// </summary>
-        private void SaveButton_Click(object sender, EventArgs e)
+        void SaveButton_Click(object sender, EventArgs e)
         {
             WriteUIToFnt(FONTS_DIRECTORY + "\\" + ALBERTUS_EXTRA_BOLD_12,      textBox1,  numericUpDown1);
             WriteUIToFnt(FONTS_DIRECTORY + "\\" + ALBERTUS_EXTRA_BOLD_14,      textBox2,  numericUpDown2);
@@ -276,7 +276,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method saves changes to a single font configuration file
         /// </summary>
-        private void WriteUIToFnt(string fileNameWithPath, TextBox textBox, NumericUpDown numericUpDown)
+        void WriteUIToFnt(string fileNameWithPath, TextBox textBox, NumericUpDown numericUpDown)
         {
             if (File.Exists(fileNameWithPath))
             {
@@ -312,14 +312,14 @@ namespace DoW_Mod_Manager
             }
             else
             {
-                // TODO: Maybe do something when there is no such file
+                //TODO: Maybe do something when there is no such file
             }
         }
 
         /// <summary>
         /// This method restores all the changes since the first startr of the Font Manager
         /// </summary>
-        private void DefaultButton_Click(object sender, EventArgs e)
+        void DefaultButton_Click(object sender, EventArgs e)
         {
             if (File.Exists(backupFileNameWithPath))
             {
@@ -345,7 +345,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method opens the DoW fonts folder
         /// </summary>
-        private void OpenFolderButton_Click(object sender, EventArgs e)
+        void OpenFolderButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(FONTS_DIRECTORY);
         }
@@ -353,7 +353,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method adds a file name from a OpenFileDialog
         /// </summary>
-        private void Button1_Click(object sender, EventArgs e)
+        void Button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
 
@@ -364,7 +364,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method adds a file name from a OpenFileDialog
         /// </summary>
-        private void Button2_Click(object sender, EventArgs e)
+        void Button2_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
 
@@ -375,7 +375,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method adds a file name from a OpenFileDialog
         /// </summary>
-        private void Button3_Click(object sender, EventArgs e)
+        void Button3_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
 
@@ -386,7 +386,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method adds a file name from a OpenFileDialog
         /// </summary>
-        private void Button4_Click(object sender, EventArgs e)
+        void Button4_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
 
@@ -397,7 +397,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method adds a file name from a OpenFileDialog
         /// </summary>
-        private void Button5_Click(object sender, EventArgs e)
+        void Button5_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
 
@@ -408,7 +408,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method adds a file name from a OpenFileDialog
         /// </summary>
-        private void Button6_Click(object sender, EventArgs e)
+        void Button6_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
 
@@ -419,7 +419,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method adds a file name from a OpenFileDialog
         /// </summary>
-        private void Button7_Click(object sender, EventArgs e)
+        void Button7_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
 
@@ -430,7 +430,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method adds a file name from a OpenFileDialog
         /// </summary>
-        private void Button8_Click(object sender, EventArgs e)
+        void Button8_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
 
@@ -441,7 +441,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method adds a file name from a OpenFileDialog
         /// </summary>
-        private void Button9_Click(object sender, EventArgs e)
+        void Button9_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
 
@@ -452,7 +452,7 @@ namespace DoW_Mod_Manager
         /// <summary>
         /// This method adds a file name from a OpenFileDialog
         /// </summary>
-        private void Button10_Click(object sender, EventArgs e)
+        void Button10_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
 
@@ -460,7 +460,7 @@ namespace DoW_Mod_Manager
                 textBox10.Text = Path.GetFileName(openFileDialog1.FileName);
         }
 
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             ThemedMessageBox.Show("1024x768 -> 1024\n1280x720 -> 800\n1366x768 -> 1024\n2560x1440 -> ?\n1920x1080 -> 1280\n4096x2160 -> ?", "Discovered screen withts");
         }
