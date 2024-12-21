@@ -59,7 +59,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 2.4.0.0
+    <value>## Version 2.4.1.0
+
+- Added new startup parameter: "-noprecachemodels". It's improves performance but team colors will not be visable on models anymore (because they couldn't be precached, duh! xD)
+- Fixed a bug where setting "IsGOG" was incorrectly interpreted by a UI
+
+## Version 2.4.0.0
 
 - PE header and checksum calculations are more advanced now. That adds support for GOG version of the game. Now users could toggle LAA flags or any version of the game! (potentionally - on ANY Windows executable!)
 - Added mod support for Original game (mostly for "A larger fonts")

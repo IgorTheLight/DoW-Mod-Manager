@@ -58,6 +58,7 @@ namespace DoW_Mod_Manager
             this.checkForErrorsButton = new System.Windows.Forms.Button();
             this.noFogCheckbox = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.noprecachemodelsCheckBox = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.GOGRadioButton = new System.Windows.Forms.RadioButton();
             this.SteamRadioButton = new System.Windows.Forms.RadioButton();
@@ -186,7 +187,7 @@ namespace DoW_Mod_Manager
             this.authorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.authorLabel.AutoSize = true;
             this.authorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.authorLabel.Location = new System.Drawing.Point(16, 546);
+            this.authorLabel.Location = new System.Drawing.Point(16, 555);
             this.authorLabel.Name = "authorLabel";
             this.authorLabel.Size = new System.Drawing.Size(198, 13);
             this.authorLabel.TabIndex = 8;
@@ -210,9 +211,9 @@ namespace DoW_Mod_Manager
             this.devCheckBox.Location = new System.Drawing.Point(5, 18);
             this.devCheckBox.Margin = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.devCheckBox.Name = "devCheckBox";
-            this.devCheckBox.Size = new System.Drawing.Size(137, 17);
+            this.devCheckBox.Size = new System.Drawing.Size(136, 17);
             this.devCheckBox.TabIndex = 10;
-            this.devCheckBox.Text = "-dev: Developers Mode";
+            this.devCheckBox.Text = "-dev: Developers mode";
             this.devCheckBox.UseVisualStyleBackColor = true;
             // 
             // nomoviesCheckBox
@@ -224,9 +225,9 @@ namespace DoW_Mod_Manager
             this.nomoviesCheckBox.Location = new System.Drawing.Point(5, 35);
             this.nomoviesCheckBox.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.nomoviesCheckBox.Name = "nomoviesCheckBox";
-            this.nomoviesCheckBox.Size = new System.Drawing.Size(155, 17);
+            this.nomoviesCheckBox.Size = new System.Drawing.Size(154, 17);
             this.nomoviesCheckBox.TabIndex = 11;
-            this.nomoviesCheckBox.Text = "-nomovies: No Intro Movies";
+            this.nomoviesCheckBox.Text = "-nomovies: No Intro movies";
             this.nomoviesCheckBox.UseVisualStyleBackColor = true;
             // 
             // highpolyCheckBox
@@ -236,16 +237,16 @@ namespace DoW_Mod_Manager
             this.highpolyCheckBox.Location = new System.Drawing.Point(5, 52);
             this.highpolyCheckBox.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.highpolyCheckBox.Name = "highpolyCheckBox";
-            this.highpolyCheckBox.Size = new System.Drawing.Size(256, 17);
+            this.highpolyCheckBox.Size = new System.Drawing.Size(254, 17);
             this.highpolyCheckBox.TabIndex = 12;
-            this.highpolyCheckBox.Text = "-forcehighpoly: High Poly models at any Distance";
+            this.highpolyCheckBox.Text = "-forcehighpoly: High Poly models at any distance";
             this.highpolyCheckBox.UseVisualStyleBackColor = true;
             // 
             // optimizationsCheckBox
             // 
             this.optimizationsCheckBox.AutoSize = true;
             this.optimizationsCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.optimizationsCheckBox.Location = new System.Drawing.Point(5, 69);
+            this.optimizationsCheckBox.Location = new System.Drawing.Point(5, 86);
             this.optimizationsCheckBox.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.optimizationsCheckBox.Name = "optimizationsCheckBox";
             this.optimizationsCheckBox.Size = new System.Drawing.Size(314, 17);
@@ -310,9 +311,9 @@ namespace DoW_Mod_Manager
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.splitContainer1);
-            this.panel1.Location = new System.Drawing.Point(12, 150);
+            this.panel1.Location = new System.Drawing.Point(12, 155);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(901, 397);
+            this.panel1.Size = new System.Drawing.Size(901, 401);
             this.panel1.TabIndex = 18;
             // 
             // splitContainer1
@@ -333,7 +334,7 @@ namespace DoW_Mod_Manager
             // 
             this.splitContainer1.Panel2.Controls.Add(this.requiredModsLabel);
             this.splitContainer1.Panel2.Controls.Add(this.requiredModsList);
-            this.splitContainer1.Size = new System.Drawing.Size(898, 391);
+            this.splitContainer1.Size = new System.Drawing.Size(898, 409);
             this.splitContainer1.SplitterDistance = 455;
             this.splitContainer1.TabIndex = 19;
             // 
@@ -404,7 +405,7 @@ namespace DoW_Mod_Manager
             this.AboutkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AboutkLabel.AutoSize = true;
             this.AboutkLabel.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.AboutkLabel.Location = new System.Drawing.Point(818, 546);
+            this.AboutkLabel.Location = new System.Drawing.Point(818, 555);
             this.AboutkLabel.Name = "AboutkLabel";
             this.AboutkLabel.Size = new System.Drawing.Size(99, 13);
             this.AboutkLabel.TabIndex = 23;
@@ -446,7 +447,7 @@ namespace DoW_Mod_Manager
             // 
             this.noFogCheckbox.AutoSize = true;
             this.noFogCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.noFogCheckbox.Location = new System.Drawing.Point(5, 86);
+            this.noFogCheckbox.Location = new System.Drawing.Point(5, 103);
             this.noFogCheckbox.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.noFogCheckbox.Name = "noFogCheckbox";
             this.noFogCheckbox.Size = new System.Drawing.Size(235, 17);
@@ -462,14 +463,28 @@ namespace DoW_Mod_Manager
             this.flowLayoutPanel1.Controls.Add(this.devCheckBox);
             this.flowLayoutPanel1.Controls.Add(this.nomoviesCheckBox);
             this.flowLayoutPanel1.Controls.Add(this.highpolyCheckBox);
+            this.flowLayoutPanel1.Controls.Add(this.noprecachemodelsCheckBox);
             this.flowLayoutPanel1.Controls.Add(this.optimizationsCheckBox);
             this.flowLayoutPanel1.Controls.Add(this.noFogCheckbox);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 32);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 110);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 122);
             this.flowLayoutPanel1.TabIndex = 28;
+            // 
+            // noprecachemodelsCheckBox
+            // 
+            this.noprecachemodelsCheckBox.AutoSize = true;
+            this.noprecachemodelsCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.noprecachemodelsCheckBox.Location = new System.Drawing.Point(5, 69);
+            this.noprecachemodelsCheckBox.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.noprecachemodelsCheckBox.Name = "noprecachemodelsCheckBox";
+            this.noprecachemodelsCheckBox.Size = new System.Drawing.Size(237, 17);
+            this.noprecachemodelsCheckBox.TabIndex = 28;
+            this.noprecachemodelsCheckBox.Text = "-noprecachemodels:  Don\'t precache models";
+            this.noprecachemodelsCheckBox.UseVisualStyleBackColor = true;
+            this.noprecachemodelsCheckBox.CheckedChanged += new System.EventHandler(this.NoprecachemodelsCheckBox_CheckedChanged);
             // 
             // panel2
             // 
@@ -485,7 +500,7 @@ namespace DoW_Mod_Manager
             this.panel2.Controls.Add(this.settingsButton);
             this.panel2.Location = new System.Drawing.Point(341, 32);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(245, 110);
+            this.panel2.Size = new System.Drawing.Size(245, 122);
             this.panel2.TabIndex = 29;
             // 
             // GOGRadioButton
@@ -527,7 +542,7 @@ namespace DoW_Mod_Manager
             this.flowLayoutPanel2.Controls.Add(this.fixMissingModButton);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(592, 32);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(321, 110);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(321, 122);
             this.flowLayoutPanel2.TabIndex = 30;
             // 
             // tableLayoutPanel1
@@ -552,7 +567,7 @@ namespace DoW_Mod_Manager
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.ClientSize = new System.Drawing.Size(925, 564);
+            this.ClientSize = new System.Drawing.Size(925, 573);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel2);
@@ -560,7 +575,7 @@ namespace DoW_Mod_Manager
             this.Controls.Add(this.AboutkLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.authorLabel);
-            this.MinimumSize = new System.Drawing.Size(941, 603);
+            this.MinimumSize = new System.Drawing.Size(941, 612);
             this.Name = "ModManagerForm";
             this.Text = "DoW Mod Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModManagerForm_Closing);
@@ -623,5 +638,6 @@ namespace DoW_Mod_Manager
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.RadioButton GOGRadioButton;
         private System.Windows.Forms.RadioButton SteamRadioButton;
+        private System.Windows.Forms.CheckBox noprecachemodelsCheckBox;
     }
 }

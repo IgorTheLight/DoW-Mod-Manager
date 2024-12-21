@@ -1,6 +1,6 @@
 ![image](https://user-images.githubusercontent.com/19975052/147577379-4ab095f3-e91a-42f2-8cae-fbbb50658130.png)
 
-# DoW Mod Manager v2.3.2.0
+# DoW Mod Manager v2.4.1.0
 
 This application allows for an easy launch of mods and management of large collections of mods for Warhammer 40K Dawn of War series.
 
@@ -20,7 +20,7 @@ This application allows for an easy launch of mods and management of large colle
 
 ## MOD MANAGER USAGE:
 
-1. Once everything is in place launch the "DoW Mod Manager v2.3.1.0.exe" by double-clicking on it (You may want to create a shortcut of the Mod Manager on your Desktop for convenience and faster access)
+1. Once everything is in place launch the "DoW Mod Manager v2.4.1.0.exe" by double-clicking on it (You may want to create a shortcut of the Mod Manager on your Desktop for convenience and faster access)
 
 2. Select a Mod from the left listing and it will show if all necessary dependency Mods are installed and if that is given, lets you directly launch the desired Mod
 
@@ -58,6 +58,8 @@ it's recommended to have the LAA(Large Address Awareness AKA. 4GB Patch) activat
   - **-nomovies** : Skips all movies and directly launches the game with the loading screen for a faster startup (Is checked by default for convenience)
 
   - **-forcehighpoly** : This option forces the game to display the higher resolution LOD of a Model at any given distance. (Hint : This may have a negative impact on your performance, use with caution.)
+
+  - **-noprecachemodels** : This option improves performance but team colors will not be visable on models anymore (because they couldn't be precached)
 
   - **/high /affinity 6** : This option sets your Daw of War game executable priority to "High" and set it's affinity (CPU thread usage) to utilize only threads 2 and 3. In theory it could help to improve performance. It WILL NOT work if you have less than 3 CPU cores!
 

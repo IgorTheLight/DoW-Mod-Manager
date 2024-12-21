@@ -53,6 +53,7 @@ namespace DoW_Mod_Manager
         public const string DEV = "Dev";
         public const string NO_MOVIES = "NoMovies";
         public const string FORCE_HIGH_POLY = "ForceHighPoly";
+        public const string NO_PRECACHE_MODELS = "NoPrecacheModels";
         public const string NO_FOG = "RemoveMapFog";
         public const string DOW_OPTIMIZATIONS = "DowOptimizations";
         public const string AUTOUPDATE = "Autoupdate";
@@ -91,6 +92,7 @@ namespace DoW_Mod_Manager
             [DEV] = 0,
             [NO_MOVIES] = 1,
             [FORCE_HIGH_POLY] = 0,
+            [NO_PRECACHE_MODELS] = 0,
             [NO_FOG] = 0,
             [DOW_OPTIMIZATIONS] = 0,
             [AUTOUPDATE] = 1,
@@ -156,8 +158,11 @@ namespace DoW_Mod_Manager
             devCheckBox.Checked = settings[DEV] == 1;
             nomoviesCheckBox.Checked = settings[NO_MOVIES] == 1;
             highpolyCheckBox.Checked = settings[FORCE_HIGH_POLY] == 1;
+            noprecachemodelsCheckBox.Checked = settings[NO_PRECACHE_MODELS] == 1;
             optimizationsCheckBox.Checked = settings[DOW_OPTIMIZATIONS] == 1;
             noFogCheckbox.Checked = settings[NO_FOG] == 1;
+            SteamRadioButton.Checked = settings[IS_GOG_VERSION] == 0;
+            GOGRadioButton.Checked = settings[IS_GOG_VERSION] == 1;
 
             CurrentGameEXE = GetCurrentGameEXE();
             CheckForGraphicsConfigEXE();
@@ -327,6 +332,7 @@ namespace DoW_Mod_Manager
                                 case DEV:
                                 case NO_MOVIES:
                                 case FORCE_HIGH_POLY:
+                                case NO_PRECACHE_MODELS:
                                 case DOW_OPTIMIZATIONS:
                                 case AUTOUPDATE:
                                 case MULTITHREADED_JIT:
@@ -368,7 +374,6 @@ namespace DoW_Mod_Manager
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         string GetCurrentGameEXE()
         {
-            
             if (File.Exists(Path.Combine(CurrentDir, GameExecutable.SOULSTORM)))
             {
                 currentDirectoryLabel.Text = "Your current Soulstorm directory:";
@@ -777,6 +782,7 @@ namespace DoW_Mod_Manager
                 sw.WriteLine($"{DEV}={settings[DEV]}");
                 sw.WriteLine($"{NO_MOVIES}={settings[NO_MOVIES]}");
                 sw.WriteLine($"{FORCE_HIGH_POLY}={settings[FORCE_HIGH_POLY]}");
+                sw.WriteLine($"{NO_PRECACHE_MODELS}={settings[NO_PRECACHE_MODELS]}");
                 sw.WriteLine($"{DOW_OPTIMIZATIONS}={settings[DOW_OPTIMIZATIONS]}");
                 sw.WriteLine($"{AUTOUPDATE}={settings[AUTOUPDATE]}");
                 sw.WriteLine($"{MULTITHREADED_JIT}={settings[MULTITHREADED_JIT]}");
@@ -1049,6 +1055,8 @@ namespace DoW_Mod_Manager
                 arguments += " -nomovies";
             if (settings[FORCE_HIGH_POLY] == 1)
                 arguments += " -forcehighpoly";
+            if (settings[NO_PRECACHE_MODELS] == 1)
+                arguments += " -noprecachemodels";
 
             Process proc = new Process();
             proc.StartInfo.FileName = CurrentGameEXE;
@@ -1075,7 +1083,7 @@ namespace DoW_Mod_Manager
                             Process[] dow = Process.GetProcessesByName(procName);
                             dow[0].PriorityClass = ProcessPriorityClass.High;
                             dow[0].ProcessorAffinity = (IntPtr)0x0006;          // Affinity 6 means using only CPU threads 2 and 3 (6 = 0b0110)
-                            break;                                              // We've done what we intended to do
+                            break;    // We've done what we intended to do
                         }
                         catch (Exception)
                         {
@@ -1102,7 +1110,7 @@ namespace DoW_Mod_Manager
                         {
                             Process[] dow = Process.GetProcessesByName(procName);
                             FogRemover.DisableFog(dow[0]);
-                            break;                                              // We've done what we intended to do
+                            break;     // We've done what we intended to do
                         }
                         catch (Exception)
                         {
@@ -1154,6 +1162,20 @@ namespace DoW_Mod_Manager
                 settings[FORCE_HIGH_POLY] = 1;
             else
                 settings[FORCE_HIGH_POLY] = 0;
+        }
+
+        /// <summary>
+        /// This is the checkbox that controls the starting option '-noprecachemodels'. 
+        /// This disable preceaching of models for better performance (but teamcolors would be ignored!)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NoprecachemodelsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (noprecachemodelsCheckBox.Checked)
+                settings[NO_PRECACHE_MODELS] = 1;
+            else
+                settings[NO_PRECACHE_MODELS] = 0;
         }
 
         /// <summary>
@@ -1409,6 +1431,10 @@ namespace DoW_Mod_Manager
                 case FORCE_HIGH_POLY:
                     settings[FORCE_HIGH_POLY] = newValue;
                     highpolyCheckBox.Checked = Convert.ToBoolean(newValue);
+                    break;
+                case NO_PRECACHE_MODELS:
+                    settings[NO_PRECACHE_MODELS] = newValue;
+                    noprecachemodelsCheckBox.Checked = Convert.ToBoolean(newValue);
                     break;
                 case DOW_OPTIMIZATIONS:
                     settings[DOW_OPTIMIZATIONS] = newValue;
