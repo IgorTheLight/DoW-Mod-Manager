@@ -139,9 +139,9 @@
             this.author2Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.author2Label.Location = new System.Drawing.Point(22, 39);
             this.author2Label.Name = "author2Label";
-            this.author2Label.Size = new System.Drawing.Size(181, 13);
+            this.author2Label.Size = new System.Drawing.Size(185, 13);
             this.author2Label.TabIndex = 7;
-            this.author2Label.Text = "IgorTheLight - new active contributor";
+            this.author2Label.Text = "IgorTheLight - current main maintainer";
             // 
             // specialThanks2Label
             // 

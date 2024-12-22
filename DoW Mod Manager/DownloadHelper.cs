@@ -13,8 +13,8 @@ namespace DoW_Mod_Manager
 {
     static class DownloadHelper
     {
-        const string EXE_VERSION_TEXT_URL = "https://raw.githubusercontent.com/Fragjacker/DoW-Mod-Manager/master/DoW%20Mod%20Manager/LatestStable/version";
-        const string EXECUTABLE_URL = "https://github.com/Fragjacker/DoW-Mod-Manager/raw/master/DoW%20Mod%20Manager/LatestStable/DoW%20Mod%20Manager.exe";
+        const string EXE_VERSION_TEXT_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/LatestStable/version";
+        const string EXECUTABLE_URL = "https://github.com/IgorTheLight/DoW-Mod-Manager/raw/master/DoW%20Mod%20Manager/LatestStable/DoW%20Mod%20Manager.exe";
 
         const string MODLIST_VERSION_TEXT_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/ModList/version";
         const string MODLIST_URL = "https://github.com/IgorTheLight/DoW-Mod-Manager/raw/master/DoW%20Mod%20Manager/ModList/DoW%20Mod%20Manager%20Download%20Mods.list";
