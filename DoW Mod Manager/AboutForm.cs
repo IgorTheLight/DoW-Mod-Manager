@@ -38,7 +38,7 @@ namespace DoW_Mod_Manager
 
         void HomePageButton_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/Fragjacker/DoW-Mod-Manager");
+            Process.Start("https://github.com/IgorTheLight/DoW-Mod-Manager");
         }
 
         void OKButton_Click(object sender, EventArgs e)

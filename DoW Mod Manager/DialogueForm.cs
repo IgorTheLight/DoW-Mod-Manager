@@ -17,7 +17,7 @@ namespace DoW_Mod_Manager
             Text = title;
         }
 
-        private void OKButton_Click(object sender, EventArgs e)
+        void OKButton_Click(object sender, EventArgs e)
         {
             if (exeORmods == "exe")
                 DownloadHelper.DownloadUpdate();
@@ -27,7 +27,7 @@ namespace DoW_Mod_Manager
             Close();
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }

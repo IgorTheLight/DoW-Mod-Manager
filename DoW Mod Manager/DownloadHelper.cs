@@ -14,13 +14,17 @@ namespace DoW_Mod_Manager
     static class DownloadHelper
     {
         const string EXE_VERSION_TEXT_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/LatestStable/version";
+        const string EXE_LATEST_CHANGELOG = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/LatestStable/latestchangelog";
         const string EXECUTABLE_URL = "https://github.com/IgorTheLight/DoW-Mod-Manager/raw/master/DoW%20Mod%20Manager/LatestStable/DoW%20Mod%20Manager.exe";
 
         const string MODLIST_VERSION_TEXT_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/ModList/version";
+        const string MODLIST_LATEST_CHANGELOG = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/ModList/latestchangelog";
         const string MODLIST_URL = "https://github.com/IgorTheLight/DoW-Mod-Manager/raw/master/DoW%20Mod%20Manager/ModList/DoW%20Mod%20Manager%20Download%20Mods.list";
 
         static readonly string currentDir = Directory.GetCurrentDirectory();
         static string latestStringVersion = "";
+        static string latestExeChangelog = "";
+        static string latestModlistChangelog = "";
         static readonly Version currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
         static bool closeAndDelete;
@@ -33,6 +37,9 @@ namespace DoW_Mod_Manager
 
             // Checking version mentioned in "version" file on GitHub
             latestStringVersion = DownloadString(EXE_VERSION_TEXT_URL);
+
+            // Checking latest changelog for an executable
+            latestExeChangelog = DownloadString(EXE_LATEST_CHANGELOG);
 
             Version latestVersion;
             bool showMessageBox;
@@ -64,7 +71,7 @@ namespace DoW_Mod_Manager
 
             if (currentVersion < latestVersion)
             {
-                return ThemedDialogueBox.Show($"The new DoW Mod Manager v{latestStringVersion} is available. Do you wish to update now?", "New update available", exeORmods: "exe");
+                return ThemedDialogueBox.Show($"The new DoW Mod Manager v{latestStringVersion} is available. Do you wish to update now?\n{latestExeChangelog}", "New update available", exeORmods: "exe");
             }
             else
             {
@@ -94,6 +101,9 @@ namespace DoW_Mod_Manager
 
             // Checking version mentioned in "version" file on GitHub
             latestStringVersion = DownloadString(MODLIST_VERSION_TEXT_URL);
+
+            // Checking latest changelog for a modlist
+            latestModlistChangelog = DownloadString(MODLIST_LATEST_CHANGELOG);
 
             int latestModlistVersion;
             bool showMessageBox;
@@ -125,7 +135,7 @@ namespace DoW_Mod_Manager
 
             // Check for version string in Modlist file
             int modlistVersion = 0;
-            using (StreamReader file = new StreamReader(currentDir + "\\" + ModDownloaderForm.MODLIST_FILE))
+            using (StreamReader file = new StreamReader(Path.Combine(currentDir, ModDownloaderForm.MODLIST_FILE)))
             {
                 string line;
 
@@ -148,7 +158,7 @@ namespace DoW_Mod_Manager
 
             if (modlistVersion < latestModlistVersion)
             {
-                return ThemedDialogueBox.Show($"The new Modlist v{latestStringVersion} is available. Do you wish to update now?", "New update available", exeORmods: "mods");
+                return ThemedDialogueBox.Show($"The new Modlist v{latestStringVersion} is available. Do you wish to update now?\n{latestModlistChangelog}", "New update available", exeORmods: "mods");
             }
             else
             {

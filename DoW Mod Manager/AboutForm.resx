@@ -118,7 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 2.4.1.1
+    <value>## Version 2.4.2.0
+
+- Added: changelog in the Application Update and Mod Update dialog. Now users could see what exactly has changed in the last version!
+- Fixed: Applying LAA patch to Soulstorm.exe could cause Multiplayer Lobby List to be always empty. To fix that, user should disable LAA, but after Mod Manager version 2.4.0.0 that would not fix the issue! That bug has been fixed in this update! GOG version executable would be patched using new method while Soulstorm executable would be patched using old, simplistic but more reliable method.
+- Refactored: moved all LAA patch logic to another class
+
+## Version 2.4.1.1
 
 - Today is the sad day! Original author, FragJacker, is stepping down from being the main maintainer of the project. Looks like I would take his place until he would return
 - With that, autoupdates would be redirected to my repository now. That means that all new versions would be downloaded from my GitHub repository, starting from this update.
@@ -140,7 +146,7 @@ https://raw.githubusercontent.com/Fragjacker/DoW-Mod-Manager/master/changelog.tx
   <data name="licenceTextBox.Text" xml:space="preserve">
     <value>MIT License
 
-Copyright (c) 2020-2024 Fragjacker
+Copyright (c) 2020-2025 Fragjacker and IgorTheLight
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

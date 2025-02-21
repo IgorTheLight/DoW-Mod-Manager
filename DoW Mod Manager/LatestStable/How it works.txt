@@ -1,3 +1,4 @@
 To use autoupdates you have to: 
 * Run "CopyExecutableHere.cmd"
 * Change version in "version" file (this file would open automatically with a Notepad)
+* Add information about the last changes in "latestchangelog"
