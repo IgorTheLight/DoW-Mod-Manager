@@ -49,6 +49,7 @@ namespace DoW_Mod_Manager
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.open_folder_button = new System.Windows.Forms.Button();
+            this.overdriveLaaButton = new System.Windows.Forms.Button();
             this.toggleLAAButton = new System.Windows.Forms.Button();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.downloadButton = new System.Windows.Forms.Button();
@@ -147,11 +148,11 @@ namespace DoW_Mod_Manager
             this.requiredModsList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.requiredModsList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.requiredModsList.FormattingEnabled = true;
-            this.requiredModsList.Location = new System.Drawing.Point(8, 23);
+            this.requiredModsList.Location = new System.Drawing.Point(8, 49);
             this.requiredModsList.Margin = new System.Windows.Forms.Padding(0);
             this.requiredModsList.Name = "requiredModsList";
             this.requiredModsList.ScrollAlwaysVisible = true;
-            this.requiredModsList.Size = new System.Drawing.Size(427, 368);
+            this.requiredModsList.Size = new System.Drawing.Size(427, 342);
             this.requiredModsList.TabIndex = 5;
             this.requiredModsList.SelectedIndexChanged += new System.EventHandler(this.RequiredModsList_SelectedIndexChanged);
             // 
@@ -215,6 +216,7 @@ namespace DoW_Mod_Manager
             this.devCheckBox.TabIndex = 10;
             this.devCheckBox.Text = "-dev: Developers mode";
             this.devCheckBox.UseVisualStyleBackColor = true;
+            this.devCheckBox.CheckedChanged += new System.EventHandler(this.DevCheckBox_CheckedChanged);
             // 
             // nomoviesCheckBox
             // 
@@ -229,6 +231,7 @@ namespace DoW_Mod_Manager
             this.nomoviesCheckBox.TabIndex = 11;
             this.nomoviesCheckBox.Text = "-nomovies: No Intro movies";
             this.nomoviesCheckBox.UseVisualStyleBackColor = true;
+            this.nomoviesCheckBox.CheckedChanged += new System.EventHandler(this.NomoviesCheckBox_CheckedChanged);
             // 
             // highpolyCheckBox
             // 
@@ -241,6 +244,7 @@ namespace DoW_Mod_Manager
             this.highpolyCheckBox.TabIndex = 12;
             this.highpolyCheckBox.Text = "-forcehighpoly: High Poly models at any distance";
             this.highpolyCheckBox.UseVisualStyleBackColor = true;
+            this.highpolyCheckBox.CheckedChanged += new System.EventHandler(this.HighpolyCheckBox_CheckedChanged);
             // 
             // optimizationsCheckBox
             // 
@@ -253,6 +257,7 @@ namespace DoW_Mod_Manager
             this.optimizationsCheckBox.TabIndex = 13;
             this.optimizationsCheckBox.Text = "/high /affinity 6: Set to highest thread priority and CPU affinity";
             this.optimizationsCheckBox.UseVisualStyleBackColor = true;
+            this.optimizationsCheckBox.CheckedChanged += new System.EventHandler(this.OptimizationsCheckBox_CheckedChanged);
             // 
             // mergeButton
             // 
@@ -301,7 +306,7 @@ namespace DoW_Mod_Manager
             this.graphicsConfigLAAStatusLabel.Location = new System.Drawing.Point(8, 89);
             this.graphicsConfigLAAStatusLabel.Margin = new System.Windows.Forms.Padding(3);
             this.graphicsConfigLAAStatusLabel.Name = "graphicsConfigLAAStatusLabel";
-            this.graphicsConfigLAAStatusLabel.Size = new System.Drawing.Size(210, 15);
+            this.graphicsConfigLAAStatusLabel.Size = new System.Drawing.Size(206, 14);
             this.graphicsConfigLAAStatusLabel.TabIndex = 17;
             this.graphicsConfigLAAStatusLabel.Text = "Graphics Config: LAA Active";
             // 
@@ -334,6 +339,7 @@ namespace DoW_Mod_Manager
             // 
             this.splitContainer1.Panel2.Controls.Add(this.requiredModsLabel);
             this.splitContainer1.Panel2.Controls.Add(this.requiredModsList);
+            this.splitContainer1.Panel2.Controls.Add(this.overdriveLaaButton);
             this.splitContainer1.Size = new System.Drawing.Size(898, 409);
             this.splitContainer1.SplitterDistance = 455;
             this.splitContainer1.TabIndex = 19;
@@ -351,6 +357,20 @@ namespace DoW_Mod_Manager
             this.open_folder_button.Text = "Open Folder...";
             this.open_folder_button.UseVisualStyleBackColor = false;
             this.open_folder_button.Click += new System.EventHandler(this.OpenFolderButton_Click);
+            // 
+            // overdriveLaaButton
+            // 
+            this.overdriveLaaButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.overdriveLaaButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.overdriveLaaButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.overdriveLaaButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.overdriveLaaButton.Location = new System.Drawing.Point(163, 2);
+            this.overdriveLaaButton.Name = "overdriveLaaButton";
+            this.overdriveLaaButton.Size = new System.Drawing.Size(82, 36);
+            this.overdriveLaaButton.TabIndex = 31;
+            this.overdriveLaaButton.Text = "Overdrive LAA";
+            this.overdriveLaaButton.UseVisualStyleBackColor = false;
+            this.overdriveLaaButton.Click += new System.EventHandler(this.OverdriveLaaButton_Click);
             // 
             // toggleLAAButton
             // 
@@ -472,6 +492,7 @@ namespace DoW_Mod_Manager
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 122);
             this.flowLayoutPanel1.TabIndex = 28;
+            this.flowLayoutPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NoFogCheckbox_hover);
             // 
             // noprecachemodelsCheckBox
             // 
@@ -500,7 +521,7 @@ namespace DoW_Mod_Manager
             this.panel2.Controls.Add(this.settingsButton);
             this.panel2.Location = new System.Drawing.Point(341, 32);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(245, 122);
+            this.panel2.Size = new System.Drawing.Size(245, 128);
             this.panel2.TabIndex = 29;
             // 
             // GOGRadioButton
@@ -639,5 +660,6 @@ namespace DoW_Mod_Manager
         private System.Windows.Forms.RadioButton GOGRadioButton;
         private System.Windows.Forms.RadioButton SteamRadioButton;
         private System.Windows.Forms.CheckBox noprecachemodelsCheckBox;
+        private System.Windows.Forms.Button overdriveLaaButton; // Add to field declarations
     }
 }

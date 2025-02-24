@@ -45,6 +45,84 @@ namespace DoW_Mod_Manager
         const string JIT_PROFILE_FILE_NAME = "DoW Mod Manager.JITProfile";
         const string WARNINGS_LOG = "warnings.log";
 
+        private void OverdriveLaaButton_Click(object sender, EventArgs e)
+        {
+            string soulstormPath = Path.Combine(CurrentDir, "Soulstorm.exe");
+
+            if (!File.Exists(soulstormPath))
+            {
+                MessageBox.Show("Soulstorm.exe not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Check if Soulstorm.exe is locked
+            if (IsFileLocked(soulstormPath))
+            {
+                MessageBox.Show("Soulstorm.exe is currently in use by another program. Close any running instances and try again.",
+                                "File Locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (IsPatchApplied(soulstormPath))
+            {
+                DialogResult result = MessageBox.Show("Overdrive LAA is already enabled. Do you want to disable it?",
+                                                      "Toggle Patch", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    if (DisableOverdriveLAA(soulstormPath))
+                    {
+                        MessageBox.Show("Overdrive LAA disabled.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to disable Overdrive LAA.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                return;
+            }
+
+            if (ApplyOverdriveLAA(soulstormPath))
+            {
+                MessageBox.Show("Overdrive LAA successfully applied!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Failed to apply Overdrive LAA.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+        private bool IsPatchApplied(string exePath)
+        {
+            try
+            {
+                using (FileStream fs = new FileStream(exePath, FileMode.Open, FileAccess.Read))
+                using (BinaryReader br = new BinaryReader(fs))
+                {
+                    fs.Seek(0x3C, SeekOrigin.Begin); // PE Header offset
+                    int peOffset = br.ReadInt32();
+                    fs.Seek(peOffset + 0x16, SeekOrigin.Begin); // Characteristics offset
+
+                    ushort characteristics = br.ReadUInt16();
+
+                    // Check if IMAGE_FILE_LARGE_ADDRESS_AWARE flag is set
+                    return (characteristics & 0x20) != 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking LAA patch: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+
+
+
+
+
+
         // This is a State Machine which determines what action must be performed
         public enum Action { None, CreateNativeImage, CreateNativeImageAndDeleteJITProfile, DeleteJITProfile, DeleteNativeImage, DeleteJITProfileAndNativeImage }
 
@@ -214,6 +292,105 @@ namespace DoW_Mod_Manager
                 ).Start();
             }
         }
+
+        private bool EnableLAA(string exePath)
+        {
+            if (IsGameRunning())
+            {
+                MessageBox.Show("Soulstorm is currently running! Close the game before applying LAA.",
+                                "Game Running", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (IsFileLocked(exePath))
+            {
+                MessageBox.Show("Soulstorm.exe is in use. Close any running instances and try again.",
+                                "File Locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            try
+            {
+                using (FileStream fs = new FileStream(exePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+                using (BinaryReader br = new BinaryReader(fs))
+                using (BinaryWriter bw = new BinaryWriter(fs))
+                {
+                    fs.Seek(0x3C, SeekOrigin.Begin);
+                    int peOffset = br.ReadInt32();
+                    fs.Seek(peOffset + 0x16, SeekOrigin.Begin);
+                    ushort characteristics = br.ReadUInt16();
+
+                    if ((characteristics & 0x20) != 0) // Already patched
+                        return true;
+
+                    characteristics |= 0x20; // Set IMAGE_FILE_LARGE_ADDRESS_AWARE flag
+
+                    fs.Seek(peOffset + 0x16, SeekOrigin.Begin);
+                    bw.Write(characteristics);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to modify LAA flag: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private bool ApplyOverdriveLAA(string exePath)
+        {
+            if (IsGameRunning())
+            {
+                MessageBox.Show("Soulstorm is currently running! Close the game before applying Overdrive LAA.",
+                                "Game Running", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!EnableLAA(exePath))
+            {
+                return false;
+            }
+
+            // Apply memory patch even if the game is not running
+            return MemoryPatcher.PatchMultiplayerLobby(exePath);  // Pass exePath to the method
+        }
+
+
+        private bool DisableOverdriveLAA(string exePath)
+        {
+            string backupPath = exePath + ".bak";
+
+            if (!File.Exists(backupPath))
+            {
+                MessageBox.Show("Backup file not found! Unable to restore the original file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            try
+            {
+                File.Copy(backupPath, exePath, true);
+                File.Delete(backupPath);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error restoring original file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+
+
+        private bool IsGameRunning()
+        {
+            // Check if the process 'Soulstorm' is running
+            return Process.GetProcessesByName("Soulstorm").Length > 0;
+        }
+
+
+
+
+
 
         /// <summary>
         /// This function shows a tooltip, should the disable fog checkbox be disabled due to a wrong game version used.

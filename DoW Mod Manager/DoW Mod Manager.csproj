@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="LAATweaks.cs" />
     <Compile Include="LAATweaksOld.cs" />
+    <Compile Include="MemoryPatcher.cs" />
     <Compile Include="MessageForm.cs">
       <SubType>Form</SubType>
     </Compile>
