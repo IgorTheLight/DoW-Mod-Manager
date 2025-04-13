@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Threading;
 using System.Runtime.CompilerServices;
 using System.Runtime;
+using System.Net;
 
 namespace DoW_Mod_Manager
 {
@@ -81,7 +82,8 @@ namespace DoW_Mod_Manager
         public List<string> AllFoundModules;                                        // Contains the list of all available Mods that will be used by the Mod Merger
         public List<ModuleEntry> AllValidModules;                                   // Contains the list of all playable Mods that will be used by the Mod Merger
         public bool IsTimerResolutionLowered = false;
-        string currentModuleFilePath = "";                                  // Contains the name of the current selected Mod.
+        string currentModuleFilePath = "";                                          // Contains the name of the current selected Mod.
+        bool isDXVKInstalled;
 
         // Don't make Settings readonly or it couldn't be changed from outside the class!
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "<Pending>")]
@@ -147,6 +149,17 @@ namespace DoW_Mod_Manager
             }
 
             InitializeComponent();
+
+            if (File.Exists("dxvk.conf") && File.Exists("d3d9.dll") && File.Exists("dxgi.dll"))
+            {
+                dxvkButton.Text = "Remove DXVK";
+                isDXVKInstalled = true;
+            }
+            else
+            {
+                dxvkButton.Text = "Install DXVK";
+                isDXVKInstalled = false;
+            }
 
             // Sets Title of the form to be the same as Assembly Name
             Text = Assembly.GetExecutingAssembly().GetName().Name;
@@ -1373,6 +1386,42 @@ namespace DoW_Mod_Manager
         {
             if (GOGRadioButton.Checked)
                 settings[IS_GOG_VERSION] = 1;
+        }
+
+        private void DxvkButton_Click(object sender, EventArgs e)
+        {
+            const string URL = "";
+            // isDXVKInstalled
+            if (isDXVKInstalled)
+            {
+                File.Delete("dxvk.conf");
+                File.Delete("d3d9.dll");
+                File.Delete("dxgi.dll");
+
+                isDXVKInstalled = false;
+                dxvkButton.Text = "Install DXVK";
+            }
+            else
+            {
+                var client = new WebClient();
+                try
+                {
+                    client.DownloadFile(URL + "dxvk.conf", "dxvk.conf");
+                    client.DownloadFile(URL + "d3d9.dll", "d3d9.dll");
+                    client.DownloadFile(URL + "dxgi.dll", "dxgi.dll");
+
+                    isDXVKInstalled = true;
+                    dxvkButton.Text = "Install DXVK";
+                }
+                catch (Exception ex)
+                {
+                    ThemedMessageBox.Show("We can't download files!", "Warning!");
+                }
+                finally
+                {
+                    client.Dispose();
+                }
+            }
         }
     }
 }

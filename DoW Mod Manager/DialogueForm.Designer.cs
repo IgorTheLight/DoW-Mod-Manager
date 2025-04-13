@@ -87,15 +87,13 @@
             // 
             // dmessageLabel
             // 
-            this.dmessageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dmessageLabel.AutoSize = true;
             this.dmessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dmessageLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.dmessageLabel.Location = new System.Drawing.Point(19, 11);
             this.dmessageLabel.Margin = new System.Windows.Forms.Padding(10, 20, 10, 10);
             this.dmessageLabel.Name = "dmessageLabel";
-            this.dmessageLabel.Size = new System.Drawing.Size(276, 44);
+            this.dmessageLabel.Size = new System.Drawing.Size(28, 13);
             this.dmessageLabel.TabIndex = 6;
             this.dmessageLabel.Text = "Text";
             // 
