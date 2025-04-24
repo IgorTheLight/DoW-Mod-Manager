@@ -1,5 +1,5 @@
 ## Version 2.5.0.0
 
-- Added: DXVK support. Now users could install, update and remiove the latest working version of DXVK just by clicking one button!
+- Added: DXVK support. Now users could install, update and remove the latest working version of DXVK just by clicking one button!
 - Fixed: ThemedDialogBox didn't resize properly so modlist and application changelogs were cropped on the right side
 - Refactored: static class DownloadHelper was refactored for less code duplication
