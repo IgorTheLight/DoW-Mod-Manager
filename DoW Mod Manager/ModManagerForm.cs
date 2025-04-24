@@ -46,6 +46,8 @@ namespace DoW_Mod_Manager
         const string JIT_PROFILE_FILE_NAME = "DoW Mod Manager.JITProfile";
         const string WARNINGS_LOG = "warnings.log";
 
+        const string DXVK_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/DXVK/";
+
         // This is a State Machine which determines what action must be performed
         public enum Action { None, CreateNativeImage, CreateNativeImageAndDeleteJITProfile, DeleteJITProfile, DeleteNativeImage, DeleteJITProfileAndNativeImage }
 
@@ -150,10 +152,24 @@ namespace DoW_Mod_Manager
 
             InitializeComponent();
 
-            if (File.Exists("dxvk.conf") && File.Exists("d3d9.dll") && File.Exists("dxgi.dll"))
+            if (File.Exists("dxvk.conf") && File.Exists("d3d9.dll") && File.Exists("dxgi.dll") && File.Exists("dxvk.version"))
             {
-                dxvkButton.Text = "Remove DXVK";
-                isDXVKInstalled = true;
+                string stringVersion = DownloadHelper.DownloadString(DXVK_URL + "dxvk.version");
+                var version = new Version(stringVersion);
+
+                string currentStringVersion = File.ReadAllText("dxvk.version");
+                var currentVersion = new Version(currentStringVersion);
+
+                if (currentVersion < version)
+                {
+                    dxvkButton.Text = "Update DXVK";
+                    isDXVKInstalled = false;
+                }
+                else
+                {
+                    dxvkButton.Text = "Remove DXVK";
+                    isDXVKInstalled = true;
+                }
             }
             else
             {
@@ -219,7 +235,7 @@ namespace DoW_Mod_Manager
                 new Thread(() =>
                 {
                     // Once all is done - check for an updates.
-                    DialogResult result = DownloadHelper.CheckForUpdates(silently: true);
+                    DialogResult result = DownloadHelper.CheckForExeUpdate(silently: true);
 
                     if (result == DialogResult.OK && settings[AOT_COMPILATION] == 1)
                         settings[ACTION_STATE] = (int)Action.CreateNativeImage;
@@ -1388,38 +1404,42 @@ namespace DoW_Mod_Manager
                 settings[IS_GOG_VERSION] = 1;
         }
 
-        private void DxvkButton_Click(object sender, EventArgs e)
+        void DxvkButton_Click(object sender, EventArgs e)
         {
-            const string URL = "";
-            // isDXVKInstalled
             if (isDXVKInstalled)
             {
+                File.Delete("dxvk.version");
                 File.Delete("dxvk.conf");
                 File.Delete("d3d9.dll");
                 File.Delete("dxgi.dll");
 
                 isDXVKInstalled = false;
                 dxvkButton.Text = "Install DXVK";
+                ThemedMessageBox.Show("DXVK is disabled and deleted!", "Information:");
             }
             else
             {
+                dxvkButton.Enabled = false;
                 var client = new WebClient();
                 try
                 {
-                    client.DownloadFile(URL + "dxvk.conf", "dxvk.conf");
-                    client.DownloadFile(URL + "d3d9.dll", "d3d9.dll");
-                    client.DownloadFile(URL + "dxgi.dll", "dxgi.dll");
+                    client.DownloadFile(DXVK_URL + "dxvk.version", "dxvk.version");
+                    client.DownloadFile(DXVK_URL + "dxvk.conf", "dxvk.conf");
+                    client.DownloadFile(DXVK_URL + "d3d9.dll", "d3d9.dll");
+                    client.DownloadFile(DXVK_URL + "dxgi.dll", "dxgi.dll");
 
                     isDXVKInstalled = true;
-                    dxvkButton.Text = "Install DXVK";
+                    dxvkButton.Text = "Remove DXVK";
+                    ThemedMessageBox.Show("DXVK is downloaded and enabled!", "Information:");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     ThemedMessageBox.Show("We can't download files!", "Warning!");
                 }
                 finally
                 {
                     client.Dispose();
+                    dxvkButton.Enabled = true;
                 }
             }
         }

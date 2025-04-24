@@ -100,7 +100,7 @@ namespace DoW_Mod_Manager
         private void ReadModsFromFile(string parameter)
         {
             if (File.Exists(MODLIST_FILE))
-                DownloadHelper.CheckForNewModlist(silently: true);
+                DownloadHelper.CheckForModlistUpdate(silently: true);
             else
                 DownloadHelper.DownloadModlist();
 

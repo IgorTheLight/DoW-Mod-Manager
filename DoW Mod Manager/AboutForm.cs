@@ -48,7 +48,7 @@ namespace DoW_Mod_Manager
 
         void UpdateButton_Click(object sender, EventArgs e)
         {
-            DialogResult result = DownloadHelper.CheckForUpdates(silently: false);
+            DialogResult result = DownloadHelper.CheckForExeUpdate(silently: false);
 
             if (result == DialogResult.OK && modManager.GetSetting(ModManagerForm.AOT_COMPILATION) == 1)
                 modManager.ChangeSetting(ModManagerForm.ACTION_STATE, (int)ModManagerForm.Action.CreateNativeImage);

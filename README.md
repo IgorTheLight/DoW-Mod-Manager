@@ -1,6 +1,6 @@
 ![image](https://user-images.githubusercontent.com/19975052/147577379-4ab095f3-e91a-42f2-8cae-fbbb50658130.png)
 
-# DoW Mod Manager v2.4.2.0
+# DoW Mod Manager v2.5.0.0
 
 This application allows for an easy launch of mods and management of large collections of mods for Warhammer 40K Dawn of War series.
 
@@ -20,7 +20,7 @@ This application allows for an easy launch of mods and management of large colle
 
 ## MOD MANAGER USAGE:
 
-1. Once everything is in place launch the "DoW Mod Manager v2.4.2.0.exe" by double-clicking on it (You may want to create a shortcut of the Mod Manager on your Desktop for convenience and faster access)
+1. Once everything is in place launch the "DoW Mod Manager vX.X.X.X.exe" by double-clicking on it (You may want to create a shortcut of the Mod Manager on your Desktop for convenience and faster access)
 
 2. Select a Mod from the left listing and it will show if all necessary dependency Mods are installed and if that is given, lets you directly launch the desired Mod
 
@@ -35,12 +35,14 @@ This application allows for an easy launch of mods and management of large colle
 
 - **START MOD**: Starts the Game with the selected Advanced Start Options and the selected Mod if all dependency mods are installed.
 
-- **SETTINGS**: You could change game settings without launching the game. It also let's you change some HIDDEN game settings! From there you could also start System Performance Manager
+- **SETTINGS**: You could change game settings without launching the game. It also let's you change some HIDDEN game settings! From there you could also start System Performance Manager and Fonts Manager to make font in the game bigger!
 
 - **TOGGLE LAA**: This button allows for convenient activation and deactivation of the LAA flag for the Soulstorm.exe and GraphicsConfig.exe
 
 - **LAA Labels** : These two labels will show if both the Soulstorm.exe and GraphicsConfig.exe are LAA patched. Since the UA Mod and many other mods push the game engine really hard towards it's limits
 it's recommended to have the LAA(Large Address Awareness AKA. 4GB Patch) activated on both executables to reduce the chance for the game crashing when playing mods. Since most people use the LAA Patch in Online matches anyways you'd do yourself a favor applying the LAA patch on said Executables. The LAA patch can ba applied and removed at any time by pressing the TOGGLE LAA button.
+
+- **Install DXVK** : Installs and enables the latest versiuon of DXVK that was tested and configured for Dawn of War for potentially better performance and less crashes! Button would change to "Remove DXVK" if you have the latest version or "Update DXVK" if your version is outdated (or if you are missing one of 4 files).
 
 - **Download Mod...**: This button will open the new Download Manager window where you could download one (or how much you like) of popular mods. If mod has a patch - it will be downloaded too! Wait 5 seconds and mod will start downloading.
 
@@ -61,7 +63,7 @@ it's recommended to have the LAA(Large Address Awareness AKA. 4GB Patch) activat
 
   - **-noprecachemodels** : This option improves performance but team colors will not be visable on models anymore (because they couldn't be precached)
 
-  - **/high /affinity 6** : This option sets your Daw of War game executable priority to "High" and set it's affinity (CPU thread usage) to utilize only threads 2 and 3. In theory it could help to improve performance. It WILL NOT work if you have less than 3 CPU cores!
+  - **/high /affinity 6** : This option sets your Daw of War game executable priority to "High" and set it's affinity (CPU thread usage) to utilize only threads 2 and 3 (6=0110 in binary -> enable second and third thread). In theory it could help to improve performance. It WILL NOT work if you have less than 3 CPU cores!
 
   - **Disable Fog** : This option removes the brownish ambient fog from any map. This fog is particularly visible when zooming out really far or move the camera in a horizontal position, obstructing long distance view.
 

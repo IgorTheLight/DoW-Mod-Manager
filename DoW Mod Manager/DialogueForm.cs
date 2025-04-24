@@ -20,9 +20,11 @@ namespace DoW_Mod_Manager
         void OKButton_Click(object sender, EventArgs e)
         {
             if (exeORmods == "exe")
-                DownloadHelper.DownloadUpdate();
+                DownloadHelper.DownloadExe();
             else if (exeORmods == "mods")
                 DownloadHelper.DownloadModlist();
+            else
+                ThemedMessageBox.Show("You should choose either \"exe\" or \"mods\"!", "Error!");
 
             Close();
         }

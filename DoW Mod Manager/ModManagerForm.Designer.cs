@@ -60,10 +60,10 @@ namespace DoW_Mod_Manager
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.noprecachemodelsCheckBox = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dxvkButton = new System.Windows.Forms.Button();
             this.GOGRadioButton = new System.Windows.Forms.RadioButton();
             this.SteamRadioButton = new System.Windows.Forms.RadioButton();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.dxvkButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.panel1.SuspendLayout();
@@ -107,7 +107,7 @@ namespace DoW_Mod_Manager
             // 
             this.installedModsLabel.AutoSize = true;
             this.installedModsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.installedModsLabel.Location = new System.Drawing.Point(4, 2);
+            this.installedModsLabel.Location = new System.Drawing.Point(4, 3);
             this.installedModsLabel.Name = "installedModsLabel";
             this.installedModsLabel.Size = new System.Drawing.Size(119, 13);
             this.installedModsLabel.TabIndex = 2;
@@ -117,7 +117,7 @@ namespace DoW_Mod_Manager
             // 
             this.requiredModsLabel.AutoSize = true;
             this.requiredModsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.requiredModsLabel.Location = new System.Drawing.Point(5, 2);
+            this.requiredModsLabel.Location = new System.Drawing.Point(5, 3);
             this.requiredModsLabel.Margin = new System.Windows.Forms.Padding(10);
             this.requiredModsLabel.Name = "requiredModsLabel";
             this.requiredModsLabel.Size = new System.Drawing.Size(79, 13);
@@ -136,7 +136,7 @@ namespace DoW_Mod_Manager
             this.installedModsListBox.Margin = new System.Windows.Forms.Padding(0);
             this.installedModsListBox.Name = "installedModsListBox";
             this.installedModsListBox.ScrollAlwaysVisible = true;
-            this.installedModsListBox.Size = new System.Drawing.Size(447, 342);
+            this.installedModsListBox.Size = new System.Drawing.Size(447, 355);
             this.installedModsListBox.TabIndex = 4;
             this.installedModsListBox.SelectedIndexChanged += new System.EventHandler(this.InstalledModsList_SelectedIndexChanged);
             // 
@@ -152,7 +152,7 @@ namespace DoW_Mod_Manager
             this.requiredModsList.Margin = new System.Windows.Forms.Padding(0);
             this.requiredModsList.Name = "requiredModsList";
             this.requiredModsList.ScrollAlwaysVisible = true;
-            this.requiredModsList.Size = new System.Drawing.Size(427, 342);
+            this.requiredModsList.Size = new System.Drawing.Size(427, 355);
             this.requiredModsList.TabIndex = 5;
             this.requiredModsList.SelectedIndexChanged += new System.EventHandler(this.RequiredModsList_SelectedIndexChanged);
             // 
@@ -188,7 +188,7 @@ namespace DoW_Mod_Manager
             this.authorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.authorLabel.AutoSize = true;
             this.authorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.authorLabel.Location = new System.Drawing.Point(16, 577);
+            this.authorLabel.Location = new System.Drawing.Point(16, 560);
             this.authorLabel.Name = "authorLabel";
             this.authorLabel.Size = new System.Drawing.Size(198, 13);
             this.authorLabel.TabIndex = 8;
@@ -288,10 +288,10 @@ namespace DoW_Mod_Manager
             // 
             this.gameLAAStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.gameLAAStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameLAAStatusLabel.Location = new System.Drawing.Point(8, 73);
+            this.gameLAAStatusLabel.Location = new System.Drawing.Point(8, 93);
             this.gameLAAStatusLabel.Margin = new System.Windows.Forms.Padding(3);
             this.gameLAAStatusLabel.Name = "gameLAAStatusLabel";
-            this.gameLAAStatusLabel.Size = new System.Drawing.Size(210, 15);
+            this.gameLAAStatusLabel.Size = new System.Drawing.Size(189, 17);
             this.gameLAAStatusLabel.TabIndex = 16;
             this.gameLAAStatusLabel.Text = "Game: LAA Active";
             // 
@@ -299,10 +299,10 @@ namespace DoW_Mod_Manager
             // 
             this.graphicsConfigLAAStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.graphicsConfigLAAStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.graphicsConfigLAAStatusLabel.Location = new System.Drawing.Point(8, 89);
+            this.graphicsConfigLAAStatusLabel.Location = new System.Drawing.Point(8, 77);
             this.graphicsConfigLAAStatusLabel.Margin = new System.Windows.Forms.Padding(3);
             this.graphicsConfigLAAStatusLabel.Name = "graphicsConfigLAAStatusLabel";
-            this.graphicsConfigLAAStatusLabel.Size = new System.Drawing.Size(210, 15);
+            this.graphicsConfigLAAStatusLabel.Size = new System.Drawing.Size(189, 14);
             this.graphicsConfigLAAStatusLabel.TabIndex = 17;
             this.graphicsConfigLAAStatusLabel.Text = "Graphics Config: LAA Active";
             // 
@@ -312,9 +312,9 @@ namespace DoW_Mod_Manager
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.splitContainer1);
-            this.panel1.Location = new System.Drawing.Point(12, 203);
+            this.panel1.Location = new System.Drawing.Point(12, 171);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(901, 375);
+            this.panel1.Size = new System.Drawing.Size(901, 390);
             this.panel1.TabIndex = 18;
             // 
             // splitContainer1
@@ -335,7 +335,7 @@ namespace DoW_Mod_Manager
             // 
             this.splitContainer1.Panel2.Controls.Add(this.requiredModsLabel);
             this.splitContainer1.Panel2.Controls.Add(this.requiredModsList);
-            this.splitContainer1.Size = new System.Drawing.Size(898, 383);
+            this.splitContainer1.Size = new System.Drawing.Size(898, 398);
             this.splitContainer1.SplitterDistance = 455;
             this.splitContainer1.TabIndex = 19;
             // 
@@ -406,7 +406,7 @@ namespace DoW_Mod_Manager
             this.AboutkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AboutkLabel.AutoSize = true;
             this.AboutkLabel.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.AboutkLabel.Location = new System.Drawing.Point(818, 577);
+            this.AboutkLabel.Location = new System.Drawing.Point(818, 560);
             this.AboutkLabel.Name = "AboutkLabel";
             this.AboutkLabel.Size = new System.Drawing.Size(99, 13);
             this.AboutkLabel.TabIndex = 23;
@@ -471,7 +471,7 @@ namespace DoW_Mod_Manager
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 32);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 165);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 133);
             this.flowLayoutPanel1.TabIndex = 28;
             // 
             // noprecachemodelsCheckBox
@@ -492,24 +492,38 @@ namespace DoW_Mod_Manager
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.AutoSize = true;
-            this.panel2.Controls.Add(this.GOGRadioButton);
-            this.panel2.Controls.Add(this.SteamRadioButton);
             this.panel2.Controls.Add(this.toggleLAAButton);
             this.panel2.Controls.Add(this.checkForErrorsButton);
             this.panel2.Controls.Add(this.gameLAAStatusLabel);
             this.panel2.Controls.Add(this.graphicsConfigLAAStatusLabel);
             this.panel2.Controls.Add(this.settingsButton);
+            this.panel2.Controls.Add(this.dxvkButton);
             this.panel2.Location = new System.Drawing.Point(341, 32);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(245, 165);
+            this.panel2.Size = new System.Drawing.Size(245, 133);
             this.panel2.TabIndex = 29;
+            // 
+            // dxvkButton
+            // 
+            this.dxvkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dxvkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.dxvkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dxvkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.dxvkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.dxvkButton.Location = new System.Drawing.Point(121, 40);
+            this.dxvkButton.Name = "dxvkButton";
+            this.dxvkButton.Size = new System.Drawing.Size(104, 31);
+            this.dxvkButton.TabIndex = 25;
+            this.dxvkButton.Text = "Install DXVK";
+            this.dxvkButton.UseVisualStyleBackColor = false;
+            this.dxvkButton.Click += new System.EventHandler(this.DxvkButton_Click);
             // 
             // GOGRadioButton
             // 
             this.GOGRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.GOGRadioButton.AutoSize = true;
             this.GOGRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.GOGRadioButton.Location = new System.Drawing.Point(131, 57);
+            this.GOGRadioButton.Location = new System.Drawing.Point(101, 108);
             this.GOGRadioButton.Name = "GOGRadioButton";
             this.GOGRadioButton.Size = new System.Drawing.Size(86, 17);
             this.GOGRadioButton.TabIndex = 27;
@@ -523,7 +537,7 @@ namespace DoW_Mod_Manager
             this.SteamRadioButton.AutoSize = true;
             this.SteamRadioButton.Checked = true;
             this.SteamRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.SteamRadioButton.Location = new System.Drawing.Point(131, 38);
+            this.SteamRadioButton.Location = new System.Drawing.Point(3, 108);
             this.SteamRadioButton.Name = "SteamRadioButton";
             this.SteamRadioButton.Size = new System.Drawing.Size(92, 17);
             this.SteamRadioButton.TabIndex = 26;
@@ -541,26 +555,12 @@ namespace DoW_Mod_Manager
             this.flowLayoutPanel2.Controls.Add(this.downloadButton);
             this.flowLayoutPanel2.Controls.Add(this.mergeButton);
             this.flowLayoutPanel2.Controls.Add(this.fixMissingModButton);
-            this.flowLayoutPanel2.Controls.Add(this.dxvkButton);
+            this.flowLayoutPanel2.Controls.Add(this.SteamRadioButton);
+            this.flowLayoutPanel2.Controls.Add(this.GOGRadioButton);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(592, 32);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(321, 165);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(321, 133);
             this.flowLayoutPanel2.TabIndex = 30;
-            // 
-            // dxvkButton
-            // 
-            this.dxvkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dxvkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            this.dxvkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dxvkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.dxvkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.dxvkButton.Location = new System.Drawing.Point(3, 108);
-            this.dxvkButton.Name = "dxvkButton";
-            this.dxvkButton.Size = new System.Drawing.Size(121, 43);
-            this.dxvkButton.TabIndex = 25;
-            this.dxvkButton.Text = "Install DXVK";
-            this.dxvkButton.UseVisualStyleBackColor = false;
-            this.dxvkButton.Click += new System.EventHandler(this.DxvkButton_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -584,7 +584,7 @@ namespace DoW_Mod_Manager
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.ClientSize = new System.Drawing.Size(925, 595);
+            this.ClientSize = new System.Drawing.Size(925, 578);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel2);
@@ -592,7 +592,7 @@ namespace DoW_Mod_Manager
             this.Controls.Add(this.AboutkLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.authorLabel);
-            this.MinimumSize = new System.Drawing.Size(941, 612);
+            this.MinimumSize = new System.Drawing.Size(941, 617);
             this.Name = "ModManagerForm";
             this.Text = "DoW Mod Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModManagerForm_Closing);
@@ -609,8 +609,8 @@ namespace DoW_Mod_Manager
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
