@@ -63,6 +63,7 @@ namespace DoW_Mod_Manager
         public const string MULTITHREADED_JIT = "MultithreadedJIT";
         public const string AOT_COMPILATION = "AOTCompilation";
         public const string IS_GOG_VERSION = "IsGOGVersion";
+        public const string DXVK_UPDATE_CHECK = "DXVKUpdateCheck";
 
         // A boolean array that maps Index-wise to the filepaths indices. Index 0 checks if required mod at index 0 in the FilePaths is installed or not.
         bool[] _isInstalled;
@@ -102,7 +103,8 @@ namespace DoW_Mod_Manager
             [AUTOUPDATE] = 1,
             [MULTITHREADED_JIT] = 0,
             [AOT_COMPILATION] = 1,
-            [IS_GOG_VERSION] = 0
+            [IS_GOG_VERSION] = 0,
+            [DXVK_UPDATE_CHECK] = 1
         };
 
         /// <summary>
@@ -152,31 +154,6 @@ namespace DoW_Mod_Manager
 
             InitializeComponent();
 
-            if (File.Exists("dxvk.conf") && File.Exists("d3d9.dll") && File.Exists("dxgi.dll") && File.Exists("dxvk.version"))
-            {
-                string stringVersion = DownloadHelper.DownloadString(DXVK_URL + "dxvk.version");
-                var version = new Version(stringVersion);
-
-                string currentStringVersion = File.ReadAllText("dxvk.version");
-                var currentVersion = new Version(currentStringVersion);
-
-                if (currentVersion < version)
-                {
-                    dxvkButton.Text = "Update DXVK";
-                    isDXVKInstalled = false;
-                }
-                else
-                {
-                    dxvkButton.Text = "Remove DXVK";
-                    isDXVKInstalled = true;
-                }
-            }
-            else
-            {
-                dxvkButton.Text = "Install DXVK";
-                isDXVKInstalled = false;
-            }
-
             // Sets Title of the form to be the same as Assembly Name
             Text = Assembly.GetExecutingAssembly().GetName().Name;
 
@@ -219,6 +196,7 @@ namespace DoW_Mod_Manager
             highpolyCheckBox.CheckedChanged += new EventHandler(HighpolyCheckBox_CheckedChanged);
             optimizationsCheckBox.CheckedChanged += new EventHandler(OptimizationsCheckBox_CheckedChanged);
             noFogCheckbox.CheckedChanged += new EventHandler(NoFogCheckboxCheckedChanged);
+            noprecachemodelsCheckBox.CheckedChanged += new EventHandler(NoprecachemodelsCheckBox_CheckedChanged);
 
             // Disable no Fog checkbox if it's not Soulstorm because it only works on Soulstorm.
             if (CurrentGameEXE != GameExecutable.SOULSTORM)
@@ -241,6 +219,48 @@ namespace DoW_Mod_Manager
                         settings[ACTION_STATE] = (int)Action.CreateNativeImage;
                 }
                 ).Start();
+            }
+
+            // Checking DXVK existing and updates
+            if (File.Exists("dxvk.conf") && File.Exists("d3d9.dll") && File.Exists("dxgi.dll") && File.Exists("dxvk.version"))
+            {
+                try
+                {
+                    if (settings[DXVK_UPDATE_CHECK] == 1)
+                    {
+                        string stringVersion = DownloadHelper.DownloadString(DXVK_URL + "dxvk.version");
+                        var version = new Version(stringVersion);
+
+                        string currentStringVersion = File.ReadAllText("dxvk.version");
+                        var currentVersion = new Version(currentStringVersion);
+
+                        if (currentVersion < version)
+                        {
+                            dxvkButton.Text = "Update DXVK";
+                            isDXVKInstalled = false;
+                        }
+                        else
+                        {
+                            dxvkButton.Text = "Remove DXVK";
+                            isDXVKInstalled = true;
+                        }
+                    }
+                    else
+                    {
+                        dxvkButton.Text = "Remove DXVK";
+                        isDXVKInstalled = true;
+                    }
+                }
+                catch (Exception)
+                {
+                    dxvkButton.Enabled = false;
+                    return;
+                }
+            }
+            else
+            {
+                dxvkButton.Text = "Install DXVK";
+                isDXVKInstalled = false;
             }
         }
 
@@ -368,6 +388,7 @@ namespace DoW_Mod_Manager
                                 case AOT_COMPILATION:
                                 case NO_FOG:
                                 case IS_GOG_VERSION:
+                                case DXVK_UPDATE_CHECK:
                                     if (value > 0)
                                         settings[setting] = value;
                                     else
@@ -641,7 +662,8 @@ namespace DoW_Mod_Manager
                 sw.WriteLine($"{MULTITHREADED_JIT}={settings[MULTITHREADED_JIT]}");
                 sw.WriteLine($"{AOT_COMPILATION}={settings[AOT_COMPILATION]}");
                 sw.WriteLine($"{NO_FOG}={settings[NO_FOG]}");
-                sw.Write($"{IS_GOG_VERSION}={settings[IS_GOG_VERSION]}");
+                sw.WriteLine($"{IS_GOG_VERSION}={settings[IS_GOG_VERSION]}");
+                sw.Write($"{DXVK_UPDATE_CHECK}={settings[DXVK_UPDATE_CHECK]}");
             }
 
             // If Timer Resolution was lowered we have to keep DoW Mod Manager alive or Timer Resolution will be reset
@@ -1327,6 +1349,9 @@ namespace DoW_Mod_Manager
                         GOGRadioButton.Checked = Convert.ToBoolean(newValue);
                     else
                         SteamRadioButton.Checked = Convert.ToBoolean(newValue);
+                    break;
+                case DXVK_UPDATE_CHECK:
+                    settings[DXVK_UPDATE_CHECK] = newValue;
                     break;
             }
         }

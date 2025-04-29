@@ -45,6 +45,7 @@
             this.specialThanks3Label = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.aboutTabPage = new System.Windows.Forms.TabPage();
+            this.DXVKUpdateCheckBox = new System.Windows.Forms.CheckBox();
             this.singlethreadedJITCompilationRadioButton = new System.Windows.Forms.RadioButton();
             this.multithreadedJITCompilationRadioButton = new System.Windows.Forms.RadioButton();
             this.AOTCompilationRadioButton = new System.Windows.Forms.RadioButton();
@@ -250,6 +251,7 @@
             // aboutTabPage
             // 
             this.aboutTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.aboutTabPage.Controls.Add(this.DXVKUpdateCheckBox);
             this.aboutTabPage.Controls.Add(this.singlethreadedJITCompilationRadioButton);
             this.aboutTabPage.Controls.Add(this.multithreadedJITCompilationRadioButton);
             this.aboutTabPage.Controls.Add(this.AOTCompilationRadioButton);
@@ -262,6 +264,18 @@
             this.aboutTabPage.Size = new System.Drawing.Size(434, 180);
             this.aboutTabPage.TabIndex = 0;
             this.aboutTabPage.Text = "About";
+            // 
+            // DXVKUpdateCheckBox
+            // 
+            this.DXVKUpdateCheckBox.AutoSize = true;
+            this.DXVKUpdateCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.DXVKUpdateCheckBox.Location = new System.Drawing.Point(20, 138);
+            this.DXVKUpdateCheckBox.Name = "DXVKUpdateCheckBox";
+            this.DXVKUpdateCheckBox.Size = new System.Drawing.Size(126, 17);
+            this.DXVKUpdateCheckBox.TabIndex = 16;
+            this.DXVKUpdateCheckBox.Text = "DXVK Update check";
+            this.DXVKUpdateCheckBox.UseVisualStyleBackColor = true;
+            this.DXVKUpdateCheckBox.CheckedChanged += new System.EventHandler(this.DXVKUpdateCheckBox_CheckedChanged);
             // 
             // singlethreadedJITCompilationRadioButton
             // 
@@ -304,9 +318,9 @@
             this.autoupdateCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.autoupdateCheckBox.Location = new System.Drawing.Point(20, 115);
             this.autoupdateCheckBox.Name = "autoupdateCheckBox";
-            this.autoupdateCheckBox.Size = new System.Drawing.Size(86, 17);
+            this.autoupdateCheckBox.Size = new System.Drawing.Size(150, 17);
             this.autoupdateCheckBox.TabIndex = 11;
-            this.autoupdateCheckBox.Text = "Autoupdates";
+            this.autoupdateCheckBox.Text = "Mod Manager Autoupdate";
             this.autoupdateCheckBox.UseVisualStyleBackColor = true;
             // 
             // aboutLabel
@@ -537,5 +551,6 @@
         private System.Windows.Forms.RadioButton AOTCompilationRadioButton;
         private System.Windows.Forms.RadioButton multithreadedJITCompilationRadioButton;
         private System.Windows.Forms.RadioButton singlethreadedJITCompilationRadioButton;
+        private System.Windows.Forms.CheckBox DXVKUpdateCheckBox;
     }
 }

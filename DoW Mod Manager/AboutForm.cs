@@ -28,12 +28,14 @@ namespace DoW_Mod_Manager
                 multithreadedJITCompilationRadioButton.Checked = true;
             else
                 singlethreadedJITCompilationRadioButton.Checked = true;
+            DXVKUpdateCheckBox.Checked = modManager.GetSetting(ModManagerForm.DXVK_UPDATE_CHECK) == 1;
 
             // We have to add those methods to the EventHandler here so we could avoid accidental firing of those methods after we would change the state of the CheckBox
             autoupdateCheckBox.CheckedChanged += new EventHandler(AutoupdateCheckBox_CheckedChanged);
             singlethreadedJITCompilationRadioButton.CheckedChanged += new EventHandler(SinglethreadedJITCompilationRadioButton_CheckedChanged);
             multithreadedJITCompilationRadioButton.CheckedChanged += new EventHandler(MultithreadedJITCompilationRadioButton_CheckedChanged);
             AOTCompilationRadioButton.CheckedChanged += new EventHandler(AOTCompilationRadioButton_CheckedChanged);
+            DXVKUpdateCheckBox.CheckedChanged += new EventHandler(DXVKUpdateCheckBox_CheckedChanged);
         }
 
         void HomePageButton_Click(object sender, EventArgs e)
@@ -108,6 +110,14 @@ namespace DoW_Mod_Manager
 
                 modManager.ChangeSetting(ModManagerForm.ACTION_STATE, (int)ModManagerForm.Action.CreateNativeImageAndDeleteJITProfile);
             }
+        }
+
+        void DXVKUpdateCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DXVKUpdateCheckBox.Checked)
+                modManager.ChangeSetting(ModManagerForm.DXVK_UPDATE_CHECK, 1);
+            else
+                modManager.ChangeSetting(ModManagerForm.DXVK_UPDATE_CHECK, 0);
         }
     }
 }

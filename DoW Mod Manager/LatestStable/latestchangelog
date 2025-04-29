@@ -1,5 +1,5 @@
-## Version 2.5.0.0
+## Version 2.5.1.0
 
-- Added: DXVK support. Now users could install, update and remove the latest working version of DXVK just by clicking one button!
-- Fixed: ThemedDialogBox didn't resize properly so modlist and application changelogs were cropped on the right side
-- Refactored: static class DownloadHelper was refactored for less code duplication
+- Added: ability to disable DXVK Autoupdate cheking (helps when an user don't have an Internet access)
+- Fixed: DoW Mod Manager could close if there is a problem with DXVK autoupdate check
+- Refactored: some code that doublechecked "noprecachemodels" CheckBox at startup

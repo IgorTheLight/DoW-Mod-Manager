@@ -485,7 +485,6 @@ namespace DoW_Mod_Manager
             this.noprecachemodelsCheckBox.TabIndex = 28;
             this.noprecachemodelsCheckBox.Text = "-noprecachemodels:  Don\'t precache models";
             this.noprecachemodelsCheckBox.UseVisualStyleBackColor = true;
-            this.noprecachemodelsCheckBox.CheckedChanged += new System.EventHandler(this.NoprecachemodelsCheckBox_CheckedChanged);
             // 
             // panel2
             // 

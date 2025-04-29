@@ -118,7 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 2.5.0.0
+    <value>## Version 2.5.1.0
+
+- Added: ability to disable DXVK Autoupdate cheking (helps when an user don't have an Internet access)
+- Fixed: DoW Mod Manager could close if there is a problem with DXVK autoupdate check
+- Refactored: some code that doublechecked "noprecachemodels" CheckBox at startup
+
+## Version 2.5.0.0
 
 - Added: DXVK support. Now users could install, update and remove the latest working version of DXVK just by clicking one button!
 - Fixed: ThemedDialogBox didn't resize properly so modlist and application changelogs were cropped on the right side
