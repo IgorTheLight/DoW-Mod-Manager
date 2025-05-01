@@ -14,8 +14,7 @@ namespace DoW_Mod_Manager
 {
     static class DownloadHelper
     {
-        // Encapsulates all the differences between “exe” and “modlist” updates
-        private class UpdateInfo
+        class UpdateInfo
         {
             public string VersionUrl { get; }
             public string ChangelogUrl { get; }
@@ -44,15 +43,12 @@ namespace DoW_Mod_Manager
             }
         }
 
-        // current working directory
-        private static readonly string currentDir = Directory.GetCurrentDirectory();
-        // shared mutable state for the most-recent check
-        private static string latestStringVersion = "";
-        private static string latestChangelog = "";
-        private static bool closeAndDelete;
+        static readonly string currentDir = Directory.GetCurrentDirectory();
+        static string latestStringVersion = "";
+        static string latestChangelog = "";
+        static bool closeAndDelete;
 
-        // Info for checking the main EXE
-        private static readonly UpdateInfo ExeUpdateInfo = new UpdateInfo(
+        static readonly UpdateInfo ExeUpdateInfo = new UpdateInfo(
             versionUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/LatestStable/version",
             changelogUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/LatestStable/latestchangelog",
             parseVersion: s => new Version(s),
@@ -65,7 +61,6 @@ namespace DoW_Mod_Manager
                 exeORmods: "exe")
         );
 
-        // Info for checking the ModList
         private static readonly UpdateInfo ModlistUpdateInfo = new UpdateInfo(
             versionUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/ModList/version",
             changelogUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/ModList/latestchangelog",
@@ -77,9 +72,7 @@ namespace DoW_Mod_Manager
             },
             isNewerThanCurrent: latest =>
             {
-                // read first line of local modlist file
-                string firstLine = System.IO.File.ReadLines(Path.Combine(currentDir, ModDownloaderForm.MODLIST_FILE))
-                                       .FirstOrDefault() ?? "";
+                string firstLine = System.IO.File.ReadLines(Path.Combine(currentDir, ModDownloaderForm.MODLIST_FILE)).FirstOrDefault() ?? "";
                 int localNumeric = 0;
                 if (!string.IsNullOrEmpty(firstLine))
                     localNumeric = Convert.ToInt32(firstLine.Replace(".", ""));
@@ -105,13 +98,8 @@ namespace DoW_Mod_Manager
         public static DialogResult CheckForModlistUpdate(bool silently) =>
             CheckForUpdateCore(ModlistUpdateInfo, silently);
 
-        // Core logic extracted from both methods
-        private static DialogResult CheckForUpdateCore(UpdateInfo info, bool silently)
+        static DialogResult CheckForUpdateCore(UpdateInfo info, bool silently)
         {
-            // Windows 7 + TLS 1.2 fix
-            ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
             latestStringVersion = DownloadString(info.VersionUrl);
             latestChangelog = DownloadString(info.ChangelogUrl);
 
@@ -143,10 +131,7 @@ namespace DoW_Mod_Manager
             }
 
             if (info.IsNewerThanCurrent(latestVersion))
-            {
-                // prompt user to download
                 return info.ShowUpdatePrompt();
-            }
             else
             {
                 showMessageBox = true;
@@ -161,8 +146,6 @@ namespace DoW_Mod_Manager
 
             return result;
         }
-
-        // Inlined download methods remain unchanged:
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DownloadExe()
@@ -234,7 +217,7 @@ namespace DoW_Mod_Manager
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void CleanupAndStartApp()
+        static void CleanupAndStartApp()
         {
             string oldExe = Path.Combine(currentDir, AppDomain.CurrentDomain.FriendlyName);
             string newExe = Path.Combine(currentDir, $"DoW Mod Manager v{latestStringVersion}.exe");
@@ -246,7 +229,7 @@ namespace DoW_Mod_Manager
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void CreateShortcut(string shortcutName, string targetPath)
+        static void CreateShortcut(string shortcutName, string targetPath)
         {
             string shortcutLocation = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.Desktop),

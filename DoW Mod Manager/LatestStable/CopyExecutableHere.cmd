@@ -1,6 +1,6 @@
 del *.exe
 PUSHD ..
-copy bin\Release\*.exe LatestStable\
+copy bin\Release\DoW*.exe LatestStable\
 POPD
-rename *.exe "DoW Mod Manager.exe"
+rename DoW*.exe "DoW Mod Manager.exe"
 notepad version

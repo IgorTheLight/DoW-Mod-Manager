@@ -154,6 +154,10 @@ namespace DoW_Mod_Manager
 
             InitializeComponent();
 
+            // Windows 7 download fix
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             // Sets Title of the form to be the same as Assembly Name
             Text = Assembly.GetExecutingAssembly().GetName().Name;
 
@@ -1446,6 +1450,7 @@ namespace DoW_Mod_Manager
             {
                 dxvkButton.Enabled = false;
                 var client = new WebClient();
+
                 try
                 {
                     client.DownloadFile(DXVK_URL + "dxvk.version", "dxvk.version");

@@ -1,3 +1,1 @@
-- Added: ability to disable DXVK Autoupdate cheking (helps when an user don't have an Internet access)
-- Fixed: DoW Mod Manager could close if there is a problem with DXVK autoupdate check
-- Refactored: some code that doublechecked "noprecachemodels" CheckBox at startup
+- Fixed: DXVK download error on Windows 7
