@@ -154,6 +154,7 @@ namespace DoW_Mod_Manager
 
             InitializeComponent();
 
+            // TODO: apply this only if OS = Windows 7
             // Windows 7 download fix
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
