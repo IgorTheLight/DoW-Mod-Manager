@@ -66,20 +66,19 @@ namespace DoW_Mod_Manager
         public const string DXVK_UPDATE_CHECK = "DXVKUpdateCheck";
 
         // A boolean array that maps Index-wise to the filepaths indices. Index 0 checks if required mod at index 0 in the FilePaths is installed or not.
-        bool[] _isInstalled;
-        bool _isGameEXELAAPatched = false;
-        bool _isGraphicsConfigLAAPatched = false;
-        bool _isMessageBoxOnScreen = false;
-        bool _isOldGame;
-        bool _IsNoFogTooltipShown = false;
-        string _dowProcessName = "";
-        readonly ToolTip _disabledNoFogTooltip = new ToolTip();
-        Control _currentToolTipControl;
+        bool[] isInstalled;
+        bool isGameEXELAAPatched = false;
+        bool isGraphicsConfigLAAPatched = false;
+        bool isMessageBoxOnScreen = false;
+        bool isOldGame;
+        bool isNoFogTooltipShown = false;
+        string dowProcessName = "";
+        readonly ToolTip disabledNoFogTooltip = new ToolTip();
+        Control currentToolTipControl;
         ModMergerForm modMerger = null;
 
         public readonly string CurrentDir = Directory.GetCurrentDirectory();
         public readonly string CurrentGameEXE = "";
-        public readonly string GraphicsConfigEXE = "GraphicsConfig.exe";
         public string[] ModuleFilePaths;
         public string[] ModFolderPaths;
         public List<string> AllFoundModules;                                        // Contains the list of all available Mods that will be used by the Mod Merger
@@ -176,15 +175,12 @@ namespace DoW_Mod_Manager
             GOGRadioButton.Checked = settings[IS_GOG_VERSION] == 1;
 
             CurrentGameEXE = GetCurrentGameEXE();
-            CheckForGraphicsConfigEXE();
 
             currentDirTextBox.Text = CurrentDir;
             SetUpAllNecessaryMods();
 
-            _isGameEXELAAPatched = LAATweaks.IsLargeAddressAware(Directory.GetFiles(CurrentDir, CurrentGameEXE)[0]);
+            isGameEXELAAPatched = LAATweaks.IsLargeAddressAware(Directory.GetFiles(CurrentDir, CurrentGameEXE)[0]);
             SetGameLAALabelText();
-            _isGraphicsConfigLAAPatched = LAATweaks.IsLargeAddressAware(Directory.GetFiles(CurrentDir, GraphicsConfigEXE)[0]);
-            SetGraphicsConfigLAALabelText();
 
             // Watch for any changes in game directory
             AddFileSystemWatcher();
@@ -286,20 +282,20 @@ namespace DoW_Mod_Manager
             Control ctrl = parent.GetChildAtPoint(e.Location);
             if (ctrl != null)
             {
-                if (ctrl == noFogCheckbox && !_IsNoFogTooltipShown)
+                if (ctrl == noFogCheckbox && !isNoFogTooltipShown)
                 {
-                    _disabledNoFogTooltip.Show(
+                    disabledNoFogTooltip.Show(
                         "Disable Fog only works in Dawn of War: Soulstorm",
                         noFogCheckbox,
                         noFogCheckbox.Width / 2,
                         noFogCheckbox.Height / 2);
-                    _IsNoFogTooltipShown = true;
+                    isNoFogTooltipShown = true;
                 }
             }
             else
             {
-                _disabledNoFogTooltip.Hide(noFogCheckbox);
-                _IsNoFogTooltipShown = false;
+                disabledNoFogTooltip.Hide(noFogCheckbox);
+                isNoFogTooltipShown = false;
             }
         }
 
@@ -432,21 +428,21 @@ namespace DoW_Mod_Manager
             if (File.Exists(Path.Combine(CurrentDir, GameExecutable.SOULSTORM)))
             {
                 currentDirectoryLabel.Text = "Your current Soulstorm directory:";
-                _isOldGame = false;
+                isOldGame = false;
                 return GameExecutable.SOULSTORM;
             }
 
             if (File.Exists(Path.Combine(CurrentDir, GameExecutable.DARK_CRUSADE)))
             {
                 currentDirectoryLabel.Text = "Your current Dark Crusade directory:";
-                _isOldGame = false;
+                isOldGame = false;
                 return GameExecutable.DARK_CRUSADE;
             }
 
             if (File.Exists(Path.Combine(CurrentDir, GameExecutable.WINTER_ASSAULT)))
             {
                 currentDirectoryLabel.Text = "Your current Winter Assault directory:";
-                _isOldGame = true;
+                isOldGame = true;
                 return GameExecutable.WINTER_ASSAULT;
             }
 
@@ -454,36 +450,18 @@ namespace DoW_Mod_Manager
             if (File.Exists(Path.Combine(CurrentDir, GameExecutable.ORIGINAL)))
             {
                 currentDirectoryLabel.Text = "   Your current Dawn of War directory";
-                _isOldGame = true;
+                isOldGame = true;
                 return GameExecutable.ORIGINAL;
             }
 
-            if (!_isMessageBoxOnScreen)
+            if (!isMessageBoxOnScreen)
             {
                 ThemedMessageBox.Show("Neither found the Soulstorm, Dark Crusade, Winter Assault nor Original in this directory!", "ERROR:");
-                _isMessageBoxOnScreen = true;
+                isMessageBoxOnScreen = true;
                 Program.TerminateApp();
             }
 
             return "";
-        }
-
-        /// <summary>
-        /// This method scans for GraphicsConfig.exe
-        /// </summary>
-        // Request the inlining of this method
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        void CheckForGraphicsConfigEXE()
-        {
-            if (!File.Exists(Path.Combine(CurrentDir, GraphicsConfigEXE)))
-            {
-                if (!_isMessageBoxOnScreen)
-                {
-                    ThemedMessageBox.Show(GraphicsConfigEXE + " was not found!", "ERROR:");
-                    _isMessageBoxOnScreen = true;
-                    Program.TerminateApp();
-                }
-            }
         }
 
         /// <summary>
@@ -501,7 +479,7 @@ namespace DoW_Mod_Manager
         /// </summary>
         void SetGameLAALabelText()
         {
-            if (_isGameEXELAAPatched)
+            if (isGameEXELAAPatched)
             {
                 gameLAAStatusLabel.Text = CurrentGameEXE + ": LAA Active";
                 gameLAAStatusLabel.ForeColor = Color.LimeGreen;
@@ -510,23 +488,6 @@ namespace DoW_Mod_Manager
             {
                 gameLAAStatusLabel.Text = CurrentGameEXE + ": LAA Inactive";
                 gameLAAStatusLabel.ForeColor = Color.Red;
-            }
-        }
-
-        /// <summary>
-        /// This method draws the LAA text for the GraphicsConfig label depending on whether the flag is true (Green) or false (Red).
-        /// </summary>
-        void SetGraphicsConfigLAALabelText()
-        {
-            if (_isGraphicsConfigLAAPatched)
-            {
-                graphicsConfigLAAStatusLabel.Text = GraphicsConfigEXE + ": LAA Active";
-                graphicsConfigLAAStatusLabel.ForeColor = Color.LimeGreen;
-            }
-            else
-            {
-                graphicsConfigLAAStatusLabel.Text = GraphicsConfigEXE + ": LAA Inactive";
-                graphicsConfigLAAStatusLabel.ForeColor = Color.Red;
             }
         }
 
@@ -560,28 +521,33 @@ namespace DoW_Mod_Manager
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void GetMods()
         {
+            installedModsListBox.Items.Clear();
+
             // Make a new list for the new Pathitems
             List<string> newfilePathsList = new List<string>();
             AllFoundModules = new List<string>();
             AllValidModules = new List<ModuleEntry>();
-
-            installedModsListBox.Items.Clear();
 
             ModuleFilePaths = Directory.GetFiles(CurrentDir, "*.module");
             if (ModuleFilePaths.Length > 0)
             {
                 for (int i = 0; i < ModuleFilePaths.Length; i++)
                 {
+                    // Check if the file actually exists
+                    if (!File.Exists(ModuleFilePaths[i]))
+                        continue;
+
                     string filePath = ModuleFilePaths[i];
                     string fileName = Path.GetFileNameWithoutExtension(filePath);
 
-                    // Check if the file actually exists
-                    if (!File.Exists(filePath))
-                        continue;
-
                     // There is no point of adding base modules to the list
-                    if (filePath.Contains("W40k.module") || filePath.Contains("DXP2.module"))
-                        continue;
+                    switch (fileName)
+                    {
+                        case "W40k":
+                        case "WXP":
+                        case "DXP2":
+                            continue;
+                    }
 
                     // Find the List of ALL found module files for the Mod Merger available Mods List
                     AllFoundModules.Add(fileName);
@@ -598,23 +564,16 @@ namespace DoW_Mod_Manager
                         while ((line = file.ReadLine()) != null)
                         {
                             // Winter Assault or Original doesn't have a "Playable" state
-                            if (line.Contains("Playable = 1") || _isOldGame)
+                            if (line.Contains("Playable = 1") || isOldGame)
                                 isPlayable = true;
 
                             // Add information about the home mod folder of a mod
                             if (line.Contains("ModFolder"))
-                            {
-                                int indexOfEqualSigh = line.IndexOf('=');
-                                modFolderName = line.Substring(indexOfEqualSigh + 1, line.Length - indexOfEqualSigh - 1);
-                                modFolderName = modFolderName.Replace(" ", "");     // Remove whitespaces
-                            }
+                                modFolderName = Extensions.GetValueFromLine(line, false);
 
                             // Add information about a version of a mod
                             if (line.Contains("ModVersion"))
-                            {
-                                int indexOfEqualSigh = line.IndexOf('=');
-                                modVersion = line.Substring(indexOfEqualSigh + 1, line.Length - indexOfEqualSigh - 1);
-                            }
+                                modVersion = Extensions.GetValueFromLine(line, false);
                         }
 
                         if (isPlayable)
@@ -638,10 +597,10 @@ namespace DoW_Mod_Manager
             }
             else
             {
-                if (!_isMessageBoxOnScreen)
+                if (!isMessageBoxOnScreen)
                 {
                     ThemedMessageBox.Show("No mods were found in the specified directory! Please check your current directory again!", "Warning!");
-                    _isMessageBoxOnScreen = true;
+                    isMessageBoxOnScreen = true;
                     Program.TerminateApp();
                 }
             }
@@ -684,8 +643,8 @@ namespace DoW_Mod_Manager
                     Process dowOrModManager = Process.GetCurrentProcess();
 
                     // Remember DoW process Name but if DoW is not launched - just terminate the Thread
-                    if (_dowProcessName.Length > 0)
-                        procName = _dowProcessName;
+                    if (dowProcessName.Length > 0)
+                        procName = dowProcessName;
                     else
                         return;
 
@@ -848,7 +807,7 @@ namespace DoW_Mod_Manager
 
             string folderPath;
             int itemsCount = requiredModsList.Items.Count;
-            _isInstalled = new bool[itemsCount];
+            isInstalled = new bool[itemsCount];
 
             for (int i = 0; i < itemsCount; i++)
             {
@@ -857,12 +816,12 @@ namespace DoW_Mod_Manager
                 if (Directory.Exists(folderPath))
                 {
                     requiredModsList.Items[i] += " ...INSTALLED!";
-                    _isInstalled[i] = true;
+                    isInstalled[i] = true;
                 }
                 else
                 {
                     requiredModsList.Items[i] += " ...MISSING!";
-                    _isInstalled[i] = false;
+                    isInstalled[i] = false;
                     startModButton.Enabled = false;
 
                     // Select missed mod so user could find it more easily
@@ -943,7 +902,7 @@ namespace DoW_Mod_Manager
             proc.StartInfo.Arguments = arguments;
             proc.Start();
 
-            _dowProcessName = proc.ProcessName;
+            dowProcessName = proc.ProcessName;
 
             // Create new thread to change the process CPU affinity after the game has started.
             if (settings[DOW_OPTIMIZATIONS] == 1)
@@ -952,7 +911,7 @@ namespace DoW_Mod_Manager
                 new Thread(() =>
                 {
                     int triesCount = 0;
-                    string procName = _dowProcessName;
+                    string procName = dowProcessName;
 
                     // We will try 30 times and then Thread will be terminated regardless
                     while (triesCount < 30)
@@ -980,7 +939,7 @@ namespace DoW_Mod_Manager
                 new Thread(() =>
                 {
                     int timeOutCounter = 0;
-                    string procName = _dowProcessName;
+                    string procName = dowProcessName;
 
                     // We will try 30 times and then Thread will be terminated regardless
                     while (timeOutCounter < 30)
@@ -1103,7 +1062,7 @@ namespace DoW_Mod_Manager
 
             Brush myBrush;
 
-            if (_isInstalled[e.Index])
+            if (isInstalled[e.Index])
                 myBrush = Brushes.LimeGreen;
             else
                 myBrush = Brushes.Red;
@@ -1247,42 +1206,16 @@ namespace DoW_Mod_Manager
         void ButtonToggleLAA_Click(object sender, EventArgs e)
         {
             // Check if the Game is LAA Patched and fill in the Label properly
-            string currentGamePath = CurrentDir + "\\" + CurrentGameEXE;
-            string currentGraphucsConfigPath = CurrentDir + "\\" + GraphicsConfigEXE;
+            string currentGamePath = Path.Combine(CurrentDir, CurrentGameEXE);
 
-            if (!IsFileLocked(currentGamePath) && !IsFileLocked(currentGraphucsConfigPath))
+            if (!IsFileLocked(currentGamePath))
             {
-                if ((_isGameEXELAAPatched && _isGraphicsConfigLAAPatched) || (!_isGameEXELAAPatched && !_isGraphicsConfigLAAPatched))
-                {
-                    if (settings[IS_GOG_VERSION] == 1)
-                    {
-                        _isGameEXELAAPatched = LAATweaks.ToggleLAA(currentGamePath);
-                        _isGraphicsConfigLAAPatched = LAATweaks.ToggleLAA(currentGraphucsConfigPath);
-                    }
-                    else
-                    {
-                        _isGameEXELAAPatched = LAATweaksOld.ToggleLAA(currentGamePath);
-                        _isGraphicsConfigLAAPatched = LAATweaksOld.ToggleLAA(currentGraphucsConfigPath);
-                    }
-                }
-                else if (!_isGameEXELAAPatched)
-                {
-                    if (settings[IS_GOG_VERSION] == 1)
-                        _isGameEXELAAPatched = LAATweaks.ToggleLAA(currentGamePath);
-                    else
-                        _isGameEXELAAPatched = LAATweaksOld.ToggleLAA(currentGamePath);
-                }
-
-                else if (!_isGraphicsConfigLAAPatched)
-                {
-                    if (settings[IS_GOG_VERSION] == 1)
-                        _isGraphicsConfigLAAPatched = LAATweaks.ToggleLAA(currentGraphucsConfigPath);
-                    else
-                        _isGraphicsConfigLAAPatched = LAATweaksOld.ToggleLAA(currentGraphucsConfigPath);
-                }
+                if (settings[IS_GOG_VERSION] == 1)
+                    isGameEXELAAPatched = LAATweaks.ToggleLAA(currentGamePath);
+                else
+                    isGameEXELAAPatched = LAATweaksOld.ToggleLAA(currentGamePath);
 
                 SetGameLAALabelText();
-                SetGraphicsConfigLAALabelText();
             }
         }
 
@@ -1381,15 +1314,15 @@ namespace DoW_Mod_Manager
             {
                 if (!control.Enabled && control == noFogCheckbox)
                 {
-                    string toolTipString = _disabledNoFogTooltip.GetToolTip(control);
-                    _disabledNoFogTooltip.Show(toolTipString, control, control.Width / 2, control.Height / 2);
-                    _currentToolTipControl = control;
+                    string toolTipString = disabledNoFogTooltip.GetToolTip(control);
+                    disabledNoFogTooltip.Show(toolTipString, control, control.Width / 2, control.Height / 2);
+                    currentToolTipControl = control;
                 }
             }
             else
             {
-                if (_currentToolTipControl != null) _disabledNoFogTooltip.Hide(_currentToolTipControl);
-                _currentToolTipControl = null;
+                if (currentToolTipControl != null) disabledNoFogTooltip.Hide(currentToolTipControl);
+                currentToolTipControl = null;
             }
         }
 

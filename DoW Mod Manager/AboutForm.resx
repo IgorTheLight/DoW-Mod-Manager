@@ -59,7 +59,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 2.5.1.1
+    <value>## Version 2.5.2.0
+
+- Removed: ability to LAA patch GraphicsConfig.exe Reason: it literally does nothing in terns of performance (I tested that). So now LAA pathing would be twice faster without any downsides!
+- Refactored: method GetMods() to be more clean, faster and more readable at the same time!
+
+## Version 2.5.1.1
 
 - Fixed: DXVK download error on Windows 7
 

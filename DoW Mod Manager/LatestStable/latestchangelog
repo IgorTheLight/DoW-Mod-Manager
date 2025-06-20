@@ -1,1 +1,2 @@
-- Fixed: DXVK download error on Windows 7
+- Removed: ability to LAA patch GraphicsConfig.exe Reason: it literally does nothing in terns of performance (I tested that). So now LAA pathing would be twice faster without any downsides!
+- Refactored: method GetMods() to be more clean, faster and more readable at the same time!

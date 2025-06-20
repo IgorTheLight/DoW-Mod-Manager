@@ -45,7 +45,6 @@ namespace DoW_Mod_Manager
             this.mergeButton = new System.Windows.Forms.Button();
             this.startVanillaButton = new System.Windows.Forms.Button();
             this.gameLAAStatusLabel = new System.Windows.Forms.Label();
-            this.graphicsConfigLAAStatusLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.open_folder_button = new System.Windows.Forms.Button();
@@ -288,23 +287,12 @@ namespace DoW_Mod_Manager
             // 
             this.gameLAAStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.gameLAAStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameLAAStatusLabel.Location = new System.Drawing.Point(8, 93);
+            this.gameLAAStatusLabel.Location = new System.Drawing.Point(8, 73);
             this.gameLAAStatusLabel.Margin = new System.Windows.Forms.Padding(3);
             this.gameLAAStatusLabel.Name = "gameLAAStatusLabel";
             this.gameLAAStatusLabel.Size = new System.Drawing.Size(189, 17);
             this.gameLAAStatusLabel.TabIndex = 16;
             this.gameLAAStatusLabel.Text = "Game: LAA Active";
-            // 
-            // graphicsConfigLAAStatusLabel
-            // 
-            this.graphicsConfigLAAStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.graphicsConfigLAAStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.graphicsConfigLAAStatusLabel.Location = new System.Drawing.Point(8, 77);
-            this.graphicsConfigLAAStatusLabel.Margin = new System.Windows.Forms.Padding(3);
-            this.graphicsConfigLAAStatusLabel.Name = "graphicsConfigLAAStatusLabel";
-            this.graphicsConfigLAAStatusLabel.Size = new System.Drawing.Size(189, 14);
-            this.graphicsConfigLAAStatusLabel.TabIndex = 17;
-            this.graphicsConfigLAAStatusLabel.Text = "Graphics Config: LAA Active";
             // 
             // panel1
             // 
@@ -494,7 +482,6 @@ namespace DoW_Mod_Manager
             this.panel2.Controls.Add(this.toggleLAAButton);
             this.panel2.Controls.Add(this.checkForErrorsButton);
             this.panel2.Controls.Add(this.gameLAAStatusLabel);
-            this.panel2.Controls.Add(this.graphicsConfigLAAStatusLabel);
             this.panel2.Controls.Add(this.settingsButton);
             this.panel2.Controls.Add(this.dxvkButton);
             this.panel2.Location = new System.Drawing.Point(341, 32);
@@ -636,7 +623,6 @@ namespace DoW_Mod_Manager
         private System.Windows.Forms.ListBox installedModsListBox;
         private System.Windows.Forms.Button startVanillaButton;
         private System.Windows.Forms.Label gameLAAStatusLabel;
-        private System.Windows.Forms.Label graphicsConfigLAAStatusLabel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button toggleLAAButton;
