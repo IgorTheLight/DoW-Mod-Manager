@@ -1500,8 +1500,8 @@ namespace DoW_Mod_Manager
 
                 try
                 {
-                    client.DownloadFile(CAMERA_URL + "camera_high.lua", "camera_high.lua");
-                    client.DownloadFile(CAMERA_URL + "camera_low.lua", "camera_low.lua");
+                    client.DownloadFile(CAMERA_URL + "camera_high.lua", Path.Combine(cameraDirectory, "camera_high.lua"));
+                    client.DownloadFile(CAMERA_URL + "camera_low.lua", Path.Combine(cameraDirectory, "camera_low.lua"));
 
                     cameraButton.Text = "Remove a better camera";
                     isCameraInstalled = true;
@@ -1526,8 +1526,8 @@ namespace DoW_Mod_Manager
         {
             if (isFontInstalled)
             {
-                Directory.Delete(Path.Combine(fontDirectory, "art"));
-                Directory.Delete(Path.Combine(fontDirectory, "font"));
+                Directory.Delete(Path.Combine(fontDirectory, "art"), true);
+                Directory.Delete(Path.Combine(fontDirectory, "font"), true);
 
                 fontButton.Text = "Install larger fonts";
                 isFontInstalled = false;
@@ -1547,29 +1547,31 @@ namespace DoW_Mod_Manager
                     if (!Directory.Exists(artPath))
                         Directory.CreateDirectory(artPath);
 
-                    client.DownloadFile(FONT_URL + "font_glyphs.gfx", "font_glyphs.gfx");
-                    client.DownloadFile(FONT_URL + "fontaux.gfx", "fontaux.gfx");
-                    client.DownloadFile(FONT_URL + "fontbody.gfx", "fontbody.gfx");
-                    client.DownloadFile(FONT_URL + "fontdecor.gfx", "fontdecor.gfx");
-                    client.DownloadFile(FONT_URL + "fonthead.gfx", "fonthead.gfx");
+                    string artURL = FONT_URL + "art/ui/swf/";
+                    client.DownloadFile(artURL + "font_glyphs.gfx", Path.Combine(artPath, "font_glyphs.gfx"));
+                    client.DownloadFile(artURL + "fontaux.gfx", Path.Combine(artPath, "fontaux.gfx"));
+                    client.DownloadFile(artURL + "fontbody.gfx", Path.Combine(artPath, "fontbody.gfx"));
+                    client.DownloadFile(artURL + "fontdecor.gfx", Path.Combine(artPath, "fontdecor.gfx"));
+                    client.DownloadFile(artURL + "fonthead.gfx", Path.Combine(artPath, "fonthead.gfx"));
 
                     string fontPath = Path.Combine(fontDirectory, "font");
                     if (!Directory.Exists(fontPath))
                         Directory.CreateDirectory(fontPath);
 
-                    client.DownloadFile(FONT_URL + "albertus extra bold12.fnt", "albertus extra bold12.fnt");
-                    client.DownloadFile(FONT_URL + "albertus extra bold14.fnt", "albertus extra bold14.fnt");
-                    client.DownloadFile(FONT_URL + "albertus extra bold16.fnt", "albertus extra bold16.fnt");
-                    client.DownloadFile(FONT_URL + "ansnb___.ttf", "ansnb___.ttf");
-                    client.DownloadFile(FONT_URL + "engo.ttf", "engo.ttf");
-                    client.DownloadFile(FONT_URL + "engravers old english mt30.fnt", "engravers old english mt30.fnt");
-                    client.DownloadFile(FONT_URL + "gil_____.ttf", "gil_____.ttf");
-                    client.DownloadFile(FONT_URL + "gillsans_11.fnt", "gillsans_11.fnt");
-                    client.DownloadFile(FONT_URL + "gillsans_11b.fnt", "gillsans_11b.fnt");
-                    client.DownloadFile(FONT_URL + "gillsans_16.fnt", "gillsans_16.fnt");
-                    client.DownloadFile(FONT_URL + "gillsans_bold_16.fnt", "gillsans_bold_16.fnt");
-                    client.DownloadFile(FONT_URL + "quorum medium bold13.fnt", "quorum medium bold13.fnt");
-                    client.DownloadFile(FONT_URL + "quorum medium bold16.fnt", "quorum medium bold16.fnt");
+                    string fontURL = FONT_URL + "font/";
+                    client.DownloadFile(fontURL + "albertus extra bold12.fnt", Path.Combine(artPath, "albertus extra bold12.fnt"));
+                    client.DownloadFile(fontURL + "albertus extra bold14.fnt", Path.Combine(artPath, "albertus extra bold14.fnt"));
+                    client.DownloadFile(fontURL + "albertus extra bold16.fnt", Path.Combine(artPath, "albertus extra bold16.fnt"));
+                    client.DownloadFile(fontURL + "ansnb___.ttf", Path.Combine(artPath, "ansnb___.ttf"));
+                    client.DownloadFile(fontURL + "engo.ttf", Path.Combine(artPath, "engo.ttf"));
+                    client.DownloadFile(fontURL + "engravers old english mt30.fnt", Path.Combine(artPath, "engravers old english mt30.fnt"));
+                    client.DownloadFile(fontURL + "gil_____.ttf", Path.Combine(artPath, "gil_____.ttf"));
+                    client.DownloadFile(fontURL + "gillsans_11.fnt", Path.Combine(artPath, "gillsans_11.fnt"));
+                    client.DownloadFile(fontURL + "gillsans_11b.fnt", Path.Combine(artPath, "gillsans_11b.fnt"));
+                    client.DownloadFile(fontURL + "gillsans_16.fnt", Path.Combine(artPath, "gillsans_16.fnt"));
+                    client.DownloadFile(fontURL + "gillsans_bold_16.fnt", Path.Combine(artPath, "gillsans_bold_16.fnt"));
+                    client.DownloadFile(fontURL + "quorum medium bold13.fnt", Path.Combine(artPath, "quorum medium bold13.fnt"));
+                    client.DownloadFile(fontURL + "quorum medium bold16.fnt", Path.Combine(artPath, "quorum medium bold16.fnt"));
 
                     fontButton.Text = "Remove larger fonts";
                     isFontInstalled = true;

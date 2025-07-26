@@ -59,7 +59,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 2.6.0.0
+    <value>## Version 2.6.0.1
+
+- Fixed: a few bugs that could prevent installing and removing for camera and fonts
+
+## Version 2.6.0.0
 
 - Added: Kekoulis to "About and Updates" -> "Special Thanks" for all the support!
 - Added: an indicator to show is your DXVK is installed/enabled or not
