@@ -1,10 +1,1 @@
-- Added: Kekoulis to "About and Updates" -> "Special Thanks" for all the support!
-- Added: an indicator to show is your DXVK is installed/enabled or not
-- Added: an one click installer for better camera (totally new feature!) and an indicator for it
-- Added: an one click installer for bigger font (it was listed as a mod before) and the indicator for it
-- Added: a new graphical setting - "Ultra+" which is basically old "Ultra". New "Ultra" is a "real" Ultra from Dawn of War (without any hidden settings applied).
-In other words, "Ultra" = "Ultra" in game, "Ultra+" = "Ultra" in game + hidden features like "High resolution textures", "-forcehighpoly" enabled, Antialiasing, "-noprecachemodels" disabled
-- Added: a new graphical setting - "Low-" which is basically original "Low" with "-noprecachemodels" enabled
-- Renamed: "Toggle LAA" button to "Toggle 4Gb RAM patch" so more people could understand what it actually do xD
-- Renamed: "DirectX 8 Cursor" to "Hardware cursor" so more people could understand what it actually do xD
-- Changed: main UI a little bit so new buttons would look more coherent
+- Added many new features!
