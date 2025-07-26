@@ -59,7 +59,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 2.6.0.1
+    <value>## Version 2.6.0.2
+
+- A few additional bugs were burned
+
+## Version 2.6.0.1
 
 - Fixed: a few bugs that could prevent installing and removing for camera and fonts
 
