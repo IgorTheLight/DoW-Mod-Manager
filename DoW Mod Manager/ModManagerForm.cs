@@ -47,6 +47,8 @@ namespace DoW_Mod_Manager
         const string WARNINGS_LOG = "warnings.log";
 
         const string DXVK_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/DXVK/";
+        const string CAMERA_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/CAMERA/";
+        const string FONT_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/FONT/";
 
         // This is a State Machine which determines what action must be performed
         public enum Action { None, CreateNativeImage, CreateNativeImageAndDeleteJITProfile, DeleteJITProfile, DeleteNativeImage, DeleteJITProfileAndNativeImage }
@@ -68,7 +70,6 @@ namespace DoW_Mod_Manager
         // A boolean array that maps Index-wise to the filepaths indices. Index 0 checks if required mod at index 0 in the FilePaths is installed or not.
         bool[] isInstalled;
         bool isGameEXELAAPatched = false;
-        bool isGraphicsConfigLAAPatched = false;
         bool isMessageBoxOnScreen = false;
         bool isOldGame;
         bool isNoFogTooltipShown = false;
@@ -84,8 +85,13 @@ namespace DoW_Mod_Manager
         public List<string> AllFoundModules;                                        // Contains the list of all available Mods that will be used by the Mod Merger
         public List<ModuleEntry> AllValidModules;                                   // Contains the list of all playable Mods that will be used by the Mod Merger
         public bool IsTimerResolutionLowered = false;
+
+        readonly string cameraDirectory;
+        readonly string fontDirectory;
         string currentModuleFilePath = "";                                          // Contains the name of the current selected Mod.
         bool isDXVKInstalled;
+        bool isCameraInstalled;
+        bool isFontInstalled;
 
         // Don't make Settings readonly or it couldn't be changed from outside the class!
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "<Pending>")]
@@ -113,6 +119,9 @@ namespace DoW_Mod_Manager
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public ModManagerForm()
         {
+            cameraDirectory = Path.Combine(CurrentDir, "Engine\\Data");
+            fontDirectory = Path.Combine(CurrentDir, "Engine\\Locale\\English\\Data");
+
             ReadSettingsFromDoWModManagerINI();
 
             if (settings[MULTITHREADED_JIT] == 1)
@@ -239,17 +248,23 @@ namespace DoW_Mod_Manager
                         {
                             dxvkButton.Text = "Update DXVK";
                             isDXVKInstalled = false;
+                            DXVKStatusLabel.Text = "Disabled";
+                            DXVKStatusLabel.ForeColor = Color.Red;
                         }
                         else
                         {
                             dxvkButton.Text = "Remove DXVK";
                             isDXVKInstalled = true;
+                            DXVKStatusLabel.Text = "Enabled";
+                            DXVKStatusLabel.ForeColor = Color.LimeGreen;
                         }
                     }
                     else
                     {
                         dxvkButton.Text = "Remove DXVK";
                         isDXVKInstalled = true;
+                        DXVKStatusLabel.Text = "DXVK is enabled";
+                        DXVKStatusLabel.ForeColor = Color.LimeGreen;
                     }
                 }
                 catch (Exception)
@@ -262,6 +277,56 @@ namespace DoW_Mod_Manager
             {
                 dxvkButton.Text = "Install DXVK";
                 isDXVKInstalled = false;
+                DXVKStatusLabel.Text = "DXVK is disabled";
+                DXVKStatusLabel.ForeColor = Color.Red;
+            }
+
+            // Checking is better camera installed
+            if (File.Exists(Path.Combine(cameraDirectory, "camera_high.lua")) && File.Exists(Path.Combine(cameraDirectory, "camera_low.lua")))
+            {
+                try
+                {
+                    cameraButton.Text = "Remove a better camera";
+                    isCameraInstalled = true;
+                    cameraStatusLabel.Text = "Enabled";
+                    cameraStatusLabel.ForeColor = Color.LimeGreen;
+                }
+                catch (Exception)
+                {
+                    cameraButton.Enabled = false;
+                    return;
+                }
+            }
+            else
+            {
+                cameraButton.Text = "Install a better camera";
+                isCameraInstalled = false;
+                cameraStatusLabel.Text = "Disabled";
+                cameraStatusLabel.ForeColor = Color.Red;
+            }
+
+            // Checking are larger fonts installed
+            if (Directory.Exists(Path.Combine(fontDirectory, "art")) && Directory.Exists(Path.Combine(fontDirectory, "font")))
+            {
+                try
+                {
+                    fontButton.Text = "Remove larger fonts";
+                    isFontInstalled = true;
+                    fontStatusLabel.Text = "Enabled";
+                    fontStatusLabel.ForeColor = Color.LimeGreen;
+                }
+                catch (Exception)
+                {
+                    fontButton.Enabled = false;
+                    return;
+                }
+            }
+            else
+            {
+                fontButton.Text = "Install larger fonts";
+                isFontInstalled = false;
+                fontStatusLabel.Text = "Disabled";
+                fontStatusLabel.ForeColor = Color.Red;
             }
         }
 
@@ -481,12 +546,12 @@ namespace DoW_Mod_Manager
         {
             if (isGameEXELAAPatched)
             {
-                gameLAAStatusLabel.Text = CurrentGameEXE + ": LAA Active";
+                gameLAAStatusLabel.Text = "Enabled";
                 gameLAAStatusLabel.ForeColor = Color.LimeGreen;
             }
             else
             {
-                gameLAAStatusLabel.Text = CurrentGameEXE + ": LAA Inactive";
+                gameLAAStatusLabel.Text = "Disabled";
                 gameLAAStatusLabel.ForeColor = Color.Red;
             }
         }
@@ -1376,8 +1441,11 @@ namespace DoW_Mod_Manager
                 File.Delete("d3d9.dll");
                 File.Delete("dxgi.dll");
 
-                isDXVKInstalled = false;
                 dxvkButton.Text = "Install DXVK";
+                isDXVKInstalled = false;
+                DXVKStatusLabel.Text = "Disabled";
+                DXVKStatusLabel.ForeColor = Color.Red;
+
                 ThemedMessageBox.Show("DXVK is disabled and deleted!", "Information:");
             }
             else
@@ -1392,8 +1460,11 @@ namespace DoW_Mod_Manager
                     client.DownloadFile(DXVK_URL + "d3d9.dll", "d3d9.dll");
                     client.DownloadFile(DXVK_URL + "dxgi.dll", "dxgi.dll");
 
-                    isDXVKInstalled = true;
                     dxvkButton.Text = "Remove DXVK";
+                    isDXVKInstalled = true;
+                    DXVKStatusLabel.Text = "Enabled";
+                    DXVKStatusLabel.ForeColor = Color.LimeGreen;
+
                     ThemedMessageBox.Show("DXVK is downloaded and enabled!", "Information:");
                 }
                 catch (Exception)
@@ -1404,6 +1475,117 @@ namespace DoW_Mod_Manager
                 {
                     client.Dispose();
                     dxvkButton.Enabled = true;
+                }
+            }
+        }
+
+        private void CameraButton_Click(object sender, EventArgs e)
+        {
+            if (isCameraInstalled)
+            {
+                File.Delete(Path.Combine(cameraDirectory, "camera_high.lua"));
+                File.Delete(Path.Combine(cameraDirectory, "camera_low.lua"));
+
+                cameraButton.Text = "Install a better camera";
+                isCameraInstalled = false;
+                cameraStatusLabel.Text = "Disabled";
+                cameraStatusLabel.ForeColor = Color.Red;
+
+                ThemedMessageBox.Show("A Better camera is disabled and deleted!", "Information:");
+            }
+            else
+            {
+               cameraButton.Enabled = false;
+                var client = new WebClient();
+
+                try
+                {
+                    client.DownloadFile(CAMERA_URL + "camera_high.lua", "camera_high.lua");
+                    client.DownloadFile(CAMERA_URL + "camera_low.lua", "camera_low.lua");
+
+                    cameraButton.Text = "Remove a better camera";
+                    isCameraInstalled = true;
+                    cameraStatusLabel.Text = "Enabled";
+                    cameraStatusLabel.ForeColor = Color.LimeGreen;
+
+                    ThemedMessageBox.Show("A better camera is downloaded and enabled!", "Information:");
+                }
+                catch (Exception)
+                {
+                    ThemedMessageBox.Show("We can't download files!", "Warning!");
+                }
+                finally
+                {
+                    client.Dispose();
+                    cameraButton.Enabled = true;
+                }
+            }
+        }
+
+        private void FontButton_Click(object sender, EventArgs e)
+        {
+            if (isFontInstalled)
+            {
+                Directory.Delete(Path.Combine(fontDirectory, "art"));
+                Directory.Delete(Path.Combine(fontDirectory, "font"));
+
+                fontButton.Text = "Install larger fonts";
+                isFontInstalled = false;
+                fontStatusLabel.Text = "Disabled";
+                fontStatusLabel.ForeColor = Color.Red;
+
+                ThemedMessageBox.Show("Larger fonts are disabled and deleted!", "Information:");
+            }
+            else
+            {
+                fontButton.Enabled = false;
+                var client = new WebClient();
+
+                try
+                {
+                    string artPath = Path.Combine(fontDirectory, "art\\ui\\swf");
+                    if (!Directory.Exists(artPath))
+                        Directory.CreateDirectory(artPath);
+
+                    client.DownloadFile(FONT_URL + "font_glyphs.gfx", "font_glyphs.gfx");
+                    client.DownloadFile(FONT_URL + "fontaux.gfx", "fontaux.gfx");
+                    client.DownloadFile(FONT_URL + "fontbody.gfx", "fontbody.gfx");
+                    client.DownloadFile(FONT_URL + "fontdecor.gfx", "fontdecor.gfx");
+                    client.DownloadFile(FONT_URL + "fonthead.gfx", "fonthead.gfx");
+
+                    string fontPath = Path.Combine(fontDirectory, "font");
+                    if (!Directory.Exists(fontPath))
+                        Directory.CreateDirectory(fontPath);
+
+                    client.DownloadFile(FONT_URL + "albertus extra bold12.fnt", "albertus extra bold12.fnt");
+                    client.DownloadFile(FONT_URL + "albertus extra bold14.fnt", "albertus extra bold14.fnt");
+                    client.DownloadFile(FONT_URL + "albertus extra bold16.fnt", "albertus extra bold16.fnt");
+                    client.DownloadFile(FONT_URL + "ansnb___.ttf", "ansnb___.ttf");
+                    client.DownloadFile(FONT_URL + "engo.ttf", "engo.ttf");
+                    client.DownloadFile(FONT_URL + "engravers old english mt30.fnt", "engravers old english mt30.fnt");
+                    client.DownloadFile(FONT_URL + "gil_____.ttf", "gil_____.ttf");
+                    client.DownloadFile(FONT_URL + "gillsans_11.fnt", "gillsans_11.fnt");
+                    client.DownloadFile(FONT_URL + "gillsans_11b.fnt", "gillsans_11b.fnt");
+                    client.DownloadFile(FONT_URL + "gillsans_16.fnt", "gillsans_16.fnt");
+                    client.DownloadFile(FONT_URL + "gillsans_bold_16.fnt", "gillsans_bold_16.fnt");
+                    client.DownloadFile(FONT_URL + "quorum medium bold13.fnt", "quorum medium bold13.fnt");
+                    client.DownloadFile(FONT_URL + "quorum medium bold16.fnt", "quorum medium bold16.fnt");
+
+                    fontButton.Text = "Remove larger fonts";
+                    isFontInstalled = true;
+                    fontStatusLabel.Text = "Enabled";
+                    fontStatusLabel.ForeColor = Color.LimeGreen;
+
+                    ThemedMessageBox.Show("Larger fonts are downloaded and enabled!", "Information:");
+                }
+                catch (Exception)
+                {
+                    ThemedMessageBox.Show("We can't download files!", "Warning!");
+                }
+                finally
+                {
+                    client.Dispose();
+                    cameraButton.Enabled = true;
                 }
             }
         }

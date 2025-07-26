@@ -59,6 +59,11 @@ namespace DoW_Mod_Manager
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.noprecachemodelsCheckBox = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.fontStatusLabel = new System.Windows.Forms.Label();
+            this.fontButton = new System.Windows.Forms.Button();
+            this.cameraStatusLabel = new System.Windows.Forms.Label();
+            this.cameraButton = new System.Windows.Forms.Button();
+            this.DXVKStatusLabel = new System.Windows.Forms.Label();
             this.dxvkButton = new System.Windows.Forms.Button();
             this.GOGRadioButton = new System.Windows.Forms.RadioButton();
             this.SteamRadioButton = new System.Windows.Forms.RadioButton();
@@ -135,7 +140,7 @@ namespace DoW_Mod_Manager
             this.installedModsListBox.Margin = new System.Windows.Forms.Padding(0);
             this.installedModsListBox.Name = "installedModsListBox";
             this.installedModsListBox.ScrollAlwaysVisible = true;
-            this.installedModsListBox.Size = new System.Drawing.Size(447, 355);
+            this.installedModsListBox.Size = new System.Drawing.Size(447, 342);
             this.installedModsListBox.TabIndex = 4;
             this.installedModsListBox.SelectedIndexChanged += new System.EventHandler(this.InstalledModsList_SelectedIndexChanged);
             // 
@@ -151,7 +156,7 @@ namespace DoW_Mod_Manager
             this.requiredModsList.Margin = new System.Windows.Forms.Padding(0);
             this.requiredModsList.Name = "requiredModsList";
             this.requiredModsList.ScrollAlwaysVisible = true;
-            this.requiredModsList.Size = new System.Drawing.Size(427, 355);
+            this.requiredModsList.Size = new System.Drawing.Size(427, 342);
             this.requiredModsList.TabIndex = 5;
             this.requiredModsList.SelectedIndexChanged += new System.EventHandler(this.RequiredModsList_SelectedIndexChanged);
             // 
@@ -187,7 +192,7 @@ namespace DoW_Mod_Manager
             this.authorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.authorLabel.AutoSize = true;
             this.authorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.authorLabel.Location = new System.Drawing.Point(16, 560);
+            this.authorLabel.Location = new System.Drawing.Point(16, 596);
             this.authorLabel.Name = "authorLabel";
             this.authorLabel.Size = new System.Drawing.Size(198, 13);
             this.authorLabel.TabIndex = 8;
@@ -287,12 +292,13 @@ namespace DoW_Mod_Manager
             // 
             this.gameLAAStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.gameLAAStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameLAAStatusLabel.Location = new System.Drawing.Point(8, 73);
+            this.gameLAAStatusLabel.ForeColor = System.Drawing.Color.Gray;
+            this.gameLAAStatusLabel.Location = new System.Drawing.Point(163, 47);
             this.gameLAAStatusLabel.Margin = new System.Windows.Forms.Padding(3);
             this.gameLAAStatusLabel.Name = "gameLAAStatusLabel";
-            this.gameLAAStatusLabel.Size = new System.Drawing.Size(189, 17);
+            this.gameLAAStatusLabel.Size = new System.Drawing.Size(65, 13);
             this.gameLAAStatusLabel.TabIndex = 16;
-            this.gameLAAStatusLabel.Text = "Game: LAA Active";
+            this.gameLAAStatusLabel.Text = "Enabled";
             // 
             // panel1
             // 
@@ -300,9 +306,9 @@ namespace DoW_Mod_Manager
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.splitContainer1);
-            this.panel1.Location = new System.Drawing.Point(12, 171);
+            this.panel1.Location = new System.Drawing.Point(12, 220);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(901, 390);
+            this.panel1.Size = new System.Drawing.Size(901, 377);
             this.panel1.TabIndex = 18;
             // 
             // splitContainer1
@@ -323,7 +329,7 @@ namespace DoW_Mod_Manager
             // 
             this.splitContainer1.Panel2.Controls.Add(this.requiredModsLabel);
             this.splitContainer1.Panel2.Controls.Add(this.requiredModsList);
-            this.splitContainer1.Size = new System.Drawing.Size(898, 398);
+            this.splitContainer1.Size = new System.Drawing.Size(898, 385);
             this.splitContainer1.SplitterDistance = 455;
             this.splitContainer1.TabIndex = 19;
             // 
@@ -349,9 +355,9 @@ namespace DoW_Mod_Manager
             this.toggleLAAButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.toggleLAAButton.Location = new System.Drawing.Point(11, 40);
             this.toggleLAAButton.Name = "toggleLAAButton";
-            this.toggleLAAButton.Size = new System.Drawing.Size(104, 31);
+            this.toggleLAAButton.Size = new System.Drawing.Size(138, 31);
             this.toggleLAAButton.TabIndex = 20;
-            this.toggleLAAButton.Text = "TOGGLE LAA";
+            this.toggleLAAButton.Text = "Toggle 4Gb RAM patch";
             this.toggleLAAButton.UseVisualStyleBackColor = false;
             this.toggleLAAButton.Click += new System.EventHandler(this.ButtonToggleLAA_Click);
             // 
@@ -394,7 +400,7 @@ namespace DoW_Mod_Manager
             this.AboutkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AboutkLabel.AutoSize = true;
             this.AboutkLabel.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.AboutkLabel.Location = new System.Drawing.Point(818, 560);
+            this.AboutkLabel.Location = new System.Drawing.Point(818, 596);
             this.AboutkLabel.Name = "AboutkLabel";
             this.AboutkLabel.Size = new System.Drawing.Size(99, 13);
             this.AboutkLabel.TabIndex = 23;
@@ -459,7 +465,7 @@ namespace DoW_Mod_Manager
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 32);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 133);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 185);
             this.flowLayoutPanel1.TabIndex = 28;
             // 
             // noprecachemodelsCheckBox
@@ -479,6 +485,11 @@ namespace DoW_Mod_Manager
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.AutoSize = true;
+            this.panel2.Controls.Add(this.fontStatusLabel);
+            this.panel2.Controls.Add(this.fontButton);
+            this.panel2.Controls.Add(this.cameraStatusLabel);
+            this.panel2.Controls.Add(this.cameraButton);
+            this.panel2.Controls.Add(this.DXVKStatusLabel);
             this.panel2.Controls.Add(this.toggleLAAButton);
             this.panel2.Controls.Add(this.checkForErrorsButton);
             this.panel2.Controls.Add(this.gameLAAStatusLabel);
@@ -486,8 +497,74 @@ namespace DoW_Mod_Manager
             this.panel2.Controls.Add(this.dxvkButton);
             this.panel2.Location = new System.Drawing.Point(341, 32);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(245, 133);
+            this.panel2.Size = new System.Drawing.Size(245, 185);
             this.panel2.TabIndex = 29;
+            // 
+            // fontStatusLabel
+            // 
+            this.fontStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.fontStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontStatusLabel.ForeColor = System.Drawing.Color.Gray;
+            this.fontStatusLabel.Location = new System.Drawing.Point(163, 159);
+            this.fontStatusLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.fontStatusLabel.Name = "fontStatusLabel";
+            this.fontStatusLabel.Size = new System.Drawing.Size(65, 20);
+            this.fontStatusLabel.TabIndex = 30;
+            this.fontStatusLabel.Text = "Enabled";
+            // 
+            // fontButton
+            // 
+            this.fontButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.fontButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.fontButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.fontButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.fontButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.fontButton.Location = new System.Drawing.Point(11, 151);
+            this.fontButton.Name = "fontButton";
+            this.fontButton.Size = new System.Drawing.Size(138, 31);
+            this.fontButton.TabIndex = 29;
+            this.fontButton.Text = "Install larger fonts";
+            this.fontButton.UseVisualStyleBackColor = false;
+            this.fontButton.Click += new System.EventHandler(this.FontButton_Click);
+            // 
+            // cameraStatusLabel
+            // 
+            this.cameraStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cameraStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cameraStatusLabel.ForeColor = System.Drawing.Color.Gray;
+            this.cameraStatusLabel.Location = new System.Drawing.Point(163, 122);
+            this.cameraStatusLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.cameraStatusLabel.Name = "cameraStatusLabel";
+            this.cameraStatusLabel.Size = new System.Drawing.Size(65, 20);
+            this.cameraStatusLabel.TabIndex = 28;
+            this.cameraStatusLabel.Text = "Enabled";
+            // 
+            // cameraButton
+            // 
+            this.cameraButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cameraButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.cameraButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cameraButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.cameraButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.cameraButton.Location = new System.Drawing.Point(11, 114);
+            this.cameraButton.Name = "cameraButton";
+            this.cameraButton.Size = new System.Drawing.Size(138, 31);
+            this.cameraButton.TabIndex = 27;
+            this.cameraButton.Text = "Install a better camera";
+            this.cameraButton.UseVisualStyleBackColor = false;
+            this.cameraButton.Click += new System.EventHandler(this.CameraButton_Click);
+            // 
+            // DXVKStatusLabel
+            // 
+            this.DXVKStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.DXVKStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DXVKStatusLabel.ForeColor = System.Drawing.Color.Gray;
+            this.DXVKStatusLabel.Location = new System.Drawing.Point(163, 85);
+            this.DXVKStatusLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.DXVKStatusLabel.Name = "DXVKStatusLabel";
+            this.DXVKStatusLabel.Size = new System.Drawing.Size(65, 15);
+            this.DXVKStatusLabel.TabIndex = 26;
+            this.DXVKStatusLabel.Text = "Enabled";
             // 
             // dxvkButton
             // 
@@ -496,9 +573,9 @@ namespace DoW_Mod_Manager
             this.dxvkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dxvkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.dxvkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.dxvkButton.Location = new System.Drawing.Point(121, 40);
+            this.dxvkButton.Location = new System.Drawing.Point(11, 77);
             this.dxvkButton.Name = "dxvkButton";
-            this.dxvkButton.Size = new System.Drawing.Size(104, 31);
+            this.dxvkButton.Size = new System.Drawing.Size(138, 31);
             this.dxvkButton.TabIndex = 25;
             this.dxvkButton.Text = "Install DXVK";
             this.dxvkButton.UseVisualStyleBackColor = false;
@@ -545,7 +622,7 @@ namespace DoW_Mod_Manager
             this.flowLayoutPanel2.Controls.Add(this.GOGRadioButton);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(592, 32);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(321, 133);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(321, 185);
             this.flowLayoutPanel2.TabIndex = 30;
             // 
             // tableLayoutPanel1
@@ -570,7 +647,7 @@ namespace DoW_Mod_Manager
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.ClientSize = new System.Drawing.Size(925, 578);
+            this.ClientSize = new System.Drawing.Size(925, 614);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel2);
@@ -578,7 +655,7 @@ namespace DoW_Mod_Manager
             this.Controls.Add(this.AboutkLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.authorLabel);
-            this.MinimumSize = new System.Drawing.Size(941, 617);
+            this.MinimumSize = new System.Drawing.Size(941, 653);
             this.Name = "ModManagerForm";
             this.Text = "DoW Mod Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModManagerForm_Closing);
@@ -642,5 +719,10 @@ namespace DoW_Mod_Manager
         private System.Windows.Forms.RadioButton SteamRadioButton;
         private System.Windows.Forms.CheckBox noprecachemodelsCheckBox;
         private System.Windows.Forms.Button dxvkButton;
+        private System.Windows.Forms.Label DXVKStatusLabel;
+        private System.Windows.Forms.Button cameraButton;
+        private System.Windows.Forms.Label cameraStatusLabel;
+        private System.Windows.Forms.Label fontStatusLabel;
+        private System.Windows.Forms.Button fontButton;
     }
 }

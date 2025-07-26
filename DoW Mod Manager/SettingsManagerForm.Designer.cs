@@ -127,6 +127,8 @@
             this.soundQualityLabel = new System.Windows.Forms.Label();
             this.randomizedSoundsCheckBox = new System.Windows.Forms.CheckBox();
             this.randomizedSoundsLabel = new System.Windows.Forms.Label();
+            this.lowMinusGraphicsButton = new System.Windows.Forms.Button();
+            this.ultraPlusGraphicsButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.generalTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scrollRateTrackBar)).BeginInit();
@@ -174,7 +176,7 @@
             this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.closeButton.Location = new System.Drawing.Point(479, 622);
+            this.closeButton.Location = new System.Drawing.Point(526, 622);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(109, 38);
             this.closeButton.TabIndex = 3;
@@ -188,7 +190,7 @@
             this.defaultsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.defaultsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.defaultsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.defaultsButton.Location = new System.Drawing.Point(247, 622);
+            this.defaultsButton.Location = new System.Drawing.Point(270, 622);
             this.defaultsButton.Name = "defaultsButton";
             this.defaultsButton.Size = new System.Drawing.Size(109, 38);
             this.defaultsButton.TabIndex = 1;
@@ -207,7 +209,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 29);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(580, 576);
+            this.tabControl1.Size = new System.Drawing.Size(627, 576);
             this.tabControl1.TabIndex = 5;
             // 
             // generalTabPage
@@ -477,6 +479,8 @@
             // videoTabPage
             // 
             this.videoTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.videoTabPage.Controls.Add(this.ultraPlusGraphicsButton);
+            this.videoTabPage.Controls.Add(this.lowMinusGraphicsButton);
             this.videoTabPage.Controls.Add(this.splitContainer1);
             this.videoTabPage.Controls.Add(this.ultraGraphicsButton);
             this.videoTabPage.Controls.Add(this.highGraphicsButton);
@@ -486,7 +490,7 @@
             this.videoTabPage.Location = new System.Drawing.Point(4, 22);
             this.videoTabPage.Name = "videoTabPage";
             this.videoTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.videoTabPage.Size = new System.Drawing.Size(572, 550);
+            this.videoTabPage.Size = new System.Drawing.Size(619, 550);
             this.videoTabPage.TabIndex = 0;
             this.videoTabPage.Text = "Video";
             // 
@@ -549,8 +553,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.worldEventsLabel);
             this.splitContainer1.Panel2.Controls.Add(this.shadowsDetailComboBox);
             this.splitContainer1.Panel2MinSize = 255;
-            this.splitContainer1.Size = new System.Drawing.Size(576, 469);
-            this.splitContainer1.SplitterDistance = 284;
+            this.splitContainer1.Size = new System.Drawing.Size(623, 469);
+            this.splitContainer1.SplitterDistance = 307;
             this.splitContainer1.TabIndex = 49;
             // 
             // activeVideocardComboBox
@@ -561,7 +565,7 @@
             this.activeVideocardComboBox.FormattingEnabled = true;
             this.activeVideocardComboBox.Location = new System.Drawing.Point(117, 18);
             this.activeVideocardComboBox.Name = "activeVideocardComboBox";
-            this.activeVideocardComboBox.Size = new System.Drawing.Size(143, 21);
+            this.activeVideocardComboBox.Size = new System.Drawing.Size(166, 21);
             this.activeVideocardComboBox.TabIndex = 14;
             // 
             // screenResolutionLabel
@@ -605,7 +609,7 @@
             "800×600"});
             this.screenResolutionComboBox.Location = new System.Drawing.Point(117, 93);
             this.screenResolutionComboBox.Name = "screenResolutionComboBox";
-            this.screenResolutionComboBox.Size = new System.Drawing.Size(143, 21);
+            this.screenResolutionComboBox.Size = new System.Drawing.Size(166, 21);
             this.screenResolutionComboBox.TabIndex = 1;
             // 
             // gammaLabel
@@ -627,7 +631,7 @@
             this.gammaTrackBar.Maximum = 15;
             this.gammaTrackBar.Minimum = 5;
             this.gammaTrackBar.Name = "gammaTrackBar";
-            this.gammaTrackBar.Size = new System.Drawing.Size(143, 45);
+            this.gammaTrackBar.Size = new System.Drawing.Size(166, 45);
             this.gammaTrackBar.TabIndex = 4;
             this.gammaTrackBar.Value = 10;
             // 
@@ -696,7 +700,7 @@
             "59 Hz"});
             this.refreshRateComboBox.Location = new System.Drawing.Point(117, 131);
             this.refreshRateComboBox.Name = "refreshRateComboBox";
-            this.refreshRateComboBox.Size = new System.Drawing.Size(143, 21);
+            this.refreshRateComboBox.Size = new System.Drawing.Size(166, 21);
             this.refreshRateComboBox.TabIndex = 10;
             // 
             // antialiasingLabel
@@ -750,7 +754,7 @@
             "32 bit (TrueColor)"});
             this.colorDepthComboBox.Location = new System.Drawing.Point(117, 169);
             this.colorDepthComboBox.Name = "colorDepthComboBox";
-            this.colorDepthComboBox.Size = new System.Drawing.Size(143, 21);
+            this.colorDepthComboBox.Size = new System.Drawing.Size(166, 21);
             this.colorDepthComboBox.TabIndex = 16;
             // 
             // rendererLabel
@@ -773,7 +777,7 @@
             "Dx9 : Hardware TnL"});
             this.rendererComboBox.Location = new System.Drawing.Point(117, 55);
             this.rendererComboBox.Name = "rendererComboBox";
-            this.rendererComboBox.Size = new System.Drawing.Size(143, 21);
+            this.rendererComboBox.Size = new System.Drawing.Size(166, 21);
             this.rendererComboBox.TabIndex = 18;
             // 
             // textureDetailLabel
@@ -798,7 +802,7 @@
             "High"});
             this.textureDetailComboBox.Location = new System.Drawing.Point(117, 354);
             this.textureDetailComboBox.Name = "textureDetailComboBox";
-            this.textureDetailComboBox.Size = new System.Drawing.Size(143, 21);
+            this.textureDetailComboBox.Size = new System.Drawing.Size(166, 21);
             this.textureDetailComboBox.TabIndex = 20;
             // 
             // modelDetailLabel
@@ -823,7 +827,7 @@
             "High"});
             this.modelDetailComboBox.Location = new System.Drawing.Point(117, 393);
             this.modelDetailComboBox.Name = "modelDetailComboBox";
-            this.modelDetailComboBox.Size = new System.Drawing.Size(143, 21);
+            this.modelDetailComboBox.Size = new System.Drawing.Size(166, 21);
             this.modelDetailComboBox.TabIndex = 22;
             // 
             // terrainDetailLabel
@@ -848,7 +852,7 @@
             "High"});
             this.terrainDetailComboBox.Location = new System.Drawing.Point(117, 433);
             this.terrainDetailComboBox.Name = "terrainDetailComboBox";
-            this.terrainDetailComboBox.Size = new System.Drawing.Size(143, 21);
+            this.terrainDetailComboBox.Size = new System.Drawing.Size(166, 21);
             this.terrainDetailComboBox.TabIndex = 24;
             // 
             // allowHDCursorLabel
@@ -857,9 +861,9 @@
             this.allowHDCursorLabel.ForeColor = System.Drawing.Color.Cyan;
             this.allowHDCursorLabel.Location = new System.Drawing.Point(17, 354);
             this.allowHDCursorLabel.Name = "allowHDCursorLabel";
-            this.allowHDCursorLabel.Size = new System.Drawing.Size(87, 13);
+            this.allowHDCursorLabel.Size = new System.Drawing.Size(88, 13);
             this.allowHDCursorLabel.TabIndex = 45;
-            this.allowHDCursorLabel.Text = "DirectX 8 Cursor:";
+            this.allowHDCursorLabel.Text = "Hardware cursor:";
             // 
             // hwCursorCheckBox
             // 
@@ -875,7 +879,7 @@
             // 
             this.hdTexWarningLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.hdTexWarningLabel.ForeColor = System.Drawing.Color.Orange;
-            this.hdTexWarningLabel.Location = new System.Drawing.Point(132, 7);
+            this.hdTexWarningLabel.Location = new System.Drawing.Point(156, 7);
             this.hdTexWarningLabel.Name = "hdTexWarningLabel";
             this.hdTexWarningLabel.Size = new System.Drawing.Size(150, 40);
             this.hdTexWarningLabel.TabIndex = 43;
@@ -914,7 +918,7 @@
             "High"});
             this.persistentBodiesComboBox.Location = new System.Drawing.Point(115, 169);
             this.persistentBodiesComboBox.Name = "persistentBodiesComboBox";
-            this.persistentBodiesComboBox.Size = new System.Drawing.Size(135, 21);
+            this.persistentBodiesComboBox.Size = new System.Drawing.Size(159, 21);
             this.persistentBodiesComboBox.TabIndex = 26;
             // 
             // unitsOcclusionLabel
@@ -958,7 +962,7 @@
             "High"});
             this.dynamicLightsComboBox.Location = new System.Drawing.Point(115, 245);
             this.dynamicLightsComboBox.Name = "dynamicLightsComboBox";
-            this.dynamicLightsComboBox.Size = new System.Drawing.Size(135, 21);
+            this.dynamicLightsComboBox.Size = new System.Drawing.Size(159, 21);
             this.dynamicLightsComboBox.TabIndex = 42;
             // 
             // persistentScarringLabel
@@ -993,7 +997,7 @@
             "High"});
             this.persistentScarringComboBox.Location = new System.Drawing.Point(115, 207);
             this.persistentScarringComboBox.Name = "persistentScarringComboBox";
-            this.persistentScarringComboBox.Size = new System.Drawing.Size(135, 21);
+            this.persistentScarringComboBox.Size = new System.Drawing.Size(159, 21);
             this.persistentScarringComboBox.TabIndex = 32;
             // 
             // effectsDetailComboBox
@@ -1008,7 +1012,7 @@
             "High"});
             this.effectsDetailComboBox.Location = new System.Drawing.Point(115, 131);
             this.effectsDetailComboBox.Name = "effectsDetailComboBox";
-            this.effectsDetailComboBox.Size = new System.Drawing.Size(135, 21);
+            this.effectsDetailComboBox.Size = new System.Drawing.Size(159, 21);
             this.effectsDetailComboBox.TabIndex = 40;
             // 
             // full3DCameraLabel
@@ -1052,7 +1056,7 @@
             "High"});
             this.worldEventsComboBox.Location = new System.Drawing.Point(115, 93);
             this.worldEventsComboBox.Name = "worldEventsComboBox";
-            this.worldEventsComboBox.Size = new System.Drawing.Size(135, 21);
+            this.worldEventsComboBox.Size = new System.Drawing.Size(159, 21);
             this.worldEventsComboBox.TabIndex = 38;
             // 
             // shadowsLabel
@@ -1088,7 +1092,7 @@
             "High (Blob + Map + Volume)"});
             this.shadowsDetailComboBox.Location = new System.Drawing.Point(115, 55);
             this.shadowsDetailComboBox.Name = "shadowsDetailComboBox";
-            this.shadowsDetailComboBox.Size = new System.Drawing.Size(135, 21);
+            this.shadowsDetailComboBox.Size = new System.Drawing.Size(159, 21);
             this.shadowsDetailComboBox.TabIndex = 36;
             // 
             // ultraGraphicsButton
@@ -1097,7 +1101,7 @@
             this.ultraGraphicsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ultraGraphicsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ultraGraphicsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.ultraGraphicsButton.Location = new System.Drawing.Point(423, 486);
+            this.ultraGraphicsButton.Location = new System.Drawing.Point(415, 486);
             this.ultraGraphicsButton.Name = "ultraGraphicsButton";
             this.ultraGraphicsButton.Size = new System.Drawing.Size(94, 38);
             this.ultraGraphicsButton.TabIndex = 48;
@@ -1111,7 +1115,7 @@
             this.highGraphicsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.highGraphicsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.highGraphicsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.highGraphicsButton.Location = new System.Drawing.Point(302, 486);
+            this.highGraphicsButton.Location = new System.Drawing.Point(315, 486);
             this.highGraphicsButton.Name = "highGraphicsButton";
             this.highGraphicsButton.Size = new System.Drawing.Size(94, 38);
             this.highGraphicsButton.TabIndex = 47;
@@ -1125,7 +1129,7 @@
             this.mediumGraphicsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.mediumGraphicsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mediumGraphicsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.mediumGraphicsButton.Location = new System.Drawing.Point(180, 486);
+            this.mediumGraphicsButton.Location = new System.Drawing.Point(215, 486);
             this.mediumGraphicsButton.Name = "mediumGraphicsButton";
             this.mediumGraphicsButton.Size = new System.Drawing.Size(94, 38);
             this.mediumGraphicsButton.TabIndex = 46;
@@ -1139,7 +1143,7 @@
             this.lowGraphicsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lowGraphicsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lowGraphicsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.lowGraphicsButton.Location = new System.Drawing.Point(58, 486);
+            this.lowGraphicsButton.Location = new System.Drawing.Point(115, 486);
             this.lowGraphicsButton.Name = "lowGraphicsButton";
             this.lowGraphicsButton.Size = new System.Drawing.Size(94, 38);
             this.lowGraphicsButton.TabIndex = 6;
@@ -1152,7 +1156,7 @@
             this.cyanLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cyanLabel.AutoSize = true;
             this.cyanLabel.ForeColor = System.Drawing.Color.Cyan;
-            this.cyanLabel.Location = new System.Drawing.Point(346, 534);
+            this.cyanLabel.Location = new System.Drawing.Point(393, 534);
             this.cyanLabel.Name = "cyanLabel";
             this.cyanLabel.Size = new System.Drawing.Size(224, 13);
             this.cyanLabel.TabIndex = 45;
@@ -1421,18 +1425,46 @@
             this.randomizedSoundsLabel.TabIndex = 35;
             this.randomizedSoundsLabel.Text = "Randomizes Sounds:";
             // 
+            // lowMinusGraphicsButton
+            // 
+            this.lowMinusGraphicsButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lowMinusGraphicsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lowMinusGraphicsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lowMinusGraphicsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.lowMinusGraphicsButton.Location = new System.Drawing.Point(13, 486);
+            this.lowMinusGraphicsButton.Name = "lowMinusGraphicsButton";
+            this.lowMinusGraphicsButton.Size = new System.Drawing.Size(94, 38);
+            this.lowMinusGraphicsButton.TabIndex = 50;
+            this.lowMinusGraphicsButton.Text = "LOW-";
+            this.lowMinusGraphicsButton.UseVisualStyleBackColor = false;
+            this.lowMinusGraphicsButton.Click += new System.EventHandler(this.LowMinusGraphicsButton_Click);
+            // 
+            // ultraPlusGraphicsButton
+            // 
+            this.ultraPlusGraphicsButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.ultraPlusGraphicsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.ultraPlusGraphicsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ultraPlusGraphicsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.ultraPlusGraphicsButton.Location = new System.Drawing.Point(515, 486);
+            this.ultraPlusGraphicsButton.Name = "ultraPlusGraphicsButton";
+            this.ultraPlusGraphicsButton.Size = new System.Drawing.Size(94, 38);
+            this.ultraPlusGraphicsButton.TabIndex = 51;
+            this.ultraPlusGraphicsButton.Text = "ULTRA+";
+            this.ultraPlusGraphicsButton.UseVisualStyleBackColor = false;
+            this.ultraPlusGraphicsButton.Click += new System.EventHandler(this.UltraPlusGraphicsButton_Click);
+            // 
             // SettingsManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.ClientSize = new System.Drawing.Size(604, 672);
+            this.ClientSize = new System.Drawing.Size(651, 672);
             this.Controls.Add(this.settingsLabel);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.defaultsButton);
             this.Controls.Add(this.closeButton);
-            this.MinimumSize = new System.Drawing.Size(620, 711);
+            this.MinimumSize = new System.Drawing.Size(667, 711);
             this.Name = "SettingsManagerForm";
             this.Text = "Settings Manager";
             this.tabControl1.ResumeLayout(false);
@@ -1560,5 +1592,7 @@
         private System.Windows.Forms.Label allowHDCursorLabel;
         private System.Windows.Forms.CheckBox hwCursorCheckBox;
         private System.Windows.Forms.Button fontsManagerButton;
+        private System.Windows.Forms.Button ultraPlusGraphicsButton;
+        private System.Windows.Forms.Button lowMinusGraphicsButton;
     }
 }

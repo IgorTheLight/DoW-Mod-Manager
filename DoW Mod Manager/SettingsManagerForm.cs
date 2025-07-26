@@ -90,6 +90,10 @@ namespace DoW_Mod_Manager
         bool enableHighPoly = false;
         bool disableHighPoly = false;
 
+        // Those two settings could indicate that we need to modify DoW start options
+        bool enableNoPreCacheModels = false;
+        bool disableNoPreCacheModels = false;
+
         // Not the same settings as in ModManagerForm!
         Dictionary<string, string> settings;
 
@@ -109,7 +113,7 @@ namespace DoW_Mod_Manager
             Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
 
             // You could change PROFILES_PATH only in constructor because it's readonly
-            PROFILES_PATH = modManager.CurrentDir + "\\Profiles";
+            PROFILES_PATH = Path.Combine(modManager.CurrentDir,"Profiles");
 
             InitializeSettingsWithDefaults();
 
@@ -882,6 +886,17 @@ namespace DoW_Mod_Manager
                 disableHighPoly = false;
             }
 
+            if (enableNoPreCacheModels)
+            {
+                modManager.ChangeSetting(ModManagerForm.NO_PRECACHE_MODELS, 1);
+                enableNoPreCacheModels = false;
+            }
+            else if (disableNoPreCacheModels)
+            {
+                modManager.ChangeSetting(ModManagerForm.NO_PRECACHE_MODELS, 0);
+                disableNoPreCacheModels = false;
+            }
+
             void SearchForThatString(ref string[] strArray)
             {
                 bool weFoundIt = false;
@@ -1474,6 +1489,38 @@ namespace DoW_Mod_Manager
         }
 
         /// <summary>
+        /// This method sets the graphics to "Low-" preset
+        /// </summary>
+        private void LowMinusGraphicsButton_Click(object sender, EventArgs e)
+        {
+            settings[CAMERA_DETAIL] = "0";
+            settings[DYNAMIC_LIGHTS] = "0";
+            settings[EVENT_DETAIL_LEVEL] = "0";
+            settings[FULLRES_TEAMCOLOUR] = "0";
+            settings[FX_DETAIL_LEVEL] = "0";
+            settings[MODEL_DETAIL] = "0";
+            settings[PERSISTENT_BODIES] = "0";
+            settings[PERSISTENT_DECALS] = "0";
+            settings[SCREEN_ANIALIAS] = "0";
+            settings[SCREEN_DEPTH] = "16";
+            settings[SHADOW_BLOB] = "0";
+            settings[SHADOW_MAP] = "0";
+            settings[SHADOW_VOLUME] = "0";
+            settings[TERRAIN_ENABLE_FOW_BLUR] = "0";
+            settings[TEXTURE_DETAIL] = "0";
+
+            disableHighPoly = true;
+            enableNoPreCacheModels = true;
+
+            InitializeGUIWithSettings(localINI: true, playercfgLUA: false);
+
+            closeButton.Text = CANCEL_LABEL;
+            saveButton.Enabled = true;
+            saveButton.Focus();
+            defaultsButton.Enabled = true;
+        }
+
+        /// <summary>
         /// This method sets the graphics to "Low" preset
         /// </summary>
         void LowGraphicsButton_Click(object sender, EventArgs e)
@@ -1495,6 +1542,7 @@ namespace DoW_Mod_Manager
             settings[TEXTURE_DETAIL] = "0";
 
             disableHighPoly = true;
+            disableNoPreCacheModels = true;
 
             InitializeGUIWithSettings(localINI: true, playercfgLUA: false);
 
@@ -1525,6 +1573,9 @@ namespace DoW_Mod_Manager
             settings[TERRAIN_ENABLE_FOW_BLUR] = "1";
             settings[TEXTURE_DETAIL] = "1";
 
+            disableHighPoly = true;
+            disableNoPreCacheModels = true;
+
             InitializeGUIWithSettings(localINI: true, playercfgLUA: false);
 
             closeButton.Text = CANCEL_LABEL;
@@ -1554,6 +1605,9 @@ namespace DoW_Mod_Manager
             settings[TERRAIN_ENABLE_FOW_BLUR] = "2";
             settings[TEXTURE_DETAIL] = "2";
 
+            disableHighPoly = true;
+            disableNoPreCacheModels = true;
+
             InitializeGUIWithSettings(localINI: true, playercfgLUA: false);
 
             closeButton.Text = CANCEL_LABEL;
@@ -1566,6 +1620,38 @@ namespace DoW_Mod_Manager
         /// This method sets the graphics to "Ultra" preset
         /// </summary>
         void UltraGraphicsButton_Click(object sender, EventArgs e)
+        {
+            settings[CAMERA_DETAIL] = "1";
+            settings[DYNAMIC_LIGHTS] = "3";
+            settings[EVENT_DETAIL_LEVEL] = "2";
+            settings[FULLRES_TEAMCOLOUR] = "0";
+            settings[FX_DETAIL_LEVEL] = "2";
+            settings[MODEL_DETAIL] = "2";
+            settings[PERSISTENT_BODIES] = "3";
+            settings[PERSISTENT_DECALS] = "2";
+            settings[SCREEN_ANIALIAS] = "0";
+            settings[SCREEN_DEPTH] = "32";
+            settings[SHADOW_BLOB] = "1";
+            settings[SHADOW_MAP] = "1";
+            settings[SHADOW_VOLUME] = "1";
+            settings[TERRAIN_ENABLE_FOW_BLUR] = "2";
+            settings[TEXTURE_DETAIL] = "2";
+
+            disableHighPoly = true;
+            disableNoPreCacheModels = true;
+
+            InitializeGUIWithSettings(localINI: true, playercfgLUA: false);
+
+            closeButton.Text = CANCEL_LABEL;
+            saveButton.Enabled = true;
+            saveButton.Focus();
+            defaultsButton.Enabled = true;
+        }
+
+        /// <summary>
+        /// This method sets the graphics to "Ultra+" preset
+        /// </summary>
+        private void UltraPlusGraphicsButton_Click(object sender, EventArgs e)
         {
             settings[CAMERA_DETAIL] = "1";
             settings[DYNAMIC_LIGHTS] = "3";
@@ -1584,6 +1670,7 @@ namespace DoW_Mod_Manager
             settings[TEXTURE_DETAIL] = "2";
 
             enableHighPoly = true;
+            disableNoPreCacheModels = true;
 
             InitializeGUIWithSettings(localINI: true, playercfgLUA: false);
 

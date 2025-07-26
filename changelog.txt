@@ -1,9 +1,22 @@
 # CHANGELOG
 
 Who did what:
-Fragjacker (original author) - up to 1.5.2,  then 1.6.1,  2.0.3,  2.0.5,  2.1.2,  2.1.4,  2.1.5,  2.1.7,  2.1.9,,  2.2.2,  2.3.1.0
-IgorTheLight (current main maintainer) - 1.5.3 to 1.6,  1.7 to 2.0.3,  2.0.4,  2.1.0,  2.1.1,  2.1.3,  2.1.6,  2.1.8,  2.2.0,  2.2.1,  2.3.0.0, 2.3.2.0, 2.4.0.0, 2.4.1.0, 2.4.1.1, 2.4.2.0, 2.5.0.0, 2.5.1.0, 2.5.1.1, 2.5.2.0
+Fragjacker (original author) - up to 1.5.2, 1.6.1, 2.0.3, 2.0.5, 2.1.2, 2.1.4, 2.1.5, 2.1.7, 2.1.9, 2.2.2, 2.3.1.0
+IgorTheLight (current main maintainer) - 1.5.3 to 1.6, 1.7 to 2.0.3, 2.0.4, 2.1.0, 2.1.1, 2.1.3, 2.1.6, 2.1.8, 2.2.0, 2.2.1, 2.3.0.0, 2.3.2.0, 2.4.0.0, 2.4.1.0, 2.4.1.1, 2.4.2.0, 2.5.0.0, 2.5.1.0, 2.5.1.1, 2.5.2.0, 2.6.0.0
 BlueAmulet - 2.1.7
+
+## Version 2.6.0.0
+
+- Added: Kekoulis to "About and Updates" -> "Special Thanks" for all the support!
+- Added: an indicator to show is your DXVK is installed/enabled or not
+- Added: an one click installer for better camera (totally new feature!) and an indicator for it
+- Added: an one click installer for bigger font (it was listed as a mod before) and the indicator for it
+- Added: a new graphical setting - "Ultra+" which is basically old "Ultra". New "Ultra" is a "real" Ultra from Dawn of War (without any hidden settings applied).
+In other words, "Ultra" = "Ultra" in game, "Ultra+" = "Ultra" in game + hidden features like "High resolution textures", "-forcehighpoly" enabled, Antialiasing, "-noprecachemodels" disabled
+- Added: a new graphical setting - "Low-" which is basically original "Low" with "-noprecachemodels" enabled
+- Renamed: "Toggle LAA" button to "Toggle 4Gb RAM patch" so more people could understand what it actually do xD
+- Renamed: "DirectX 8 Cursor" to "Hardware cursor" so more people could understand what it actually do xD
+- Changed: main UI a little bit so new buttons would look more coherent
 
 ## Version 2.5.2.0
 

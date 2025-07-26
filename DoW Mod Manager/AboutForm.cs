@@ -71,6 +71,11 @@ namespace DoW_Mod_Manager
             Process.Start("https://github.com/zayenCh/DownloadFile");
         }
 
+        void SpecialThanks5LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.moddb.com/members/kekoulis");
+        }
+
         void AutoupdateCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (autoupdateCheckBox.Checked)

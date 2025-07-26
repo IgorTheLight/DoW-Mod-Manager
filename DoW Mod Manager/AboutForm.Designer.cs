@@ -63,6 +63,8 @@
             this.GUILibraryAnswerLabel = new System.Windows.Forms.Label();
             this.frameworkLabel = new System.Windows.Forms.Label();
             this.frameworkAnswerLabel = new System.Windows.Forms.Label();
+            this.specialThanks5Label = new System.Windows.Forms.Label();
+            this.specialThanks5LinkLabel = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.aboutTabPage.SuspendLayout();
@@ -102,9 +104,9 @@
             this.author1Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.author1Label.Location = new System.Drawing.Point(22, 17);
             this.author1Label.Name = "author1Label";
-            this.author1Label.Size = new System.Drawing.Size(135, 13);
+            this.author1Label.Size = new System.Drawing.Size(152, 13);
             this.author1Label.TabIndex = 4;
-            this.author1Label.Text = "FragJacker - original author";
+            this.author1Label.Text = "FragJacker - original developer";
             // 
             // homePageButton
             // 
@@ -140,9 +142,9 @@
             this.author2Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.author2Label.Location = new System.Drawing.Point(22, 39);
             this.author2Label.Name = "author2Label";
-            this.author2Label.Size = new System.Drawing.Size(185, 13);
+            this.author2Label.Size = new System.Drawing.Size(184, 13);
             this.author2Label.TabIndex = 7;
-            this.author2Label.Text = "IgorTheLight - current main maintainer";
+            this.author2Label.Text = "IgorTheLight - current main developer";
             // 
             // specialThanks2Label
             // 
@@ -349,6 +351,8 @@
             // specialThanksTabPage
             // 
             this.specialThanksTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.specialThanksTabPage.Controls.Add(this.specialThanks5LinkLabel);
+            this.specialThanksTabPage.Controls.Add(this.specialThanks5Label);
             this.specialThanksTabPage.Controls.Add(this.specialThanks4Label);
             this.specialThanksTabPage.Controls.Add(this.specialThanks1Label);
             this.specialThanksTabPage.Controls.Add(this.specialThanks3LinkLabel);
@@ -482,6 +486,28 @@
             this.frameworkAnswerLabel.TabIndex = 16;
             this.frameworkAnswerLabel.Text = ".NET Framwork 4.8";
             // 
+            // specialThanks5Label
+            // 
+            this.specialThanks5Label.AutoSize = true;
+            this.specialThanks5Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.specialThanks5Label.Location = new System.Drawing.Point(18, 100);
+            this.specialThanks5Label.Name = "specialThanks5Label";
+            this.specialThanks5Label.Size = new System.Drawing.Size(158, 13);
+            this.specialThanks5Label.TabIndex = 18;
+            this.specialThanks5Label.Text = "Kekoulis -for continuous support";
+            // 
+            // specialThanks5LinkLabel
+            // 
+            this.specialThanks5LinkLabel.AutoSize = true;
+            this.specialThanks5LinkLabel.LinkColor = System.Drawing.Color.DodgerBlue;
+            this.specialThanks5LinkLabel.Location = new System.Drawing.Point(247, 100);
+            this.specialThanks5LinkLabel.Name = "specialThanks5LinkLabel";
+            this.specialThanks5LinkLabel.Size = new System.Drawing.Size(60, 13);
+            this.specialThanks5LinkLabel.TabIndex = 19;
+            this.specialThanks5LinkLabel.TabStop = true;
+            this.specialThanks5LinkLabel.Text = "home page";
+            this.specialThanks5LinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SpecialThanks5LinkLabel_LinkClicked);
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -552,5 +578,7 @@
         private System.Windows.Forms.RadioButton multithreadedJITCompilationRadioButton;
         private System.Windows.Forms.RadioButton singlethreadedJITCompilationRadioButton;
         private System.Windows.Forms.CheckBox DXVKUpdateCheckBox;
+        private System.Windows.Forms.Label specialThanks5Label;
+        private System.Windows.Forms.LinkLabel specialThanks5LinkLabel;
     }
 }
