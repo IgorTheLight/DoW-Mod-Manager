@@ -59,7 +59,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 2.6.0.2
+    <value>## Version 2.6.0.3
+
+- Fixed: a bug that prevents removing larger fonts if they were recently installed
+- Fixed: an annoyance where "Install a better camera" could be cropped on dispays with 125% scaling (very common thing on 15.6' laptops)
+
+## Version 2.6.0.2
 
 - A few additional bugs were burned
 
@@ -79,27 +84,6 @@ In other words, "Ultra" = "Ultra" in game, "Ultra+" = "Ultra" in game + hidden f
 - Renamed: "Toggle LAA" button to "Toggle 4Gb RAM patch" so more people could understand what it actually do xD
 - Renamed: "DirectX 8 Cursor" to "Hardware cursor" so more people could understand what it actually do xD
 - Changed: main UI a little bit so new buttons would look more coherent
-
-## Version 2.5.2.0
-
-- Removed: ability to LAA patch GraphicsConfig.exe Reason: it literally does nothing in terns of performance (I tested that). So now LAA pathing would be twice faster without any downsides!
-- Refactored: method GetMods() to be more clean, faster and more readable at the same time!
-
-## Version 2.5.1.1
-
-- Fixed: DXVK download error on Windows 7
-
-## Version 2.5.1.0
-
-- Added: ability to disable DXVK Autoupdate cheking (helps when an user don't have an Internet access)
-- Fixed: DoW Mod Manager could close if there is a problem with DXVK autoupdate check
-- Refactored: some code that doublechecked "noprecachemodels" CheckBox at startup
-
-## Version 2.5.0.0
-
-- Added: DXVK support. Now users could install, update and remove the latest working version of DXVK just by clicking one button!
-- Fixed: ThemedDialogBox didn't resize properly so modlist and application changelogs were cropped on the right side
-- Refactored: static class DownloadHelper was refactored for less code duplication
 
 Full changelog: 
 https://raw.githubusercontent.com/Fragjacker/DoW-Mod-Manager/master/changelog.txt</value>

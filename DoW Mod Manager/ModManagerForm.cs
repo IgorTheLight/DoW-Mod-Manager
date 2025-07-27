@@ -1587,7 +1587,7 @@ namespace DoW_Mod_Manager
                 finally
                 {
                     client.Dispose();
-                    cameraButton.Enabled = true;
+                    fontButton.Enabled = true;
                 }
             }
         }
