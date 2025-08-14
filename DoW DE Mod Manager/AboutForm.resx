@@ -59,7 +59,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Changelog compared to DoW Mod Manager 2.6.0.3:
+    <value>## Version 1.0.0.1
+
+- Fixed: a problem with downloading... anything! Updates, mods, DXVK
+
+## Changelog compared to DoW Mod Manager 2.6.0.3:
 
 - Removed: abilty to add better camera because DE already has a pretty good one
 - Removed: abilty to add bigger fonts because DE already has a pretty big ones

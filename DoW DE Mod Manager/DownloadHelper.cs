@@ -49,8 +49,8 @@ namespace DoW_DE_Nod_Manager
         static bool closeAndDelete;
 
         static readonly UpdateInfo ExeUpdateInfo = new UpdateInfo(
-            versionUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/DE/DoW%20Mod%20Manager/LatestStable/version",
-            changelogUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/DE/DoW%20Mod%20Manager/LatestStable/latestchangelog",
+            versionUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/LatestStable/version",
+            changelogUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/LatestStable/latestchangelog",
             parseVersion: s => new Version(s),
             isNewerThanCurrent: latest => Assembly.GetExecutingAssembly().GetName().Version < latest,
             noDataMessage: "There is no data in \"version\" file on GitHub!",
@@ -62,8 +62,8 @@ namespace DoW_DE_Nod_Manager
         );
 
         private static readonly UpdateInfo ModlistUpdateInfo = new UpdateInfo(
-            versionUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/DE/DoW%20Mod%20Manager/ModList/version",
-            changelogUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/DE/DoW%20Mod%20Manager/ModList/latestchangelog",
+            versionUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/ModList/version",
+            changelogUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/ModList/latestchangelog",
             parseVersion: s =>
             {
                 // strip dots, parse int, wrap in Version for easy compare

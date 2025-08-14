@@ -39,7 +39,7 @@ namespace DoW_DE_Nod_Manager
         const string JIT_PROFILE_FILE_NAME = "DoW Mod Manager.JITProfile";
         const string WARNINGS_LOG = "warnings.log";
 
-        const string DXVK_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/DE/DoW%20Mod%20Manager/DXVK/";
+        const string DXVK_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/DXVK/";
 
         // This is a State Machine which determines what action must be performed
         public enum Action { None, CreateNativeImage, CreateNativeImageAndDeleteJITProfile, DeleteJITProfile, DeleteNativeImage, DeleteJITProfileAndNativeImage }
