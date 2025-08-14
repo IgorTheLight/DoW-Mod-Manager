@@ -1,26 +1,18 @@
 ![image](https://user-images.githubusercontent.com/19975052/147577379-4ab095f3-e91a-42f2-8cae-fbbb50658130.png)
 
-# DoW Mod Manager v2.6.0.3
+# DoW DE Mod Manager v1.0.0.0
 
 This application allows for an easy launch of mods and management of large collections of mods for Warhammer 40K Dawn of War series.
 
 ## INSTALLATION:
 
-- In order to install the Mod Manager drop the "DoW Mod Manager v2.6.0.3.exe" into your primary game directory which is either:
-
-  - "..\Dawn of War - Soulstorm\"
-  or
-  - "..\Dawn of War - Dark Crusade\"
-  or
-  - "..\Dawn of War - Winter Assault\"
-  or even
-  - "..\Dawn of War - Gold\"
+- In order to install the Mod Manager drop the "DoW DE Mod Manager v1.0.0.0.exe" into your primary game directory
 
   DO NOT put executable file into a subfolder or it won't work!
 
 ## MOD MANAGER USAGE:
 
-1. Once everything is in place launch the "DoW Mod Manager v2.X.X.X.exe" by double-clicking on it (You may want to create a shortcut of the Mod Manager on your Desktop for convenience and faster access)
+1. Once everything is in place launch the "DoW DE Mod Manager v1.X.X.X.exe" by double-clicking on it (You may want to create a shortcut of the Mod Manager on your Desktop for convenience and faster access)
 
 2. Select a Mod from the left listing and it will show if all necessary dependency Mods are installed and if that is given, lets you directly launch the desired Mod
 
