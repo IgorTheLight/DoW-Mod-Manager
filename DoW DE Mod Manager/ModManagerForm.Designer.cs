@@ -1,3 +1,5 @@
+using System;
+
 namespace DoW_DE_Nod_Manager
 {
     partial class ModManagerForm
@@ -551,6 +553,7 @@ namespace DoW_DE_Nod_Manager
             this.SoulstormButton.TabIndex = 6;
             this.SoulstormButton.Text = "Browse";
             this.SoulstormButton.UseVisualStyleBackColor = false;
+            this.SoulstormButton.Click += new System.EventHandler(this.SoulstormButton_Click);
             // 
             // ModManagerForm
             // 

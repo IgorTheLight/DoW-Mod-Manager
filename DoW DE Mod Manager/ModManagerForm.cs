@@ -35,8 +35,8 @@ namespace DoW_DE_Nod_Manager
     public partial class ModManagerForm : Form
     {
         const string GAME_EXECUTABLE_NAME = "W40k.exe";
-        const string CONFIG_FILE_NAME = "DoW Mod Manager.ini";
-        const string JIT_PROFILE_FILE_NAME = "DoW Mod Manager.JITProfile";
+        const string CONFIG_FILE_NAME = "DoW DE Mod Manager.ini";
+        const string JIT_PROFILE_FILE_NAME = "DoW DE Mod Manager.JITProfile";
         const string WARNINGS_LOG = "warnings.log";
 
         const string DXVK_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/DXVK/";
@@ -81,7 +81,7 @@ namespace DoW_DE_Nod_Manager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "<Pending>")]
         Dictionary<string, string> settings = new Dictionary<string, string>
         {
-            [ACTION_STATE] = Action.CreateNativeImage.ToString(),
+            [ACTION_STATE] = "1",   // Action.CreateNativeImage
             [CHOICE_INDEX] = "0",
             [DEV] = "0",
             [NO_MOVIES] = "1",
@@ -126,21 +126,21 @@ namespace DoW_DE_Nod_Manager
                 case "2":
                     CreateNativeImage();
                     DeleteJITProfile();
-                    settings[ACTION_STATE] = Action.CreateNativeImage.ToString();
+                    settings[ACTION_STATE] = "1";   // Action.CreateNativeImage
                     break;
                 case "3":
                     if (settings[MULTITHREADED_JIT] == "0")
                         DeleteJITProfile();
-                    settings[ACTION_STATE] = Action.None.ToString();
+                    settings[ACTION_STATE] = "0";
                     break;
                 case "4":
                     DeleteNativeImage();
-                    settings[ACTION_STATE] = Action.None.ToString();
+                    settings[ACTION_STATE] = "0";
                     break;
                 case "5":
                     DeleteJITProfile();
                     DeleteNativeImage();
-                    settings[ACTION_STATE] = Action.None.ToString();
+                    settings[ACTION_STATE] = "0";
                     break;
             }
 
@@ -186,7 +186,6 @@ namespace DoW_DE_Nod_Manager
             nomoviesCheckBox.CheckedChanged += new EventHandler(NomoviesCheckBox_CheckedChanged);
             noFogCheckbox.CheckedChanged += new EventHandler(NoFogCheckboxCheckedChanged);
             noprecachemodelsCheckBox.CheckedChanged += new EventHandler(NoprecachemodelsCheckBox_CheckedChanged);
-            SoulstormButton.Click += new EventHandler(SoulstormButton_Click);
 
             // Check for an update
             if (settings[AUTOUPDATE] == "1")
@@ -422,16 +421,34 @@ namespace DoW_DE_Nod_Manager
             AllFoundModules = new List<string>();
             AllValidModules = new List<ModuleEntry>();
 
-            string[] mfp1 = Directory.GetFiles(CurrentDir, "*.module");
-            string modsDir = Path.Combine(SettingsDir, "Mods");
+            string[] mfp1;
+            try
+            {
+                mfp1 = Directory.GetFiles(CurrentDir, "*.module");
+            }
+            catch (Exception)
+            {
+                mfp1 = new string[0];
+                ThemedMessageBox.Show("There is a problem occured tryuing\n to find all *.module files!", "Warning:");
+            }
+
+            string modsDir = Path.Combine(SettingsDir, "MODS");
 
             if (!Directory.Exists(modsDir))
                 Directory.CreateDirectory(modsDir);
 
-            string[] mfp2 = Directory.GetFiles(modsDir, "*.module");
+            string[] mfp2;
+            try
+            {
+                mfp2 = Directory.GetFiles(modsDir, "*.module");
+            }
+            catch (Exception)
+            {
+                mfp2 = new string[0];
+                ThemedMessageBox.Show("There is a problem occured tryuing\n to find all *.module files!", "Warning:");
+            }
 
             string[] mfp3;
-
             try
             {
                 mfp3 = Directory.GetFiles(settings[SOULSTORM_DIR], "*.module");
@@ -480,7 +497,7 @@ namespace DoW_DE_Nod_Manager
                         while ((line = file.ReadLine()) != null)
                         {
                             // Winter Assault or Original doesn't have a "Playable" state
-                            if (line.Contains("Playable = 1") || isOldGame || fileName.Contains("W40k") || fileName.Contains("WXP") || fileName.Contains("DXP2") || fileName.Contains("DXP3"))
+                            if (line.Contains("Playable = 1") || isOldGame || fileName == "W40k" || fileName == "WXP" || fileName == "DXP2" || fileName == "DXP3")
                                 isPlayable = true;
 
                             // Add information about the home mod folder of a mod

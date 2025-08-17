@@ -7,7 +7,7 @@
     <ProjectGuid>{071DFF9E-1A7F-4F94-A1CE-4B5CB931D8EE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>DoW_DE_Mod_Manager</RootNamespace>
-    <AssemblyName>DoW DE Mod Manager v1.0.0.1</AssemblyName>
+    <AssemblyName>DoW DE Mod Manager v1.0.0.2</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -18,7 +18,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>

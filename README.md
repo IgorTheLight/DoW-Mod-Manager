@@ -1,12 +1,12 @@
 ![image](https://user-images.githubusercontent.com/19975052/147577379-4ab095f3-e91a-42f2-8cae-fbbb50658130.png)
 
-# DoW DE Mod Manager v1.0.0.1
+# DoW DE Mod Manager v1.0.0.2
 
 This application allows for an easy launch of mods and management of large collections of mods for Warhammer 40K Dawn of War series.
 
 ## INSTALLATION:
 
-- In order to install the Mod Manager drop the "DoW DE Mod Manager v1.0.0.1.exe" into your primary game directory
+- In order to install the Mod Manager drop the "DoW DE Mod Manager v1.0.0.2.exe" into your primary game directory
 
   DO NOT put executable file into a subfolder or it won't work!
 
@@ -20,8 +20,10 @@ This application allows for an easy launch of mods and management of large colle
 
 ## MOD MANAGER FEATURE EXPLANATION:
 
-- **Install location**: Shows the current location of the active Mod Manager executable. You can have multiple Soulstorm installations with their own Mod Manager
-(Simply repeat the installation process inside the new Soulstorm install location)
+- **Yopur current DE directory**: Shows the current location of the active Mod Manager executable. You can have multiple DE installations with their own Mod Manager
+(Simply repeat the installation process inside the new DE install location)
+
+- **Your Soustorm directory**: Shows the directory where Soulstorm is installed. That is needed if you want to load mods right from Soulstorm directory instead of moving them to DE directory
 
 - **START BASE GAME**: Does what the name implies, starts a new Session of the unmodded Soulstorm base game.
 
@@ -29,13 +31,7 @@ This application allows for an easy launch of mods and management of large colle
 
 - **SETTINGS**: You could change game settings without launching the game. It also let's you change some HIDDEN game settings! From there you could also start System Performance Manager and Fonts Manager to make font in the game bigger!
 
-- **Toggle 4 Gb RAM Patch**: This button allows for convenient activation and deactivation of the LAA flag for the game executable
-
 - **Install DXVK** : Installs and enables the latest versiuon of DXVK that was tested and configured for Dawn of War for potentially better performance and less crashes! Button would change to "Remove DXVK" if you have the latest version or "Update DXVK" if your version is outdated (or if you are missing one of 4 files).
-
-- **Install a better camera** : Installs and enables a custom script that improves default camera a lot! Some mods would rewrite this camera with their own but this option is mostly for playing without any mods ;-)
-
-- **Install larger fonts** : Installs custom fonts that are much easier to read! Those fonts are the same as the default ones - just bigger!
 
 - **Download Mod...**: This button will open the new Download Manager window where you could download one (or how much you like) of popular mods. If mod has a patch - it will be downloaded too! Wait 5 seconds and mod will start downloading.
 
@@ -52,13 +48,9 @@ This application allows for an easy launch of mods and management of large colle
 
   - **-nomovies** : Skips all movies and directly launches the game with the loading screen for a faster startup (Is checked by default for convenience)
 
-  - **-forcehighpoly** : This option forces the game to display the higher resolution LOD of a Model at any given distance. (Hint : This may have a negative impact on your performance, use with caution.)
-
   - **-noprecachemodels** : This option improves performance but team colors will not be visable on models anymore (because they couldn't be precached)
 
-  - **/high /affinity 6** : This option sets your Daw of War game executable priority to "High" and set it's affinity (CPU thread usage) to utilize only threads 2 and 3 (6=0110 in binary -> enable second and third thread). In theory it could help to improve performance. It WILL NOT work if you have less than 3 CPU cores!
-
-  - **Disable Fog** : This option removes the brownish ambient fog from any map. This fog is particularly visible when zooming out really far or move the camera in a horizontal position, obstructing long distance view.
+  - **Disable Fog** : DOesn't work in DE because I don't know what values to change in memory ;-) It may be enabled someday...
 
 ## MOD MERGER: (WARNING: This is an experimental feature that requires some user responsibility - use with caution.)
 

@@ -1,9 +1,19 @@
 # CHANGELOG
 
 Who did what:
-IgorTheLight (current main maintainer) - 1.0.0.0, 1.0.0.1
+IgorTheLight (current main maintainer) - 1.0.0.0, 1.0.0.1, 1.0.0.2
 
-Version 1.0.0.1
+## Version 1.0.0.2
+
+- Added: additional resiliency  checks when populations list of installed mods
+- Changed: INI file name to "DoW DE Mod Manager.ini". Old file will not be used and is not needed anymore! You may safely remove it.
+- Changed: JITProfile file name to "DoW DE Mod Manager.JITProfile". Old file will not be used and is not needed anymore! You may safely remove it.
+- Changed: filename.Contains("modname") to filename == "modname". Than will "catch" mod names like DXP2Dummy and not show them as playable mods
+- Fixed: a bug where ActionState could be written in INI file incorrectly and caused Mod Manager to crash at startup
+- Changed: Debug-Release build settings for Release settings. Looks like antiviruses from VirusTotal are not that aggressive against latest builds of Mod Manager
+- Some code refactoring here and there
+
+## Version 1.0.0.1
 
 - Fixed: a problem with downloading... anything! Updates, mods, DXVK
 
