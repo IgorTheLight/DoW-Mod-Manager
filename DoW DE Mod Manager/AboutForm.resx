@@ -59,7 +59,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 1.0.0.2
+    <value>## Version 1.0.0.3
+
+- Fixed: a mistake where I accidentally posted 1.0.0.2 under "master" branch. Oops! xD
+
+## Version 1.0.0.2
 
 - Added: additional resiliency  checks when populations list of installed mods
 - Changed: INI file name to "DoW DE Mod Manager.ini". Old file will not be used and is not needed anymore! You may safely remove it.
