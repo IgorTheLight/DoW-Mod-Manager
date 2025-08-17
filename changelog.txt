@@ -6,6 +6,7 @@ IgorTheLight (current main maintainer) - 1.0.0.0 - 1.0.0.3
 ## Version 1.0.0.3
 
 - Fixed: a mistake where I accidentally posted 1.0.0.2 under "master" branch. Oops! xD
+- Fixed: two hidden links that still downloaded from master branch
 
 ## Version 1.0.0.2
 

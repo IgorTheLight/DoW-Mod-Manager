@@ -151,7 +151,7 @@ namespace DoW_DE_Nod_Manager
         public static void DownloadExe()
         {
             DownloadFile(
-                "https://github.com/IgorTheLight/DoW-Mod-Manager/raw/master/DoW%20Mod%20Manager/LatestStable/DoW%20Mod%20Manager.exe",
+                "https://github.com/IgorTheLight/DoW-Mod-Manager/raw/refs/heads/DE/DoW%20DE%20Mod%20Manager/LatestStable/DoW%20Mod%20Manager.exe",
                 Path.Combine(currentDir, $"DoW Mod Manager v{latestStringVersion}.exe"),
                 closeAndDeleteApplication: true
             );
@@ -161,7 +161,7 @@ namespace DoW_DE_Nod_Manager
         public static void DownloadModlist()
         {
             DownloadFile(
-                "https://github.com/IgorTheLight/DoW-Mod-Manager/raw/master/DoW%20Mod%20Manager/ModList/DoW%20Mod%20Manager%20Download%20Mods.list",
+                "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/ModList/DoW%20Mod%20Manager%20Download%20Mods.list",
                 Path.Combine(currentDir, ModDownloaderForm.MODLIST_FILE),
                 closeAndDeleteApplication: false
             );
