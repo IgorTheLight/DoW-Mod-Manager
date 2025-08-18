@@ -35,6 +35,7 @@ namespace DoW_DE_Nod_Manager
     public partial class ModManagerForm : Form
     {
         const string GAME_EXECUTABLE_NAME = "W40k.exe";
+        const string GOG_GAME_EXECUTABLE_NAME = "W40k_gog.exe";
         const string CONFIG_FILE_NAME = "DoW DE Mod Manager.ini";
         const string JIT_PROFILE_FILE_NAME = "DoW DE Mod Manager.JITProfile";
         const string WARNINGS_LOG = "warnings.log";
@@ -60,7 +61,7 @@ namespace DoW_DE_Nod_Manager
         public const string SOULSTORM_DIR = "SoulstormDir";
 
         // A boolean array that maps Index-wise to the filepaths indices. Index 0 checks if required mod at index 0 in the FilePaths is installed or not.
-        bool[] _isInstalled;
+        bool[] isInstalled;
         bool isMessageBoxOnScreen = false;
         bool isOldGame;
         string dowProcessName = "";
@@ -326,7 +327,8 @@ namespace DoW_DE_Nod_Manager
                             break;
                         case SOULSTORM_DIR:
                             if (value.Contains("\\"))
-                                settings[setting] = value;
+                                if (value != CurrentDir && value != SettingsDir)
+                                    settings[setting] = value;
                             break;
                     }
                 }
@@ -360,12 +362,23 @@ namespace DoW_DE_Nod_Manager
             {
                 currentDirectoryLabel.Text = "Your current DE directory:";
                 isOldGame = false;
+                settings[IS_GOG_VERSION] = "0";
+                SteamRadioButton.Checked = true;
                 return GAME_EXECUTABLE_NAME;
+            }
+
+            if (File.Exists(Path.Combine(CurrentDir, GOG_GAME_EXECUTABLE_NAME)))
+            {
+                currentDirectoryLabel.Text = "Your current DE directory:";
+                isOldGame = false;
+                settings[IS_GOG_VERSION] = "1";
+                GOGRadioButton.Checked = true;
+                return GOG_GAME_EXECUTABLE_NAME;
             }
 
             if (!isMessageBoxOnScreen)
             {
-                ThemedMessageBox.Show("Neither found the Soulstorm, Dark Crusade, Winter Assault nor Original in this directory!", "ERROR:");
+                ThemedMessageBox.Show("Didn't found Definitive Edition's\nexecutable in this directory!", "ERROR:");
                 isMessageBoxOnScreen = true;
                 Program.TerminateApp();
             }
@@ -414,8 +427,6 @@ namespace DoW_DE_Nod_Manager
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void GetMods()
         {
-            installedModsListBox.Items.Clear();
-
             // Make a new list for the new Pathitems
             var newfilePathsList = new List<string>();
             AllFoundModules = new List<string>();
@@ -429,7 +440,7 @@ namespace DoW_DE_Nod_Manager
             catch (Exception)
             {
                 mfp1 = new string[0];
-                ThemedMessageBox.Show("There is a problem occured tryuing\n to find all *.module files!", "Warning:");
+                ThemedMessageBox.Show("There is a problem occured tryuing\n to find all *.module files\nin DE directory!", "Warning:");
             }
 
             string modsDir = Path.Combine(SettingsDir, "MODS");
@@ -445,7 +456,7 @@ namespace DoW_DE_Nod_Manager
             catch (Exception)
             {
                 mfp2 = new string[0];
-                ThemedMessageBox.Show("There is a problem occured tryuing\n to find all *.module files!", "Warning:");
+                ThemedMessageBox.Show("There is a problem occured tryuing\n to find all *.module files\nin Relic directory!", "Warning:");
             }
 
             string[] mfp3;
@@ -455,10 +466,16 @@ namespace DoW_DE_Nod_Manager
                 if (mfp3.Length < 1)
                     SoulstormTextBox.ForeColor = Color.Orange;
             }
-            catch (Exception)
+            catch (DirectoryNotFoundException)
             {
                 mfp3 = new string[0];
                 SoulstormTextBox.ForeColor = Color.Orange;
+            }
+            catch (Exception)
+            {
+                mfp3 = new string[0];
+                SoulstormTextBox.ForeColor = Color.Red;
+                ThemedMessageBox.Show("There is a problem occured tryuing\n to find all *.module files\nin Soulstorm directory!", "Warning:");
             }
 
             // Combining two arrays of strings here
@@ -466,6 +483,8 @@ namespace DoW_DE_Nod_Manager
             Array.Copy(mfp1, 0, ModuleFilePaths, 0          , mfp1.Length);
             Array.Copy(mfp2, 0, ModuleFilePaths, mfp1.Length, mfp2.Length);
             Array.Copy(mfp3, 0, ModuleFilePaths, mfp1.Length + mfp2.Length, mfp3.Length);
+
+            installedModsListBox.Items.Clear();
 
             if (ModuleFilePaths.Length > 0)
             {
@@ -479,7 +498,7 @@ namespace DoW_DE_Nod_Manager
                     string fileName = Path.GetFileNameWithoutExtension(filePath);
 
                     // There is no point of adding base modules to the list
-                    if (fileName == "DoWDE")
+                    if (fileName == "DoWDE" || fileName == "DXP2")
                         continue;
 
                     // Find the List of ALL found module files for the Mod Merger available Mods List
@@ -497,7 +516,7 @@ namespace DoW_DE_Nod_Manager
                         while ((line = file.ReadLine()) != null)
                         {
                             // Winter Assault or Original doesn't have a "Playable" state
-                            if (line.Contains("Playable = 1") || isOldGame || fileName == "W40k" || fileName == "WXP" || fileName == "DXP2" || fileName == "DXP3")
+                            if (line.Contains("Playable = 1") || isOldGame)
                                 isPlayable = true;
 
                             // Add information about the home mod folder of a mod
@@ -511,7 +530,7 @@ namespace DoW_DE_Nod_Manager
 
                         if (isPlayable)
                         {
-                            ModuleEntry module = new ModuleEntry(fileName, modFolderName);
+                            var module = new ModuleEntry(fileName, modFolderName);
 
                             newfilePathsList.Add(filePath);
                             AllValidModules.Add(module);
@@ -715,11 +734,13 @@ namespace DoW_DE_Nod_Manager
             // Read the file line by line and check for "ModFolder" attribute
             for (int i = 0; i < requiredModsCount; i++)
             {
-                string moduleFilePath = Path.Combine(CurrentDir, requiredModsList.Items[i].ToString()) + ".module";
+                string moduleFilePath1 = Path.Combine(CurrentDir, requiredModsList.Items[i].ToString()) + ".module";
+                string moduleFilePath2 = Path.Combine(SettingsDir, "Mods", requiredModsList.Items[i].ToString()) + ".module";
+                string moduleFilePath3 = Path.Combine(settings[SOULSTORM_DIR], requiredModsList.Items[i].ToString()) + ".module";
 
-                if (File.Exists(moduleFilePath))
+                if (File.Exists(moduleFilePath1))
                 {
-                    using (StreamReader file = new StreamReader(moduleFilePath))
+                    using (StreamReader file = new StreamReader(moduleFilePath1))
                     {
                         string line;
 
@@ -728,6 +749,41 @@ namespace DoW_DE_Nod_Manager
                             if (line.Contains("ModFolder"))
                                 ModFolderPaths[i] = line.GetValueFromLine(deleteModule: true);
                         }
+                        continue;
+                    }
+                }
+                else
+                    ModFolderPaths[i] = "MISSING";
+
+                if (File.Exists(moduleFilePath2))
+                {
+                    using (StreamReader file = new StreamReader(moduleFilePath2))
+                    {
+                        string line;
+
+                        while ((line = file.ReadLine()) != null)
+                        {
+                            if (line.Contains("ModFolder"))
+                                ModFolderPaths[i] = line.GetValueFromLine(deleteModule: true);
+                        }
+                        continue;
+                    }
+                }
+                else
+                    ModFolderPaths[i] = "MISSING";
+
+                if (File.Exists(moduleFilePath3))
+                {
+                    using (StreamReader file = new StreamReader(moduleFilePath3))
+                    {
+                        string line;
+
+                        while ((line = file.ReadLine()) != null)
+                        {
+                            if (line.Contains("ModFolder"))
+                                ModFolderPaths[i] = line.GetValueFromLine(deleteModule: true);
+                        }
+                        continue;
                     }
                 }
                 else
@@ -747,23 +803,25 @@ namespace DoW_DE_Nod_Manager
             Stream myStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DoW_DE_Mod_Manager.Resources.checkmark.png");
             pictureBox.Image = Image.FromStream(myStream);
 
-            string folderPath;
+            string folderPath1, folderPath2, folderPath3;
             int itemsCount = requiredModsList.Items.Count;
-            _isInstalled = new bool[itemsCount];
+            isInstalled = new bool[itemsCount];
 
             for (int i = 0; i < itemsCount; i++)
             {
-                folderPath = Path.Combine(CurrentDir, ModFolderPaths[i]);
+                folderPath1 = Path.Combine(CurrentDir, ModFolderPaths[i]);
+                folderPath2 = Path.Combine(SettingsDir,"Mods", ModFolderPaths[i]);
+                folderPath3 = Path.Combine(settings[SOULSTORM_DIR], ModFolderPaths[i]);
 
-                if (Directory.Exists(folderPath))
+                if (Directory.Exists(folderPath1) || Directory.Exists(folderPath2) || Directory.Exists(folderPath3))
                 {
                     requiredModsList.Items[i] += " ...INSTALLED!";
-                    _isInstalled[i] = true;
+                    isInstalled[i] = true;
                 }
                 else
                 {
                     requiredModsList.Items[i] += " ...MISSING!";
-                    _isInstalled[i] = false;
+                    isInstalled[i] = false;
                     startModButton.Enabled = false;
 
                     // Select missed mod so user could find it more easily
@@ -977,7 +1035,7 @@ namespace DoW_DE_Nod_Manager
 
             Brush myBrush;
 
-            if (_isInstalled[e.Index])
+            if (isInstalled[e.Index])
                 myBrush = Brushes.LimeGreen;
             else
                 myBrush = Brushes.Red;
@@ -1283,11 +1341,16 @@ namespace DoW_DE_Nod_Manager
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    settings[SOULSTORM_DIR] = fbd.SelectedPath;
-                    SoulstormTextBox.Text = fbd.SelectedPath;
-                    SoulstormTextBox.ForeColor = Color.FromArgb(200, 200, 200);
+                    if (fbd.SelectedPath != CurrentDir && fbd.SelectedPath != SettingsDir)
+                    {
+                        settings[SOULSTORM_DIR] = fbd.SelectedPath;
+                        SoulstormTextBox.Text = fbd.SelectedPath;
+                        SoulstormTextBox.ForeColor = Color.FromArgb(200, 200, 200);
 
-                    SetUpAllNecessaryMods();
+                        SetUpAllNecessaryMods();
+                    }
+                    else
+                        ThemedMessageBox.Show("The path shouldn't be the same as Definbitive Edition\nor Relic Entertainment path!", "Warning:");
                 }
             }
         }

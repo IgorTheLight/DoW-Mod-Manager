@@ -59,7 +59,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 1.0.0.3
+    <value>## Version 1.0.1.1
+
+- Added: a blocking mechanism that is preventing users to set his/her Soulstorm directory to Definitive Edition's directory (from UI and from config file)
+- Fixed: a bug where Mod Manager couldn't find dependenciues in DE directory
+- Removed: an ability to start Definitive Edition with Original, Winter Assault, Dark Crusade or Soulstorm "mods". Now it only starts as developers are intended to. And that...
+- Fixed: a bug with expansion "mods" duplication
+
+## Version 1.0.1.0
+
+- Added: autodetection of GOG and Steam versions of Definitive Edition.
+- Fixed: detection of mods dependencies if they are not in the DE folder
+- Some code refactoring here and there
+
+## Version 1.0.0.3
 
 - Fixed: a mistake where I accidentally posted 1.0.0.2 under "master" branch. Oops! xD
 - Fixed: two hidden links that still downloaded from master branch

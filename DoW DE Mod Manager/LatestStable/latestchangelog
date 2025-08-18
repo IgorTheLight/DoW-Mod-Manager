@@ -1,1 +1,3 @@
-- Some bugfixes
+- Fixed: a bug where Mod Manager couldn't find dependenciues in DE directory
+- Removed: an ability to start Definitive Edition with expansion "mods"
+- Fixed: a bug with expansion "mods" duplication
