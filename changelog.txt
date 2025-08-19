@@ -6,7 +6,7 @@ IgorTheLight (current main maintainer) - 1.0.0.0 - 1.0.0.3, 1.0.1.0
 ## Version 1.0.1.1
 
 - Added: a blocking mechanism that is preventing users to set his/her Soulstorm directory to Definitive Edition's directory (from UI and from config file)
-- Fixed: a bug where Mod Manager couldn't find dependenciues in DE directory
+- Fixed: a bug where Mod Manager couldn't find dependencies in DE directory
 - Removed: an ability to start Definitive Edition with Original, Winter Assault, Dark Crusade or Soulstorm "mods". Now it only starts as developers are intended to. And that...
 - Fixed: a bug with expansion "mods" duplication
 
