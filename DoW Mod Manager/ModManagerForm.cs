@@ -586,14 +586,22 @@ namespace DoW_Mod_Manager
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void GetMods()
         {
-            installedModsListBox.Items.Clear();
-
             // Make a new list for the new Pathitems
             List<string> newfilePathsList = new List<string>();
             AllFoundModules = new List<string>();
             AllValidModules = new List<ModuleEntry>();
 
-            ModuleFilePaths = Directory.GetFiles(CurrentDir, "*.module");
+            try
+            {
+                ModuleFilePaths = Directory.GetFiles(CurrentDir, "*.module");
+            }
+            catch (Exception)
+            {
+                ThemedMessageBox.Show("There is a problem occured tryuing\n to find all *.module files\nin Soulstorm directory!", "Warning:");
+            }
+
+            installedModsListBox.Items.Clear();
+
             if (ModuleFilePaths.Length > 0)
             {
                 for (int i = 0; i < ModuleFilePaths.Length; i++)
@@ -650,7 +658,7 @@ namespace DoW_Mod_Manager
 
                             // Append version number to filename string for display
                             if (modVersion.Length > 0)
-                                fileName += $"   (Version{modVersion})";
+                                fileName += $"   (Version {modVersion})";
 
                             installedModsListBox.Items.Add(fileName);
                         }

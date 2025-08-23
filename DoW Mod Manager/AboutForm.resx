@@ -59,7 +59,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 2.6.0.3
+    <value>## Version 2.6.0.4
+
+- Added: additional resiliency checks when populations list of installed mods
+- Fixed: an absence of space between mod version number
+
+## Version 2.6.0.3
 
 - Fixed: a bug that prevents removing larger fonts if they were recently installed
 - Fixed: an annoyance where "Install a better camera" could be cropped on dispays with 125% scaling (very common thing on 15.6' laptops)
