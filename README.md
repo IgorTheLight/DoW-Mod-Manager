@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/19975052/147577379-4ab095f3-e91a-42f2-8cae-fbbb50658130.png)
+![image](https://media.moddb.com/cache/images/downloads/1/296/295652/thumb_620x2000/Screenshot_2025-08-23_123134.png)
 
 # DoW DE Mod Manager v1.0.1.1
 
