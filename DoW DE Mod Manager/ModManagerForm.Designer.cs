@@ -37,7 +37,6 @@ namespace DoW_DE_Nod_Manager
             this.installedModsListBox = new System.Windows.Forms.ListBox();
             this.requiredModsList = new System.Windows.Forms.ListBox();
             this.startModButton = new System.Windows.Forms.Button();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.authorLabel = new System.Windows.Forms.Label();
             this.advancedStartOptionsLabel = new System.Windows.Forms.Label();
             this.devCheckBox = new System.Windows.Forms.CheckBox();
@@ -61,11 +60,15 @@ namespace DoW_DE_Nod_Manager
             this.GOGRadioButton = new System.Windows.Forms.RadioButton();
             this.SteamRadioButton = new System.Windows.Forms.RadioButton();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.SoulstormTextBox = new System.Windows.Forms.TextBox();
             this.soulstormLabel = new System.Windows.Forms.Label();
             this.SoulstormButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.label1 = new System.Windows.Forms.Label();
+            this.fullscreenCheckBox = new System.Windows.Forms.CheckBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.startExpansionbutton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -75,7 +78,9 @@ namespace DoW_DE_Nod_Manager
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // currentDirTextBox
@@ -136,7 +141,7 @@ namespace DoW_DE_Nod_Manager
             this.installedModsListBox.Margin = new System.Windows.Forms.Padding(0);
             this.installedModsListBox.Name = "installedModsListBox";
             this.installedModsListBox.ScrollAlwaysVisible = true;
-            this.installedModsListBox.Size = new System.Drawing.Size(447, 368);
+            this.installedModsListBox.Size = new System.Drawing.Size(447, 329);
             this.installedModsListBox.TabIndex = 4;
             this.installedModsListBox.SelectedIndexChanged += new System.EventHandler(this.InstalledModsList_SelectedIndexChanged);
             // 
@@ -152,7 +157,7 @@ namespace DoW_DE_Nod_Manager
             this.requiredModsList.Margin = new System.Windows.Forms.Padding(0);
             this.requiredModsList.Name = "requiredModsList";
             this.requiredModsList.ScrollAlwaysVisible = true;
-            this.requiredModsList.Size = new System.Drawing.Size(427, 368);
+            this.requiredModsList.Size = new System.Drawing.Size(427, 329);
             this.requiredModsList.TabIndex = 5;
             this.requiredModsList.SelectedIndexChanged += new System.EventHandler(this.RequiredModsList_SelectedIndexChanged);
             // 
@@ -170,18 +175,6 @@ namespace DoW_DE_Nod_Manager
             this.startModButton.Text = "START MOD";
             this.startModButton.UseVisualStyleBackColor = false;
             this.startModButton.Click += new System.EventHandler(this.StartButton_Click);
-            // 
-            // pictureBox
-            // 
-            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox.ErrorImage = null;
-            this.pictureBox.InitialImage = null;
-            this.pictureBox.Location = new System.Drawing.Point(257, 3);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox.TabIndex = 7;
-            this.pictureBox.TabStop = false;
             // 
             // authorLabel
             // 
@@ -238,9 +231,9 @@ namespace DoW_DE_Nod_Manager
             this.mergeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mergeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.mergeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.mergeButton.Location = new System.Drawing.Point(130, 59);
+            this.mergeButton.Location = new System.Drawing.Point(451, 29);
             this.mergeButton.Name = "mergeButton";
-            this.mergeButton.Size = new System.Drawing.Size(121, 43);
+            this.mergeButton.Size = new System.Drawing.Size(104, 31);
             this.mergeButton.TabIndex = 14;
             this.mergeButton.Text = "Merge Mods...";
             this.mergeButton.UseVisualStyleBackColor = false;
@@ -266,9 +259,9 @@ namespace DoW_DE_Nod_Manager
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.splitContainer1);
-            this.panel1.Location = new System.Drawing.Point(12, 181);
+            this.panel1.Location = new System.Drawing.Point(12, 220);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(901, 407);
+            this.panel1.Size = new System.Drawing.Size(901, 368);
             this.panel1.TabIndex = 18;
             // 
             // splitContainer1
@@ -289,7 +282,7 @@ namespace DoW_DE_Nod_Manager
             // 
             this.splitContainer1.Panel2.Controls.Add(this.requiredModsLabel);
             this.splitContainer1.Panel2.Controls.Add(this.requiredModsList);
-            this.splitContainer1.Size = new System.Drawing.Size(898, 415);
+            this.splitContainer1.Size = new System.Drawing.Size(898, 376);
             this.splitContainer1.SplitterDistance = 455;
             this.splitContainer1.TabIndex = 19;
             // 
@@ -362,9 +355,9 @@ namespace DoW_DE_Nod_Manager
             this.fixMissingModButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fixMissingModButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.fixMissingModButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.fixMissingModButton.Location = new System.Drawing.Point(257, 59);
+            this.fixMissingModButton.Location = new System.Drawing.Point(130, 59);
             this.fixMissingModButton.Name = "fixMissingModButton";
-            this.fixMissingModButton.Size = new System.Drawing.Size(59, 43);
+            this.fixMissingModButton.Size = new System.Drawing.Size(121, 43);
             this.fixMissingModButton.TabIndex = 24;
             this.fixMissingModButton.Text = "Find MISSING";
             this.fixMissingModButton.UseVisualStyleBackColor = false;
@@ -376,7 +369,7 @@ namespace DoW_DE_Nod_Manager
             this.checkForErrorsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.checkForErrorsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkForErrorsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.checkForErrorsButton.Location = new System.Drawing.Point(121, 3);
+            this.checkForErrorsButton.Location = new System.Drawing.Point(125, 3);
             this.checkForErrorsButton.Name = "checkForErrorsButton";
             this.checkForErrorsButton.Size = new System.Drawing.Size(104, 31);
             this.checkForErrorsButton.TabIndex = 25;
@@ -389,7 +382,7 @@ namespace DoW_DE_Nod_Manager
             this.noFogCheckbox.AutoSize = true;
             this.noFogCheckbox.Enabled = false;
             this.noFogCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.noFogCheckbox.Location = new System.Drawing.Point(5, 69);
+            this.noFogCheckbox.Location = new System.Drawing.Point(5, 55);
             this.noFogCheckbox.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.noFogCheckbox.Name = "noFogCheckbox";
             this.noFogCheckbox.Size = new System.Drawing.Size(235, 17);
@@ -404,20 +397,18 @@ namespace DoW_DE_Nod_Manager
             this.flowLayoutPanel1.Controls.Add(this.advancedStartOptionsLabel);
             this.flowLayoutPanel1.Controls.Add(this.devCheckBox);
             this.flowLayoutPanel1.Controls.Add(this.nomoviesCheckBox);
-            this.flowLayoutPanel1.Controls.Add(this.noprecachemodelsCheckBox);
-            this.flowLayoutPanel1.Controls.Add(this.noFogCheckbox);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 53);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 125);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 86);
             this.flowLayoutPanel1.TabIndex = 28;
             // 
             // noprecachemodelsCheckBox
             // 
             this.noprecachemodelsCheckBox.AutoSize = true;
             this.noprecachemodelsCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.noprecachemodelsCheckBox.Location = new System.Drawing.Point(5, 52);
+            this.noprecachemodelsCheckBox.Location = new System.Drawing.Point(5, 21);
             this.noprecachemodelsCheckBox.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.noprecachemodelsCheckBox.Name = "noprecachemodelsCheckBox";
             this.noprecachemodelsCheckBox.Size = new System.Drawing.Size(237, 17);
@@ -435,7 +426,7 @@ namespace DoW_DE_Nod_Manager
             this.panel2.Controls.Add(this.dxvkButton);
             this.panel2.Location = new System.Drawing.Point(341, 53);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(245, 125);
+            this.panel2.Size = new System.Drawing.Size(245, 86);
             this.panel2.TabIndex = 29;
             // 
             // dxvkButton
@@ -445,7 +436,7 @@ namespace DoW_DE_Nod_Manager
             this.dxvkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dxvkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.dxvkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.dxvkButton.Location = new System.Drawing.Point(121, 40);
+            this.dxvkButton.Location = new System.Drawing.Point(125, 41);
             this.dxvkButton.Name = "dxvkButton";
             this.dxvkButton.Size = new System.Drawing.Size(104, 31);
             this.dxvkButton.TabIndex = 25;
@@ -488,14 +479,25 @@ namespace DoW_DE_Nod_Manager
             this.flowLayoutPanel2.Controls.Add(this.startModButton);
             this.flowLayoutPanel2.Controls.Add(this.pictureBox);
             this.flowLayoutPanel2.Controls.Add(this.downloadButton);
-            this.flowLayoutPanel2.Controls.Add(this.mergeButton);
             this.flowLayoutPanel2.Controls.Add(this.fixMissingModButton);
             this.flowLayoutPanel2.Controls.Add(this.SteamRadioButton);
             this.flowLayoutPanel2.Controls.Add(this.GOGRadioButton);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(592, 53);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(321, 128);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(314, 136);
             this.flowLayoutPanel2.TabIndex = 30;
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox.ErrorImage = null;
+            this.pictureBox.InitialImage = null;
+            this.pictureBox.Location = new System.Drawing.Point(257, 3);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.TabIndex = 7;
+            this.pictureBox.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
@@ -555,12 +557,68 @@ namespace DoW_DE_Nod_Manager
             this.SoulstormButton.UseVisualStyleBackColor = false;
             this.SoulstormButton.Click += new System.EventHandler(this.SoulstormButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Orange;
+            this.label1.Location = new System.Drawing.Point(163, 5);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(237, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Experimental features: use them at your own risk!";
+            // 
+            // fullscreenCheckBox
+            // 
+            this.fullscreenCheckBox.AutoSize = true;
+            this.fullscreenCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.fullscreenCheckBox.Location = new System.Drawing.Point(5, 38);
+            this.fullscreenCheckBox.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.fullscreenCheckBox.Name = "fullscreenCheckBox";
+            this.fullscreenCheckBox.Size = new System.Drawing.Size(246, 17);
+            this.fullscreenCheckBox.TabIndex = 29;
+            this.fullscreenCheckBox.Text = "-fullscreen: Enables Exclusive Fullscreen mode";
+            this.fullscreenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.AutoSize = true;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.panel3.Controls.Add(this.startExpansionbutton);
+            this.panel3.Controls.Add(this.noFogCheckbox);
+            this.panel3.Controls.Add(this.fullscreenCheckBox);
+            this.panel3.Controls.Add(this.noprecachemodelsCheckBox);
+            this.panel3.Controls.Add(this.mergeButton);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Location = new System.Drawing.Point(15, 142);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(574, 72);
+            this.panel3.TabIndex = 30;
+            // 
+            // startExpansionbutton
+            // 
+            this.startExpansionbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.startExpansionbutton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.startExpansionbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.startExpansionbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.startExpansionbutton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.startExpansionbutton.Location = new System.Drawing.Point(337, 29);
+            this.startExpansionbutton.Name = "startExpansionbutton";
+            this.startExpansionbutton.Size = new System.Drawing.Size(104, 31);
+            this.startExpansionbutton.TabIndex = 30;
+            this.startExpansionbutton.Text = "Start expansion";
+            this.startExpansionbutton.UseVisualStyleBackColor = false;
+            this.startExpansionbutton.Click += new System.EventHandler(this.StartExpansionbutton_Click);
+            // 
             // ModManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(925, 605);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.SoulstormButton);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -573,7 +631,6 @@ namespace DoW_DE_Nod_Manager
             this.Name = "ModManagerForm";
             this.Text = "DoW Mod Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModManagerForm_Closing);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -587,8 +644,11 @@ namespace DoW_DE_Nod_Manager
             this.panel2.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -602,7 +662,6 @@ namespace DoW_DE_Nod_Manager
         private System.Windows.Forms.Label requiredModsLabel;
         private System.Windows.Forms.ListBox requiredModsList;
         private System.Windows.Forms.Button startModButton;
-        private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Label authorLabel;
         private System.Windows.Forms.Label advancedStartOptionsLabel;
         private System.Windows.Forms.CheckBox devCheckBox;
@@ -631,5 +690,10 @@ namespace DoW_DE_Nod_Manager
         private System.Windows.Forms.Label soulstormLabel;
         private System.Windows.Forms.Button SoulstormButton;
         private System.Windows.Forms.TextBox SoulstormTextBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox fullscreenCheckBox;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.Button startExpansionbutton;
     }
 }

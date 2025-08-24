@@ -49,5 +49,28 @@ namespace DoW_DE_Nod_Manager
             else
                 return "";
         }
+
+        public static (string, string) GetSettingAndValueFromLine(this string line, bool removeComma)
+        {
+            int indexOfEqualSigh = line.IndexOf('=');
+            string setting;
+            string value;
+
+            if (indexOfEqualSigh > 0)
+            {
+                setting = line.Substring(0, indexOfEqualSigh);
+                value = line.Substring(indexOfEqualSigh + 1, line.Length - indexOfEqualSigh - 1);
+                
+                setting = setting.Replace(" ", "");
+                value = value.Replace(" ", "");
+
+                if (removeComma)
+                    value = value.Replace(",", "");
+
+                return (setting, value);
+            }
+            else
+                return ("", "");
+        }
     }
 }

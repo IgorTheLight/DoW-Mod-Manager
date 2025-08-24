@@ -1,3 +1,4 @@
-- Fixed: a bug where Mod Manager couldn't find dependenciues in DE directory
-- Removed: an ability to start Definitive Edition with expansion "mods"
-- Fixed: a bug with expansion "mods" duplication
+- Added: an Experimental section with new (and old) features!
+- Added: an ability to start a game in Exclusive Fullscreen from Experimentsl
+- Re-added: the ability to start any of the expansions from Experimental
+And many more!

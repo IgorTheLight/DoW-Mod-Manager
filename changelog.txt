@@ -1,7 +1,18 @@
 # CHANGELOG
 
 Who did what:
-IgorTheLight (current main maintainer) - 1.0.0.0 - 1.0.0.3, 1.0.1.0
+IgorTheLight (current main maintainer) - 1.0.0.0 - 1.0.0.3, 1.0.1.0, 1.0.1.1, 1.1.0.0
+
+## Version 1.1.0.0
+
+- Added: an Experimental section with new (and old) features!
+- Added: an ability to start a game in Exclusive Fullscreen from Experimentsl
+- Re-added: the ability to start any of the expansions from Experimental
+- Fixed: an ability to create and delete profiles. It became broken after few last DE patches.
+- Moved: -noprecache and Mod Merger to Experimental
+- Retargeted: Modlist to autoupdaes from the "main" branch instead of "DE". What it does is that I could have just one place top update the Modlist
+- Removed: isFileBlocked() method because it is never used anymore
+- Code refactoring
 
 ## Version 1.0.1.1
 

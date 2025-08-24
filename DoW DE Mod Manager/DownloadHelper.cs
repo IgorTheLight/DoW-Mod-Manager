@@ -62,8 +62,8 @@ namespace DoW_DE_Nod_Manager
         );
 
         private static readonly UpdateInfo ModlistUpdateInfo = new UpdateInfo(
-            versionUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/ModList/version",
-            changelogUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/ModList/latestchangelog",
+            versionUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/master/DoW%20Mod%20Manager/ModList/version",
+            changelogUrl: "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/master/DoW%20Mod%20Manager/ModList/latestchangelog",
             parseVersion: s =>
             {
                 // strip dots, parse int, wrap in Version for easy compare
@@ -161,7 +161,7 @@ namespace DoW_DE_Nod_Manager
         public static void DownloadModlist()
         {
             DownloadFile(
-                "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/ModList/DoW%20Mod%20Manager%20Download%20Mods.list",
+                "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/master/DoW%20Mod%20Manager/ModList/DoW%20Mod%20Manager%20Download%20Mods.list",
                 Path.Combine(currentDir, ModDownloaderForm.MODLIST_FILE),
                 closeAndDeleteApplication: false
             );

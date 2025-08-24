@@ -7,6 +7,7 @@ using System.Management;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace DoW_DE_Nod_Manager
 {
@@ -66,6 +67,7 @@ namespace DoW_DE_Nod_Manager
 
         readonly string PROFILES_PATH;
         const string NAME_DAT = "name.dat";
+        const string UI_NAME_DAT = "ui_name.dat";
         const string PLAYERCONFIG = "playercfg.lua";
         const string PROFILE = "Profile";
 
@@ -139,14 +141,12 @@ namespace DoW_DE_Nod_Manager
             shadowsDetailComboBox.SelectedIndexChanged += new EventHandler(ShadowsDetailComboBox_SelectedIndexChanged);
             full3DCameraCheckBox.CheckedChanged += new EventHandler(Full3DCameraCheckBox_CheckedChanged);
             persistentScarringComboBox.SelectedIndexChanged += new EventHandler(PersistentScarringComboBox_SelectedIndexChanged);
-            //betterTeamcoloredTexturexCheckBox.CheckedChanged += new EventHandler(BetterTeamcoloredTexturexCheckBox_CheckedChanged);
             unitsOcclusionCheckBox.CheckedChanged += new EventHandler(UnitsOcclusionCheckBox_CheckedChanged);
             persistentBodiesComboBox.SelectedIndexChanged += new EventHandler(PersistentBodiesComboBox_SelectedIndexChanged);
             terrainDetailComboBox.SelectedIndexChanged += new EventHandler(TerrainDetailComboBox_SelectedIndexChanged);
             modelDetailComboBox.SelectedIndexChanged += new EventHandler(ModelDetailComboBox_SelectedIndexChanged);
             textureDetailComboBox.SelectedIndexChanged += new EventHandler(TextureDetailComboBox_SelectedIndexChanged);
             rendererComboBox.SelectedIndexChanged += new EventHandler(RendererComboBox_SelectedIndexChanged);
-            //colorDepthComboBox.SelectedIndexChanged += new EventHandler(ColorDepthComboBox_SelectedIndexChanged);
             activeVideocardComboBox.SelectedIndexChanged += new EventHandler(ActiveVideocardComboBox_SelectedIndexChanged);
             antialiasingCheckBox.CheckedChanged += new EventHandler(AntialiasingCheckBox_CheckedChanged);
             refreshRateComboBox.SelectedIndexChanged += new EventHandler(RefreshRateComboBox_SelectedIndexChanged);
@@ -161,7 +161,6 @@ namespace DoW_DE_Nod_Manager
             effectsVolumeTrackBar.Scroll += new EventHandler(EffectsVolumeTrackBar_Scroll);
             ambientVolumeTrackBar.Scroll += new EventHandler(AmbientVolumeTarckBar_Scroll);
             soundChannelsComboBox.SelectedIndexChanged += new EventHandler(SoundChannelsComboBox_SelectedIndexChanged);
-            //soundQualityComboBox.SelectedIndexChanged += new EventHandler(SoundQualityComboBox_SelectedIndexChanged);
             randomizedSoundsCheckBox.CheckedChanged += new EventHandler(RandomizedSoundsCheckBox_CheckedChanged);
 
             closeButton.Text = CLOSE_LABEL;
@@ -227,13 +226,6 @@ namespace DoW_DE_Nod_Manager
                 [TEXTURE_DETAIL] = "1",
                 [TOTAL_MATCHES] = "0",
                 [UNIT_OCCLUSION] = "0",
-
-                //[CURRENT_MOD] = "W40k",
-                //[FULLRES_TEAMCOLOUR] = "0",
-                //[SCREEN_DEPTH] = "32",
-                //[SHADOW_BLOB] = "0",
-                //[SHADOW_VOLUME] = "0",
-                //[SOUND_QUALITY] = "2",
 
                 // For playercfg.lua
                 [CURSOR_SCALE] = "1",
@@ -318,9 +310,6 @@ namespace DoW_DE_Nod_Manager
                                     if (value == "0" || value == "1")
                                         settings[CAMERA_DETAIL] = value;
                                     break;
-                                //case CURRENT_MOD:
-                                //    settings[CURRENT_MOD] = value;
-                                //    break;
                                 case DYNAMIC_LIGHTS:
                                     if (value == "0" || value == "1" || value == "2" || value == "3")
                                         settings[DYNAMIC_LIGHTS] = value;
@@ -333,10 +322,6 @@ namespace DoW_DE_Nod_Manager
                                     if (value == "0" || value == "1")
                                         settings[FORCE_WATCH_MOVIES] = value;
                                     break;
-                                //case FULLRES_TEAMCOLOUR:
-                                //    if (value == "0" || value == "1")
-                                //        settings[FULLRES_TEAMCOLOUR] = value;
-                                //    break;
                                 case FX_DETAIL_LEVEL:
                                     if (value == "0" || value == "1" || value == "2")
                                         settings[FX_DETAIL_LEVEL] = value;
@@ -377,10 +362,6 @@ namespace DoW_DE_Nod_Manager
                                     if (value == "0" || value == "1")
                                         settings[SCREEN_ANIALIAS] = value;
                                     break;
-                                //case SCREEN_DEPTH:
-                                //    if (value == "16" || value == "24" || value == "32")
-                                //        settings[SCREEN_DEPTH] = value;
-                                //    break;
                                 case SCREEN_DEVICE:
                                     if (value == "Dx9 : Hardware TnL")
                                         settings[SCREEN_DEVICE] = value;
@@ -409,18 +390,10 @@ namespace DoW_DE_Nod_Manager
                                     if (value == "0" || value == "1")
                                         settings[SCREEN_WINDOWED] = value;
                                     break;
-                                //case SHADOW_BLOB:
-                                //    if (value == "0" || value == "1")
-                                //        settings[SHADOW_BLOB] = value;
-                                //    break;
                                 case SHADOW_MAP:
                                     if (value == "0" || value == "1024" || value == "2048" || value == "4096")
                                         settings[SHADOW_MAP] = value;
                                     break;
-                                //case SHADOW_VOLUME:
-                                //    if (value == "0" || value == "1")
-                                //        settings[SHADOW_VOLUME] = value;
-                                //    break;
                                 case SOUND_ENABLED:
                                     if (value == "0" || value == "1")
                                         settings[SOUND_ENABLED] = value;
@@ -433,10 +406,6 @@ namespace DoW_DE_Nod_Manager
                                     if (Convert.ToInt32(value) > 0 && Convert.ToInt32(value) < 65)        // Range must be tested!
                                         settings[SOUND_NR_CHANNELS] = value;
                                     break;
-                                //case SOUND_QUALITY:
-                                //    if (value == "0" || value == "1" || value == "2")
-                                //        settings[SOUND_QUALITY] = value;
-                                //    break;
                                 case TERRAIN_ENABLE_FOW_BLUR:
                                     if (value == "0" || value == "1" || value == "2")
                                         settings[TERRAIN_ENABLE_FOW_BLUR] = value;
@@ -481,20 +450,24 @@ namespace DoW_DE_Nod_Manager
                 {
                     for (int i = 0; i < profileDirectories.Length; i++)
                     {
+                        //TODO: Maybe use FileInfo instead? ;-)
                         int indexOfLastSlah = profileDirectories[i].LastIndexOf("\\");
                         string profileName = profileDirectories[i].Substring(indexOfLastSlah + 1);
 
-                        string playerName = "Player";
-                        string playerNamePath = profileDirectories[i] + "\\" + NAME_DAT;
-                        if (File.Exists(playerNamePath))
-                            playerName = File.ReadAllText(playerNamePath);
+                        string playerName = "Player";   // Default name
+                        string playerNamePath1 = Path.Combine(profileDirectories[i], UI_NAME_DAT);
+                        string playerNamePath2 = Path.Combine(profileDirectories[i], NAME_DAT);
+
+                        if (File.Exists(playerNamePath1))
+                            playerName = File.ReadAllText(playerNamePath1);
+                        else if (File.Exists(playerNamePath2))
+                            playerName = File.ReadAllText(playerNamePath2);
 
                         profiles.Add(new Profile(profileName, playerName));
                     }
 
-                    bool isProfileExist = false;
-
                     // Checks if profile listed in settings Dictionary is really exists
+                    bool isProfileExist = false;
                     for (int i = 0; i < profiles.Count; i++)
                     {
                         if (settings[PLAYER_PROFILE] == profiles[i].ProfileName)
@@ -535,43 +508,36 @@ namespace DoW_DE_Nod_Manager
                     {
                         if (line.EndsWith(","))
                         {
-                            line = line.Replace(" ", "");
+                            (string setting, string value) = Extensions.GetSettingAndValueFromLine(line, true);
 
-                            int indexOfEqualSign = line.IndexOf('=');
-
-                            if (indexOfEqualSign > 0)
+                            if (setting.Contains(CURSOR_SCALE))
+                                settings[CURSOR_SCALE] = value;
+                            else if (setting.Contains(ENABLE_CHAT))
+                                settings[ENABLE_CHAT] = value;
+                            else if (setting.Contains(HOTKEY_PRESET))
+                                settings[HOTKEY_PRESET] = value;
+                            else if (setting.Contains(INVERT_DECLINATION))
+                                settings[INVERT_DECLINATION] = value;
+                            else if (setting.Contains(LOCK_CURSOR))
+                                settings[LOCK_CURSOR] = value;
+                            else if (setting.Contains(INVERT_PAN))
+                                settings[INVERT_PAN] = value;
+                            else if (setting.Contains(SCROLL_RATE))
+                                settings[SCROLL_RATE] = value;
+                            else if (setting.Contains(SHOW_HOTKEYS))
+                                settings[SHOW_HOTKEYS] = value;
+                            else if (setting.Contains(SOUND_VOLUME_AMBIENT))
+                                settings[SOUND_VOLUME_AMBIENT] = value;
+                            else if (setting.Contains(SOUND_VOLUME_MUSIC))
+                                settings[SOUND_VOLUME_MUSIC] = value;
+                            else if (setting.Contains(SOUND_VOLUME_SFX))
+                                settings[SOUND_VOLUME_SFX] = value;
+                            else if (setting.Contains(SOUND_VOLUME_VOICE))
                             {
-                                string stringValue = line.Substring(indexOfEqualSign + 1, line.Length - indexOfEqualSign - 2);
+                                settings[SOUND_VOLUME_VOICE] = value;
 
-                                if (line.Contains(CURSOR_SCALE))
-                                    settings[CURSOR_SCALE] = stringValue;
-                                else if (line.Contains(ENABLE_CHAT))
-                                    settings[ENABLE_CHAT] = stringValue;
-                                else if (line.Contains(HOTKEY_PRESET))
-                                    settings[HOTKEY_PRESET] = stringValue;
-                                else if (line.Contains(INVERT_DECLINATION))
-                                    settings[INVERT_DECLINATION] = stringValue;
-                                else if (line.Contains(LOCK_CURSOR))
-                                    settings[LOCK_CURSOR] = stringValue;
-                                else if (line.Contains(INVERT_PAN))
-                                    settings[INVERT_PAN] = stringValue;
-                                else if (line.Contains(SCROLL_RATE))
-                                    settings[SCROLL_RATE] = stringValue;
-                                else if (line.Contains(SHOW_HOTKEYS))
-                                    settings[SHOW_HOTKEYS] = stringValue;
-                                else if (line.Contains(SOUND_VOLUME_AMBIENT))
-                                    settings[SOUND_VOLUME_AMBIENT] = stringValue;
-                                else if (line.Contains(SOUND_VOLUME_MUSIC))
-                                    settings[SOUND_VOLUME_MUSIC] = stringValue;
-                                else if (line.Contains(SOUND_VOLUME_SFX))
-                                    settings[SOUND_VOLUME_SFX] = stringValue;
-                                else if (line.Contains(SOUND_VOLUME_VOICE))
-                                {
-                                    settings[SOUND_VOLUME_VOICE] = stringValue;
-
-                                    // We found all the setting we need
-                                    break;
-                                }
+                                // We found all the setting we need
+                                break;
                             }
                         }
                     }
@@ -618,7 +584,7 @@ namespace DoW_DE_Nod_Manager
                     deleteProfileButton.Enabled = false;
 
                 loginAttemptsComboBox.SelectedItem = settings[RL_SSO_NUM_TIMES_SHOWN];
-                //TODO: Test for performance!
+                //TODO: Test for performance! start
                 List<string> videocards = GetAllVideocards();
                 int currentScreenAdapter = Convert.ToInt32(settings[SCREEN_ADAPTER]);
 
@@ -631,7 +597,7 @@ namespace DoW_DE_Nod_Manager
                     settings[SCREEN_ADAPTER] = "0";
                     WriteSettings(localINI: true, playercgfLUA: false);
                 }
-                //TODO: Test for performance!
+                //TODO: Test for performance! end
                 antialiasingCheckBox.Checked = settings[SCREEN_ANIALIAS] == "1";
                 rendererComboBox.SelectedItem = settings[SCREEN_DEVICE];
                 gammaTrackBar.Value = Convert.ToInt32(settings[SCREEN_GAMMA]);
@@ -660,11 +626,10 @@ namespace DoW_DE_Nod_Manager
                         soundChannelsComboBox.SelectedIndex = 0;
                         break;
                 }
-                //soundQualityComboBox.SelectedIndex = Convert.ToInt32(settings[SOUND_QUALITY]);
                 soundQualityComboBox.Enabled = false;
                 terrainDetailComboBox.SelectedIndex = Convert.ToInt32(settings[TERRAIN_ENABLE_FOW_BLUR]);
                 textureDetailComboBox.SelectedIndex = Convert.ToInt32(settings[TEXTURE_DETAIL]);
-                // Skip TotalMatchces setting
+                // Skip TotalMatches setting
                 unitsOcclusionCheckBox.Checked = settings[UNIT_OCCLUSION] == "1";
             }
 
@@ -789,13 +754,6 @@ namespace DoW_DE_Nod_Manager
                     sw.WriteLine($"{TEXTURE_DETAIL}={settings[TEXTURE_DETAIL]}");
                     sw.WriteLine($"{TOTAL_MATCHES}={settings[TOTAL_MATCHES]}");
                     sw.WriteLine($"{UNIT_OCCLUSION}={settings[UNIT_OCCLUSION]}");
-
-                    //sw.WriteLine($"{CURRENT_MOD}={settings[CURRENT_MOD]}");
-                    //sw.WriteLine($"{FULLRES_TEAMCOLOUR}={settings[FULLRES_TEAMCOLOUR]}");
-                    //sw.WriteLine($"{SCREEN_DEPTH}={settings[SCREEN_DEPTH]}");
-                    //sw.WriteLine($"{SHADOW_BLOB}={settings[SHADOW_BLOB]}");
-                    //sw.WriteLine($"{SHADOW_VOLUME}={settings[SHADOW_VOLUME]}");
-                    //sw.WriteLine($"{SOUND_QUALITY}={settings[SOUND_QUALITY]}");
                 }
 
                 // Write the driversettings to file
@@ -829,7 +787,7 @@ namespace DoW_DE_Nod_Manager
             {
                 // Save settings that are stored in playercfg.lua
                 // TODO: Use Streams insted of reading and writing the whoile file at once
-                string pathToPlayerConfig = PROFILES_PATH + "\\" + PROFILE + (currentPlayerComboBox.SelectedIndex + 1).ToString() + "\\" + PLAYERCONFIG;
+                string pathToPlayerConfig = Path.Combine(PROFILES_PATH, PROFILE + (currentPlayerComboBox.SelectedIndex + 1).ToString(), PLAYERCONFIG);
 
                 if (File.Exists(pathToPlayerConfig))
                 {
@@ -872,6 +830,7 @@ namespace DoW_DE_Nod_Manager
                     }
                     File.WriteAllLines(pathToPlayerConfig, lines);
                 }
+                // playercfg.lua doesn't exist!
                 else
                 {
                     using (StreamWriter sw = File.CreateText(pathToPlayerConfig))
@@ -879,12 +838,7 @@ namespace DoW_DE_Nod_Manager
                         sw.WriteLine("Controls = ");
                         sw.WriteLine("{");
                         sw.WriteLine($"\t{CURSOR_SCALE} = {settings[CURSOR_SCALE]},");
-                        sw.WriteLine($"\t{ENABLE_CHAT} = {settings[ENABLE_CHAT]},");
-                        sw.WriteLine($"\t{HOTKEY_PRESET} = \"{settings[HOTKEY_PRESET]}\",");
-                        sw.WriteLine($"\t{INVERT_DECLINATION} = {settings[INVERT_DECLINATION]},");
-                        sw.WriteLine($"\t{INVERT_PAN} = {settings[INVERT_PAN]},");
-                        sw.WriteLine($"\t{SCROLL_RATE} = {settings[SCROLL_RATE]},");
-                        sw.WriteLine($"\t{SHOW_HOTKEYS} = {settings[SHOW_HOTKEYS]},");
+                        sw.WriteLine($"\t{LOCK_CURSOR} = {settings[LOCK_CURSOR]},");
                         sw.WriteLine("}");
                         sw.WriteLine("Sound = ");
                         sw.WriteLine("{");
@@ -1126,29 +1080,6 @@ namespace DoW_DE_Nod_Manager
         }
 
         /// <summary>
-        /// This method reacts to changes in colorDepthComboBox.SelectedIndex
-        /// </summary>
-        //void ColorDepthComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    switch (colorDepthComboBox.SelectedIndex)
-        //    {
-        //        case 2:
-        //            settings[SCREEN_DEPTH] = "32";
-        //            break;
-        //        case 1:
-        //            settings[SCREEN_DEPTH] = "24";
-        //            break;
-        //        case 0:
-        //            settings[SCREEN_DEPTH] = "16";
-        //            break;
-        //    }
-
-        //    closeButton.Text = CANCEL_LABEL;
-        //    saveButton.Enabled = true;
-        //    defaultsButton.Enabled = true;
-        //}
-
-        /// <summary>
         /// This method reacts to changes in gammaTrackBar.Value
         /// </summary>
         void GammaTrackBar_Scroll(object sender, EventArgs e)
@@ -1245,21 +1176,6 @@ namespace DoW_DE_Nod_Manager
         }
 
         /// <summary>
-        /// This method reacts to changes in betterTeamcoloredTexturexCheckBox.Checked
-        /// </summary>
-        //void BetterTeamcoloredTexturexCheckBox_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (betterTeamcoloredTexturexCheckBox.Checked)
-        //        settings[FULLRES_TEAMCOLOUR] = "1";
-        //    else
-        //        settings[FULLRES_TEAMCOLOUR] = "0";
-
-        //    closeButton.Text = CANCEL_LABEL;
-        //    saveButton.Enabled = true;
-        //    defaultsButton.Enabled = true;
-        //}
-
-        /// <summary>
         /// This method reacts to changes in shadowsDetailComboBox.SelectedIndex
         /// </summary>
         void ShadowsDetailComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1267,20 +1183,6 @@ namespace DoW_DE_Nod_Manager
             // Using goto we could fall through even if case is not empty!
             switch (shadowsDetailComboBox.SelectedIndex)
             {
-                //case 0:
-                //    settings[SHADOW_BLOB] = "0";
-                //    settings[SHADOW_MAP] = "0";
-                //    settings[SHADOW_VOLUME] = "0";
-                //    break;
-                //case 3:
-                //    settings[SHADOW_VOLUME] = "1";
-                //    goto case 2;
-                //case 2:
-                //    settings[SHADOW_MAP] = "1";
-                //    goto case 1;
-                //case 1:
-                //    settings[SHADOW_BLOB] = "1";
-                //    break;
                 case 0:
                     settings[SHADOW_MAP] = "0";
                     break;
@@ -1437,18 +1339,6 @@ namespace DoW_DE_Nod_Manager
         }
 
         /// <summary>
-        /// This method reacts to changes in soundQualityComboBox.SelectedIndex
-        /// </summary>
-        //void SoundQualityComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    settings[SOUND_QUALITY] = soundQualityComboBox.SelectedIndex.ToString();
-
-        //    closeButton.Text = CANCEL_LABEL;
-        //    saveButton.Enabled = true;
-        //    defaultsButton.Enabled = true;
-        //}
-
-        /// <summary>
         /// This method reacts to changes in soundChannelsComboBox.SelectedIndex
         /// </summary>
         void SoundChannelsComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1539,16 +1429,12 @@ namespace DoW_DE_Nod_Manager
             settings[CAMERA_DETAIL] = "0";
             settings[DYNAMIC_LIGHTS] = "0";
             settings[EVENT_DETAIL_LEVEL] = "0";
-            //settings[FULLRES_TEAMCOLOUR] = "0";
             settings[FX_DETAIL_LEVEL] = "0";
             settings[MODEL_DETAIL] = "0";
             settings[PERSISTENT_BODIES] = "0";
             settings[PERSISTENT_DECALS] = "0";
             settings[SCREEN_ANIALIAS] = "0";
-            //settings[SCREEN_DEPTH] = "16";
-            //settings[SHADOW_BLOB] = "0";
             settings[SHADOW_MAP] = "0";
-            //settings[SHADOW_VOLUME] = "0";
             settings[TERRAIN_ENABLE_FOW_BLUR] = "0";
             settings[TEXTURE_DETAIL] = "0";
 
@@ -1568,16 +1454,12 @@ namespace DoW_DE_Nod_Manager
             settings[CAMERA_DETAIL] = "1";
             settings[DYNAMIC_LIGHTS] = "1";
             settings[EVENT_DETAIL_LEVEL] = "1";
-            //settings[FULLRES_TEAMCOLOUR] = "0";
             settings[FX_DETAIL_LEVEL] = "1";
             settings[MODEL_DETAIL] = "1";
             settings[PERSISTENT_BODIES] = "1";
             settings[PERSISTENT_DECALS] = "1";
             settings[SCREEN_ANIALIAS] = "0";
-            //settings[SCREEN_DEPTH] = "32";
-            //settings[SHADOW_BLOB] = "1";
             settings[SHADOW_MAP] = "1024";
-            //settings[SHADOW_VOLUME] = "0";
             settings[TERRAIN_ENABLE_FOW_BLUR] = "1";
             settings[TEXTURE_DETAIL] = "1";
 
@@ -1597,16 +1479,12 @@ namespace DoW_DE_Nod_Manager
             settings[CAMERA_DETAIL] = "1";
             settings[DYNAMIC_LIGHTS] = "2";
             settings[EVENT_DETAIL_LEVEL] = "2";
-            //settings[FULLRES_TEAMCOLOUR] = "0";
             settings[FX_DETAIL_LEVEL] = "2";
             settings[MODEL_DETAIL] = "2";
             settings[PERSISTENT_BODIES] = "2";
             settings[PERSISTENT_DECALS] = "2";
             settings[SCREEN_ANIALIAS] = "0";
-            //settings[SCREEN_DEPTH] = "32";
-            //settings[SHADOW_BLOB] = "1";
             settings[SHADOW_MAP] = "2048";
-            //settings[SHADOW_VOLUME] = "0";
             settings[TERRAIN_ENABLE_FOW_BLUR] = "2";
             settings[TEXTURE_DETAIL] = "2";
 
@@ -1626,16 +1504,12 @@ namespace DoW_DE_Nod_Manager
             settings[CAMERA_DETAIL] = "1";
             settings[DYNAMIC_LIGHTS] = "3";
             settings[EVENT_DETAIL_LEVEL] = "2";
-            //settings[FULLRES_TEAMCOLOUR] = "1";
             settings[FX_DETAIL_LEVEL] = "2";
             settings[MODEL_DETAIL] = "2";
             settings[PERSISTENT_BODIES] = "3";
             settings[PERSISTENT_DECALS] = "2";
             settings[SCREEN_ANIALIAS] = "1";
-            //settings[SCREEN_DEPTH] = "32";
-            //settings[SHADOW_BLOB] = "1";
             settings[SHADOW_MAP] = "4096";
-            //settings[SHADOW_VOLUME] = "1";
             settings[TERRAIN_ENABLE_FOW_BLUR] = "2";
             settings[TEXTURE_DETAIL] = "2";
 
@@ -1655,7 +1529,6 @@ namespace DoW_DE_Nod_Manager
             settings[SOUND_ENABLED] = "1";
             settings[SOUND_LIMIT_SAMPLES] = "1";
             settings[SOUND_NR_CHANNELS] = "16";
-            //settings[SOUND_QUALITY] = "0";
 
             InitializeGUIWithSettings(localINI: true, playercfgLUA: false);
 
@@ -1673,7 +1546,6 @@ namespace DoW_DE_Nod_Manager
             settings[SOUND_ENABLED] = "1";
             settings[SOUND_LIMIT_SAMPLES] = "0";
             settings[SOUND_NR_CHANNELS] = "32";
-            //settings[SOUND_QUALITY] = "1";
 
             InitializeGUIWithSettings(localINI: true, playercfgLUA: false);
 
@@ -1691,7 +1563,6 @@ namespace DoW_DE_Nod_Manager
             settings[SOUND_ENABLED] = "1";
             settings[SOUND_LIMIT_SAMPLES] = "0";
             settings[SOUND_NR_CHANNELS] = "64";
-            //settings[SOUND_QUALITY] = "2";
 
             InitializeGUIWithSettings(localINI: true, playercfgLUA: false);
 
@@ -1772,11 +1643,12 @@ namespace DoW_DE_Nod_Manager
             }
 
             string newProfileName = PROFILE + indexOfNewProfile;
-            string newProfilePath = PROFILES_PATH + "\\" + newProfileName;
+            string newProfilePath = Path.Combine(PROFILES_PATH, newProfileName);
 
-            Directory.CreateDirectory(newProfilePath);
             try
             {
+                Directory.CreateDirectory(newProfilePath);
+
                 File.WriteAllText(newProfilePath + "\\" + NAME_DAT, newPlayerTextBox.Text, Encoding.GetEncoding("utf-16"));
 
                 newPlayerTextBox.Text = "";
@@ -1784,6 +1656,35 @@ namespace DoW_DE_Nod_Manager
 
                 FindAllProfilesInDirectory(clearProfiles: true);
                 InitializeGUIWithSettings(localINI: true, playercfgLUA: true);
+
+                // Create an empty DoWDE directory
+                Directory.CreateDirectory(Path.Combine(newProfilePath, "DoWDE"));
+
+                // Create a PLAYERCONFIG file and fill it with default values
+                //TODO: Code duplication
+                string pathToPlayerConfig = Path.Combine(newProfilePath, PLAYERCONFIG);
+                using (StreamWriter sw = File.CreateText(pathToPlayerConfig))
+                {
+                    sw.WriteLine("Controls = ");
+                    sw.WriteLine("{");
+                    sw.WriteLine($"\t{CURSOR_SCALE} = {settings[CURSOR_SCALE]},");
+                    sw.WriteLine($"\t{LOCK_CURSOR} = {settings[LOCK_CURSOR]},");
+                    sw.WriteLine("}");
+                    sw.WriteLine("Sound = ");
+                    sw.WriteLine("{");
+                    sw.WriteLine($"\t{SOUND_VOLUME_AMBIENT} = {settings[SOUND_VOLUME_AMBIENT]},");
+                    sw.WriteLine($"\t{SOUND_VOLUME_MUSIC} = {settings[SOUND_VOLUME_MUSIC]},");
+                    sw.WriteLine($"\t{SOUND_VOLUME_SFX} = {settings[SOUND_VOLUME_SFX]},");
+                    sw.WriteLine($"\t{SOUND_VOLUME_VOICE} = {settings[SOUND_VOLUME_VOICE]},");
+                    sw.WriteLine("}");
+                    sw.WriteLine("player_preferences = ");
+                    sw.WriteLine("{");
+                    sw.WriteLine("\tcampaign_played_disorder = false,");
+                    sw.WriteLine("\tcampaign_played_order = false,");
+                    sw.WriteLine("\tforce_name = \"Blood Ravens\",");
+                    sw.WriteLine("\trace = \"space_marine_race\",");
+                    sw.WriteLine("}");
+                }
             }
             catch (Exception ex)
             {

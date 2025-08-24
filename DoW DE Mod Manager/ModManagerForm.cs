@@ -10,6 +10,7 @@ using System.Threading;
 using System.Runtime.CompilerServices;
 using System.Runtime;
 using System.Net;
+using DoW_DE_Mod_Manager;
 
 namespace DoW_DE_Nod_Manager
 {
@@ -59,6 +60,7 @@ namespace DoW_DE_Nod_Manager
         public const string IS_GOG_VERSION = "IsGOGVersion";
         public const string DXVK_UPDATE_CHECK = "DXVKUpdateCheck";
         public const string SOULSTORM_DIR = "SoulstormDir";
+        public const string FULLSCREEEN = "Fullscreen";
 
         // A boolean array that maps Index-wise to the filepaths indices. Index 0 checks if required mod at index 0 in the FilePaths is installed or not.
         bool[] isInstalled;
@@ -95,7 +97,8 @@ namespace DoW_DE_Nod_Manager
             [AOT_COMPILATION] = "1",
             [IS_GOG_VERSION] = "0",
             [DXVK_UPDATE_CHECK] = "1",
-            [SOULSTORM_DIR] = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Dawn of War Soulstorm"
+            [SOULSTORM_DIR] = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Dawn of War Soulstorm",
+            [FULLSCREEEN] = "0"
         };
 
         /// <summary>
@@ -187,6 +190,7 @@ namespace DoW_DE_Nod_Manager
             nomoviesCheckBox.CheckedChanged += new EventHandler(NomoviesCheckBox_CheckedChanged);
             noFogCheckbox.CheckedChanged += new EventHandler(NoFogCheckboxCheckedChanged);
             noprecachemodelsCheckBox.CheckedChanged += new EventHandler(NoprecachemodelsCheckBox_CheckedChanged);
+            fullscreenCheckBox.CheckedChanged += new EventHandler(FullscreenCheckBox_CheckedChanged);
 
             // Check for an update
             if (settings[AUTOUPDATE] == "1")
@@ -319,6 +323,7 @@ namespace DoW_DE_Nod_Manager
                         case AOT_COMPILATION:
                         case NO_FOG:
                         case IS_GOG_VERSION:
+                        case FULLSCREEEN:
                         case DXVK_UPDATE_CHECK:
                             if (Convert.ToInt32(value) > 0)
                                 settings[setting] = value;
@@ -588,7 +593,8 @@ namespace DoW_DE_Nod_Manager
                 sw.WriteLine($"{NO_FOG}={settings[NO_FOG]}");
                 sw.WriteLine($"{IS_GOG_VERSION}={settings[IS_GOG_VERSION]}");
                 sw.WriteLine($"{DXVK_UPDATE_CHECK}={settings[DXVK_UPDATE_CHECK]}");
-                sw.Write($"{SOULSTORM_DIR}={settings[SOULSTORM_DIR]}");
+                sw.WriteLine($"{SOULSTORM_DIR}={settings[SOULSTORM_DIR]}");
+                sw.Write($"{FULLSCREEEN}={settings[FULLSCREEEN]}");
             }
 
             // If Timer Resolution was lowered we have to keep DoW Mod Manager alive or Timer Resolution will be reset
@@ -883,7 +889,7 @@ namespace DoW_DE_Nod_Manager
         /// This method handles starting an instance of CurrentGameEXE with arguments
         /// </summary>
         /// <param name="modName"></param>
-        void StartGameWithOptions(string modName)
+        public void StartGameWithOptions(string modName)
         {
             string arguments = "-modname " + modName;
 
@@ -896,6 +902,9 @@ namespace DoW_DE_Nod_Manager
                 arguments += " -forcehighpoly";
             if (settings[NO_PRECACHE_MODELS] == "1")
                 arguments += " -noprecachemodels";
+            if (settings[FULLSCREEEN] == "1")
+                arguments += " -fullscreen";
+
 
             Process proc = new Process();
             proc.StartInfo.FileName = CurrentGameEXE;
@@ -1140,39 +1149,6 @@ namespace DoW_DE_Nod_Manager
         }
 
         /// <summary>
-        /// This method checks if a file is yet still opened and thus blocked.
-        /// It prevents crashes when attempting to write to files not yet closed.
-        /// </summary>
-        /// <param name="file"></param>
-        /// <returns>bool</returns>
-        bool IsFileLocked(string file)
-        {
-            FileStream fs = null;
-            try
-            {
-                fs = File.Open(file, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
-            }
-            catch (IOException)
-            {
-                // The file is unavailable because it is:
-                // still being written to
-                // or being processed by another thread
-                // or does not exist (has already been processed)
-                return true;
-            }
-            finally
-            {
-                fs?.Close();
-
-                // Or using the old way of checking that
-                //if (fs != null) fs.Close();
-            }
-
-            // File is not locked
-            return false;
-        }
-
-        /// <summary>
         /// This method can be used ouside this class to get a setting
         /// </summary>
         /// <param name="setting"></param>
@@ -1239,6 +1215,9 @@ namespace DoW_DE_Nod_Manager
                 case SOULSTORM_DIR:
                     if (newValue.Contains("\\"))
                         settings[SOULSTORM_DIR] = newValue;
+                    break;
+                case FULLSCREEEN:
+                    settings[FULLSCREEEN] = newValue;
                     break;
             }
         }
@@ -1333,7 +1312,7 @@ namespace DoW_DE_Nod_Manager
             }
         }
 
-        private void SoulstormButton_Click(object sender, EventArgs e)
+        void SoulstormButton_Click(object sender, EventArgs e)
         {
             using (var fbd = new FolderBrowserDialog())
             {
@@ -1353,6 +1332,28 @@ namespace DoW_DE_Nod_Manager
                         ThemedMessageBox.Show("The path shouldn't be the same as Definbitive Edition\nor Relic Entertainment path!", "Warning:");
                 }
             }
+        }
+
+        void FullscreenCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (fullscreenCheckBox.Checked)
+            {
+                settings[FULLSCREEEN] = "1";
+                ThemedMessageBox.Show("PRO: It may increase performance\nCON: It may make a game unstable!\nEscpecially after Alt + Tabbing","Warning!");
+            }
+            else
+                settings[FULLSCREEEN] = "0";
+        }
+
+        void StartExpansionbutton_Click(object sender, EventArgs e)
+        {
+            new StartExpansionForm(this).Show();
+            startExpansionbutton.Enabled = false;
+        }
+
+        public void EnableStartExpansionButton()
+        {
+            startExpansionbutton.Enabled = true;
         }
     }
 }
