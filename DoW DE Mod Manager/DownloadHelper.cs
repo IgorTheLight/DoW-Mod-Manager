@@ -152,7 +152,7 @@ namespace DoW_DE_Nod_Manager
         {
             DownloadFile(
                 "https://github.com/IgorTheLight/DoW-Mod-Manager/raw/refs/heads/DE/DoW%20DE%20Mod%20Manager/LatestStable/DoW%20Mod%20Manager.exe",
-                Path.Combine(currentDir, $"DoW Mod Manager v{latestStringVersion}.exe"),
+                Path.Combine(currentDir, $"DoW DE Mod Manager v{latestStringVersion}.exe"),
                 closeAndDeleteApplication: true
             );
         }

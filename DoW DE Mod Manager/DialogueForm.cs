@@ -13,7 +13,7 @@ namespace DoW_DE_Nod_Manager
 
             this.exeORmods = exeORmods;
 
-            dmessageLabel.Text = message;
+            dmessageLabel.Text = message;   // Make sure that text is not longer than 68 lines and each line is no longer than 300 characters!
             Text = title;
         }
 

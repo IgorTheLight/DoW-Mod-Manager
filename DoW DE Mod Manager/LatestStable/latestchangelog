@@ -1,4 +1,3 @@
-- Added: an Experimental section with new (and old) features!
-- Added: an ability to start a game in Exclusive Fullscreen from Experimentsl
-- Re-added: the ability to start any of the expansions from Experimental
-And many more!
+- Added: a real 4k resolution - 3840x2160
+- Fixed: a ThemedDialogBox that pops-up when anuser is prompted to update anything
+- Fixed: a bug with window resizing

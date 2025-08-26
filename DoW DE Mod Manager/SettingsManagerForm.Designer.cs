@@ -726,6 +726,7 @@
             this.screenResolutionComboBox.Items.AddRange(new object[] {
             "4096×2160",
             "3840×2400",
+            "3840×2160",
             "2560×1600",
             "2560×1440",
             "1920×1200",

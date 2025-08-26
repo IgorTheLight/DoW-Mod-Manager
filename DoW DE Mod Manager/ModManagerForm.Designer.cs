@@ -431,7 +431,7 @@ namespace DoW_DE_Nod_Manager
             // 
             // dxvkButton
             // 
-            this.dxvkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dxvkButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dxvkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.dxvkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dxvkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
@@ -582,8 +582,6 @@ namespace DoW_DE_Nod_Manager
             // 
             // panel3
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.AutoSize = true;
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.panel3.Controls.Add(this.startExpansionbutton);

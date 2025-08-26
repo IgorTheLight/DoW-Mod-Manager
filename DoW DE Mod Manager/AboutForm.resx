@@ -59,7 +59,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 1.1.0.0
+    <value>## Version 1.1.0.1
+
+- Added: a real 4k resolution - 3840x2160
+- Fixed: a ThemedDialogBox that pops-up when anuser is prompted to update anything
+- Fixed: a bug with window resizing
+
+## Version 1.1.0.0
 
 - Added: an Experimental section with new (and old) features!
 - Added: an ability to start a game in Exclusive Fullscreen from Experimentsl
