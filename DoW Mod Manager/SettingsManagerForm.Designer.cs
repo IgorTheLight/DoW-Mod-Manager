@@ -55,6 +55,8 @@
             this.currentPlayerComboBox = new System.Windows.Forms.ComboBox();
             this.currentPlayerLabel = new System.Windows.Forms.Label();
             this.videoTabPage = new System.Windows.Forms.TabPage();
+            this.ultraPlusGraphicsButton = new System.Windows.Forms.Button();
+            this.lowMinusGraphicsButton = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.activeVideocardComboBox = new System.Windows.Forms.ComboBox();
             this.screenResolutionLabel = new System.Windows.Forms.Label();
@@ -127,8 +129,6 @@
             this.soundQualityLabel = new System.Windows.Forms.Label();
             this.randomizedSoundsCheckBox = new System.Windows.Forms.CheckBox();
             this.randomizedSoundsLabel = new System.Windows.Forms.Label();
-            this.lowMinusGraphicsButton = new System.Windows.Forms.Button();
-            this.ultraPlusGraphicsButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.generalTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scrollRateTrackBar)).BeginInit();
@@ -237,7 +237,7 @@
             this.generalTabPage.Controls.Add(this.currentPlayerLabel);
             this.generalTabPage.Location = new System.Drawing.Point(4, 22);
             this.generalTabPage.Name = "generalTabPage";
-            this.generalTabPage.Size = new System.Drawing.Size(572, 550);
+            this.generalTabPage.Size = new System.Drawing.Size(619, 550);
             this.generalTabPage.TabIndex = 3;
             this.generalTabPage.Text = "General";
             // 
@@ -494,6 +494,34 @@
             this.videoTabPage.TabIndex = 0;
             this.videoTabPage.Text = "Video";
             // 
+            // ultraPlusGraphicsButton
+            // 
+            this.ultraPlusGraphicsButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.ultraPlusGraphicsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.ultraPlusGraphicsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ultraPlusGraphicsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.ultraPlusGraphicsButton.Location = new System.Drawing.Point(515, 486);
+            this.ultraPlusGraphicsButton.Name = "ultraPlusGraphicsButton";
+            this.ultraPlusGraphicsButton.Size = new System.Drawing.Size(94, 38);
+            this.ultraPlusGraphicsButton.TabIndex = 51;
+            this.ultraPlusGraphicsButton.Text = "ULTRA+";
+            this.ultraPlusGraphicsButton.UseVisualStyleBackColor = false;
+            this.ultraPlusGraphicsButton.Click += new System.EventHandler(this.UltraPlusGraphicsButton_Click);
+            // 
+            // lowMinusGraphicsButton
+            // 
+            this.lowMinusGraphicsButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lowMinusGraphicsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lowMinusGraphicsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lowMinusGraphicsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.lowMinusGraphicsButton.Location = new System.Drawing.Point(13, 486);
+            this.lowMinusGraphicsButton.Name = "lowMinusGraphicsButton";
+            this.lowMinusGraphicsButton.Size = new System.Drawing.Size(94, 38);
+            this.lowMinusGraphicsButton.TabIndex = 50;
+            this.lowMinusGraphicsButton.Text = "LOW-";
+            this.lowMinusGraphicsButton.UseVisualStyleBackColor = false;
+            this.lowMinusGraphicsButton.Click += new System.EventHandler(this.LowMinusGraphicsButton_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -587,6 +615,7 @@
             this.screenResolutionComboBox.Items.AddRange(new object[] {
             "4096×2160",
             "3840×2400",
+            "3840×2160",
             "2560×1600",
             "2560×1440",
             "1920×1200",
@@ -1188,7 +1217,7 @@
             this.audioTabPage.Location = new System.Drawing.Point(4, 22);
             this.audioTabPage.Name = "audioTabPage";
             this.audioTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.audioTabPage.Size = new System.Drawing.Size(572, 550);
+            this.audioTabPage.Size = new System.Drawing.Size(619, 550);
             this.audioTabPage.TabIndex = 1;
             this.audioTabPage.Text = "Audio";
             // 
@@ -1424,34 +1453,6 @@
             this.randomizedSoundsLabel.Size = new System.Drawing.Size(107, 13);
             this.randomizedSoundsLabel.TabIndex = 35;
             this.randomizedSoundsLabel.Text = "Randomizes Sounds:";
-            // 
-            // lowMinusGraphicsButton
-            // 
-            this.lowMinusGraphicsButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.lowMinusGraphicsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.lowMinusGraphicsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lowMinusGraphicsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.lowMinusGraphicsButton.Location = new System.Drawing.Point(13, 486);
-            this.lowMinusGraphicsButton.Name = "lowMinusGraphicsButton";
-            this.lowMinusGraphicsButton.Size = new System.Drawing.Size(94, 38);
-            this.lowMinusGraphicsButton.TabIndex = 50;
-            this.lowMinusGraphicsButton.Text = "LOW-";
-            this.lowMinusGraphicsButton.UseVisualStyleBackColor = false;
-            this.lowMinusGraphicsButton.Click += new System.EventHandler(this.LowMinusGraphicsButton_Click);
-            // 
-            // ultraPlusGraphicsButton
-            // 
-            this.ultraPlusGraphicsButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.ultraPlusGraphicsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.ultraPlusGraphicsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ultraPlusGraphicsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.ultraPlusGraphicsButton.Location = new System.Drawing.Point(515, 486);
-            this.ultraPlusGraphicsButton.Name = "ultraPlusGraphicsButton";
-            this.ultraPlusGraphicsButton.Size = new System.Drawing.Size(94, 38);
-            this.ultraPlusGraphicsButton.TabIndex = 51;
-            this.ultraPlusGraphicsButton.Text = "ULTRA+";
-            this.ultraPlusGraphicsButton.UseVisualStyleBackColor = false;
-            this.ultraPlusGraphicsButton.Click += new System.EventHandler(this.UltraPlusGraphicsButton_Click);
             // 
             // SettingsManagerForm
             // 

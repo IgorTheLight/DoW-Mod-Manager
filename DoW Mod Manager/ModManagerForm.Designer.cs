@@ -293,7 +293,7 @@ namespace DoW_Mod_Manager
             this.gameLAAStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.gameLAAStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameLAAStatusLabel.ForeColor = System.Drawing.Color.Gray;
-            this.gameLAAStatusLabel.Location = new System.Drawing.Point(182, 47);
+            this.gameLAAStatusLabel.Location = new System.Drawing.Point(178, 47);
             this.gameLAAStatusLabel.Margin = new System.Windows.Forms.Padding(3);
             this.gameLAAStatusLabel.Name = "gameLAAStatusLabel";
             this.gameLAAStatusLabel.Size = new System.Drawing.Size(65, 13);
@@ -353,7 +353,7 @@ namespace DoW_Mod_Manager
             this.toggleLAAButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.toggleLAAButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.toggleLAAButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.toggleLAAButton.Location = new System.Drawing.Point(11, 40);
+            this.toggleLAAButton.Location = new System.Drawing.Point(7, 40);
             this.toggleLAAButton.Name = "toggleLAAButton";
             this.toggleLAAButton.Size = new System.Drawing.Size(154, 31);
             this.toggleLAAButton.TabIndex = 20;
@@ -387,7 +387,7 @@ namespace DoW_Mod_Manager
             this.settingsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.settingsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.settingsButton.Location = new System.Drawing.Point(11, 3);
+            this.settingsButton.Location = new System.Drawing.Point(7, 3);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(104, 31);
             this.settingsButton.TabIndex = 22;
@@ -430,7 +430,7 @@ namespace DoW_Mod_Manager
             this.checkForErrorsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.checkForErrorsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkForErrorsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.checkForErrorsButton.Location = new System.Drawing.Point(121, 3);
+            this.checkForErrorsButton.Location = new System.Drawing.Point(117, 3);
             this.checkForErrorsButton.Name = "checkForErrorsButton";
             this.checkForErrorsButton.Size = new System.Drawing.Size(104, 31);
             this.checkForErrorsButton.TabIndex = 25;
@@ -465,7 +465,7 @@ namespace DoW_Mod_Manager
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 32);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 185);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(333, 185);
             this.flowLayoutPanel1.TabIndex = 28;
             // 
             // noprecachemodelsCheckBox
@@ -505,7 +505,7 @@ namespace DoW_Mod_Manager
             this.fontStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.fontStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontStatusLabel.ForeColor = System.Drawing.Color.Gray;
-            this.fontStatusLabel.Location = new System.Drawing.Point(182, 159);
+            this.fontStatusLabel.Location = new System.Drawing.Point(178, 159);
             this.fontStatusLabel.Margin = new System.Windows.Forms.Padding(3);
             this.fontStatusLabel.Name = "fontStatusLabel";
             this.fontStatusLabel.Size = new System.Drawing.Size(65, 20);
@@ -514,12 +514,12 @@ namespace DoW_Mod_Manager
             // 
             // fontButton
             // 
-            this.fontButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.fontButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.fontButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.fontButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fontButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.fontButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.fontButton.Location = new System.Drawing.Point(11, 151);
+            this.fontButton.Location = new System.Drawing.Point(7, 151);
             this.fontButton.Name = "fontButton";
             this.fontButton.Size = new System.Drawing.Size(154, 31);
             this.fontButton.TabIndex = 29;
@@ -532,7 +532,7 @@ namespace DoW_Mod_Manager
             this.cameraStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cameraStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cameraStatusLabel.ForeColor = System.Drawing.Color.Gray;
-            this.cameraStatusLabel.Location = new System.Drawing.Point(182, 122);
+            this.cameraStatusLabel.Location = new System.Drawing.Point(178, 122);
             this.cameraStatusLabel.Margin = new System.Windows.Forms.Padding(3);
             this.cameraStatusLabel.Name = "cameraStatusLabel";
             this.cameraStatusLabel.Size = new System.Drawing.Size(65, 20);
@@ -541,12 +541,12 @@ namespace DoW_Mod_Manager
             // 
             // cameraButton
             // 
-            this.cameraButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cameraButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cameraButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.cameraButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cameraButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.cameraButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.cameraButton.Location = new System.Drawing.Point(11, 114);
+            this.cameraButton.Location = new System.Drawing.Point(7, 114);
             this.cameraButton.Name = "cameraButton";
             this.cameraButton.Size = new System.Drawing.Size(154, 31);
             this.cameraButton.TabIndex = 27;
@@ -559,7 +559,7 @@ namespace DoW_Mod_Manager
             this.DXVKStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.DXVKStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DXVKStatusLabel.ForeColor = System.Drawing.Color.Gray;
-            this.DXVKStatusLabel.Location = new System.Drawing.Point(182, 85);
+            this.DXVKStatusLabel.Location = new System.Drawing.Point(178, 85);
             this.DXVKStatusLabel.Margin = new System.Windows.Forms.Padding(3);
             this.DXVKStatusLabel.Name = "DXVKStatusLabel";
             this.DXVKStatusLabel.Size = new System.Drawing.Size(65, 15);
@@ -568,12 +568,12 @@ namespace DoW_Mod_Manager
             // 
             // dxvkButton
             // 
-            this.dxvkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dxvkButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dxvkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.dxvkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dxvkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.dxvkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.dxvkButton.Location = new System.Drawing.Point(11, 77);
+            this.dxvkButton.Location = new System.Drawing.Point(7, 77);
             this.dxvkButton.Name = "dxvkButton";
             this.dxvkButton.Size = new System.Drawing.Size(154, 31);
             this.dxvkButton.TabIndex = 25;

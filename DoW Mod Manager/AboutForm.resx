@@ -59,7 +59,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 2.6.0.4
+    <value>## Version 2.6.1.0
+
+- Added: a warning when user is trying to enable -noprecachemodels
+- Added: a real 4k resolution - 3840x2160
+- Fixed: a ThemedDialogBox that pops-up when anuser is prompted to update anything
+- Fixed: a bug with window resizing
+
+## Version 2.6.0.4
 
 - Added: additional resiliency checks when populations list of installed mods
 - Fixed: an absence of space between mod version number

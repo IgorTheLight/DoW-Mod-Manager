@@ -1085,7 +1085,10 @@ namespace DoW_Mod_Manager
         private void NoprecachemodelsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (noprecachemodelsCheckBox.Checked)
+            {
                 settings[NO_PRECACHE_MODELS] = 1;
+                ThemedMessageBox.Show("CON: Enabling this feature may brake some textures!\nPRO: Game would load much faster and use less memory", "Warning!");
+            }
             else
                 settings[NO_PRECACHE_MODELS] = 0;
         }

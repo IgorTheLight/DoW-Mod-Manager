@@ -1,2 +1,4 @@
-- Added: additional resiliency checks when populations list of installed mods
-- Fixed: an absence of space between mod version number
+- Added: a warning when user is trying to enable -noprecachemodels
+- Added: a real 4k resolution - 3840x2160
+- Fixed: a ThemedDialogBox that pops-up when anuser is prompted to update anything
+- Fixed: a bug with window resizing

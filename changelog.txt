@@ -2,8 +2,15 @@
 
 Who did what:
 Fragjacker (original author) - up to 1.5.2, 1.6.1, 2.0.3, 2.0.5, 2.1.2, 2.1.4, 2.1.5, 2.1.7, 2.1.9, 2.2.2, 2.3.1.0
-IgorTheLight (current main maintainer) - 1.5.3 to 1.6, 1.7 to 2.0.3, 2.0.4, 2.1.0, 2.1.1, 2.1.3, 2.1.6, 2.1.8, 2.2.0, 2.2.1, 2.3.0.0, 2.3.2.0, 2.4.0.0, 2.4.1.0, 2.4.1.1, 2.4.2.0, 2.5.0.0, 2.5.1.0, 2.5.1.1, 2.5.2.0, 2.6.0.0 - 2.6.0.4
+IgorTheLight (current main maintainer) - 1.5.3 to 1.6, 1.7 to 2.0.3, 2.0.4, 2.1.0, 2.1.1, 2.1.3, 2.1.6, 2.1.8, 2.2.0, 2.2.1, 2.3.0.0, 2.3.2.0, 2.4.0.0, 2.4.1.0, 2.4.1.1, 2.4.2.0, 2.5.0.0, 2.5.1.0, 2.5.1.1, 2.5.2.0, 2.6.0.0 - 2.6.0.4, 2.6.1.0
 BlueAmulet - 2.1.7
+
+## Version 2.6.1.0
+
+- Added: a warning when user is trying to enable -noprecachemodels
+- Added: a real 4k resolution - 3840x2160
+- Fixed: a ThemedDialogBox that pops-up when anuser is prompted to update anything
+- Fixed: a bug with window resizing
 
 ## Version 2.6.0.4
 
