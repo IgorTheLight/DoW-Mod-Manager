@@ -6,7 +6,7 @@ IgorTheLight (current main maintainer) - 1.0.0.0 - 1.0.0.3, 1.0.1.0, 1.0.1.1, 1.
 ## Version 1.1.0.1
 
 - Added: a real 4k resolution - 3840x2160
-- Fixed: a ThemedDialogBox that pops-up when anuser is prompted to update anything
+- Fixed: a ThemedDialogBox that pops-up when an user is prompted to update anything
 - Fixed: a bug with window resizing
 
 ## Version 1.1.0.0
