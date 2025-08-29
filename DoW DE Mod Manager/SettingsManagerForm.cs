@@ -7,7 +7,6 @@ using System.Management;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace DoW_DE_Nod_Manager
 {
@@ -230,7 +229,7 @@ namespace DoW_DE_Nod_Manager
                 // For playercfg.lua
                 [CURSOR_SCALE] = "1",
                 [ENABLE_CHAT] = "false",
-                [HOTKEY_PRESET] = "KEYDEFAULTS",
+                [HOTKEY_PRESET] = "keydefaults",
                 [INVERT_DECLINATION] = "0",
                 [INVERT_PAN] = "1",
                 [LOCK_CURSOR] = "true",
@@ -515,7 +514,7 @@ namespace DoW_DE_Nod_Manager
                             else if (setting.Contains(ENABLE_CHAT))
                                 settings[ENABLE_CHAT] = value;
                             else if (setting.Contains(HOTKEY_PRESET))
-                                settings[HOTKEY_PRESET] = value;
+                                settings[HOTKEY_PRESET] = value.Trim('\"');
                             else if (setting.Contains(INVERT_DECLINATION))
                                 settings[INVERT_DECLINATION] = value;
                             else if (setting.Contains(LOCK_CURSOR))
@@ -640,14 +639,20 @@ namespace DoW_DE_Nod_Manager
                 // TODO: Add other values!
                 switch (settings[HOTKEY_PRESET])
                 {
-                    case "KEYDEFAULTS":
+                    case "keydefaults":
                         hotkeyPresetComboBox.SelectedIndex = 0;
                         break;
-                    case "KEYDEFAULTS_GRID":
+                    case "keydefaults_grid":
                         hotkeyPresetComboBox.SelectedIndex = 1;
                         break;
-                    case "KEYDEFAULTS_MODERN":
+                    case "keydefaults_grid_azerty":
                         hotkeyPresetComboBox.SelectedIndex = 2;
+                        break;
+                    case "keydefaults_grid_qwertz":
+                        hotkeyPresetComboBox.SelectedIndex = 3;
+                        break;
+                    case "keydefaults_modern":
+                        hotkeyPresetComboBox.SelectedIndex = 4;
                         break;
                 }
                 inverseDeclinationCheckBox.Checked = settings[INVERT_DECLINATION] == "1";
@@ -1774,13 +1779,19 @@ namespace DoW_DE_Nod_Manager
             switch (hotkeyPresetComboBox.SelectedIndex)
             {
                 case 0:
-                    settings[HOTKEY_PRESET] = "KEYDEFAULTS";
+                    settings[HOTKEY_PRESET] = "keydefaults";
                     break;
                 case 1:
-                    settings[HOTKEY_PRESET] = "KEYDEFAULTS_GRID";
+                    settings[HOTKEY_PRESET] = "keydefaults_grid";
                     break;
                 case 2:
-                    settings[HOTKEY_PRESET] = "KEYDEFAULTS_MODERN";
+                    settings[HOTKEY_PRESET] = "keydefaults_grid_azerty";
+                    break;
+                case 3:
+                    settings[HOTKEY_PRESET] = "keydefaults_grid_qwertz";
+                    break;
+                case 4:
+                    settings[HOTKEY_PRESET] = "keydefaults_modern";
                     break;
             }
 

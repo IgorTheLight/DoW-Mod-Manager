@@ -290,7 +290,9 @@
             this.hotkeyPresetComboBox.FormattingEnabled = true;
             this.hotkeyPresetComboBox.Items.AddRange(new object[] {
             "Classic",
-            "Grid",
+            "Grid QWERTY",
+            "Grid AZERTY",
+            "Grid QUERTZ",
             "Modern"});
             this.hotkeyPresetComboBox.Location = new System.Drawing.Point(407, 403);
             this.hotkeyPresetComboBox.Name = "hotkeyPresetComboBox";

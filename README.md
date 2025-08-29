@@ -1,12 +1,12 @@
 ![image](https://media.moddb.com/cache/images/downloads/1/296/295652/thumb_620x2000/Screenshot_2025-08-23_123134.png)
 
-# DoW DE Mod Manager v1.1.0.1
+# DoW DE Mod Manager v1.1.1.0
 
 This application allows for an easy launch of mods and management of large collections of mods for Warhammer 40K Dawn of War series.
 
 ## INSTALLATION:
 
-- In order to install the Mod Manager drop the "DoW DE Mod Manager v1.1.0.1.exe" into your primary game directory
+- In order to install the Mod Manager drop the "DoW DE Mod Manager v1.1.1.0.exe" into your primary game directory
 
   DO NOT put executable file into a subfolder or it won't work!
 
