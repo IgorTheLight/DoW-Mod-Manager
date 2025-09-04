@@ -1,7 +1,11 @@
 # CHANGELOG
 
 Who did what:
-IgorTheLight (current main maintainer) - 1.0.0.0 - 1.0.0.3, 1.0.1.0, 1.0.1.1, 1.1.0.0, 1.1.0.1, 1.1.1.0, 1.1.1.1
+IgorTheLight (current main maintainer) - 1.0.0.0 - 1.0.0.3, 1.0.1.0, 1.0.1.1, 1.1.0.0, 1.1.0.1, 1.1.1.0, 1.1.1.1, 1.1.1.2
+
+## Version 1.1.1.2
+
+- Fixed: a bug with downloading "a better camera"
 
 ## Version 1.1.1.1
 

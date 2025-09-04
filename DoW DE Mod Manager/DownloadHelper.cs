@@ -220,23 +220,21 @@ namespace DoW_DE_Nod_Manager
         static void CleanupAndStartApp()
         {
             string oldExe = Path.Combine(currentDir, AppDomain.CurrentDomain.FriendlyName);
-            string newExe = Path.Combine(currentDir, $"DoW Mod Manager v{latestStringVersion}.exe");
+            string newExe = Path.Combine(currentDir, $"DoW DE Mod Manager v{latestStringVersion}.exe");
 
             Process.Start(newExe);
             Process.Start("cmd.exe", "/C choice /C Y /N /D Y /T 1 & Del \"" + oldExe + "\"");
-            CreateShortcut($"DoW Mod Manager v{latestStringVersion}", newExe);
+            CreateShortcut($"DoW DE Mod Manager v{latestStringVersion}", newExe);
             Program.TerminateApp();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static void CreateShortcut(string shortcutName, string targetPath)
         {
-            string shortcutLocation = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                shortcutName + ".lnk");
+            string shortcutLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), shortcutName + ".lnk");
             var shell = new WshShell();
             var shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
-            shortcut.Description = $"The latest DoW Mod Manager v{latestStringVersion}";
+            shortcut.Description = $"The latest DoW DE Mod Manager v{latestStringVersion}";
             shortcut.TargetPath = targetPath;
             shortcut.WorkingDirectory = currentDir;
             shortcut.Save();

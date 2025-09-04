@@ -224,7 +224,7 @@ namespace DoW_DE_Nod_Manager
                 }
                 catch (Exception)
                 {
-                    //cameraButton.Enabled = false;
+                    cameraButton.Enabled = false;
                     return;
                 }
             }
@@ -1395,8 +1395,10 @@ namespace DoW_DE_Nod_Manager
             }
             else
             {
-                cameraButton.Enabled = false;
                 var client = new WebClient();
+
+                if (!Directory.Exists(cameraDirectory))
+                    Directory.CreateDirectory(cameraDirectory);
 
                 try
                 {
@@ -1407,6 +1409,7 @@ namespace DoW_DE_Nod_Manager
                     isCameraInstalled = true;
 
                     ThemedMessageBox.Show("A better camera is downloaded and enabled!", "Information:");
+                    cameraButton.Enabled = false;
                 }
                 catch (Exception)
                 {

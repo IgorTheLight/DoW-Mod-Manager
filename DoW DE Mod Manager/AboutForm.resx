@@ -59,7 +59,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 1.1.1.1
+    <value>## Version 1.1.1.2
+
+- Fixed: a bug with downloading "a better camera"
+
+## Version 1.1.1.1
 
 - Re-added: a better (further away) camera
 - Removed: dxgi.dll because it's not needed for SXVKL anymore and it causes problems for some users
