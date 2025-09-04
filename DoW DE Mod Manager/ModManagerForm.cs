@@ -42,6 +42,7 @@ namespace DoW_DE_Nod_Manager
         const string WARNINGS_LOG = "warnings.log";
 
         const string DXVK_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/DXVK/";
+        const string CAMERA_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/CAMERA/";
 
         // This is a State Machine which determines what action must be performed
         public enum Action { None, CreateNativeImage, CreateNativeImageAndDeleteJITProfile, DeleteJITProfile, DeleteNativeImage, DeleteJITProfileAndNativeImage }
@@ -71,6 +72,7 @@ namespace DoW_DE_Nod_Manager
 
         public readonly string CurrentDir = Directory.GetCurrentDirectory();
         public readonly string SettingsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Relic Entertainment", "Dawn of War");
+        public readonly string cameraDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Engine", "Data");
         public readonly string CurrentGameEXE = "";
         public string[] ModuleFilePaths;
         public string[] ModFolderPaths;
@@ -79,6 +81,7 @@ namespace DoW_DE_Nod_Manager
         public bool IsTimerResolutionLowered = false;
         string currentModuleFilePath = "";                                          // Contains the name of the current selected Mod.
         bool isDXVKInstalled;
+        bool isCameraInstalled;
 
         // Don't make Settings readonly or it couldn't be changed from outside the class!
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "<Pending>")]
@@ -207,8 +210,32 @@ namespace DoW_DE_Nod_Manager
                 ).Start();
             }
 
+            // TODO: Remove this if DoW Mod Manager version < 1.1.1.1
+            if (File.Exists("dxgi.dll"))
+                File.Delete("dxgi.dll");
+
+            // Checking is better camera installed
+            if (File.Exists(Path.Combine(cameraDirectory, "camera_high.lua")) && File.Exists(Path.Combine(cameraDirectory, "camera_low.lua")))
+            {
+                try
+                {
+                    cameraButton.Text = "Remove a better camera";
+                    isCameraInstalled = true;
+                }
+                catch (Exception)
+                {
+                    //cameraButton.Enabled = false;
+                    return;
+                }
+            }
+            else
+            {
+                cameraButton.Text = "Install a better camera";
+                isCameraInstalled = false;
+            }
+
             // Checking DXVK existing and updates
-            if (File.Exists("dxvk.conf") && File.Exists("d3d9.dll") && File.Exists("dxgi.dll") && File.Exists("dxvk.version"))
+            if (File.Exists("dxvk.conf") && File.Exists("d3d9.dll") && File.Exists("dxvk.version"))
             {
                 try
                 {
@@ -1278,7 +1305,6 @@ namespace DoW_DE_Nod_Manager
                 File.Delete("dxvk.version");
                 File.Delete("dxvk.conf");
                 File.Delete("d3d9.dll");
-                File.Delete("dxgi.dll");
 
                 isDXVKInstalled = false;
                 dxvkButton.Text = "Install DXVK";
@@ -1294,7 +1320,6 @@ namespace DoW_DE_Nod_Manager
                     client.DownloadFile(DXVK_URL + "dxvk.version", "dxvk.version");
                     client.DownloadFile(DXVK_URL + "dxvk.conf", "dxvk.conf");
                     client.DownloadFile(DXVK_URL + "d3d9.dll", "d3d9.dll");
-                    client.DownloadFile(DXVK_URL + "dxgi.dll", "dxgi.dll");
 
                     isDXVKInstalled = true;
                     dxvkButton.Text = "Remove DXVK";
@@ -1354,6 +1379,44 @@ namespace DoW_DE_Nod_Manager
         public void EnableStartExpansionButton()
         {
             startExpansionbutton.Enabled = true;
+        }
+
+        private void CameraButton_Click(object sender, EventArgs e)
+        {
+            if (isCameraInstalled)
+            {
+                File.Delete(Path.Combine(cameraDirectory, "camera_high.lua"));
+                File.Delete(Path.Combine(cameraDirectory, "camera_low.lua"));
+
+                cameraButton.Text = "Install a better camera";
+                isCameraInstalled = false;
+
+                ThemedMessageBox.Show("A Better camera is disabled and deleted!", "Information:");
+            }
+            else
+            {
+                cameraButton.Enabled = false;
+                var client = new WebClient();
+
+                try
+                {
+                    client.DownloadFile(CAMERA_URL + "camera_high.lua", Path.Combine(cameraDirectory, "camera_high.lua"));
+                    client.DownloadFile(CAMERA_URL + "camera_low.lua", Path.Combine(cameraDirectory, "camera_low.lua"));
+
+                    cameraButton.Text = "Remove a better camera";
+                    isCameraInstalled = true;
+
+                    ThemedMessageBox.Show("A better camera is downloaded and enabled!", "Information:");
+                }
+                catch (Exception)
+                {
+                    ThemedMessageBox.Show("We can't download files!", "Warning!");
+                }
+                finally
+                {
+                    client.Dispose();
+                }
+            }
         }
     }
 }

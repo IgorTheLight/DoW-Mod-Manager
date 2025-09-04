@@ -1,1 +1,2 @@
-- Added: new keybinding schemes that were added in the last Definitive Edition update
+- Re-added: a better (further away) camera
+- Removed: dxgi.dll because it's not needed for SXVKL anymore and it causes problems for some users

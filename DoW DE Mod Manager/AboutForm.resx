@@ -59,7 +59,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 1.1.1.0
+    <value>## Version 1.1.1.1
+
+- Re-added: a better (further away) camera
+- Removed: dxgi.dll because it's not needed for SXVKL anymore and it causes problems for some users
+
+## Version 1.1.1.0
 
 - Added: new keybinding schemes that were added in the last Definitive Edition update
 
@@ -79,52 +84,6 @@
 - Retargeted: Modlist to autoupdaes from the "main" branch instead of "DE". What it does is that I could have just one place top update the Modlist
 - Removed: isFileBlocked() method because it is never used anymore
 - Code refactoring
-
-## Version 1.0.1.1
-
-- Added: a Help button for all the features on the main window! ("?" buttons)
-- Added: a blocking mechanism that is preventing users to set his/her Soulstorm directory to Definitive Edition's directory (from UI and from config file)
-- Fixed: a bug where Mod Manager couldn't find dependencies in DE directory
-- Removed: an ability to start Definitive Edition with Original, Winter Assault, Dark Crusade or Soulstorm "mods". Now it only starts as developers are intended to. And that...
-- Fixed: a bug with expansion "mods" duplication
-
-## Version 1.0.1.0
-
-- Added: autodetection of GOG and Steam versions of Definitive Edition.
-- Fixed: detection of mods dependencies if they are not in the DE folder
-- Some code refactoring here and there
-
-## Version 1.0.0.3
-
-- Fixed: a mistake where I accidentally posted 1.0.0.2 under "master" branch. Oops! xD
-- Fixed: two hidden links that still downloaded from master branch
-
-## Version 1.0.0.2
-
-- Added: additional resiliency  checks when populations list of installed mods
-- Changed: INI file name to "DoW DE Mod Manager.ini". Old file will not be used and is not needed anymore! You may safely remove it.
-- Changed: JITProfile file name to "DoW DE Mod Manager.JITProfile". Old file will not be used and is not needed anymore! You may safely remove it.
-- Changed: filename.Contains("modname") to filename == "modname". Than will "catch" mod names like DXP2Dummy and not show them as playable mods
-- Fixed: a bug where ActionState could be written in INI file incorrectly and caused Mod Manager to crash at startup
-- Changed: Debug-Release build settings for Release settings. Looks like antiviruses from VirusTotal are not that aggressive against latest builds of Mod Manager
-- Some code refactoring here and there
-
-## Version 1.0.0.1
-
-- Fixed: a problem with downloading... anything! Updates, mods, DXVK
-
-## Changelog compared to DoW Mod Manager 2.6.0.3:
-
-- Removed: abilty to add better camera because DE already has a pretty good one
-- Removed: abilty to add bigger fonts because DE already has a pretty big ones
-- Removed: "-forcehighpoly" and "fullres_teamcolour" because DE has that enabled permanently
-- Removed: feature to use only cores 2, 3 and 4 of your CPU. That was some voodoo magic that helped some people previously. Not needed in DE
-- Added: support for all new graphical and gameplay features from DE. You can find them in SETTINGS
-- Added support for mods that are stored in %AppData%\Relic Entertainment\Dawn of War\Mods
-- Added: a warning every time when you are enabling "-noprecachemodels". Yes - it really could cause issues in some cases!
-- Added: ability to load mods right from the Soulstorm directory. Just like De does it!
-- Temporary disabled: Fog remover because I need to know new memory values for that xD
-- Some code refactoring here and there
 
 Full changelog: 
 https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/DE/changelog.txt</value>

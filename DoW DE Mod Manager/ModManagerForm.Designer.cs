@@ -56,6 +56,7 @@ namespace DoW_DE_Nod_Manager
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.noprecachemodelsCheckBox = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cameraButton = new System.Windows.Forms.Button();
             this.dxvkButton = new System.Windows.Forms.Button();
             this.GOGRadioButton = new System.Windows.Forms.RadioButton();
             this.SteamRadioButton = new System.Windows.Forms.RadioButton();
@@ -181,7 +182,7 @@ namespace DoW_DE_Nod_Manager
             this.authorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.authorLabel.AutoSize = true;
             this.authorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.authorLabel.Location = new System.Drawing.Point(16, 587);
+            this.authorLabel.Location = new System.Drawing.Point(16, 613);
             this.authorLabel.Name = "authorLabel";
             this.authorLabel.Size = new System.Drawing.Size(198, 13);
             this.authorLabel.TabIndex = 8;
@@ -259,9 +260,9 @@ namespace DoW_DE_Nod_Manager
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.splitContainer1);
-            this.panel1.Location = new System.Drawing.Point(12, 220);
+            this.panel1.Location = new System.Drawing.Point(12, 244);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(901, 368);
+            this.panel1.Size = new System.Drawing.Size(901, 366);
             this.panel1.TabIndex = 18;
             // 
             // splitContainer1
@@ -282,7 +283,7 @@ namespace DoW_DE_Nod_Manager
             // 
             this.splitContainer1.Panel2.Controls.Add(this.requiredModsLabel);
             this.splitContainer1.Panel2.Controls.Add(this.requiredModsList);
-            this.splitContainer1.Size = new System.Drawing.Size(898, 376);
+            this.splitContainer1.Size = new System.Drawing.Size(898, 360);
             this.splitContainer1.SplitterDistance = 455;
             this.splitContainer1.TabIndex = 19;
             // 
@@ -339,7 +340,7 @@ namespace DoW_DE_Nod_Manager
             this.AboutkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AboutkLabel.AutoSize = true;
             this.AboutkLabel.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.AboutkLabel.Location = new System.Drawing.Point(818, 587);
+            this.AboutkLabel.Location = new System.Drawing.Point(818, 613);
             this.AboutkLabel.Name = "AboutkLabel";
             this.AboutkLabel.Size = new System.Drawing.Size(99, 13);
             this.AboutkLabel.TabIndex = 23;
@@ -401,7 +402,7 @@ namespace DoW_DE_Nod_Manager
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 53);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 86);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 112);
             this.flowLayoutPanel1.TabIndex = 28;
             // 
             // noprecachemodelsCheckBox
@@ -421,13 +422,28 @@ namespace DoW_DE_Nod_Manager
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.AutoSize = true;
+            this.panel2.Controls.Add(this.cameraButton);
             this.panel2.Controls.Add(this.checkForErrorsButton);
             this.panel2.Controls.Add(this.settingsButton);
             this.panel2.Controls.Add(this.dxvkButton);
             this.panel2.Location = new System.Drawing.Point(341, 53);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(245, 86);
+            this.panel2.Size = new System.Drawing.Size(245, 112);
             this.panel2.TabIndex = 29;
+            // 
+            // cameraButton
+            // 
+            this.cameraButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cameraButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.cameraButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cameraButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.cameraButton.Location = new System.Drawing.Point(11, 78);
+            this.cameraButton.Name = "cameraButton";
+            this.cameraButton.Size = new System.Drawing.Size(218, 31);
+            this.cameraButton.TabIndex = 26;
+            this.cameraButton.Text = "Install a better camera";
+            this.cameraButton.UseVisualStyleBackColor = false;
+            this.cameraButton.Click += new System.EventHandler(this.CameraButton_Click);
             // 
             // dxvkButton
             // 
@@ -590,7 +606,7 @@ namespace DoW_DE_Nod_Manager
             this.panel3.Controls.Add(this.noprecachemodelsCheckBox);
             this.panel3.Controls.Add(this.mergeButton);
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Location = new System.Drawing.Point(15, 142);
+            this.panel3.Location = new System.Drawing.Point(15, 168);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(574, 72);
             this.panel3.TabIndex = 30;
@@ -615,7 +631,7 @@ namespace DoW_DE_Nod_Manager
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.ClientSize = new System.Drawing.Size(925, 605);
+            this.ClientSize = new System.Drawing.Size(925, 631);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.SoulstormButton);
             this.Controls.Add(this.flowLayoutPanel2);
@@ -625,7 +641,7 @@ namespace DoW_DE_Nod_Manager
             this.Controls.Add(this.AboutkLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.authorLabel);
-            this.MinimumSize = new System.Drawing.Size(941, 644);
+            this.MinimumSize = new System.Drawing.Size(941, 670);
             this.Name = "ModManagerForm";
             this.Text = "DoW Mod Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModManagerForm_Closing);
@@ -693,5 +709,6 @@ namespace DoW_DE_Nod_Manager
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Button startExpansionbutton;
+        private System.Windows.Forms.Button cameraButton;
     }
 }
