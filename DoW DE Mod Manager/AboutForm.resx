@@ -66,7 +66,7 @@
 ## Version 1.1.1.1
 
 - Re-added: a better (further away) camera
-- Removed: dxgi.dll because it's not needed for SXVKL anymore and it causes problems for some users
+- Removed: dxgi.dll because it's not needed for DXVK anymore and it causes problems for some users
 
 ## Version 1.1.1.0
 
