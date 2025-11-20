@@ -607,7 +607,23 @@ namespace DoW_DE_Nod_Manager
                 else
                     refreshRateComboBox.SelectedItem = settings[SCREEN_REFRESH] + " Hz";
                 windowedCheckBox.Checked = settings[SCREEN_WINDOWED] == "1";
-                shadowsDetailComboBox.Enabled = false;
+                switch (settings[SHADOW_MAP])
+                {
+                    case "0":
+                        shadowsDetailComboBox.SelectedItem = "None";
+                        break;
+                    case "1024":
+                        shadowsDetailComboBox.SelectedItem = "Low (1024)";
+                        break;
+                    case "2048":
+                        shadowsDetailComboBox.SelectedItem = "Medium (2048)";
+                        break;
+                    case "4096":
+                        shadowsDetailComboBox.SelectedItem = "High (4096)";
+                        break;
+                    default:
+                        break;
+                }
                 soundEnabledCheckBox.Checked = settings[SOUND_ENABLED] == "1";
                 if (settings[SOUND_LIMIT_SAMPLES] == "1")       // We have to invert it for covienience
                     randomizedSoundsCheckBox.Checked = false;

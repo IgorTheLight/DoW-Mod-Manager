@@ -59,7 +59,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 1.1.1.2
+    <value>## Version 1.1.1.3
+
+- Fixed: Shadow setting was greyed out (this whole time and noone noticed that?)
+
+## Version 1.1.1.2
 
 - Fixed: a bug with downloading "a better camera"
 

@@ -1,2 +1,1 @@
-- Re-added: a better (further away) camera
-- Removed: dxgi.dll because it's not needed for SXVKL anymore and it causes problems for some users
+- Fixed: Shadow setting was greyed out (this whole time and noone noticed that?)
