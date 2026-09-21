@@ -53,6 +53,8 @@
             this.aboutLabel = new System.Windows.Forms.Label();
             this.authorsTabPage = new System.Windows.Forms.TabPage();
             this.specialThanksTabPage = new System.Windows.Forms.TabPage();
+            this.specialThanks5LinkLabel = new System.Windows.Forms.LinkLabel();
+            this.specialThanks5Label = new System.Windows.Forms.Label();
             this.specialThanks4Label = new System.Windows.Forms.Label();
             this.changelogTabPage = new System.Windows.Forms.TabPage();
             this.changelogTextBox = new System.Windows.Forms.TextBox();
@@ -63,8 +65,7 @@
             this.GUILibraryAnswerLabel = new System.Windows.Forms.Label();
             this.frameworkLabel = new System.Windows.Forms.Label();
             this.frameworkAnswerLabel = new System.Windows.Forms.Label();
-            this.specialThanks5Label = new System.Windows.Forms.Label();
-            this.specialThanks5LinkLabel = new System.Windows.Forms.LinkLabel();
+            this.dgVoodoo2UpdateCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.aboutTabPage.SuspendLayout();
@@ -253,6 +254,7 @@
             // aboutTabPage
             // 
             this.aboutTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.aboutTabPage.Controls.Add(this.dgVoodoo2UpdateCheckBox);
             this.aboutTabPage.Controls.Add(this.DXVKUpdateCheckBox);
             this.aboutTabPage.Controls.Add(this.singlethreadedJITCompilationRadioButton);
             this.aboutTabPage.Controls.Add(this.multithreadedJITCompilationRadioButton);
@@ -271,7 +273,7 @@
             // 
             this.DXVKUpdateCheckBox.AutoSize = true;
             this.DXVKUpdateCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.DXVKUpdateCheckBox.Location = new System.Drawing.Point(20, 138);
+            this.DXVKUpdateCheckBox.Location = new System.Drawing.Point(20, 115);
             this.DXVKUpdateCheckBox.Name = "DXVKUpdateCheckBox";
             this.DXVKUpdateCheckBox.Size = new System.Drawing.Size(126, 17);
             this.DXVKUpdateCheckBox.TabIndex = 16;
@@ -318,7 +320,7 @@
             // 
             this.autoupdateCheckBox.AutoSize = true;
             this.autoupdateCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.autoupdateCheckBox.Location = new System.Drawing.Point(20, 115);
+            this.autoupdateCheckBox.Location = new System.Drawing.Point(20, 92);
             this.autoupdateCheckBox.Name = "autoupdateCheckBox";
             this.autoupdateCheckBox.Size = new System.Drawing.Size(150, 17);
             this.autoupdateCheckBox.TabIndex = 11;
@@ -365,6 +367,28 @@
             this.specialThanksTabPage.Size = new System.Drawing.Size(434, 180);
             this.specialThanksTabPage.TabIndex = 2;
             this.specialThanksTabPage.Text = "Special Thanks";
+            // 
+            // specialThanks5LinkLabel
+            // 
+            this.specialThanks5LinkLabel.AutoSize = true;
+            this.specialThanks5LinkLabel.LinkColor = System.Drawing.Color.DodgerBlue;
+            this.specialThanks5LinkLabel.Location = new System.Drawing.Point(247, 100);
+            this.specialThanks5LinkLabel.Name = "specialThanks5LinkLabel";
+            this.specialThanks5LinkLabel.Size = new System.Drawing.Size(60, 13);
+            this.specialThanks5LinkLabel.TabIndex = 19;
+            this.specialThanks5LinkLabel.TabStop = true;
+            this.specialThanks5LinkLabel.Text = "home page";
+            this.specialThanks5LinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SpecialThanks5LinkLabel_LinkClicked);
+            // 
+            // specialThanks5Label
+            // 
+            this.specialThanks5Label.AutoSize = true;
+            this.specialThanks5Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.specialThanks5Label.Location = new System.Drawing.Point(18, 100);
+            this.specialThanks5Label.Name = "specialThanks5Label";
+            this.specialThanks5Label.Size = new System.Drawing.Size(158, 13);
+            this.specialThanks5Label.TabIndex = 18;
+            this.specialThanks5Label.Text = "Kekoulis -for continuous support";
             // 
             // specialThanks4Label
             // 
@@ -486,27 +510,16 @@
             this.frameworkAnswerLabel.TabIndex = 16;
             this.frameworkAnswerLabel.Text = ".NET Framwork 4.8";
             // 
-            // specialThanks5Label
+            // dgVoodoo2UpdateCheckBox
             // 
-            this.specialThanks5Label.AutoSize = true;
-            this.specialThanks5Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.specialThanks5Label.Location = new System.Drawing.Point(18, 100);
-            this.specialThanks5Label.Name = "specialThanks5Label";
-            this.specialThanks5Label.Size = new System.Drawing.Size(158, 13);
-            this.specialThanks5Label.TabIndex = 18;
-            this.specialThanks5Label.Text = "Kekoulis -for continuous support";
-            // 
-            // specialThanks5LinkLabel
-            // 
-            this.specialThanks5LinkLabel.AutoSize = true;
-            this.specialThanks5LinkLabel.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.specialThanks5LinkLabel.Location = new System.Drawing.Point(247, 100);
-            this.specialThanks5LinkLabel.Name = "specialThanks5LinkLabel";
-            this.specialThanks5LinkLabel.Size = new System.Drawing.Size(60, 13);
-            this.specialThanks5LinkLabel.TabIndex = 19;
-            this.specialThanks5LinkLabel.TabStop = true;
-            this.specialThanks5LinkLabel.Text = "home page";
-            this.specialThanks5LinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SpecialThanks5LinkLabel_LinkClicked);
+            this.dgVoodoo2UpdateCheckBox.AutoSize = true;
+            this.dgVoodoo2UpdateCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.dgVoodoo2UpdateCheckBox.Location = new System.Drawing.Point(20, 138);
+            this.dgVoodoo2UpdateCheckBox.Name = "dgVoodoo2UpdateCheckBox";
+            this.dgVoodoo2UpdateCheckBox.Size = new System.Drawing.Size(152, 17);
+            this.dgVoodoo2UpdateCheckBox.TabIndex = 17;
+            this.dgVoodoo2UpdateCheckBox.Text = "dgVoodoo2 Update check";
+            this.dgVoodoo2UpdateCheckBox.UseVisualStyleBackColor = true;
             // 
             // AboutForm
             // 
@@ -580,5 +593,6 @@
         private System.Windows.Forms.CheckBox DXVKUpdateCheckBox;
         private System.Windows.Forms.Label specialThanks5Label;
         private System.Windows.Forms.LinkLabel specialThanks5LinkLabel;
+        private System.Windows.Forms.CheckBox dgVoodoo2UpdateCheckBox;
     }
 }

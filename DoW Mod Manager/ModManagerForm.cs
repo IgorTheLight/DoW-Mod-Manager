@@ -47,6 +47,7 @@ namespace DoW_Mod_Manager
         const string WARNINGS_LOG = "warnings.log";
 
         const string DXVK_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/DXVK/";
+        const string DGVOODOO2_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/dgVoodoo2/";
         const string CAMERA_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/CAMERA/";
         const string FONT_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/master/DoW%20Mod%20Manager/FONT/";
 
@@ -66,6 +67,7 @@ namespace DoW_Mod_Manager
         public const string AOT_COMPILATION = "AOTCompilation";
         public const string IS_GOG_VERSION = "IsGOGVersion";
         public const string DXVK_UPDATE_CHECK = "DXVKUpdateCheck";
+        public const string DGVOODOO2_UPDATE_CHECK = "dgVoodoo2UpdateCheck";
 
         // A boolean array that maps Index-wise to the filepaths indices. Index 0 checks if required mod at index 0 in the FilePaths is installed or not.
         bool[] isInstalled;
@@ -90,6 +92,7 @@ namespace DoW_Mod_Manager
         readonly string fontDirectory;
         string currentModuleFilePath = "";                                          // Contains the name of the current selected Mod.
         bool isDXVKInstalled;
+        bool isDgvoodoo2Installed;
         bool isCameraInstalled;
         bool isFontInstalled;
 
@@ -109,7 +112,8 @@ namespace DoW_Mod_Manager
             [MULTITHREADED_JIT] = 0,
             [AOT_COMPILATION] = 1,
             [IS_GOG_VERSION] = 0,
-            [DXVK_UPDATE_CHECK] = 1
+            [DXVK_UPDATE_CHECK] = 1,
+            [DGVOODOO2_UPDATE_CHECK] = 1
         };
 
         /// <summary>
@@ -216,71 +220,6 @@ namespace DoW_Mod_Manager
                 flowLayoutPanel1.MouseMove += new MouseEventHandler(NoFogCheckbox_hover);
             }
 
-            // Check for an update
-            if (settings[AUTOUPDATE] == 1)
-            {
-                // Threads could work even if application would be closed (IsBackground = true by default)
-                new Thread(() =>
-                {
-                    // Once all is done - check for an updates.
-                    DialogResult result = DownloadHelper.CheckForExeUpdate(silently: true);
-
-                    if (result == DialogResult.OK && settings[AOT_COMPILATION] == 1)
-                        settings[ACTION_STATE] = (int)Action.CreateNativeImage;
-                }
-                ).Start();
-            }
-
-            // Checking DXVK existing and updates
-            if (File.Exists("dxvk.conf") && File.Exists("d3d9.dll") && File.Exists("dxgi.dll") && File.Exists("dxvk.version"))
-            {
-                try
-                {
-                    if (settings[DXVK_UPDATE_CHECK] == 1)
-                    {
-                        string stringVersion = DownloadHelper.DownloadString(DXVK_URL + "dxvk.version");
-                        var version = new Version(stringVersion);
-
-                        string currentStringVersion = File.ReadAllText("dxvk.version");
-                        var currentVersion = new Version(currentStringVersion);
-
-                        if (currentVersion < version)
-                        {
-                            dxvkButton.Text = "Update DXVK";
-                            isDXVKInstalled = false;
-                            DXVKStatusLabel.Text = "Disabled";
-                            DXVKStatusLabel.ForeColor = Color.Red;
-                        }
-                        else
-                        {
-                            dxvkButton.Text = "Remove DXVK";
-                            isDXVKInstalled = true;
-                            DXVKStatusLabel.Text = "Enabled";
-                            DXVKStatusLabel.ForeColor = Color.LimeGreen;
-                        }
-                    }
-                    else
-                    {
-                        dxvkButton.Text = "Remove DXVK";
-                        isDXVKInstalled = true;
-                        DXVKStatusLabel.Text = "DXVK is enabled";
-                        DXVKStatusLabel.ForeColor = Color.LimeGreen;
-                    }
-                }
-                catch (Exception)
-                {
-                    dxvkButton.Enabled = false;
-                    return;
-                }
-            }
-            else
-            {
-                dxvkButton.Text = "Install DXVK";
-                isDXVKInstalled = false;
-                DXVKStatusLabel.Text = "DXVK is disabled";
-                DXVKStatusLabel.ForeColor = Color.Red;
-            }
-
             // Checking is better camera installed
             if (File.Exists(Path.Combine(cameraDirectory, "camera_high.lua")) && File.Exists(Path.Combine(cameraDirectory, "camera_low.lua")))
             {
@@ -327,6 +266,105 @@ namespace DoW_Mod_Manager
                 isFontInstalled = false;
                 fontStatusLabel.Text = "Disabled";
                 fontStatusLabel.ForeColor = Color.Red;
+            }
+
+            // Check for an update
+            if (settings[AUTOUPDATE] == 1)
+            {
+                // Threads could work even if application would be closed (IsBackground = true by default)
+                new Thread(() =>
+                {
+                    // Once all is done - check for an updates.
+                    DialogResult result = DownloadHelper.CheckForExeUpdate(silently: true);
+
+                    if (result == DialogResult.OK && settings[AOT_COMPILATION] == 1)
+                        settings[ACTION_STATE] = (int)Action.CreateNativeImage;
+                }
+                ).Start();
+            }
+
+            // Checking if DXVK exists and updated
+            if (File.Exists("dxvk.conf") && File.Exists("d3d9.dll") && File.Exists("dxd8.dll") && File.Exists("dxvk.version"))
+            {
+                try
+                {
+                    if (settings[DXVK_UPDATE_CHECK] == 1)
+                    {
+                        string stringVersion = DownloadHelper.DownloadString(DXVK_URL + "dxvk.version");
+                        var version = new Version(stringVersion);
+
+                        string currentStringVersion = File.ReadAllText("dxvk.version");
+                        var currentVersion = new Version(currentStringVersion);
+
+                        if (currentVersion < version)
+                        {
+                            dxvkButton.Text = "Update DXVK";
+                            isDXVKInstalled = false;
+                        }
+                        else
+                        {
+                            dxvkButton.Text = "Remove DXVK";
+                            isDXVKInstalled = true;
+                        }
+                    }
+                    else
+                    {
+                        dxvkButton.Text = "Remove DXVK";
+                        isDXVKInstalled = true;
+                    }
+                }
+                catch (Exception)
+                {
+                    dxvkButton.Enabled = false;
+                    return;
+                }
+            }
+            else
+            {
+                dxvkButton.Text = "Install DXVK";
+                isDXVKInstalled = false;
+            }
+
+            // Checking if dgVoodoo2 exists and updated
+            if (File.Exists("dgVoodoo.conf") && File.Exists("d3d9.dll") && File.Exists("dgVoodooCpl.exe") && File.Exists("dgVoodoo.version"))
+            {
+                try
+                {
+                    if (settings[DGVOODOO2_UPDATE_CHECK] == 1)
+                    {
+                        string stringVersion = DownloadHelper.DownloadString(DGVOODOO2_URL + "dgVoodoo.version");
+                        var version = new Version(stringVersion);
+
+                        string currentStringVersion = File.ReadAllText("dgVoodoo.version");
+                        var currentVersion = new Version(currentStringVersion);
+
+                        if (currentVersion < version)
+                        {
+                            dgVoodoo2Button.Text = "Update dgVoodoo2";
+                            isDgvoodoo2Installed = false;
+                        }
+                        else
+                        {
+                            dgVoodoo2Button.Text = "Remove dgVoodoo2";
+                            isDgvoodoo2Installed = true;
+                        }
+                    }
+                    else
+                    {
+                        dgVoodoo2Button.Text = "Remove dgVoodoo2";
+                        isDgvoodoo2Installed = true;
+                    }
+                }
+                catch (Exception)
+                {
+                    dgVoodoo2Button.Enabled = false;
+                    return;
+                }
+            }
+            else
+            {
+                dgVoodoo2Button.Text = "Install dgVoodoo2";
+                isDgvoodoo2Installed = false;
             }
         }
 
@@ -455,6 +493,7 @@ namespace DoW_Mod_Manager
                                 case NO_FOG:
                                 case IS_GOG_VERSION:
                                 case DXVK_UPDATE_CHECK:
+                                case DGVOODOO2_UPDATE_CHECK:
                                     if (value > 0)
                                         settings[setting] = value;
                                     else
@@ -700,7 +739,8 @@ namespace DoW_Mod_Manager
                 sw.WriteLine($"{AOT_COMPILATION}={settings[AOT_COMPILATION]}");
                 sw.WriteLine($"{NO_FOG}={settings[NO_FOG]}");
                 sw.WriteLine($"{IS_GOG_VERSION}={settings[IS_GOG_VERSION]}");
-                sw.Write($"{DXVK_UPDATE_CHECK}={settings[DXVK_UPDATE_CHECK]}");
+                sw.WriteLine($"{DXVK_UPDATE_CHECK}={settings[DXVK_UPDATE_CHECK]}");
+                sw.Write($"{DGVOODOO2_UPDATE_CHECK}={settings[DGVOODOO2_UPDATE_CHECK]}");
             }
 
             // If Timer Resolution was lowered we have to keep DoW Mod Manager alive or Timer Resolution will be reset
@@ -1367,6 +1407,9 @@ namespace DoW_Mod_Manager
                 case DXVK_UPDATE_CHECK:
                     settings[DXVK_UPDATE_CHECK] = newValue;
                     break;
+                case DGVOODOO2_UPDATE_CHECK:
+                    settings[DGVOODOO2_UPDATE_CHECK] = newValue;
+                    break;
             }
         }
 
@@ -1450,12 +1493,10 @@ namespace DoW_Mod_Manager
                 File.Delete("dxvk.version");
                 File.Delete("dxvk.conf");
                 File.Delete("d3d9.dll");
-                File.Delete("dxgi.dll");
+                File.Delete("dxd8.dll");
 
                 dxvkButton.Text = "Install DXVK";
                 isDXVKInstalled = false;
-                DXVKStatusLabel.Text = "Disabled";
-                DXVKStatusLabel.ForeColor = Color.Red;
 
                 ThemedMessageBox.Show("DXVK is disabled and deleted!", "Information:");
             }
@@ -1469,12 +1510,10 @@ namespace DoW_Mod_Manager
                     client.DownloadFile(DXVK_URL + "dxvk.version", "dxvk.version");
                     client.DownloadFile(DXVK_URL + "dxvk.conf", "dxvk.conf");
                     client.DownloadFile(DXVK_URL + "d3d9.dll", "d3d9.dll");
-                    client.DownloadFile(DXVK_URL + "dxgi.dll", "dxgi.dll");
+                    client.DownloadFile(DXVK_URL + "dxd8.dll", "dxd8.dll");
 
                     dxvkButton.Text = "Remove DXVK";
                     isDXVKInstalled = true;
-                    DXVKStatusLabel.Text = "Enabled";
-                    DXVKStatusLabel.ForeColor = Color.LimeGreen;
 
                     ThemedMessageBox.Show("DXVK is downloaded and enabled!", "Information:");
                 }
@@ -1486,6 +1525,49 @@ namespace DoW_Mod_Manager
                 {
                     client.Dispose();
                     dxvkButton.Enabled = true;
+                }
+            }
+        }
+
+        void DgVoodoo2Button_Click(object sender, EventArgs e)
+        {
+            if (isDgvoodoo2Installed)
+            {
+                File.Delete("dgVoodoo.version");
+                File.Delete("dgVoodoo.conf");
+                File.Delete("d3d9.dll");
+                File.Delete("dgVoodooCpl.exe");
+
+                dgVoodoo2Button.Text = "Install dgVoodoo2";
+                isDgvoodoo2Installed = false;
+
+                ThemedMessageBox.Show("dgVoodoo2 is disabled and deleted!", "Information:");
+            }
+            else
+            {
+                dgVoodoo2Button.Enabled = false;
+                var client = new WebClient();
+
+                try
+                {
+                    client.DownloadFile(DGVOODOO2_URL + "dgVoodoo.version", "dgVoodoo.version");
+                    client.DownloadFile(DGVOODOO2_URL + "dgVoodoo.conf", "dgVoodoo.conf");
+                    client.DownloadFile(DGVOODOO2_URL + "d3d9.dll", "d3d9.dll");
+                    client.DownloadFile(DGVOODOO2_URL + "dgVoodooCpl.exe", "dgVoodooCpl.exe");
+
+                    dgVoodoo2Button.Text = "Remove dgVoodoo2";
+                    isDgvoodoo2Installed = true;
+
+                    ThemedMessageBox.Show("dgVoodoo2 is downloaded and enabled!\nBest way to use it:\n* Go to SETTINGS -> Video\n* Disable Antialiasing\n* Set resolution to 1280x960 or 1024x768\nThat way UI will not be stretched anymore!", "Information:");
+                }
+                catch (Exception)
+                {
+                    ThemedMessageBox.Show("We can't download files!", "Warning!");
+                }
+                finally
+                {
+                    client.Dispose();
+                    dgVoodoo2Button.Enabled = true;
                 }
             }
         }

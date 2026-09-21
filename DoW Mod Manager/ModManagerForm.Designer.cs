@@ -63,7 +63,7 @@ namespace DoW_Mod_Manager
             this.fontButton = new System.Windows.Forms.Button();
             this.cameraStatusLabel = new System.Windows.Forms.Label();
             this.cameraButton = new System.Windows.Forms.Button();
-            this.DXVKStatusLabel = new System.Windows.Forms.Label();
+            this.dgVoodoo2Button = new System.Windows.Forms.Button();
             this.dxvkButton = new System.Windows.Forms.Button();
             this.GOGRadioButton = new System.Windows.Forms.RadioButton();
             this.SteamRadioButton = new System.Windows.Forms.RadioButton();
@@ -489,11 +489,11 @@ namespace DoW_Mod_Manager
             this.panel2.Controls.Add(this.fontButton);
             this.panel2.Controls.Add(this.cameraStatusLabel);
             this.panel2.Controls.Add(this.cameraButton);
-            this.panel2.Controls.Add(this.DXVKStatusLabel);
             this.panel2.Controls.Add(this.toggleLAAButton);
             this.panel2.Controls.Add(this.checkForErrorsButton);
             this.panel2.Controls.Add(this.gameLAAStatusLabel);
             this.panel2.Controls.Add(this.settingsButton);
+            this.panel2.Controls.Add(this.dgVoodoo2Button);
             this.panel2.Controls.Add(this.dxvkButton);
             this.panel2.Location = new System.Drawing.Point(341, 32);
             this.panel2.Name = "panel2";
@@ -554,28 +554,31 @@ namespace DoW_Mod_Manager
             this.cameraButton.UseVisualStyleBackColor = false;
             this.cameraButton.Click += new System.EventHandler(this.CameraButton_Click);
             // 
-            // DXVKStatusLabel
+            // dgVoodoo2Button
             // 
-            this.DXVKStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.DXVKStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DXVKStatusLabel.ForeColor = System.Drawing.Color.Gray;
-            this.DXVKStatusLabel.Location = new System.Drawing.Point(178, 85);
-            this.DXVKStatusLabel.Margin = new System.Windows.Forms.Padding(3);
-            this.DXVKStatusLabel.Name = "DXVKStatusLabel";
-            this.DXVKStatusLabel.Size = new System.Drawing.Size(65, 15);
-            this.DXVKStatusLabel.TabIndex = 26;
-            this.DXVKStatusLabel.Text = "Enabled";
+            this.dgVoodoo2Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.dgVoodoo2Button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.dgVoodoo2Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dgVoodoo2Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dgVoodoo2Button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.dgVoodoo2Button.Location = new System.Drawing.Point(117, 77);
+            this.dgVoodoo2Button.Name = "dgVoodoo2Button";
+            this.dgVoodoo2Button.Size = new System.Drawing.Size(104, 31);
+            this.dgVoodoo2Button.TabIndex = 28;
+            this.dgVoodoo2Button.Text = "Install dgVoodoo2";
+            this.dgVoodoo2Button.UseVisualStyleBackColor = false;
+            this.dgVoodoo2Button.Click += new System.EventHandler(this.DgVoodoo2Button_Click);
             // 
             // dxvkButton
             // 
             this.dxvkButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dxvkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.dxvkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dxvkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.dxvkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dxvkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.dxvkButton.Location = new System.Drawing.Point(7, 77);
             this.dxvkButton.Name = "dxvkButton";
-            this.dxvkButton.Size = new System.Drawing.Size(154, 31);
+            this.dxvkButton.Size = new System.Drawing.Size(104, 31);
             this.dxvkButton.TabIndex = 25;
             this.dxvkButton.Text = "Install DXVK";
             this.dxvkButton.UseVisualStyleBackColor = false;
@@ -719,10 +722,10 @@ namespace DoW_Mod_Manager
         private System.Windows.Forms.RadioButton SteamRadioButton;
         private System.Windows.Forms.CheckBox noprecachemodelsCheckBox;
         private System.Windows.Forms.Button dxvkButton;
-        private System.Windows.Forms.Label DXVKStatusLabel;
         private System.Windows.Forms.Button cameraButton;
         private System.Windows.Forms.Label cameraStatusLabel;
         private System.Windows.Forms.Label fontStatusLabel;
         private System.Windows.Forms.Button fontButton;
+        private System.Windows.Forms.Button dgVoodoo2Button;
     }
 }

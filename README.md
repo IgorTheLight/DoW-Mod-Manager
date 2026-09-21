@@ -1,6 +1,6 @@
 ![image](https://user-images.githubusercontent.com/19975052/147577379-4ab095f3-e91a-42f2-8cae-fbbb50658130.png)
 
-# DoW Mod Manager v2.6.1.0
+# DoW Mod Manager v2.7.0.0
 
 This application allows for an easy launch of mods and management of large collections of mods for Warhammer 40K Dawn of War series.
 
