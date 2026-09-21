@@ -284,7 +284,7 @@ namespace DoW_Mod_Manager
             }
 
             // Checking if DXVK exists and updated
-            if (File.Exists("dxvk.conf") && File.Exists("d3d9.dll") && File.Exists("dxd8.dll") && File.Exists("dxvk.version"))
+            if (File.Exists("dxvk.conf") && File.Exists("d3d9.dll") && File.Exists("d3d8.dll") && File.Exists("dxvk.version"))
             {
                 try
                 {
@@ -345,13 +345,13 @@ namespace DoW_Mod_Manager
                         }
                         else
                         {
-                            dgVoodoo2Button.Text = "Remove dgVoodoo2";
+                            dgVoodoo2Button.Text = "Delete dgVoodoo";
                             isDgvoodoo2Installed = true;
                         }
                     }
                     else
                     {
-                        dgVoodoo2Button.Text = "Remove dgVoodoo2";
+                        dgVoodoo2Button.Text = "Delete dgVoodoo";
                         isDgvoodoo2Installed = true;
                     }
                 }
@@ -1493,7 +1493,7 @@ namespace DoW_Mod_Manager
                 File.Delete("dxvk.version");
                 File.Delete("dxvk.conf");
                 File.Delete("d3d9.dll");
-                File.Delete("dxd8.dll");
+                File.Delete("d3d8.dll");
 
                 dxvkButton.Text = "Install DXVK";
                 isDXVKInstalled = false;
@@ -1510,16 +1510,16 @@ namespace DoW_Mod_Manager
                     client.DownloadFile(DXVK_URL + "dxvk.version", "dxvk.version");
                     client.DownloadFile(DXVK_URL + "dxvk.conf", "dxvk.conf");
                     client.DownloadFile(DXVK_URL + "d3d9.dll", "d3d9.dll");
-                    client.DownloadFile(DXVK_URL + "dxd8.dll", "dxd8.dll");
+                    client.DownloadFile(DXVK_URL + "d3d8.dll", "d3d8.dll");
 
                     dxvkButton.Text = "Remove DXVK";
                     isDXVKInstalled = true;
 
                     ThemedMessageBox.Show("DXVK is downloaded and enabled!", "Information:");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    ThemedMessageBox.Show("We can't download files!", "Warning!");
+                    ThemedMessageBox.Show("We can't download files!\n" + ex, "Warning!");
                 }
                 finally
                 {
@@ -1535,7 +1535,7 @@ namespace DoW_Mod_Manager
             {
                 File.Delete("dgVoodoo.version");
                 File.Delete("dgVoodoo.conf");
-                File.Delete("d3d9.dll");
+                File.Delete("D3D9.dll");
                 File.Delete("dgVoodooCpl.exe");
 
                 dgVoodoo2Button.Text = "Install dgVoodoo2";
@@ -1552,17 +1552,17 @@ namespace DoW_Mod_Manager
                 {
                     client.DownloadFile(DGVOODOO2_URL + "dgVoodoo.version", "dgVoodoo.version");
                     client.DownloadFile(DGVOODOO2_URL + "dgVoodoo.conf", "dgVoodoo.conf");
-                    client.DownloadFile(DGVOODOO2_URL + "d3d9.dll", "d3d9.dll");
+                    client.DownloadFile(DGVOODOO2_URL + "D3D9.dll", "D3D9.dll");
                     client.DownloadFile(DGVOODOO2_URL + "dgVoodooCpl.exe", "dgVoodooCpl.exe");
 
-                    dgVoodoo2Button.Text = "Remove dgVoodoo2";
+                    dgVoodoo2Button.Text = "Delete dgVoodoo";
                     isDgvoodoo2Installed = true;
 
                     ThemedMessageBox.Show("dgVoodoo2 is downloaded and enabled!\nBest way to use it:\n* Go to SETTINGS -> Video\n* Disable Antialiasing\n* Set resolution to 1280x960 or 1024x768\nThat way UI will not be stretched anymore!", "Information:");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    ThemedMessageBox.Show("We can't download files!", "Warning!");
+                    ThemedMessageBox.Show("We can't download files!\n" + ex, "Warning!");
                 }
                 finally
                 {

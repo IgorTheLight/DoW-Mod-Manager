@@ -59,7 +59,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="changelogTextBox.Text" xml:space="preserve">
-    <value>## Version 2.7.0.0
+    <value>## Version 2.7.0.1
+
+- Fixed: bugs with downloading and updating dgVoodoo2
+
+## Version 2.7.0.0
 
 - Added: dgVoodoo2. It's an alternative to DXVK that has less overheat and let's you play DoW in 4:3 resolutions without stretching!
 - Changed: replaced dxgi.dll (used by DirectX 10+ which DoW doesn't need) for d3d8.dll (used by DirectX 8 - hardware mouse may need it)
