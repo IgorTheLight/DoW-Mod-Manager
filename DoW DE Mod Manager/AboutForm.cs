@@ -29,6 +29,7 @@ namespace DoW_DE_Nod_Manager
             else
                 singlethreadedJITCompilationRadioButton.Checked = true;
             DXVKUpdateCheckBox.Checked = modManager.GetSetting(ModManagerForm.DXVK_UPDATE_CHECK) == "1";
+            dgVoodoo2UpdateCheckBox.Checked = modManager.GetSetting(ModManagerForm.DGVOODOO2_UPDATE_CHECK) == "1";
 
             // We have to add those methods to the EventHandler here so we could avoid accidental firing of those methods after we would change the state of the CheckBox
             autoupdateCheckBox.CheckedChanged += new EventHandler(AutoupdateCheckBox_CheckedChanged);
@@ -36,6 +37,7 @@ namespace DoW_DE_Nod_Manager
             multithreadedJITCompilationRadioButton.CheckedChanged += new EventHandler(MultithreadedJITCompilationRadioButton_CheckedChanged);
             AOTCompilationRadioButton.CheckedChanged += new EventHandler(AOTCompilationRadioButton_CheckedChanged);
             DXVKUpdateCheckBox.CheckedChanged += new EventHandler(DXVKUpdateCheckBox_CheckedChanged);
+            dgVoodoo2UpdateCheckBox.CheckedChanged += new EventHandler(dgVoodoo2UpdateCheckBox_CheckedChanged);
         }
 
         void HomePageButton_Click(object sender, EventArgs e)
@@ -118,6 +120,14 @@ namespace DoW_DE_Nod_Manager
                 modManager.ChangeSetting(ModManagerForm.DXVK_UPDATE_CHECK, "1");
             else
                 modManager.ChangeSetting(ModManagerForm.DXVK_UPDATE_CHECK, "0");
+        }
+
+        private void dgVoodoo2UpdateCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (dgVoodoo2UpdateCheckBox.Checked)
+                modManager.ChangeSetting(ModManagerForm.DGVOODOO2_UPDATE_CHECK, "1");
+            else
+                modManager.ChangeSetting(ModManagerForm.DGVOODOO2_UPDATE_CHECK, "0");
         }
     }
 }

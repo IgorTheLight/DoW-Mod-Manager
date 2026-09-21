@@ -202,7 +202,7 @@ namespace DoW_DE_Nod_Manager
                 [FORCE_WATCH_MOVIES] = "1",
                 [FX_DETAIL_LEVEL] = "2",
                 [HUD_WIDTH] = "100",
-                [MODEL_DETAIL] = "2",
+                [MODEL_DETAIL] = "1",
                 [PARENTAL_CONTROL] = "0",
                 [PERSISTENT_BODIES] = "0",
                 [PERSISTENT_DECALS] = "0",
@@ -330,7 +330,7 @@ namespace DoW_DE_Nod_Manager
                                         settings[HUD_WIDTH] = value;
                                     break;
                                 case MODEL_DETAIL:
-                                    if (value == "0" || value == "1" || value == "2")
+                                    if (value == "0" || value == "1")
                                         settings[MODEL_DETAIL] = value;
                                     break;
                                 case PARENTAL_CONTROL:
@@ -1476,7 +1476,7 @@ namespace DoW_DE_Nod_Manager
             settings[DYNAMIC_LIGHTS] = "1";
             settings[EVENT_DETAIL_LEVEL] = "1";
             settings[FX_DETAIL_LEVEL] = "1";
-            settings[MODEL_DETAIL] = "1";
+            settings[MODEL_DETAIL] = "0";
             settings[PERSISTENT_BODIES] = "1";
             settings[PERSISTENT_DECALS] = "1";
             settings[SCREEN_ANIALIAS] = "0";
@@ -1501,7 +1501,7 @@ namespace DoW_DE_Nod_Manager
             settings[DYNAMIC_LIGHTS] = "2";
             settings[EVENT_DETAIL_LEVEL] = "2";
             settings[FX_DETAIL_LEVEL] = "2";
-            settings[MODEL_DETAIL] = "2";
+            settings[MODEL_DETAIL] = "1";
             settings[PERSISTENT_BODIES] = "2";
             settings[PERSISTENT_DECALS] = "2";
             settings[SCREEN_ANIALIAS] = "0";
@@ -1526,7 +1526,7 @@ namespace DoW_DE_Nod_Manager
             settings[DYNAMIC_LIGHTS] = "3";
             settings[EVENT_DETAIL_LEVEL] = "2";
             settings[FX_DETAIL_LEVEL] = "2";
-            settings[MODEL_DETAIL] = "2";
+            settings[MODEL_DETAIL] = "1";
             settings[PERSISTENT_BODIES] = "3";
             settings[PERSISTENT_DECALS] = "2";
             settings[SCREEN_ANIALIAS] = "1";

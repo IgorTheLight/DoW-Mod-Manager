@@ -939,9 +939,8 @@
             this.modelDetailComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.modelDetailComboBox.FormattingEnabled = true;
             this.modelDetailComboBox.Items.AddRange(new object[] {
-            "Low",
-            "Medium",
-            "High"});
+            "Off",
+            "On"});
             this.modelDetailComboBox.Location = new System.Drawing.Point(117, 352);
             this.modelDetailComboBox.Name = "modelDetailComboBox";
             this.modelDetailComboBox.Size = new System.Drawing.Size(143, 21);

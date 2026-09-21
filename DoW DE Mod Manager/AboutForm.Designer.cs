@@ -63,6 +63,7 @@
             this.GUILibraryAnswerLabel = new System.Windows.Forms.Label();
             this.frameworkLabel = new System.Windows.Forms.Label();
             this.frameworkAnswerLabel = new System.Windows.Forms.Label();
+            this.dgVoodoo2UpdateCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.aboutTabPage.SuspendLayout();
@@ -251,6 +252,7 @@
             // aboutTabPage
             // 
             this.aboutTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.aboutTabPage.Controls.Add(this.dgVoodoo2UpdateCheckBox);
             this.aboutTabPage.Controls.Add(this.DXVKUpdateCheckBox);
             this.aboutTabPage.Controls.Add(this.singlethreadedJITCompilationRadioButton);
             this.aboutTabPage.Controls.Add(this.multithreadedJITCompilationRadioButton);
@@ -269,7 +271,7 @@
             // 
             this.DXVKUpdateCheckBox.AutoSize = true;
             this.DXVKUpdateCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.DXVKUpdateCheckBox.Location = new System.Drawing.Point(20, 138);
+            this.DXVKUpdateCheckBox.Location = new System.Drawing.Point(20, 115);
             this.DXVKUpdateCheckBox.Name = "DXVKUpdateCheckBox";
             this.DXVKUpdateCheckBox.Size = new System.Drawing.Size(126, 17);
             this.DXVKUpdateCheckBox.TabIndex = 16;
@@ -316,7 +318,7 @@
             // 
             this.autoupdateCheckBox.AutoSize = true;
             this.autoupdateCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.autoupdateCheckBox.Location = new System.Drawing.Point(20, 115);
+            this.autoupdateCheckBox.Location = new System.Drawing.Point(20, 92);
             this.autoupdateCheckBox.Name = "autoupdateCheckBox";
             this.autoupdateCheckBox.Size = new System.Drawing.Size(150, 17);
             this.autoupdateCheckBox.TabIndex = 11;
@@ -482,6 +484,17 @@
             this.frameworkAnswerLabel.TabIndex = 16;
             this.frameworkAnswerLabel.Text = ".NET Framwork 4.8";
             // 
+            // dgVoodoo2UpdateCheckBox
+            // 
+            this.dgVoodoo2UpdateCheckBox.AutoSize = true;
+            this.dgVoodoo2UpdateCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.dgVoodoo2UpdateCheckBox.Location = new System.Drawing.Point(20, 138);
+            this.dgVoodoo2UpdateCheckBox.Name = "dgVoodoo2UpdateCheckBox";
+            this.dgVoodoo2UpdateCheckBox.Size = new System.Drawing.Size(152, 17);
+            this.dgVoodoo2UpdateCheckBox.TabIndex = 17;
+            this.dgVoodoo2UpdateCheckBox.Text = "dgVoodoo2 Update check";
+            this.dgVoodoo2UpdateCheckBox.UseVisualStyleBackColor = true;
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -552,5 +565,6 @@
         private System.Windows.Forms.RadioButton multithreadedJITCompilationRadioButton;
         private System.Windows.Forms.RadioButton singlethreadedJITCompilationRadioButton;
         private System.Windows.Forms.CheckBox DXVKUpdateCheckBox;
+        private System.Windows.Forms.CheckBox dgVoodoo2UpdateCheckBox;
     }
 }

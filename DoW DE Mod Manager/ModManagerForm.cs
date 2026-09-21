@@ -43,6 +43,7 @@ namespace DoW_DE_Nod_Manager
 
         const string DXVK_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/DXVK/";
         const string CAMERA_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/CAMERA/";
+        const string DGVOODOO2_URL = "https://raw.githubusercontent.com/IgorTheLight/DoW-Mod-Manager/refs/heads/DE/DoW%20DE%20Mod%20Manager/dgVoodoo2/";
 
         // This is a State Machine which determines what action must be performed
         public enum Action { None, CreateNativeImage, CreateNativeImageAndDeleteJITProfile, DeleteJITProfile, DeleteNativeImage, DeleteJITProfileAndNativeImage }
@@ -60,6 +61,7 @@ namespace DoW_DE_Nod_Manager
         public const string AOT_COMPILATION = "AOTCompilation";
         public const string IS_GOG_VERSION = "IsGOGVersion";
         public const string DXVK_UPDATE_CHECK = "DXVKUpdateCheck";
+        public const string DGVOODOO2_UPDATE_CHECK = "dgVoodoo2UpdateCheck";
         public const string SOULSTORM_DIR = "SoulstormDir";
         public const string FULLSCREEEN = "Fullscreen";
 
@@ -82,6 +84,7 @@ namespace DoW_DE_Nod_Manager
         string currentModuleFilePath = "";                                          // Contains the name of the current selected Mod.
         bool isDXVKInstalled;
         bool isCameraInstalled;
+        bool isdgvoodoo2Installed;
 
         // Don't make Settings readonly or it couldn't be changed from outside the class!
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "<Pending>")]
@@ -100,6 +103,7 @@ namespace DoW_DE_Nod_Manager
             [AOT_COMPILATION] = "1",
             [IS_GOG_VERSION] = "0",
             [DXVK_UPDATE_CHECK] = "1",
+            [DGVOODOO2_UPDATE_CHECK] = "1",
             [SOULSTORM_DIR] = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Dawn of War Soulstorm",
             [FULLSCREEEN] = "0"
         };
@@ -195,6 +199,8 @@ namespace DoW_DE_Nod_Manager
             noprecachemodelsCheckBox.CheckedChanged += new EventHandler(NoprecachemodelsCheckBox_CheckedChanged);
             fullscreenCheckBox.CheckedChanged += new EventHandler(FullscreenCheckBox_CheckedChanged);
 
+            noFogCheckbox.Enabled = false;
+
             // Check for an update
             if (settings[AUTOUPDATE] == "1")
             {
@@ -275,6 +281,48 @@ namespace DoW_DE_Nod_Manager
                 dxvkButton.Text = "Install DXVK";
                 isDXVKInstalled = false;
             }
+
+            // Checking dgVoodoo2 existing and updates
+            if (File.Exists("dgVoodoo.conf") && File.Exists("d3d9.dll") && File.Exists("dgVoodoo.version") && File.Exists("dgVoodooCpl.exe"))
+            {
+                try
+                {
+                    if (settings[DGVOODOO2_UPDATE_CHECK] == "1")
+                    {
+                        string stringVersion = DownloadHelper.DownloadString(DXVK_URL + "dgVoodoo.version");
+                        var version = new Version(stringVersion);
+
+                        string currentStringVersion = File.ReadAllText("dgVoodoo.version");
+                        var currentVersion = new Version(currentStringVersion);
+
+                        if (currentVersion < version)
+                        {
+                            dgVoodoo2Button.Text = "Update dgVoodoo2";
+                            isdgvoodoo2Installed = false;
+                        }
+                        else
+                        {
+                            dgVoodoo2Button.Text = "Remove dgVoodoo2";
+                            isdgvoodoo2Installed = true;
+                        }
+                    }
+                    else
+                    {
+                        dgVoodoo2Button.Text = "Remove dgVoodoo2";
+                        isdgvoodoo2Installed = true;
+                    }
+                }
+                catch (Exception)
+                {
+                    dgVoodoo2Button.Enabled = false;
+                    return;
+                }
+            }
+            else
+            {
+                dgVoodoo2Button.Text = "Install dgVoodoo2";
+                isdgvoodoo2Installed = false;
+            }
         }
 
         /// <summary>
@@ -352,6 +400,7 @@ namespace DoW_DE_Nod_Manager
                         case IS_GOG_VERSION:
                         case FULLSCREEEN:
                         case DXVK_UPDATE_CHECK:
+                        case DGVOODOO2_UPDATE_CHECK:
                             if (Convert.ToInt32(value) > 0)
                                 settings[setting] = value;
                             else
@@ -620,6 +669,7 @@ namespace DoW_DE_Nod_Manager
                 sw.WriteLine($"{NO_FOG}={settings[NO_FOG]}");
                 sw.WriteLine($"{IS_GOG_VERSION}={settings[IS_GOG_VERSION]}");
                 sw.WriteLine($"{DXVK_UPDATE_CHECK}={settings[DXVK_UPDATE_CHECK]}");
+                sw.WriteLine($"{DGVOODOO2_UPDATE_CHECK}={settings[DGVOODOO2_UPDATE_CHECK]}");
                 sw.WriteLine($"{SOULSTORM_DIR}={settings[SOULSTORM_DIR]}");
                 sw.Write($"{FULLSCREEEN}={settings[FULLSCREEEN]}");
             }
@@ -1239,6 +1289,9 @@ namespace DoW_DE_Nod_Manager
                 case DXVK_UPDATE_CHECK:
                     settings[DXVK_UPDATE_CHECK] = newValue;
                     break;
+                case DGVOODOO2_UPDATE_CHECK:
+                    settings[DGVOODOO2_UPDATE_CHECK] = newValue;
+                    break;
                 case SOULSTORM_DIR:
                     if (newValue.Contains("\\"))
                         settings[SOULSTORM_DIR] = newValue;
@@ -1337,6 +1390,47 @@ namespace DoW_DE_Nod_Manager
             }
         }
 
+        private void DgVoodoo2Button_Click(object sender, EventArgs e)
+        {
+            if (isdgvoodoo2Installed)
+            {
+                File.Delete("dgVoodoo.version");
+                File.Delete("dgVoodoo.conf");
+                File.Delete("d3d9.dll");
+                File.Delete("dgVoodooCpl.exe");
+
+                isdgvoodoo2Installed = false;
+                dgVoodoo2Button.Text = "Install dgVoodoo2";
+                ThemedMessageBox.Show("dgVoodoo2 is disabled and deleted!", "Information:");
+            }
+            else
+            {
+                dgVoodoo2Button.Enabled = false;
+                var client = new WebClient();
+
+                try
+                {
+                    client.DownloadFile(DGVOODOO2_URL + "dgVoodoo.version", "dgVoodoo.version");
+                    client.DownloadFile(DGVOODOO2_URL + "dgVoodoo.conf", "dgVoodoo.conf");
+                    client.DownloadFile(DGVOODOO2_URL + "d3d9.dll", "d3d9.dll");
+                    client.DownloadFile(DGVOODOO2_URL + "dgVoodooCpl.exe", "dgVoodooCpl.exe");
+
+                    isdgvoodoo2Installed = true;
+                    dgVoodoo2Button.Text = "Remove dgVoodoo2";
+                    ThemedMessageBox.Show("dgVoodoo2 is downloaded and enabled!", "Information:");
+                }
+                catch (Exception)
+                {
+                    ThemedMessageBox.Show("We can't download files!", "Warning!");
+                }
+                finally
+                {
+                    client.Dispose();
+                    dgVoodoo2Button.Enabled = true;
+                }
+            }
+        }
+
         void SoulstormButton_Click(object sender, EventArgs e)
         {
             using (var fbd = new FolderBrowserDialog())
@@ -1409,7 +1503,6 @@ namespace DoW_DE_Nod_Manager
                     isCameraInstalled = true;
 
                     ThemedMessageBox.Show("A better camera is downloaded and enabled!", "Information:");
-                    cameraButton.Enabled = false;
                 }
                 catch (Exception)
                 {

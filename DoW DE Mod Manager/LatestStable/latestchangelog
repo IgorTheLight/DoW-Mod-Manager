@@ -1,1 +1,5 @@
-- Fixed: Shadow setting was greyed out (this whole time and noone noticed that?)
+- Added: After the DXVK comes dgVoodoo2 - a Windows only compatibility layer for any DirectX application! It translates old DirectX API calls to a newer ones. What it gives Dawn of War? Slightly more performance and less overhead than DXVK! Check it out! ;-)
+- Fixed: Game developers changed Model Detail setting from "Low/Medium/High" to "On/Off". That broke DoW DE Mod Manager's ability to change this setting correctly.
+- Fixed: Not been able to remove Better Camera without restarting DoW DE Mod Manager. That was just a small bug - not a feature! xD
+- Updated DXVK to version 3.1.1
+- Updated DXVK configuration file for 3.1.1

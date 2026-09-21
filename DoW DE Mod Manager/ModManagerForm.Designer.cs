@@ -56,6 +56,7 @@ namespace DoW_DE_Nod_Manager
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.noprecachemodelsCheckBox = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dgVoodoo2Button = new System.Windows.Forms.Button();
             this.cameraButton = new System.Windows.Forms.Button();
             this.dxvkButton = new System.Windows.Forms.Button();
             this.GOGRadioButton = new System.Windows.Forms.RadioButton();
@@ -381,7 +382,6 @@ namespace DoW_DE_Nod_Manager
             // noFogCheckbox
             // 
             this.noFogCheckbox.AutoSize = true;
-            this.noFogCheckbox.Enabled = false;
             this.noFogCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.noFogCheckbox.Location = new System.Drawing.Point(5, 55);
             this.noFogCheckbox.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
@@ -422,6 +422,7 @@ namespace DoW_DE_Nod_Manager
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.AutoSize = true;
+            this.panel2.Controls.Add(this.dgVoodoo2Button);
             this.panel2.Controls.Add(this.cameraButton);
             this.panel2.Controls.Add(this.checkForErrorsButton);
             this.panel2.Controls.Add(this.settingsButton);
@@ -430,6 +431,21 @@ namespace DoW_DE_Nod_Manager
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(245, 112);
             this.panel2.TabIndex = 29;
+            // 
+            // dgVoodoo2Button
+            // 
+            this.dgVoodoo2Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.dgVoodoo2Button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.dgVoodoo2Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dgVoodoo2Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dgVoodoo2Button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.dgVoodoo2Button.Location = new System.Drawing.Point(11, 41);
+            this.dgVoodoo2Button.Name = "dgVoodoo2Button";
+            this.dgVoodoo2Button.Size = new System.Drawing.Size(104, 31);
+            this.dgVoodoo2Button.TabIndex = 27;
+            this.dgVoodoo2Button.Text = "Install dgVoodoo2";
+            this.dgVoodoo2Button.UseVisualStyleBackColor = false;
+            this.dgVoodoo2Button.Click += new System.EventHandler(this.DgVoodoo2Button_Click);
             // 
             // cameraButton
             // 
@@ -710,5 +726,6 @@ namespace DoW_DE_Nod_Manager
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Button startExpansionbutton;
         private System.Windows.Forms.Button cameraButton;
+        private System.Windows.Forms.Button dgVoodoo2Button;
     }
 }
