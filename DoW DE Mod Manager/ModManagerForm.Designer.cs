@@ -437,7 +437,7 @@ namespace DoW_DE_Nod_Manager
             this.dgVoodoo2Button.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dgVoodoo2Button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.dgVoodoo2Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dgVoodoo2Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dgVoodoo2Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dgVoodoo2Button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.dgVoodoo2Button.Location = new System.Drawing.Point(11, 41);
             this.dgVoodoo2Button.Name = "dgVoodoo2Button";
@@ -466,7 +466,7 @@ namespace DoW_DE_Nod_Manager
             this.dxvkButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dxvkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.dxvkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dxvkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.dxvkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.dxvkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.dxvkButton.Location = new System.Drawing.Point(125, 41);
             this.dxvkButton.Name = "dxvkButton";

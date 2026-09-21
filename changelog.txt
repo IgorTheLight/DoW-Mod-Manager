@@ -1,7 +1,11 @@
 # CHANGELOG
 
 Who did what:
-IgorTheLight (current main maintainer) - 1.0.0.0 - 1.0.0.3, 1.0.1.0, 1.0.1.1, 1.1.0.0, 1.1.0.1, 1.1.1.0, 1.1.1.1, 1.1.1.2, 1.1.1.3, 1.1.2.0
+IgorTheLight (current main maintainer) - 1.0.0.0 - 1.0.0.3, 1.0.1.0, 1.0.1.1, 1.1.0.0, 1.1.0.1, 1.1.1.0, 1.1.1.1, 1.1.1.2, 1.1.1.3, 1.1.2.0, 1.1.2.1
+
+## Version 1.1.2.1
+
+- Fixed: bugs with dgVoodoo2 downloading and updating
 
 ## Version 1.1.2.0
 

@@ -289,7 +289,7 @@ namespace DoW_DE_Nod_Manager
                 {
                     if (settings[DGVOODOO2_UPDATE_CHECK] == "1")
                     {
-                        string stringVersion = DownloadHelper.DownloadString(DXVK_URL + "dgVoodoo.version");
+                        string stringVersion = DownloadHelper.DownloadString(DGVOODOO2_URL + "dgVoodoo.version");
                         var version = new Version(stringVersion);
 
                         string currentStringVersion = File.ReadAllText("dgVoodoo.version");
@@ -1378,9 +1378,9 @@ namespace DoW_DE_Nod_Manager
                     dxvkButton.Text = "Remove DXVK";
                     ThemedMessageBox.Show("DXVK is downloaded and enabled!", "Information:");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    ThemedMessageBox.Show("We can't download files!", "Warning!");
+                    ThemedMessageBox.Show("We can't download files!\n" + ex, "Warning!");
                 }
                 finally
                 {
@@ -1396,7 +1396,7 @@ namespace DoW_DE_Nod_Manager
             {
                 File.Delete("dgVoodoo.version");
                 File.Delete("dgVoodoo.conf");
-                File.Delete("d3d9.dll");
+                File.Delete("D3D9.dll");
                 File.Delete("dgVoodooCpl.exe");
 
                 isdgvoodoo2Installed = false;
@@ -1412,16 +1412,16 @@ namespace DoW_DE_Nod_Manager
                 {
                     client.DownloadFile(DGVOODOO2_URL + "dgVoodoo.version", "dgVoodoo.version");
                     client.DownloadFile(DGVOODOO2_URL + "dgVoodoo.conf", "dgVoodoo.conf");
-                    client.DownloadFile(DGVOODOO2_URL + "d3d9.dll", "d3d9.dll");
+                    client.DownloadFile(DGVOODOO2_URL + "D3D9.dll", "D3D9.dll");
                     client.DownloadFile(DGVOODOO2_URL + "dgVoodooCpl.exe", "dgVoodooCpl.exe");
 
                     isdgvoodoo2Installed = true;
-                    dgVoodoo2Button.Text = "Remove dgVoodoo2";
+                    dgVoodoo2Button.Text = "Delete dgVoodoo";
                     ThemedMessageBox.Show("dgVoodoo2 is downloaded and enabled!", "Information:");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    ThemedMessageBox.Show("We can't download files!", "Warning!");
+                    ThemedMessageBox.Show("We can't download files!\n" + ex, "Warning!");
                 }
                 finally
                 {
