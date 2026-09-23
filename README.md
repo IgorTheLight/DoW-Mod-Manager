@@ -41,6 +41,9 @@ This application allows for an easy launch of mods and management of large colle
 
 - **Install DXVK** : Installs and enables the latest versiuon of DXVK that was tested and configured for Dawn of War for potentially better performance and less crashes! Button would change to "Remove DXVK" if you have the latest version or "Update DXVK" if your version is outdated (or if you are missing one of 4 files).
 
+- **Install dgVoodoo2** : Installs and enables the latest versiuon of dgVoodoo2 that was tested and configured for Dawn of War for potentially better performance and less crashes! Button would change to "Delete dgVoodoo2" if you have the latest version or "Update dgVoodoo2" if your version is outdated (or if you are missing one of 4 files).
+The difference with DXVK is that dgVoodoo2 is not translating DirectX calls to Vulkan but translates them to a newer DirectX calls (from DX9 to DX11)
+
 - **Install a better camera** : Installs and enables a custom script that improves default camera a lot! Some mods would rewrite this camera with their own but this option is mostly for playing without any mods ;-)
 
 - **Install larger fonts** : Installs custom fonts that are much easier to read! Those fonts are the same as the default ones - just bigger!
