@@ -33,6 +33,9 @@ This application allows for an easy launch of mods and management of large colle
 
 - **Install DXVK** : Installs and enables the latest versiuon of DXVK that was tested and configured for Dawn of War for potentially better performance and less crashes! Button would change to "Remove DXVK" if you have the latest version or "Update DXVK" if your version is outdated (or if you are missing one of 4 files).
 
+- **Install dgVoodoo2** : Installs and enables the latest versiuon of dgVoodoo2 that was tested and configured for Dawn of War for potentially better performance and less crashes! Button would change to "Delete dgVoodoo2" if you have the latest version or "Update dgVoodoo2" if your version is outdated (or if you are missing one of 4 files).
+The difference with DXVK is that dgVoodoo2 is not translating DirectX calls to Vulkan but translates them to a newer DirectX calls (from DX9 to DX11)
+
 - **Download Mod...**: This button will open the new Download Manager window where you could download one (or how much you like) of popular mods. If mod has a patch - it will be downloaded too! Wait 5 seconds and mod will start downloading.
 
 - **Check for errors**: This button will start a search for any critical errors in warnings.log. All errors would be presented to user
