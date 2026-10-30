@@ -123,8 +123,8 @@ namespace DoW_Mod_Manager
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public ModManagerForm()
         {
-            cameraDirectory = Path.Combine(CurrentDir, "Engine\\Data");
-            fontDirectory = Path.Combine(CurrentDir, "Engine\\Locale\\English\\Data");
+            cameraDirectory = Path.Combine(CurrentDir, "Engine", "Data");
+            fontDirectory = Path.Combine(CurrentDir, "Engine", "Locale", "English", "Data");
 
             ReadSettingsFromDoWModManagerINI();
 
@@ -283,9 +283,19 @@ namespace DoW_Mod_Manager
                 ).Start();
             }
 
-            // Checking if DXVK exists and updated
-            if (File.Exists("dxvk.conf") && File.Exists("d3d9.dll") && File.Exists("d3d8.dll") && File.Exists("dxvk.version"))
+            string productName = "";
+
+            // Check if d3d9.dll is in the current folder and is it from DXVK or from dgVoodoo2
+            if (File.Exists("d3d9.dll"))
             {
+                var fvi = FileVersionInfo.GetVersionInfo("d3d9.dll");
+                productName = fvi.ProductName;  // We are interested in "DXVK" and "dgVoodoo"
+            }
+
+            // Checking if DXVK exists and updated
+            if (File.Exists("dxvk.conf") && productName == "DXVK" && File.Exists("d3d8.dll") && File.Exists("dxvk.version"))
+            {
+                dgVoodoo2Button.Enabled = false;
                 try
                 {
                     if (settings[DXVK_UPDATE_CHECK] == 1)
@@ -326,8 +336,9 @@ namespace DoW_Mod_Manager
             }
 
             // Checking if dgVoodoo2 exists and updated
-            if (File.Exists("dgVoodoo.conf") && File.Exists("d3d9.dll") && File.Exists("dgVoodooCpl.exe") && File.Exists("dgVoodoo.version"))
+            if (File.Exists("dgVoodoo.conf") && productName == "dgVoodoo" && File.Exists("dgVoodooCpl.exe") && File.Exists("dgVoodoo.version"))
             {
+                dxvkButton.Enabled = false;
                 try
                 {
                     if (settings[DGVOODOO2_UPDATE_CHECK] == 1)
@@ -1498,6 +1509,8 @@ namespace DoW_Mod_Manager
                 dxvkButton.Text = "Install DXVK";
                 isDXVKInstalled = false;
 
+                dgVoodoo2Button.Enabled = true;
+
                 ThemedMessageBox.Show("DXVK is disabled and deleted!", "Information:");
             }
             else
@@ -1515,7 +1528,9 @@ namespace DoW_Mod_Manager
                     dxvkButton.Text = "Remove DXVK";
                     isDXVKInstalled = true;
 
-                    ThemedMessageBox.Show("DXVK is downloaded and enabled!", "Information:");
+                    dgVoodoo2Button.Enabled = false;
+
+                    ThemedMessageBox.Show("DXVK is downloaded and enabled!\nMake sure that your videocard\nsupports Vulkan in the first place!", "Information:");
                 }
                 catch (Exception ex)
                 {
@@ -1541,6 +1556,8 @@ namespace DoW_Mod_Manager
                 dgVoodoo2Button.Text = "Install dgVoodoo2";
                 isDgvoodoo2Installed = false;
 
+                dxvkButton.Enabled = true;
+
                 ThemedMessageBox.Show("dgVoodoo2 is disabled and deleted!", "Information:");
             }
             else
@@ -1557,6 +1574,8 @@ namespace DoW_Mod_Manager
 
                     dgVoodoo2Button.Text = "Delete dgVoodoo";
                     isDgvoodoo2Installed = true;
+
+                    dxvkButton.Enabled= false;
 
                     ThemedMessageBox.Show("dgVoodoo2 is downloaded and enabled!\nBest way to use it:\n* Go to SETTINGS -> Video\n* Disable Antialiasing\n* Set resolution to 1280x960 or 1024x768\nThat way UI will not be stretched anymore!", "Information:");
                 }
