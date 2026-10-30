@@ -1,0 +1,15 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="DoW_Mod_Manager.Views.Dialogs.MessageWindow"
+        Icon="/Assets/app-icon.ico"
+        SizeToContent="WidthAndHeight" MinWidth="320" MaxWidth="640"
+        CanResize="False" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+
+    <StackPanel Margin="20" Spacing="16">
+        <SelectableTextBlock x:Name="MessageText" TextWrapping="Wrap" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+            <Button x:Name="OkButton" Content="OK" MinWidth="80" IsDefault="True" Classes="accent" />
+            <Button x:Name="CancelButton" Content="Cancel" MinWidth="80" IsCancel="True" />
+        </StackPanel>
+    </StackPanel>
+</Window>

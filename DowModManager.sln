@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DowModManager", "DoW Mod Manager.CrossPlatform\DowModManager.csproj", "{18DE51B5-D700-40A1-8D1D-8D8DBAE5C294}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6A476A63-D411-4B2B-B4FA-883D9F559006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DowModManager.Tests", "tests\DowModManager.Tests\DowModManager.Tests.csproj", "{70BC45DC-21AA-4B77-B111-99D6A3BDF013}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18DE51B5-D700-40A1-8D1D-8D8DBAE5C294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18DE51B5-D700-40A1-8D1D-8D8DBAE5C294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18DE51B5-D700-40A1-8D1D-8D8DBAE5C294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18DE51B5-D700-40A1-8D1D-8D8DBAE5C294}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70BC45DC-21AA-4B77-B111-99D6A3BDF013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70BC45DC-21AA-4B77-B111-99D6A3BDF013}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70BC45DC-21AA-4B77-B111-99D6A3BDF013}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70BC45DC-21AA-4B77-B111-99D6A3BDF013}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{70BC45DC-21AA-4B77-B111-99D6A3BDF013} = {6A476A63-D411-4B2B-B4FA-883D9F559006}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,65 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:DoW_Mod_Manager.ViewModels"
+        x:Class="DoW_Mod_Manager.Views.ModDownloader.ModDownloaderWindow"
+        x:DataType="vm:ModDownloaderViewModel"
+        Icon="/Assets/app-icon.ico"
+        Width="620" Height="600" MinWidth="480" MinHeight="440"
+        WindowStartupLocation="CenterOwner"
+        Title="Mod Downloader">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto,Auto,Auto" Margin="16">
+        <TextBlock Grid.Row="0" Text="{Binding Header}" FontWeight="SemiBold" Margin="0,0,0,8" />
+        <TextBox Grid.Row="1" Watermark="Search..." Text="{Binding SearchText}" Margin="0,0,0,8" />
+
+        <Panel Grid.Row="2">
+            <ListBox ItemsSource="{Binding Mods}" SelectedItem="{Binding SelectedEntry}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ModListEntry">
+                        <DockPanel>
+                            <Border DockPanel.Dock="Right" IsVisible="{Binding IsInstalled}"
+                                    Background="{DynamicResource SystemAccentColor}" CornerRadius="3"
+                                    Padding="6,1" Margin="8,0,0,0" VerticalAlignment="Center">
+                                <TextBlock Text="Installed" FontSize="11" Foreground="White" />
+                            </Border>
+                            <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsLoading}"
+                         VerticalAlignment="Center" Margin="40,0" />
+        </Panel>
+
+        <WrapPanel Grid.Row="3" Margin="0,12,0,0">
+            <Button Content="Install" Classes="accent" Margin="0,0,8,8"
+                    Command="{Binding InstallCommand}"
+                    ToolTip.Tip="Downloads the mod in your browser, then installs it: the manager runs its installer or extracts its archive into the game folder" />
+            <Button Content="Uninstall" Margin="0,0,8,8" Command="{Binding UninstallCommand}"
+                    ToolTip.Tip="Runs the mod's uninstaller, or removes the files the manager extracted" />
+            <Button Content="Open mod page" Margin="0,0,8,8" Command="{Binding OpenModPageCommand}" />
+            <Button Content="Browse ModDB" Margin="0,0,8,8" Command="{Binding OpenModDbCommand}" />
+            <Button Content="CLOSE" Margin="0,0,8,8" Command="{Binding CloseCommand}" />
+        </WrapPanel>
+
+        <Expander Grid.Row="4" Header="Manual steps" Margin="0,0,0,8" HorizontalAlignment="Stretch">
+            <WrapPanel>
+                <Button Content="Download only" Margin="0,0,8,8"
+                        Command="{Binding DownloadCommand}"
+                        ToolTip.Tip="Opens the download (and patch, if any) links in your browser" />
+                <Button Content="Run installer…" Margin="0,0,8,8" Command="{Binding RunInstallerCommand}"
+                        ToolTip.Tip="Runs a downloaded Windows installer (Setup.exe) for this game; on Linux it runs inside the game's Proton/Wine prefix" />
+            </WrapPanel>
+        </Expander>
+
+        <StackPanel Grid.Row="5" Spacing="6">
+            <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding IsBusy}">
+                <ProgressBar Grid.Column="0" Minimum="0" Maximum="100" VerticalAlignment="Center"
+                             IsIndeterminate="{Binding IsProgressIndeterminate}" Value="{Binding ProgressValue}" />
+                <Button Grid.Column="1" Content="Cancel" Margin="8,0,0,0" Command="{Binding CancelCommand}" />
+            </Grid>
+            <TextBlock Text="{Binding ProgressText}" IsVisible="{Binding IsBusy}" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Status}" TextWrapping="Wrap" Opacity="0.8" />
+        </StackPanel>
+    </Grid>
+</Window>

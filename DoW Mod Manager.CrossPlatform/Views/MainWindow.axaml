@@ -1,0 +1,15 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:DoW_Mod_Manager.ViewModels"
+        xmlns:mm="using:DoW_Mod_Manager.Views.ModManager"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="940" d:DesignHeight="640"
+        x:Class="DoW_Mod_Manager.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/app-icon.ico"
+        Width="940" Height="660" MinWidth="900" MinHeight="560"
+        Title="DoW Mod Manager">
+
+    <mm:ModManagerView DataContext="{Binding ModManager}" />
+</Window>

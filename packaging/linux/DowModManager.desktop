@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=DoW Mod Manager
+Comment=Manage and launch Dawn of War mods (native, launches the game via Proton/Wine)
+Exec=DowModManager
+Icon=dowmodmanager
+Categories=Game;Utility;
+Terminal=false

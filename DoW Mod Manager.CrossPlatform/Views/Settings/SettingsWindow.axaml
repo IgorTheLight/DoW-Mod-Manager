@@ -1,0 +1,184 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:DoW_Mod_Manager.ViewModels"
+        xmlns:svc="using:DoW_Mod_Manager.Services"
+        x:Class="DoW_Mod_Manager.Views.Settings.SettingsWindow"
+        x:DataType="vm:SettingsViewModel"
+        Icon="/Assets/app-icon.ico"
+        Width="720" Height="640" MinWidth="620" MinHeight="520"
+        WindowStartupLocation="CenterOwner"
+        Title="Settings Manager">
+
+    <Window.Styles>
+        <!-- Two-column "label : control" rows -->
+        <Style Selector="Grid.form > TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,4,12,4" />
+        </Style>
+        <Style Selector="Grid.form > ComboBox, Grid.form > Slider, Grid.form > CheckBox">
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="0,2" />
+        </Style>
+        <!-- Settings the game's own menu does not expose (legacy "cyan" labels) -->
+        <Style Selector="TextBlock.hidden">
+            <Setter Property="Foreground" Value="#4FD1D9" />
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="*,Auto,Auto" Margin="12">
+        <TabControl Grid.Row="0">
+
+            <!-- ============================== General ============================== -->
+            <TabItem Header="General">
+                <ScrollViewer>
+                    <StackPanel Spacing="12" Margin="4">
+                        <Grid Classes="form" ColumnDefinitions="200,*" RowDefinitions="Auto,Auto,Auto">
+                            <TextBlock Grid.Row="0" Text="Current player:" />
+                            <ComboBox Grid.Row="0" ItemsSource="{Binding Profiles}" SelectedItem="{Binding SelectedProfile}" />
+                            <TextBlock Grid.Row="1" Text="New player name:" />
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NewPlayerName}" Margin="0,2" />
+                            <WrapPanel Grid.Row="2" Grid.Column="1" Margin="0,4">
+                                <Button Content="Create profile" Margin="0,0,8,4" Command="{Binding CreateProfileCommand}" />
+                                <Button Content="Rename profile" Margin="0,0,8,4" Command="{Binding RenameProfileCommand}" />
+                                <Button Content="Delete profile" Margin="0,0,8,4" Command="{Binding DeleteProfileCommand}" />
+                            </WrapPanel>
+                        </Grid>
+
+                        <Grid Classes="form" ColumnDefinitions="200,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+                            <TextBlock Grid.Row="0" Text="Parental control:" />
+                            <CheckBox Grid.Row="0" IsChecked="{Binding ParentalControl}" />
+                            <TextBlock Grid.Row="1" Text="Inverse pan:" />
+                            <CheckBox Grid.Row="1" IsChecked="{Binding InversePan}" />
+                            <TextBlock Grid.Row="2" Text="Inverse declination:" />
+                            <CheckBox Grid.Row="2" IsChecked="{Binding InverseDeclination}" />
+                            <TextBlock Grid.Row="3" Text="Scroll rate:" />
+                            <Slider Grid.Row="3" Minimum="10" Maximum="210" TickFrequency="20" IsSnapToTickEnabled="False"
+                                    Value="{Binding ScrollRate}" />
+                            <TextBlock Grid.Row="4" Text="Login attempts:" Classes="hidden" />
+                            <ComboBox Grid.Row="4" ItemsSource="{x:Static vm:SettingsViewModel.LoginAttemptOptions}"
+                                      SelectedItem="{Binding LoginAttempts}" />
+                        </Grid>
+
+                        <WrapPanel>
+                            <Button Content="Fonts Manager" Margin="0,0,8,4" Command="{Binding OpenFontsManagerCommand}" />
+                            <Button Content="System Performance Manager" Margin="0,0,8,4" Command="{Binding OpenSystemPerformanceCommand}" />
+                        </WrapPanel>
+                        <TextBlock Classes="hidden" Text="* All cyan settings are hidden in game Settings" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============================== Video ============================== -->
+            <TabItem Header="Video">
+                <ScrollViewer>
+                    <StackPanel Spacing="12" Margin="4">
+                        <WrapPanel>
+                            <Button Content="LOW-" Margin="0,0,6,4" Command="{Binding ApplyGraphicsPresetCommand}" CommandParameter="{x:Static svc:GraphicsPreset.LowMinus}" />
+                            <Button Content="LOW" Margin="0,0,6,4" Command="{Binding ApplyGraphicsPresetCommand}" CommandParameter="{x:Static svc:GraphicsPreset.Low}" />
+                            <Button Content="MEDIUM" Margin="0,0,6,4" Command="{Binding ApplyGraphicsPresetCommand}" CommandParameter="{x:Static svc:GraphicsPreset.Medium}" />
+                            <Button Content="HIGH" Margin="0,0,6,4" Command="{Binding ApplyGraphicsPresetCommand}" CommandParameter="{x:Static svc:GraphicsPreset.High}" />
+                            <Button Content="ULTRA" Margin="0,0,6,4" Command="{Binding ApplyGraphicsPresetCommand}" CommandParameter="{x:Static svc:GraphicsPreset.Ultra}" />
+                            <Button Content="ULTRA+" Margin="0,0,6,4" Command="{Binding ApplyGraphicsPresetCommand}" CommandParameter="{x:Static svc:GraphicsPreset.UltraPlus}" />
+                        </WrapPanel>
+
+                        <Grid Classes="form" ColumnDefinitions="200,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                            <TextBlock Grid.Row="0" Text="Active videocard:" />
+                            <ComboBox Grid.Row="0" ItemsSource="{Binding Videocards}" SelectedIndex="{Binding ActiveVideocardIndex}" />
+                            <TextBlock Grid.Row="1" Text="Renderer:" />
+                            <ComboBox Grid.Row="1" ItemsSource="{x:Static vm:SettingsViewModel.Renderers}" SelectedItem="{Binding Renderer}" />
+                            <TextBlock Grid.Row="2" Text="Screen resolution:" />
+                            <ComboBox Grid.Row="2" ItemsSource="{x:Static vm:SettingsViewModel.Resolutions}" SelectedItem="{Binding ScreenResolution}" />
+                            <TextBlock Grid.Row="3" Text="Refresh rate:" />
+                            <ComboBox Grid.Row="3" ItemsSource="{x:Static vm:SettingsViewModel.RefreshRates}" SelectedItem="{Binding RefreshRate}" />
+                            <TextBlock Grid.Row="4" Text="Color depth:" />
+                            <ComboBox Grid.Row="4" ItemsSource="{x:Static vm:SettingsViewModel.ColorDepths}" SelectedIndex="{Binding ColorDepthIndex}" />
+                            <TextBlock Grid.Row="5" Text="Gamma:" />
+                            <Slider Grid.Row="5" Minimum="5" Maximum="15" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding Gamma}" />
+                            <TextBlock Grid.Row="6" Text="V-Sync:" />
+                            <CheckBox Grid.Row="6" IsChecked="{Binding VSync}" />
+                            <TextBlock Grid.Row="7" Text="Windowed:" Classes="hidden" />
+                            <CheckBox Grid.Row="7" IsChecked="{Binding Windowed}" />
+                            <TextBlock Grid.Row="8" Text="Anti-aliasing:" />
+                            <CheckBox Grid.Row="8" IsChecked="{Binding Antialiasing}" />
+                            <TextBlock Grid.Row="9" Text="Hardware cursor:" Classes="hidden"
+                                       ToolTip.Tip="Toggles the DirectX 8 cursor (allowhwcursor). Disable it if you get cursor flicker or big FPS drops." />
+                            <CheckBox Grid.Row="9" IsChecked="{Binding HardwareCursor}"
+                                      ToolTip.Tip="Toggles the DirectX 8 cursor (allowhwcursor). Disable it if you get cursor flicker or big FPS drops." />
+                        </Grid>
+
+                        <Grid Classes="form" ColumnDefinitions="200,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                            <TextBlock Grid.Row="0" Text="Texture detail:" />
+                            <ComboBox Grid.Row="0" ItemsSource="{x:Static vm:SettingsViewModel.LowMediumHigh}" SelectedIndex="{Binding TextureDetail}" />
+                            <TextBlock Grid.Row="1" Text="Model detail:" />
+                            <ComboBox Grid.Row="1" ItemsSource="{x:Static vm:SettingsViewModel.LowMediumHigh}" SelectedIndex="{Binding ModelDetail}" />
+                            <TextBlock Grid.Row="2" Text="Terrain detail:" />
+                            <ComboBox Grid.Row="2" ItemsSource="{x:Static vm:SettingsViewModel.LowMediumHigh}" SelectedIndex="{Binding TerrainDetail}" />
+                            <TextBlock Grid.Row="3" Text="High res textures:" Classes="hidden" />
+                            <CheckBox Grid.Row="3" IsChecked="{Binding HighResTextures}"
+                                      ToolTip.Tip="High res can cause crashes when playing with many AI or in multiplayer." />
+                            <TextBlock Grid.Row="4" Text="Shadows detail:" />
+                            <ComboBox Grid.Row="4" ItemsSource="{x:Static vm:SettingsViewModel.ShadowLevels}" SelectedIndex="{Binding ShadowsDetail}" />
+                            <TextBlock Grid.Row="5" Text="World events:" />
+                            <ComboBox Grid.Row="5" ItemsSource="{x:Static vm:SettingsViewModel.LowMediumHigh}" SelectedIndex="{Binding WorldEvents}" />
+                            <TextBlock Grid.Row="6" Text="Effects detail:" />
+                            <ComboBox Grid.Row="6" ItemsSource="{x:Static vm:SettingsViewModel.LowMediumHigh}" SelectedIndex="{Binding EffectsDetail}" />
+                            <TextBlock Grid.Row="7" Text="Persistent bodies:" />
+                            <ComboBox Grid.Row="7" ItemsSource="{x:Static vm:SettingsViewModel.NoneToHigh}" SelectedIndex="{Binding PersistentBodies}" />
+                            <TextBlock Grid.Row="8" Text="Persistent scarring:" />
+                            <ComboBox Grid.Row="8" ItemsSource="{x:Static vm:SettingsViewModel.LowMediumHigh}" SelectedIndex="{Binding PersistentScarring}" />
+                            <TextBlock Grid.Row="9" Text="Dynamic lights:" />
+                            <ComboBox Grid.Row="9" ItemsSource="{x:Static vm:SettingsViewModel.NoneToHigh}" SelectedIndex="{Binding DynamicLights}" />
+                            <TextBlock Grid.Row="10" Text="Full 3D camera:" />
+                            <CheckBox Grid.Row="10" IsChecked="{Binding Full3DCamera}" />
+                            <TextBlock Grid.Row="11" Text="Units occlusion:" />
+                            <CheckBox Grid.Row="11" IsChecked="{Binding UnitsOcclusion}" />
+                        </Grid>
+                        <TextBlock Classes="hidden" Text="* All cyan settings are hidden in game Settings" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============================== Audio ============================== -->
+            <TabItem Header="Audio">
+                <ScrollViewer>
+                    <StackPanel Spacing="12" Margin="4">
+                        <WrapPanel>
+                            <Button Content="LOW" Margin="0,0,6,4" Command="{Binding ApplyAudioPresetCommand}" CommandParameter="{x:Static svc:AudioPreset.Low}" />
+                            <Button Content="MEDIUM" Margin="0,0,6,4" Command="{Binding ApplyAudioPresetCommand}" CommandParameter="{x:Static svc:AudioPreset.Medium}" />
+                            <Button Content="HIGH" Margin="0,0,6,4" Command="{Binding ApplyAudioPresetCommand}" CommandParameter="{x:Static svc:AudioPreset.High}" />
+                        </WrapPanel>
+
+                        <Grid Classes="form" ColumnDefinitions="200,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                            <TextBlock Grid.Row="0" Text="Sound enabled:" />
+                            <CheckBox Grid.Row="0" IsChecked="{Binding SoundEnabled}" />
+                            <TextBlock Grid.Row="1" Text="Music volume:" />
+                            <Slider Grid.Row="1" Minimum="0" Maximum="100" Value="{Binding MusicVolume}" />
+                            <TextBlock Grid.Row="2" Text="Voice volume:" />
+                            <Slider Grid.Row="2" Minimum="0" Maximum="100" Value="{Binding VoiceVolume}" />
+                            <TextBlock Grid.Row="3" Text="Effects volume:" />
+                            <Slider Grid.Row="3" Minimum="0" Maximum="100" Value="{Binding EffectsVolume}" />
+                            <TextBlock Grid.Row="4" Text="Ambient volume:" />
+                            <Slider Grid.Row="4" Minimum="0" Maximum="100" Value="{Binding AmbientVolume}" />
+                            <TextBlock Grid.Row="5" Text="Sound channels:" />
+                            <ComboBox Grid.Row="5" ItemsSource="{x:Static vm:SettingsViewModel.SoundChannelOptions}" SelectedIndex="{Binding SoundChannelsIndex}" />
+                            <TextBlock Grid.Row="6" Text="Sound quality:" />
+                            <ComboBox Grid.Row="6" ItemsSource="{x:Static vm:SettingsViewModel.LowMediumHigh}" SelectedIndex="{Binding SoundQuality}" />
+                            <TextBlock Grid.Row="7" Text="Randomized sounds:" Classes="hidden" />
+                            <CheckBox Grid.Row="7" IsChecked="{Binding RandomizedSounds}" />
+                        </Grid>
+                        <TextBlock Classes="hidden" Text="* All cyan settings are hidden in game Settings" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <TextBlock Grid.Row="1" Text="{Binding Status}" TextWrapping="Wrap" Opacity="0.8" Margin="0,8" />
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+            <Button Content="DEFAULTS" Command="{Binding DefaultsCommand}" />
+            <Button Content="SAVE" Classes="accent" Command="{Binding SaveCommand}" />
+            <Button Content="{Binding CloseLabel}" Command="{Binding CloseCommand}" />
+        </StackPanel>
+    </Grid>
+</Window>

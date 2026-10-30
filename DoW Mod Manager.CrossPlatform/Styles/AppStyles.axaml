@@ -1,0 +1,159 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--
+        Application-wide look, copied from the WinForms app so users of both editions feel at home:
+        window 60,60,60; lists and text boxes 40,40,40; flat buttons 90,90,90 with a 1 px border;
+        text 200,200,200; status labels LimeGreen / Red.
+    -->
+
+    <Styles.Resources>
+        <SolidColorBrush x:Key="ClassicWindowBrush" Color="#3C3C3C" />
+        <SolidColorBrush x:Key="ClassicFieldBrush" Color="#282828" />
+        <SolidColorBrush x:Key="ClassicButtonBrush" Color="#5A5A5A" />
+        <SolidColorBrush x:Key="ClassicButtonHoverBrush" Color="#6E6E6E" />
+        <SolidColorBrush x:Key="ClassicButtonPressedBrush" Color="#4A4A4A" />
+        <SolidColorBrush x:Key="ClassicTextBrush" Color="#C8C8C8" />
+        <SolidColorBrush x:Key="ClassicDisabledTextBrush" Color="#808080" />
+        <SolidColorBrush x:Key="ClassicBorderBrush" Color="#A0A0A0" />
+        <SolidColorBrush x:Key="ClassicSelectionBrush" Color="#0078D7" />
+    </Styles.Resources>
+
+    <Style Selector="TextBlock.h1">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style Selector=":is(Window)">
+        <Setter Property="Background" Value="{StaticResource ClassicWindowBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ClassicTextBrush}" />
+    </Style>
+
+    <!-- Flat buttons -->
+    <Style Selector="Button">
+        <Setter Property="Background" Value="{StaticResource ClassicButtonBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ClassicTextBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ClassicBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource ClassicButtonHoverBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ClassicTextBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ClassicBorderBrush}" />
+    </Style>
+    <Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource ClassicButtonPressedBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ClassicTextBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ClassicBorderBrush}" />
+    </Style>
+    <Style Selector="Button:disabled /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource ClassicButtonBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ClassicDisabledTextBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ClassicDisabledTextBrush}" />
+    </Style>
+
+    <!-- "About and Updates": a hyperlink-looking button -->
+    <Style Selector="Button.link">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Foreground" Value="#3399FF" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="Button.link:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="#66B3FF" />
+    </Style>
+    <Style Selector="Button.link:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <!-- Text boxes and combo boxes: dark fields with a thin border -->
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="{StaticResource ClassicFieldBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ClassicTextBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ClassicBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement, TextBox:focus /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{StaticResource ClassicFieldBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ClassicTextBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="TextBox:pointerover, TextBox:focus">
+        <Setter Property="Foreground" Value="{StaticResource ClassicTextBrush}" />
+    </Style>
+
+    <Style Selector="ComboBox">
+        <Setter Property="Background" Value="{StaticResource ClassicFieldBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ClassicTextBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ClassicBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="ComboBox:pointerover /template/ Border#Background">
+        <Setter Property="Background" Value="{StaticResource ClassicFieldBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ClassicTextBrush}" />
+    </Style>
+
+    <!-- Lists: dark, bordered, compact rows, blue selection -->
+    <Style Selector="ListBox">
+        <Setter Property="Background" Value="{StaticResource ClassicFieldBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ClassicTextBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ClassicBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="ListBox.classic ListBoxItem">
+        <Setter Property="Padding" Value="4,0" />
+        <Setter Property="MinHeight" Value="0" />
+    </Style>
+    <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter, ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter, ListBoxItem:selected:focus /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource ClassicSelectionBrush}" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+
+    <!-- Compact controls inside a .classic container, like the 17-23 px WinForms ones -->
+    <Style Selector=":is(Control).classic CheckBox, :is(Control).classic RadioButton">
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="Padding" Value="6,0,0,0" />
+    </Style>
+    <Style Selector=":is(Control).classic CheckBox /template/ Grid#RootGrid > Grid, :is(Control).classic RadioButton /template/ Grid#RootGrid > Grid">
+        <Setter Property="Height" Value="18" />
+    </Style>
+    <Style Selector=":is(Control).classic CheckBox /template/ Border#NormalRectangle">
+        <Setter Property="Width" Value="14" />
+        <Setter Property="Height" Value="14" />
+    </Style>
+    <Style Selector=":is(Control).classic CheckBox /template/ Viewbox">
+        <Setter Property="Width" Value="10" />
+        <Setter Property="Height" Value="10" />
+    </Style>
+    <Style Selector=":is(Control).classic RadioButton /template/ Ellipse#OuterEllipse, :is(Control).classic RadioButton /template/ Ellipse#CheckOuterEllipse">
+        <Setter Property="Width" Value="14" />
+        <Setter Property="Height" Value="14" />
+    </Style>
+    <Style Selector=":is(Control).classic RadioButton /template/ Ellipse#CheckGlyph">
+        <Setter Property="Width" Value="6" />
+        <Setter Property="Height" Value="6" />
+    </Style>
+    <Style Selector=":is(Control).classic TextBox">
+        <Setter Property="MinHeight" Value="22" />
+        <Setter Property="Padding" Value="4,2" />
+    </Style>
+    <Style Selector=":is(Control).classic ComboBox">
+        <Setter Property="MinHeight" Value="22" />
+        <Setter Property="Padding" Value="6,1,6,1" />
+    </Style>
+    <Style Selector=":is(Control).classic Button">
+        <Setter Property="Padding" Value="4,2" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <!-- Status labels next to the tool buttons: "Enabled" in green, "Disabled" in red -->
+    <Style Selector="TextBlock.on">
+        <Setter Property="Foreground" Value="LimeGreen" />
+    </Style>
+    <Style Selector="TextBlock.off">
+        <Setter Property="Foreground" Value="Red" />
+    </Style>
+</Styles>

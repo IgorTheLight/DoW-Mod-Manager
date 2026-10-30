@@ -249,3 +249,7 @@ ModelManifest.xml
 
 #Merge stuff
 *.orig
+
+# Claude Code agent worktrees & local settings
+.claude/worktrees/
+.claude/settings.local.json

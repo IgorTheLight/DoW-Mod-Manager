@@ -1,0 +1,158 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:DoW_Mod_Manager.ViewModels"
+             xmlns:models="using:DoW_Mod_Manager.Models"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="925" d:DesignHeight="660"
+             x:Class="DoW_Mod_Manager.Views.ModManager.ModManagerView"
+             x:DataType="vm:ModManagerViewModel"
+             Classes="classic" FontSize="12">
+
+    <!-- Layout of the WinForms main window (ModManagerForm), so users of both editions find everything in the same place. -->
+    <UserControl.Resources>
+        <x:Double x:Key="ControlContentThemeFontSize">12</x:Double>
+    </UserControl.Resources>
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="12,6,12,4">
+
+        <!-- Game directory (+ the cross-platform extras: other folder, DE Soulstorm folder) -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto">
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Your current game directory" VerticalAlignment="Center" Margin="0,0,8,0" />
+            <ComboBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Installs}"
+                      SelectedItem="{Binding SelectedInstall}" />
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding PlatformName}" Foreground="Gray"
+                       VerticalAlignment="Center" Margin="8,0,0,0" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Other game directory" VerticalAlignment="Center" Margin="0,4,8,0" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,4,0,0" Watermark="Paste a game folder path"
+                     Text="{Binding ManualPath}" />
+            <Button Grid.Row="1" Grid.Column="2" Content="Load" Width="75" Height="23" Margin="8,4,0,0"
+                    Command="{Binding LoadManualPathCommand}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Your Soulstorm directory" VerticalAlignment="Center" Margin="0,4,8,0"
+                       IsVisible="{Binding IsDefinitiveEdition}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="0,4,0,0" Watermark="Soulstorm folder to also list mods from (optional)"
+                     Text="{Binding SoulstormDir}" IsVisible="{Binding IsDefinitiveEdition}"
+                     ToolTip.Tip="Lists the mods of a separate Soulstorm installation as well, so they can be used without copying them into the Definitive Edition. Leave empty and apply to stop." />
+            <Button Grid.Row="2" Grid.Column="2" Content="Apply" Width="75" Height="23" Margin="8,4,0,0"
+                    Command="{Binding ApplySoulstormDirCommand}" IsVisible="{Binding IsDefinitiveEdition}" />
+        </Grid>
+
+        <!-- Start options | tools | start buttons -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,245,310" Margin="0,8,0,0">
+
+            <!-- The WinForms option labels are 8.25 pt; the longest one must fit on one line. -->
+            <StackPanel Grid.Column="0" Spacing="1" TextElement.FontSize="11">
+                <TextBlock Text="Advanced Start Options:" Margin="0,0,0,2" />
+                <CheckBox Content="-dev: Developers mode" IsChecked="{Binding Dev}" />
+                <CheckBox Content="-nomovies: No Intro movies" IsChecked="{Binding NoMovies}" />
+                <CheckBox Content="-forcehighpoly: High Poly models at any distance" IsChecked="{Binding ForceHighPoly}" />
+                <CheckBox Content="-noprecachemodels:  Don't precache models" IsChecked="{Binding NoPrecacheModels}" />
+                <CheckBox Content="/high /affinity 6: Set to highest thread priority and CPU affinity"
+                          IsChecked="{Binding CpuAffinityOptimization}" IsEnabled="{Binding PerfTweaksSupported}" />
+                <CheckBox Content="Disable Fog: Removes the map ambient fog." IsChecked="{Binding NoFog}"
+                          IsEnabled="{Binding NoFogEnabled}" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Spacing="6">
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Button Content="SETTINGS" Width="104" Height="31" Command="{Binding OpenSettingsCommand}" />
+                    <Button Content="Check for errors" Width="104" Height="31" Command="{Binding CheckForErrorsCommand}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Button Content="Toggle 4Gb RAM patch" Width="154" Height="31" Command="{Binding ToggleLaaCommand}"
+                            ToolTip.ShowOnDisabled="True"
+                            ToolTip.Tip="Toggle the 4 GB RAM (Large Address Aware) patch. Only applies to 32-bit game executables; 64-bit ones (Definitive Edition) don't need it." />
+                    <TextBlock Text="{Binding LaaStatus}" Width="80" TextWrapping="Wrap" VerticalAlignment="Center"
+                               Foreground="Gray" FontSize="11"
+                               Classes.on="{Binding IsLaaEnabled}" Classes.off="{Binding IsLaaDisabled}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Button Content="{Binding DxvkLabel}" Width="104" Height="31" FontSize="11"
+                            Command="{Binding ToggleDxvkCommand}" ToolTip.Tip="{Binding GraphicsWrapperHint}" />
+                    <Button Content="{Binding DgVoodoo2Label}" Width="104" Height="31" FontSize="11"
+                            Command="{Binding ToggleDgVoodoo2Command}" ToolTip.Tip="{Binding GraphicsWrapperHint}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Button Content="{Binding CameraLabel}" Width="154" Height="31" Command="{Binding ToggleCameraCommand}" />
+                    <TextBlock Text="Enabled" Classes="on" VerticalAlignment="Center" IsVisible="{Binding IsCameraInstalled}" />
+                    <TextBlock Text="Disabled" Classes="off" VerticalAlignment="Center" IsVisible="{Binding !IsCameraInstalled}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Button Content="{Binding LargerFontsLabel}" Width="154" Height="31" Command="{Binding ToggleLargerFontsCommand}" />
+                    <TextBlock Text="Enabled" Classes="on" VerticalAlignment="Center" IsVisible="{Binding IsLargerFontsInstalled}" />
+                    <TextBlock Text="Disabled" Classes="off" VerticalAlignment="Center" IsVisible="{Binding !IsLargerFontsInstalled}" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Spacing="8">
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Button Content="START BASE GAME" Width="121" Height="48" Command="{Binding StartBaseGameCommand}" />
+                    <Button Content="START MOD" Width="121" Height="48" Command="{Binding StartModCommand}" />
+                    <!-- Green check when every required mod is installed, red cross otherwise -->
+                    <Panel Width="50" Height="50">
+                        <Path Data="M 6,27 L 19,40 L 45,9" Stroke="LimeGreen" StrokeThickness="8"
+                              StrokeLineCap="Square" IsVisible="{Binding AllRequiredModsInstalled}" />
+                        <Path Data="M 10,10 L 40,40 M 40,10 L 10,40" Stroke="Red" StrokeThickness="8"
+                              IsVisible="{Binding SomeRequiredModsMissing}" />
+                    </Panel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Button Content="Download Mod..." Width="121" Height="43" Command="{Binding OpenModDownloaderCommand}" />
+                    <Button Content="Merge Mods..." Width="121" Height="43" Command="{Binding OpenModMergerCommand}" />
+                    <Button Width="59" Height="43" Padding="1" FontSize="11" Command="{Binding FixMissingModCommand}"
+                            ToolTip.Tip="Select a MISSING required mod to look it up in the Mod Downloader">
+                        <TextBlock Text="Find MISSING" TextWrapping="Wrap" TextAlignment="Center" />
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <RadioButton GroupName="Store" Content="Steam version" IsChecked="{Binding !IsGogVersion, Mode=OneWay}" />
+                    <RadioButton GroupName="Store" Content="GOG version" IsChecked="{Binding IsGogVersion}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <!-- Installed mods | required mods -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" Margin="0,6,0,0">
+            <DockPanel Grid.Column="0" Margin="0,0,12,0">
+                <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="0,0,0,2">
+                    <TextBlock Text="Currently Installed Mods" VerticalAlignment="Bottom" />
+                    <Button Grid.Column="1" Content="Open Folder..." Width="91" Height="23"
+                            Command="{Binding OpenModFolderCommand}" />
+                </Grid>
+                <ListBox Classes="classic" ItemsSource="{Binding Mods}" SelectedItem="{Binding SelectedMod}" />
+            </DockPanel>
+
+            <DockPanel Grid.Column="1">
+                <Grid DockPanel.Dock="Top" Height="23" Margin="0,0,0,2">
+                    <TextBlock Text="Required Mods" VerticalAlignment="Bottom" />
+                </Grid>
+                <ListBox Classes="classic" ItemsSource="{Binding RequiredMods}" SelectedItem="{Binding SelectedRequiredMod}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="models:ModDependencyStatus">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding RequiredModName}"
+                                           Classes.on="{Binding IsInstalled}" Classes.off="{Binding !IsInstalled}" />
+                                <TextBlock Text=" ...INSTALLED!" Classes="on" IsVisible="{Binding IsInstalled}" />
+                                <TextBlock Text=" ...MISSING!" Classes="off" IsVisible="{Binding !IsInstalled}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Grid>
+
+        <!-- Footer: credits, status of the last action, About -->
+        <Grid Grid.Row="3" ColumnDefinitions="Auto,*,Auto" Margin="4,4,0,0">
+            <TextBlock Grid.Column="0" Text="Created by FragJacker and IgorTheLight" VerticalAlignment="Center" />
+            <SelectableTextBlock Grid.Column="1" Text="{Binding Status}" Foreground="Gray" Margin="16,0"
+                                 TextAlignment="Center" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                                 ToolTip.Tip="{Binding Status}" />
+            <Button Grid.Column="2" Classes="link" Command="{Binding OpenAboutCommand}">
+                <TextBlock Text="About and Updates" TextDecorations="Underline" />
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

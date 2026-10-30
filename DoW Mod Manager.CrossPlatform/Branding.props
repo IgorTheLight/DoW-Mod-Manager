@@ -1,0 +1,10 @@
+<Project>
+  <!-- Distribution-specific values, kept in this one file so a fork (e.g. one shipping its own
+       Linux releases) only has to change it: a non-empty VersionSuffix ("linux.1") is appended
+       to VersionPrefix, and DmmHomePageUrl points About / "Check for updates" at its repository. -->
+  <PropertyGroup>
+    <VersionSuffix></VersionSuffix>
+    <!-- Project page; "Check for updates" opens its /releases. -->
+    <DmmHomePageUrl>https://github.com/IgorTheLight/DoW-Mod-Manager</DmmHomePageUrl>
+  </PropertyGroup>
+</Project>

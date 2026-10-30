@@ -1,0 +1,77 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:DoW_Mod_Manager.ViewModels"
+        xmlns:models="using:DoW_Mod_Manager.Models"
+        x:Class="DoW_Mod_Manager.Views.ModMerger.ModMergerWindow"
+        x:DataType="vm:ModMergerViewModel"
+        Icon="/Assets/app-icon.ico"
+        Width="760" Height="560" MinWidth="620" MinHeight="420"
+        WindowStartupLocation="CenterOwner"
+        Title="Mod Merger">
+
+    <Grid RowDefinitions="Auto,*,Auto" Margin="16">
+
+        <!-- Module to edit -->
+        <StackPanel Grid.Row="0" Spacing="6" Margin="0,0,0,12">
+            <TextBlock Text="Mod to merge into" FontWeight="SemiBold" />
+            <Grid ColumnDefinitions="*,Auto">
+                <ComboBox Grid.Column="0" HorizontalAlignment="Stretch"
+                          ItemsSource="{Binding Modules}" SelectedItem="{Binding SelectedModule}" />
+                <Button Grid.Column="1" Margin="8,0,0,0" Content="Delete merge"
+                        Command="{Binding DeleteMergeCommand}"
+                        ToolTip.Tip="Delete the _MERGED copy and go back to the original module" />
+            </Grid>
+        </StackPanel>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto,*">
+
+            <!-- Required mods of the module -->
+            <DockPanel Grid.Column="0">
+                <TextBlock DockPanel.Dock="Top" Text="Used mods (top = highest priority)" FontWeight="SemiBold" Margin="0,0,0,6" />
+                <WrapPanel DockPanel.Dock="Bottom" Margin="0,6,0,0">
+                    <TextBlock Text="Active" Foreground="LimeGreen" Margin="0,0,12,0" />
+                    <TextBlock Text="Inactive" Foreground="Orange" Margin="0,0,12,0" />
+                    <TextBlock Text="Missing" Foreground="#FF5555" />
+                </WrapPanel>
+                <ListBox ItemsSource="{Binding Entries}" SelectedItem="{Binding SelectedEntry}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="models:MergeEntry">
+                            <Panel>
+                                <TextBlock Text="{Binding}" Foreground="LimeGreen" IsVisible="{Binding IsActive}" />
+                                <TextBlock Text="{Binding}" Foreground="Orange" IsVisible="{Binding IsInactive}" />
+                                <TextBlock Text="{Binding}" Foreground="#FF5555" IsVisible="{Binding IsMissing}" />
+                            </Panel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+
+            <!-- Editing buttons -->
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="12,0" Spacing="6">
+                <Button Content="◀ Add" HorizontalAlignment="Stretch" Command="{Binding AddCommand}"
+                        ToolTip.Tip="Add the selected available mod" />
+                <Button Content="Remove ▶" HorizontalAlignment="Stretch" Command="{Binding RemoveCommand}" />
+                <Separator />
+                <Button Content="Activate" HorizontalAlignment="Stretch" Command="{Binding ActivateCommand}" />
+                <Button Content="Deactivate" HorizontalAlignment="Stretch" Command="{Binding DeactivateCommand}" />
+                <Separator />
+                <Button Content="▲ Up" HorizontalAlignment="Stretch" Command="{Binding MoveUpCommand}" />
+                <Button Content="▼ Down" HorizontalAlignment="Stretch" Command="{Binding MoveDownCommand}" />
+            </StackPanel>
+
+            <!-- Pool of installed mods -->
+            <DockPanel Grid.Column="2">
+                <TextBlock DockPanel.Dock="Top" Text="Available mods" FontWeight="SemiBold" Margin="0,0,0,6" />
+                <ListBox ItemsSource="{Binding AvailableMods}" SelectedItem="{Binding SelectedAvailableMod}" />
+            </DockPanel>
+        </Grid>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Margin="0,12,0,0">
+            <TextBlock Grid.Column="0" Text="{Binding Status}" TextWrapping="Wrap" VerticalAlignment="Center" Opacity="0.8" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                <Button Content="SAVE" Classes="accent" Command="{Binding SaveCommand}" />
+                <Button Content="CLOSE" Command="{Binding CloseCommand}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

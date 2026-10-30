@@ -1,0 +1,62 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:DoW_Mod_Manager.ViewModels"
+        x:Class="DoW_Mod_Manager.Views.Settings.SystemPerformanceWindow"
+        x:DataType="vm:SystemPerformanceViewModel"
+        Icon="/Assets/app-icon.ico"
+        SizeToContent="Height" Width="560" CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        Title="System Performance Manager">
+
+    <StackPanel Margin="16" Spacing="14">
+
+        <!-- Linux / unsupported hosts -->
+        <Border IsVisible="{Binding !IsSupported}" Background="#1AFFFFFF" CornerRadius="4" Padding="12">
+            <TextBlock Text="{Binding UnsupportedMessage}" TextWrapping="Wrap" />
+        </Border>
+
+        <!-- Timer resolution -->
+        <StackPanel Spacing="6" IsVisible="{Binding Capabilities.SupportsTimerResolution}">
+            <TextBlock Text="Timer resolution" FontWeight="SemiBold" />
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
+                <TextBlock Grid.Row="0" Text="Minimum:" Margin="0,2,12,2" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding MinimumResolution}" />
+                <TextBlock Grid.Row="1" Text="Maximum:" Margin="0,2,12,2" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding MaximumResolution}" />
+                <TextBlock Grid.Row="2" Text="Current:" Margin="0,2,12,2" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CurrentResolution}" />
+            </Grid>
+            <WrapPanel>
+                <Button Content="Set to 0.5 ms" Margin="0,0,8,0" Command="{Binding SetTimerResolutionCommand}" />
+                <Button Content="Restore default" Command="{Binding ResetTimerResolutionCommand}" />
+            </WrapPanel>
+        </StackPanel>
+
+        <!-- Compatibility flags -->
+        <StackPanel Spacing="4" IsVisible="{Binding Capabilities.SupportsCompatibilityFlags}">
+            <TextBlock Text="Game compatibility" FontWeight="SemiBold" />
+            <CheckBox Content="Disable fullscreen optimizations" IsChecked="{Binding FullscreenOptimizationsDisabled}" />
+            <CheckBox Content="Run as administrator" IsChecked="{Binding RunAsAdmin}" />
+            <CheckBox Content="Override high DPI scaling" IsChecked="{Binding HighDpiAware}" />
+            <CheckBox Content="Compatibility mode" IsChecked="{Binding CompatibilityMode}" />
+            <WrapPanel Margin="0,4,0,0">
+                <Button Content="Apply" Classes="accent" Margin="0,0,8,0" Command="{Binding ApplyCompatibilityCommand}" />
+                <Button Content="Open game properties" Command="{Binding OpenGamePropertiesCommand}" />
+            </WrapPanel>
+        </StackPanel>
+
+        <!-- Power plans -->
+        <StackPanel Spacing="6" IsVisible="{Binding Capabilities.SupportsPowerPlans}">
+            <TextBlock Text="Power plan" FontWeight="SemiBold" />
+            <ComboBox HorizontalAlignment="Stretch" ItemsSource="{Binding PowerPlans}" SelectedItem="{Binding SelectedPowerPlan}" />
+            <WrapPanel>
+                <Button Content="Set power plan" Margin="0,0,8,4" Command="{Binding SetPowerPlanCommand}" />
+                <Button Content="Unlock Ultimate Performance" Margin="0,0,8,4" Command="{Binding UnlockUltimatePerformanceCommand}" />
+                <Button Content="Power options" Margin="0,0,8,4" Command="{Binding OpenPowerOptionsCommand}" />
+            </WrapPanel>
+        </StackPanel>
+
+        <TextBlock Text="{Binding Status}" TextWrapping="Wrap" Opacity="0.8" />
+        <Button Content="CLOSE" HorizontalAlignment="Right" Command="{Binding CloseCommand}" />
+    </StackPanel>
+</Window>

@@ -1,0 +1,48 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:DoW_Mod_Manager.ViewModels"
+        x:Class="DoW_Mod_Manager.Views.About.AboutWindow"
+        x:DataType="vm:AboutViewModel"
+        Icon="/Assets/app-icon.ico"
+        SizeToContent="Height" Width="480" CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        Title="About DoW Mod Manager">
+
+    <StackPanel Margin="20" Spacing="10">
+        <StackPanel Orientation="Horizontal" Spacing="12">
+            <Image Source="/Assets/app-icon.ico" Width="48" Height="48" />
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Classes="h1" Text="DoW Mod Manager" />
+                <TextBlock Opacity="0.8">
+                    <Run Text="Version " /><Run Text="{Binding Version}" />
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock TextWrapping="Wrap" Opacity="0.8">
+            <Run Text="Running on " /><Run Text="{Binding Platform}" />
+        </TextBlock>
+
+        <TextBlock TextWrapping="Wrap"
+                   Text="Manage, merge and launch Dawn of War mods (Original, Winter Assault, Dark Crusade, Soulstorm, Definitive Edition)." />
+
+        <TextBlock TextWrapping="Wrap" Opacity="0.8" IsVisible="{Binding IsFork}"
+                   Text="{Binding UpstreamBase, StringFormat='Based on IgorTheLight/DoW-Mod-Manager {0}.'}" />
+
+        <TextBlock Text="Credits" FontWeight="SemiBold" Margin="0,6,0,0" />
+        <TextBlock TextWrapping="Wrap" Opacity="0.8"
+                   Text="Original DoW Mod Manager by IgorTheLight and contributors. Special thanks to the StackOverflow community, TimerTool (tebjan), DownloadFile (zayenCh) and Kekoulis." />
+
+        <WrapPanel>
+            <Button Content="Project page" Margin="0,0,8,8"
+                    Command="{Binding OpenUrlCommand}" CommandParameter="{Binding HomePageUrl}" />
+            <Button Content="Check for updates" Margin="0,0,8,8"
+                    Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ReleasesUrl}" />
+            <Button Content="Original project" Margin="0,0,8,8" IsVisible="{Binding IsFork}"
+                    Command="{Binding OpenUrlCommand}" CommandParameter="{x:Static vm:AboutViewModel.OriginalProjectUrl}" />
+        </WrapPanel>
+
+        <Button Content="OK" HorizontalAlignment="Right" MinWidth="80" Classes="accent"
+                Command="{Binding CloseCommand}" IsDefault="True" />
+    </StackPanel>
+</Window>

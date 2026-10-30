@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main, "feat/**" ]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_NOLOGO: 1
+  PROJECT: "DoW Mod Manager.CrossPlatform/DowModManager.csproj"
+  TEST_PROJECT: "tests/DowModManager.Tests/DowModManager.Tests.csproj"
+
+jobs:
+  build:
+    name: build-${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            tfm: net10.0
+            rid: linux-x64
+          - os: windows-latest
+            tfm: net10.0-windows
+            rid: win-x64
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore "${{ env.PROJECT }}"
+
+      - name: Build
+        run: dotnet build "${{ env.PROJECT }}" --framework ${{ matrix.tfm }} --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test "${{ env.TEST_PROJECT }}" --configuration Release
+
+      - name: Publish (self-contained, single file)
+        run: >
+          dotnet publish "${{ env.PROJECT }}"
+          --framework ${{ matrix.tfm }}
+          --configuration Release
+          --runtime ${{ matrix.rid }}
+          --self-contained true
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          --output artifacts/${{ matrix.rid }}
+
+      - name: Build AppImage (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          # appimagetool validates the .desktop entry and refuses to run without this tool.
+          sudo apt-get install -y --no-install-recommends desktop-file-utils
+          bash packaging/linux/build-appimage.sh artifacts/${{ matrix.rid }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: DowModManager-${{ matrix.rid }}
+          path: |
+            artifacts/${{ matrix.rid }}
+            artifacts/DoW_Mod_Manager-*.AppImage
+          if-no-files-found: error

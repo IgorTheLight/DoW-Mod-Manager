@@ -1,0 +1,82 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="Branding.props" />
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!-- Linux/macOS dev builds target net10.0 only; Windows & CI also build the
+         Windows-specific TFM so the P/Invoke / COM / Registry code compiles. -->
+    <TargetFrameworks>net10.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">net10.0;net10.0-windows</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>DoW_Mod_Manager</RootNamespace>
+    <AssemblyName>DowModManager</AssemblyName>
+    <ApplicationIcon>Assets\app-icon.ico</ApplicationIcon>
+    <!-- Version = the DoW Mod Manager release this matches, plus the optional VersionSuffix
+         from Branding.props (e.g. "-linux.N" in a fork). AssemblyVersion/FileVersion stay
+         numeric; the full string is the InformationalVersion shown in About. -->
+    <VersionPrefix>2.7.0.1</VersionPrefix>
+    <DmmHomePageUrl Condition="'$(DmmHomePageUrl)' == ''">https://github.com/IgorTheLight/DoW-Mod-Manager</DmmHomePageUrl>
+    <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
+    <FileVersion>$(VersionPrefix)</FileVersion>
+    <!-- Avalonia: keep the compiled XAML name generator happy -->
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+    <!-- LibraryImport / GeneratedComInterface (Windows shortcut code) generate unsafe code. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- Publish only what is reachable from Main: about a third of the size. Code that uses
+         reflection the trimmer cannot follow produces IL2xxx warnings; they fail the publish so a
+         trimmed build behaves like an untrimmed one. -->
+    <PublishTrimmed>true</PublishTrimmed>
+    <ILLinkTreatWarningsAsErrors>true</ILLinkTreatWarningsAsErrors>
+    <!-- Single-file publish must embed SkiaSharp/HarfBuzz native libs, otherwise
+         Avalonia fails at startup with DllNotFoundException: libSkiaSharp. -->
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <!-- Windows publish: one standalone, compressed EXE by default, so a plain `dotnet publish
+         -f net10.0-windows` (or Visual Studio's Publish) needs no extra options. Linux is left
+         uncompressed: the AppImage already compresses its contents. -->
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net10.0-windows' and '$(RuntimeIdentifier)' == ''">win-x64</RuntimeIdentifier>
+    <SelfContained Condition="'$(TargetFramework)' == 'net10.0-windows'">true</SelfContained>
+    <PublishSingleFile Condition="'$(TargetFramework)' == 'net10.0-windows'">true</PublishSingleFile>
+    <EnableCompressionInSingleFile Condition="'$(TargetFramework)' == 'net10.0-windows'">true</EnableCompressionInSingleFile>
+    <!-- Symbols inside the EXE, so crash stack traces have file names and line numbers. -->
+    <DebugType Condition="'$(TargetFramework)' == 'net10.0-windows' and '$(Configuration)' == 'Release'">embedded</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyMetadata Include="HomePageUrl" Value="$(DmmHomePageUrl)" />
+  </ItemGroup>
+
+  <!-- Windows-only platform implementation compiles solely under net10.0-windows. -->
+  <ItemGroup Condition="'$(TargetFramework)' != 'net10.0-windows'">
+    <Compile Remove="Platform\Windows\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <!-- Internal test seams (e.g. the Steam root list of the Linux locator). -->
+  <ItemGroup>
+    <InternalsVisibleTo Include="DowModManager.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.2.3" Condition="'$(Configuration)' == 'Debug'" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.0" />
+    <!-- Avalonia 11.2.x pulls Tmds.DBus.Protocol 0.20.0 (GHSA-xrw6-gwf8-vvr9); 0.21.3 is patched. -->
+    <PackageReference Include="Tmds.DBus.Protocol" Version="0.21.3" />
+    <PackageReference Include="SharpCompress" Version="0.50.5" />
+  </ItemGroup>
+
+
+</Project>
