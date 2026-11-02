@@ -199,8 +199,6 @@ namespace DoW_DE_Nod_Manager
             noprecachemodelsCheckBox.CheckedChanged += new EventHandler(NoprecachemodelsCheckBox_CheckedChanged);
             fullscreenCheckBox.CheckedChanged += new EventHandler(FullscreenCheckBox_CheckedChanged);
 
-            noFogCheckbox.Enabled = false;
-
             // Check for an update
             if (settings[AUTOUPDATE] == "1")
             {
